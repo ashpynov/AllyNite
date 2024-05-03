@@ -260,18 +260,18 @@
 
 
                                 <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center"
-                                    Margin="30,0,0,0" Height="40" Width="40"
+                                    Margin="30,0,0,0" Height="40" Width="72"
                                     Style="{DynamicResource ButtonAvatar}"
                                     Grid.Column="0">
                                     <ButtonEx.Content>
                                         <Grid>
-                                            <Border CornerRadius="0" Height="40" Width="40"
+                                            <Border CornerRadius="0" Height="40" Width="72"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center" ClipToBounds="True">
                                                 <Border.Background>
                                                     <ImageBrush
                                                         RenderOptions.BitmapScalingMode="Fant"
-                                                        ImageSource="{ThemeFile 'Icons/ASUS/asus_cac_nav_btn-view.png'}"
+                                                        ImageSource="{ThemeFile 'Images/ASUS/rog-eye.png'}"
                                                         Stretch="UniformToFill" />
                                                 </Border.Background>
                                             </Border>
@@ -283,6 +283,85 @@
                                     Width="40"
                                     IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"
                                     Style="{DynamicResource ChangeViewButton}" Grid.Column="1" />
+
+                                <!-- Filtre Bottom Bar-->
+                                <Grid>
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Opacity" Value="0" />
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="Grid.Row" Value="0" />
+                                            <Setter Property="Grid.Column" Value="2" />
+                                            <Setter Property="Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect ShadowDepth="2" BlurRadius="0"
+                                                        Opacity="1" Color="Black" />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=PART_MainHost, Path=Visibility}"
+                                                    Value="Visible">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="Opacity"
+                                                                    BeginTime="0:0:1"
+                                                                    Duration="0:0:0.5" To="1" />
+                                                                <ThicknessAnimation
+                                                                    Storyboard.TargetProperty="Margin"
+                                                                    BeginTime="0:0:3" From="0,-120,0,0"
+                                                                    Duration="0:0:1.5"
+                                                                    AccelerationRatio="0.3"
+                                                                    DecelerationRatio="0.7" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                    Value="Collapsed">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard FillBehavior="Stop">
+
+                                                                <ThicknessAnimation
+                                                                    Storyboard.TargetProperty="Margin"
+                                                                    BeginTime="0:0:0" From="0,-120,0,0"
+                                                                    Duration="0:0:1"
+                                                                    AccelerationRatio="0.7"
+                                                                    DecelerationRatio="0.3" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                    Value="Visible">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard FillBehavior="Stop">
+
+                                                                <ThicknessAnimation
+                                                                    Storyboard.TargetProperty="Margin"
+                                                                    BeginTime="0:0:0" From="0,0,0,0"
+                                                                    To="0,-120,0,0" Duration="0:0:1"
+                                                                    AccelerationRatio="0.5"
+                                                                    DecelerationRatio="0.5" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                </DataTrigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+
+                                    <FilterPresetSelector x:Name="ItemsFilterPresets" Margin="0,0,0,0"
+                                        HorizontalAlignment="Center" FocusVisualStyle="{x:Null}" />
+                                </Grid>
+
 
                                 <ButtonEx x:Name="PART_ButtonProgramUpdate"
                                     VerticalAlignment="Center"
@@ -297,84 +376,6 @@
                                             FontSize="32" />
                                     </ButtonEx.Content>
                                 </ButtonEx>
-
-                            <!-- Filtre Bottom Bar-->
-                            <Grid>
-                                <Grid.Style>
-                                    <Style TargetType="Grid">
-                                        <Setter Property="Opacity" Value="0" />
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="Grid.Row" Value="0" />
-                                        <Setter Property="Grid.Column" Value="2" />
-                                        <Setter Property="Effect">
-                                            <Setter.Value>
-                                                <DropShadowEffect ShadowDepth="2" BlurRadius="0"
-                                                    Opacity="1" Color="Black" />
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=PART_MainHost, Path=Visibility}"
-                                                Value="Visible">
-                                                <DataTrigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation
-                                                                Storyboard.TargetProperty="Opacity"
-                                                                BeginTime="0:0:1"
-                                                                Duration="0:0:0.5" To="1" />
-                                                            <ThicknessAnimation
-                                                                Storyboard.TargetProperty="Margin"
-                                                                BeginTime="0:0:3" From="0,-120,0,0"
-                                                                Duration="0:0:1.5"
-                                                                AccelerationRatio="0.3"
-                                                                DecelerationRatio="0.7" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.EnterActions>
-                                            </DataTrigger>
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                                                Value="Collapsed">
-                                                <DataTrigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard FillBehavior="Stop">
-
-                                                            <ThicknessAnimation
-                                                                Storyboard.TargetProperty="Margin"
-                                                                BeginTime="0:0:0" From="0,-120,0,0"
-                                                                Duration="0:0:1"
-                                                                AccelerationRatio="0.7"
-                                                                DecelerationRatio="0.3" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.EnterActions>
-                                            </DataTrigger>
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                                                Value="Visible">
-                                                <DataTrigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard FillBehavior="Stop">
-
-                                                            <ThicknessAnimation
-                                                                Storyboard.TargetProperty="Margin"
-                                                                BeginTime="0:0:0" From="0,0,0,0"
-                                                                To="0,-120,0,0" Duration="0:0:1"
-                                                                AccelerationRatio="0.5"
-                                                                DecelerationRatio="0.5" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.EnterActions>
-                                            </DataTrigger>
-
-                                        </Style.Triggers>
-                                    </Style>
-                                </Grid.Style>
-
-                                <FilterPresetSelector x:Name="ItemsFilterPresets" Margin="0,0,0,0"
-                                    HorizontalAlignment="Center" FocusVisualStyle="{x:Null}" />
-                            </Grid>
 
 
 
@@ -435,7 +436,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_20.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_20.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>
@@ -449,7 +450,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_40.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_40.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>
@@ -463,7 +464,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_60.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_60.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>
@@ -477,7 +478,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_100.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_100.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>
@@ -491,7 +492,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_20_charging.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_20_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>
@@ -505,7 +506,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_40_charging.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_40_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>
@@ -519,7 +520,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_60_charging.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_60_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>
@@ -533,7 +534,7 @@
                                                     <Setter Property="Content">
                                                         <Setter.Value>
                                                             <Image
-                                                                Source="{ThemeFile 'Icons/ASUS/asus_cac_si_status_100_charging.png'}"
+                                                                Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_100_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
                                                                 Height="60" />
                                                         </Setter.Value>

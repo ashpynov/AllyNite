@@ -2,59 +2,59 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 <!-- Style pour le contour du menu de réglages -->
-	<Style x:Key="SettingsMenuBorder" TargetType="Border">
-		<!-- Propriétés de base -->
-		<Setter Property="Height" Value="1080" />
-		<Setter Property="Width" Value="1920" />
-		<Setter Property="CornerRadius" Value="0"/>
-		<Setter Property="Margin" Value="-1420,0,-100,0" />
-		<Setter Property="HorizontalAlignment" Value="Left" />
-		<!-- Utilisation d'un Grid pour superposer l'image en tant qu'arrière-plan -->
-		<Setter Property="Background">
-			<Setter.Value>
-				<ImageBrush ImageSource="{ThemeFile 'Images/SettingsBackground.png'}" Stretch="UniformToFill"/>
-			</Setter.Value>
-		</Setter>
-		<!-- Déclencheur pour l'animation de l'opacité lors du chargement -->
-		<Style.Triggers>
-			<EventTrigger RoutedEvent="Window.Loaded">
-				<BeginStoryboard>
-					<Storyboard>
-						<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" From="0" To="1"/>
-					</Storyboard>
-				</BeginStoryboard>
-			</EventTrigger>
-		</Style.Triggers>
-	</Style>
+    <Style x:Key="SettingsMenuBorder" TargetType="Border">
+        <!-- Propriétés de base -->
+        <Setter Property="Height" Value="1080" />
+        <Setter Property="Width" Value="1920" />
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="Margin" Value="-1420,0,-100,0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <!-- Utilisation d'un Grid pour superposer l'image en tant qu'arrière-plan -->
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="{ThemeFile 'Images/SettingsBackground.png'}" Stretch="UniformToFill"/>
+            </Setter.Value>
+        </Setter>
+        <!-- Déclencheur pour l'animation de l'opacité lors du chargement -->
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Window.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" From="0" To="1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
 
 
-	<!-- Style pour la section settings -->
-	<Style x:Key="SettingsSectionBorder" TargetType="Border">
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="CornerRadius" Value="0" />
-		<Setter Property="Margin" Value="10,0,10,0" />
-		<Setter Property="Opacity" Value="1" />
-	</Style>
+    <!-- Style pour la section settings -->
+    <Style x:Key="SettingsSectionBorder" TargetType="Border">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Margin" Value="10,0,10,0" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
 
 <!-- Style pour les boutons du menu de Gauche -->
-	<Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
-		<!-- Propriétés de base -->
+    <Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+        <!-- Propriétés de base -->
         <Setter Property="Margin" Value="5,10,0,0" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="340" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-		<Setter Property="Template">
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-						<Border CornerRadius="0" Opacity="0.4" Background="Transparent"
+                        <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
                                 x:Name="MainBackground"/>						
-						<Border x:Name="MainBorder" Margin="-5" 
+                        <Border x:Name="MainBorder" Margin="-5" 
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                                 BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
-						<TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
+                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                                    Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -63,24 +63,24 @@
                         </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
-						<Trigger Property="IsEnabled" Value="False">
-						   <Setter Property="Opacity" Value="0.5" />
-						</Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                           <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
 
-			<Trigger Property="IsFocused" Value="True">
-                            				<Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-							<Setter Property="Tag" Value="True" TargetName="MainBorder" />
-							<Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-							<Setter Property="Opacity" Value="1" TargetName="MainBackground" />
-							<Setter Property="Background" Value="White" TargetName="MainBackground" />
+            <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
+                            <Setter Property="Background" Value="White" TargetName="MainBackground" />
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            				<Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                           	 			<Setter Property="Background" Value="White" TargetName="MainBackground" />
-                            				<Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-							<Setter Property="Opacity" Value="1" TargetName="MainBackground" />
-							<Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                                            <Setter Property="Background" Value="White" TargetName="MainBackground" />
+                                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
@@ -94,151 +94,151 @@
 
 
 <!-- Modèle de données pour l'en-tête du menu de réglages -->
-	<DataTemplate x:Key="SettingsMenuHeaderTemplate">
-		<!-- Conteneur parent avec une largeur automatique -->
-		<Grid HorizontalAlignment="Stretch">
-			<!-- Contenu de l'en-tête -->
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,0" Background="Transparent" Height="110">
-				<Border CornerRadius="0" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center">
-					<Border.Background>
-						<ImageBrush RenderOptions.BitmapScalingMode="Fant" ImageSource="{ThemeFile 'Icons/ASUS/asus_cac_nav_btn-view.png'}"/>
-					</Border.Background>
-				</Border>
-				<!-- Name User -->
-				<TextBlock Text="{DynamicResource UserName}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontSize="35" Style="{DynamicResource TextBlockBaseStyle}"
-						   Margin="20,0,0,0" Width="300"/>
-				<!-- Ligne de séparation -->
-				<!-- Logo Settings -->
-				<Image Source="{ThemeFile 'Images/Settings.png'}" Height="90"
-					   RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Margin="550,0,0,30" />
-			</StackPanel>
-		</Grid>
-	</DataTemplate>
+    <DataTemplate x:Key="SettingsMenuHeaderTemplate">
+        <!-- Conteneur parent avec une largeur automatique -->
+        <Grid HorizontalAlignment="Stretch">
+            <!-- Contenu de l'en-tête -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,0" Background="Transparent" Height="110">
+                <!-- <Border CornerRadius="0" Height="40" Width="72" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border.Background>
+                        <ImageBrush RenderOptions.BitmapScalingMode="Fant" ImageSource="{ThemeFile 'Images/ASUS/rog-eye.png'}"/>
+                    </Border.Background>
+                </Border> -->
+                <!-- Name User -->
+                <TextBlock Text="S E T T I N G S" VerticalAlignment="Center" HorizontalAlignment="Left"  FontSize="35" Style="{DynamicResource TextBlockBaseStyle}"
+                           Margin="20,0,0,0" Width="300"/>
+                <!-- Ligne de séparation -->
+                <!-- Logo Settings -->
+                <Image Source="{ThemeFile 'Images/ASUS/rog-eye.png'}" Height="80"
+                       RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" Margin="550,10,0,30" />
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
 
-	<!-- Épaisseur pour l'espacement des éléments de section -->
-	<Thickness x:Key="SettingsSectionItemSpacing">0,12,10,10</Thickness>
+    <!-- Épaisseur pour l'espacement des éléments de section -->
+    <Thickness x:Key="SettingsSectionItemSpacing">0,12,10,10</Thickness>
 
 <!-- Style pour le curseur de section -->
-	<Style x:Key="SettingsSectionSlider" TargetType="SliderEx" BasedOn="{StaticResource {x:Type SliderEx}}">
-		<Setter Property="Width" Value="300" />
-		<Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
-	</Style>
+    <Style x:Key="SettingsSectionSlider" TargetType="SliderEx" BasedOn="{StaticResource {x:Type SliderEx}}">
+        <Setter Property="Width" Value="300" />
+        <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
+    </Style>
 
 <!-- Style pour la case à cocher de section -->
-	<Style x:Key="SettingsSectionCheckbox" TargetType="CheckBoxEx">
-		<!-- Styles et modèles -->
-		<Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
-		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
-		<Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Height" Value="50" />
-		<Setter Property="SnapsToDevicePixels" Value="True" />
-		<Setter Property="HorizontalAlignment" Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment" Value="Right" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="CheckBox">
-					<Grid Background="{TemplateBinding Background}">
-						<Border x:Name="MainBorder" Margin="0" CornerRadius="0" BorderThickness="3" Opacity="1" Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
-						</Border>
-						<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed">
-						</Border>
-						<Grid Margin="10,0">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<TextBlock x:Name="Text" Style="{DynamicResource TextBlockBaseStyle}"
+    <Style x:Key="SettingsSectionCheckbox" TargetType="CheckBoxEx">
+        <!-- Styles et modèles -->
+        <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border x:Name="MainBorder" Margin="0" CornerRadius="0" BorderThickness="3" Opacity="1" Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
+                        </Border>
+                        <Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed">
+                        </Border>
+                        <Grid Margin="10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="Text" Style="{DynamicResource TextBlockBaseStyle}"
                                         Foreground="{TemplateBinding Foreground}"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         Grid.Column="0" TextTrimming="WordEllipsis">
-								<ContentPresenter RecognizesAccessKey="True" />
-							</TextBlock>
-							<Border Background="Transparent"
+                                <ContentPresenter RecognizesAccessKey="True" />
+                            </TextBlock>
+                            <Border Background="Transparent"
                                         VerticalAlignment="Center"
                                         Grid.Column="1" Width="30" Height="30">
-								<Viewbox x:Name="CheckIcon">
-									<TextBlock Text="&#xeffc;" FontFamily="{DynamicResource FontIcoFont}" Foreground="{TemplateBinding Foreground}"
+                                <Viewbox x:Name="CheckIcon">
+                                    <TextBlock Text="&#xeffc;" FontFamily="{DynamicResource FontIcoFont}" Foreground="{TemplateBinding Foreground}"
                                                 x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.4" />
-								</Viewbox>
-							</Border>
-						</Grid>
-					</Grid>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsChecked" Value="True">
-							<Setter Property="Text" Value="&#xf00d;" TargetName="IconText" />
-							<Setter Property="Opacity" Value="1" TargetName="IconText" />
-						</Trigger>
-						<Trigger Property="IsFocused" Value="True">
-							<Setter Property="Tag" Value="True" TargetName="MainBorder" />
-							<Setter Property="Tag" Value="True" TargetName="FlashMenuBorder" />
-							<Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-							<Setter Property="Visibility" Value="Visible" TargetName="FlashMenuBorder" />
-							<Setter Property="Opacity" Value="1" TargetName="IconText" />
-						</Trigger>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Foreground" Value="{DynamicResource GlyphBrush}" TargetName="IconText"  />
-							<Setter Property="Opacity" Value="1" TargetName="IconText" />
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+                                </Viewbox>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Text" Value="&#xf00d;" TargetName="IconText" />
+                            <Setter Property="Opacity" Value="1" TargetName="IconText" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Tag" Value="True" TargetName="FlashMenuBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="FlashMenuBorder" />
+                            <Setter Property="Opacity" Value="1" TargetName="IconText" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}" TargetName="IconText"  />
+                            <Setter Property="Opacity" Value="1" TargetName="IconText" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 <!-- Style pour la liste déroulante de section -->
-	<Style x:Key="SettingsSectionCombobox" TargetType="ComboBoxEx" BasedOn="{StaticResource {x:Type ComboBoxEx}}">
-		<Setter Property="MinWidth" Value="250" />
-		<Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
-	</Style>
+    <Style x:Key="SettingsSectionCombobox" TargetType="ComboBoxEx" BasedOn="{StaticResource {x:Type ComboBoxEx}}">
+        <Setter Property="MinWidth" Value="250" />
+        <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
+    </Style>
 
 <!-- Style pour le texte de section -->
-	<Style x:Key="SettingsSectionText" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
-		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="HorizontalAlignment" Value="Center" />
-	</Style>
+    <Style x:Key="SettingsSectionText" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
 
 <!-- Modèles de données pour les boutons du menu de réglages -->
-	<DataTemplate x:Key="SettingsMenuGeneralButtonTemplate">
-		<StackPanel Orientation="Horizontal">
+    <DataTemplate x:Key="SettingsMenuGeneralButtonTemplate">
+        <StackPanel Orientation="Horizontal">
 <!-- Texte du bouton "Général" -->
-			<TextBlock Text="{DynamicResource LOCSettingsFSSectionGeneral}" VerticalAlignment="Center"  Margin="5,0,0,0" />
-		</StackPanel>
-	</DataTemplate>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionGeneral}" VerticalAlignment="Center"  Margin="5,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
 
-	<DataTemplate x:Key="SettingsMenuVisualsButtonTemplate">
-		<StackPanel Orientation="Horizontal">
+    <DataTemplate x:Key="SettingsMenuVisualsButtonTemplate">
+        <StackPanel Orientation="Horizontal">
 <!-- Texte du bouton "Visuals" -->
-			<TextBlock Text="{DynamicResource LOCSettingsFSSectionVisuals}" VerticalAlignment="Center"  Margin="5,0,0,0" />
-		</StackPanel>
-	</DataTemplate>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionVisuals}" VerticalAlignment="Center"  Margin="5,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
 
-	<DataTemplate x:Key="SettingsMenuAudioButtonTemplate">
-		<StackPanel Orientation="Horizontal">
+    <DataTemplate x:Key="SettingsMenuAudioButtonTemplate">
+        <StackPanel Orientation="Horizontal">
 <!-- Texte du bouton "Audio" -->
-			<TextBlock Text="{DynamicResource LOCSettingsFSSectionAudio}" VerticalAlignment="Center"  Margin="5,0,0,0" />
-		</StackPanel>
-	</DataTemplate>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionAudio}" VerticalAlignment="Center"  Margin="5,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
 
-	<DataTemplate x:Key="SettingsMenuLayoutButtonTemplate">
-		<StackPanel Orientation="Horizontal">
+    <DataTemplate x:Key="SettingsMenuLayoutButtonTemplate">
+        <StackPanel Orientation="Horizontal">
 <!-- Texte du bouton "Layout" -->
-			<TextBlock Text="{DynamicResource LOCSettingsFSSectionLayout}" VerticalAlignment="Center"  Margin="5,0,0,0" />
-		</StackPanel>
-	</DataTemplate>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionLayout}" VerticalAlignment="Center"  Margin="5,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
 
-	<DataTemplate x:Key="SettingsMenuMenusButtonTemplate">
-		<StackPanel Orientation="Horizontal">
+    <DataTemplate x:Key="SettingsMenuMenusButtonTemplate">
+        <StackPanel Orientation="Horizontal">
 <!-- Texte du bouton "Menus" -->
-			<TextBlock Text="{DynamicResource LOCSettingsFSSectionMenus}" VerticalAlignment="Center"  Margin="5,0,0,0" />
-		</StackPanel>
-	</DataTemplate>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionMenus}" VerticalAlignment="Center"  Margin="5,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
 
-	<DataTemplate x:Key="SettingsMenuInputButtonTemplate">
-		<StackPanel Orientation="Horizontal">
+    <DataTemplate x:Key="SettingsMenuInputButtonTemplate">
+        <StackPanel Orientation="Horizontal">
 <!-- Texte du bouton "Input" -->
-			<TextBlock Text="{DynamicResource LOCSettingsFSSection}" VerticalAlignment="Center" Margin="5,0,0,0" />
-		</StackPanel>
-	</DataTemplate>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSection}" VerticalAlignment="Center" Margin="5,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

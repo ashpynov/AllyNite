@@ -94,7 +94,7 @@
     <!-- Modèle de l'en-tête du menu principal -->
     <DataTemplate x:Key="MainMenuHeaderTemplate">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <Image Source="{ThemeFile 'Images/Playnite.png'}" Height="60"
+            <Image Source="{ThemeFile 'Images/Allynite.png'}" Height="60"
                 RenderOptions.BitmapScalingMode="Fant" />
         </StackPanel>
     </DataTemplate>
