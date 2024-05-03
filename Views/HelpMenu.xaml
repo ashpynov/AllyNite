@@ -2,32 +2,90 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:pmrk="clr-namespace:Playnite.FullscreenApp.Markup;assembly=Playnite.FullscreenApp">
     
+    <!-- Style pour le cadre du menu d'aide -->
     <Style x:Key="HelpMenuBorder" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource OverlayMenuBackgroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
+        <Setter Property="Width" Value="{StaticResource DesignWidth}" />
+        <Setter Property="Margin" Value="0,0,300,0" /> <!-- Marge droite de 300 unités -->
+	<Setter Property="Background">
+			<Setter.Value>
+				<ImageBrush ImageSource="{ThemeFile 'Images/HelpBackground.png'}" Stretch="UniformToFill"/>
+			</Setter.Value>
+		</Setter>
     </Style>
 
+    <!-- Style pour le bouton du menu d'aide -->
     <Style x:Key="HelpMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
-        <Setter Property="Margin" Value="0,5,0,5" />
-        <Setter Property="Padding" Value="20,3,20,3" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,20,20,0" />
+        <Setter Property="Height" Value="50" />	
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">                            
+                        <Border x:Name="MainBorder" Margin="0,0,0,-5" BorderThickness="3" Opacity="1" CornerRadius="0" 
+                                Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
+                        </Border>
+                        <Border x:Name="FlashMenuBorder" Margin="15,5,5,0" Style="{DynamicResource AnimatedFlashMenu}" 
+                                Tag="False" Visibility="Collapsed">
+                        </Border>							
+                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                   Margin="0,0,25,0" DockPanel.Dock="Left"
+                                   Foreground="{TemplateBinding Foreground}" FontSize="28"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">                            
+                            <ContentPresenter />
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Tag" Value="True" TargetName="FlashMenuBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="FlashMenuBorder" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource SelectionLightBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
+    <!-- Modèle de données pour l'en-tête du menu d'aide -->
     <DataTemplate x:Key="HelpMenuHeaderTemplate">
-        <TextBlock Text="{DynamicResource LOCMenuHelpTitle}"
-                   FontSize="36" Style="{DynamicResource TextBlockBaseStyle}"
-                   Margin="20,30,40,30" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="60,40">
+            <Image Source="{ThemeFile 'Images/applogo_clean.png'}" Height="60"
+                   RenderOptions.BitmapScalingMode="Fant" />
+        </StackPanel>
     </DataTemplate>
 
+    <!-- Modèle de données pour le bouton de redémarrage de Playnite -->
     <DataTemplate x:Key="HelpMenuRestartPlayniteButtonTemplate">
-        <TextBlock Text="{DynamicResource LOCCrashRestartPlaynite}" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{DynamicResource LOCCrashRestartPlaynite}" VerticalAlignment="Center" Margin="30,5,0,0"/>
+            <TextBlock Text="&#xefd1;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,5,0,0"/>
+        </StackPanel>
     </DataTemplate>
 
+    <!-- Modèle de données pour le bouton de mode sans échec -->
     <DataTemplate x:Key="HelpMenuSafeModeButtonTemplate">
-        <TextBlock Text="{DynamicResource LOCCrashRestartSafe}" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{DynamicResource LOCCrashRestartSafe}" VerticalAlignment="Center" Margin="30,5,0,0"/>
+            <TextBlock Text="&#xefdc;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,5,0,0"/>
+        </StackPanel>
     </DataTemplate>
 
+    <!-- Modèle de données pour le bouton de retour d'informations -->
     <DataTemplate x:Key="HelpMenuFeedbackButtonTemplate">
-        <TextBlock Text="{DynamicResource LOCMenuIssues}" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{DynamicResource LOCMenuIssues}" VerticalAlignment="Center" Margin="30,5,0,0"/>
+            <TextBlock Text="&#xea54;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,5,0,0"/>
+        </StackPanel>
     </DataTemplate>
+
 </ResourceDictionary>

@@ -1,67 +1,166 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d">
 
-    <Style x:Key="ListGameItemStyle" TargetType="ListBoxItem">        
+    <!-- Définition du style pour les éléments de la liste de jeux -->
+    <Style x:Key="ListGameItemStyle" TargetType="ListBoxItem">
+        <!-- Définition des propriétés par défaut -->
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="False" />
+        <!-- Définition du modèle de contrôle -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
+                    <!-- Ressources spécifiques au modèle -->
                     <ControlTemplate.Resources>
-                        <Storyboard x:Key="FocusedOn">
-                            <DoubleAnimation Storyboard.TargetName="ScaleTransform"
-                                             Storyboard.TargetProperty="ScaleX"
-                                             From="1" To="1.06" Duration="0:0:0.1"/>
-                            <DoubleAnimation Storyboard.TargetName="ScaleTransform"
-                                             Storyboard.TargetProperty="ScaleY"
-                                             From="1" To="1.06" Duration="0:0:0.1"/>
-                        </Storyboard>
-                        <Storyboard x:Key="FocusedOff">
-                            <DoubleAnimation Storyboard.TargetName="ScaleTransform"
-                                             Storyboard.TargetProperty="ScaleX"
-                                             From="1.06" To="1" Duration="0:0:0.2"/>
-                            <DoubleAnimation Storyboard.TargetName="ScaleTransform"
-                                             Storyboard.TargetProperty="ScaleY"
-                                             From="1.06" To="1" Duration="0:0:0.2"/>
-                        </Storyboard>
+
                     </ControlTemplate.Resources>
-                    <Grid Margin="{Settings FullscreenItemSpacingMargin}"
-                          RenderTransformOrigin="0.5,0.5"
-                          d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}">
+
+                    <!-- Contenu principal du modèle -->
+                    <Grid x:Name="ListBoxGrid" RenderTransformOrigin="0.5,0.5"
+                        Margin="{Settings FullscreenItemSpacingMargin}"
+                        d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}">
+
                         <Grid.RenderTransform>
                             <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
                         </Grid.RenderTransform>
+
+                        <!-- Contenu présenté -->
                         <ContentPresenter />
-                        <Border CornerRadius="3" BorderThickness="3" BorderBrush="{DynamicResource ControlBackgroundBrush}"
-                                Margin="-3"/>
-                        <Border x:Name="MainBorder" BorderThickness="5" BorderBrush="{DynamicResource SelectionBrush}"
-                                Margin="-5" Visibility="Collapsed" CornerRadius="3">
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" Opacity="1"
-                                                  Color="{DynamicResource GlyphColor}"                                                  
-                                                  RenderingBias="Quality" BlurRadius="20"/>
-                            </Border.Effect>
+
+                        <!-- Éléments visuels supplémentaires -->
+                        <Border x:Name="FlashFocus" Opacity="0" CornerRadius="0"
+                            Style="{DynamicResource AnimatedFlashFocus}" Tag="False"
+                            Visibility="Collapsed" />
+                        <Border x:Name="FlashCover" Opacity="0"
+                            Style="{DynamicResource AnimatedFlashCover}" CornerRadius="0"
+                            Tag="False" Visibility="Collapsed" />
+                        <Border x:Name="GameTitleBackground" CornerRadius="0" Margin="0"
+                            BorderThickness="0" Background="{DynamicResource GameTitleBrush}"
+                            Height="150" Opacity="0.6"
+                            VerticalAlignment="Bottom" Visibility="Collapsed" />
+                        <Border x:Name="NonFocus" Opacity="0" CornerRadius="0" Margin="0"
+                            BorderThickness="0" Background="#7000" />
+                        <Border x:Name="MainBorder" Opacity="1" BorderThickness="5" Margin="-2"
+                            CornerRadius="0" Style="{DynamicResource SolidBorderLightBrush}"
+                            Tag="False"
+                            Visibility="Collapsed">
                         </Border>
+                        <TextBlock x:Name="InstallFont" Visibility="Collapsed" Text="&#xef08;"
+                            FontFamily="{StaticResource FontIcoFont}" Opacity="0"
+                            FontSize="40" Foreground="White"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"
+                            TextAlignment="Center" Margin="12,15" />
+                        <StackPanel x:Name="DetailsStack" VerticalAlignment="Bottom" Margin="12,15"
+                            Panel.ZIndex="1">
+                            <TextBlock x:Name="GameTitle" Visibility="Collapsed"
+                                Text="{Binding DisplayName}"
+                                TextTrimming="WordEllipsis"
+                                Style="{DynamicResource TextBlockBaseStyle}"
+                                FontSize="{DynamicResource FontSizeSmall}"
+                                VerticalAlignment="Bottom"
+                                TextAlignment="Left" Margin="0,6,0,0" />
+                        </StackPanel>
                     </Grid>
+
+                    <!-- Déclenchement des changements visuels en fonction des états -->
                     <ControlTemplate.Triggers>
+
+                        <!-- Focus -->
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <Setter Property="Canvas.ZIndex" Value="90" />
-                            <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
-                            </Trigger.ExitActions>
                             <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FocusedOn}" />
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetName="ListBoxGrid"
+                                            Storyboard.TargetProperty="Margin"
+                                            To="0,-10,0,15" Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
                             </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetName="ListBoxGrid"
+                                            Storyboard.TargetProperty="Margin"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter Property="Tag" Value="True" TargetName="FlashFocus" />
+                            <Setter Property="Tag" Value="True" TargetName="FlashCover" />
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="FlashFocus" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="FlashCover" />
+                            <Setter Property="Canvas.ZIndex" Value="90" />
                         </Trigger>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter Property="Tag" Value="False" TargetName="FlashFocus" />
+                            <Setter Property="Tag" Value="False" TargetName="FlashCover" />
+                            <Setter Property="Tag" Value="False" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="FlashFocus" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="FlashCover" />
+                            <Setter Property="Opacity" Value="0.3" TargetName="GameTitleBackground" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="GameTitleBackground" />
+                            <Setter Property="Opacity" Value="0.9" TargetName="InstallFont" />
+                        </Trigger>
+                        <!-- Sélection -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"
+                                TargetName="GameTitleBackground" />
+                        </Trigger>
+                        <!-- Survole de la souris -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetName="ListBoxGrid"
+                                            Storyboard.TargetProperty="Margin"
+                                            To="0,-15,0,15" Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetName="ListBoxGrid"
+                                            Storyboard.TargetProperty="Margin"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter Property="Visibility" Value="Collapsed"
+                                TargetName="GameTitleBackground" />
+                        </Trigger>
+                        <!-- Affichage du titre du jeu -->
+                        <DataTrigger Binding="{Settings Fullscreen.ShowGameTitles}" Value="True">
+                            <Setter Property="Opacity" Value="0.9" TargetName="GameTitleBackground" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="GameTitleBackground" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="GameTitle" />
+                        </DataTrigger>
+
+                        <!-- Affichage de l'icône d'installation -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsInstalled}" Value="False" />
+                                <Condition
+                                    Binding="{Settings Fullscreen.DarkenUninstalledGamesGrid}"
+                                    Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" TargetName="InstallFont" />
+                            <Setter Property="Opacity" Value="1" TargetName="InstallFont" />
+                        </MultiDataTrigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

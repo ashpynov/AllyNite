@@ -1,128 +1,1710 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"                    
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                    mc:Ignorable="d">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
     <Style TargetType="{x:Type GameDetails}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GameDetails}">
-                    <Grid Background="{DynamicResource MainBackgourndBrush}"
-                          x:Name="PART_ViewHost"
-                          d:DesignWidth="{StaticResource DesignWidth}"
-                          d:DesignHeight="{StaticResource DesignHeight}"
-                          d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}"
-                          KeyboardNavigation.DirectionalNavigation="Contained"
-                          KeyboardNavigation.TabNavigation="Cycle"
-                          KeyboardNavigation.ControlTabNavigation="Cycle">
+
+                    <Grid Background="#00000000"
+                        x:Name="PART_ViewHost"
+                        d:DesignWidth="{StaticResource DesignWidth}"
+                        d:DesignHeight="{StaticResource DesignHeight}"
+                        d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}"
+                        FocusManager.FocusedElement="{Binding ElementName=PART_ButtonContext}"
+                        Focusable="True"
+                        KeyboardNavigation.DirectionalNavigation="Contained"
+                        KeyboardNavigation.TabNavigation="Cycle"
+                        KeyboardNavigation.ControlTabNavigation="Cycle">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80" />
+                            <RowDefinition x:Name="DetailsRow" Height="*" />
+                            <RowDefinition Height="100" />
+                        </Grid.RowDefinitions>
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="350" />
-                            <ColumnDefinition Width="6*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*" />
-                            <RowDefinition Height="4*" />
-                        </Grid.RowDefinitions>
-                        
-                        <FadeImage HorizontalAlignment="Center" VerticalAlignment="Top"
-                                   Grid.ColumnSpan="4" Grid.RowSpan="2"
-                                   x:Name="PART_ImageBackground" />
 
-                        <Border Background="{DynamicResource GameDetailsBackgroundBrush}"
-                                Grid.ColumnSpan="4" Grid.Row="1" />
-
-                        <Border CornerRadius="3" BorderThickness="3" BorderBrush="{DynamicResource ControlBackgroundBrush}"
-                                Margin="14" Grid.Column="1" Grid.Row="1"
-                                VerticalAlignment="Top"
-                                HorizontalAlignment="Right">
-                            <Image x:Name="PART_ImageCover" />
+                        <Border x:Name="Overlay" Grid.RowSpan="3" Grid.ColumnSpan="3"
+                            RenderOptions.BitmapScalingMode="Fant" Panel.ZIndex="-48">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                    Value="1" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:0.6" Duration="0:0:1"
+                                                            To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.EnterActions>
+                                            <MultiDataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.ExitActions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}"
+                                            Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.Background>
+                                <ImageBrush ImageSource="{ThemeFile 'Images/ShadeDetails.png'}"
+                                    RenderOptions.BitmapScalingMode="Fant" Stretch="Fill" />
+                            </Border.Background>
                         </Border>
 
-                        <Image Grid.Column="1" Grid.Row="1"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Right"
-                               Margin="24"
-                               Source="{Binding LibraryPlugin.LibraryIcon}"
-                               Height="48" RenderOptions.BitmapScalingMode="Fant">
-                            <Image.Effect>
-                                <DropShadowEffect Color="White" BlurRadius="20" ShadowDepth="0"
-                                                  RenderingBias="Quality" Opacity="1"/>
-                            </Image.Effect>
-                        </Image>
+                        <!-- Trophée -->
 
-                        <DockPanel Grid.Column="2" Grid.Row="1"
-                                   Margin="20"
-                                   HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,0"
+                            Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=Id, Path=Opacity}"
+                                            Value="1">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:1"
+                                                            Duration="0:0:0.6"
+                                                            From="0"
+                                                            To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0"
+                                                            From="1"
+                                                            To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+                                            Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                            Value="Collapsed">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
 
-                            <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                       Text="{Binding DisplayName}"
-                                       Foreground="White" FontFamily="{DynamicResource FontTitilliumWebBold}"
-                                       FontSize="38" DockPanel.Dock="Top">
-                                <TextBlock.Effect>
-                                    <DropShadowEffect ShadowDepth="2" Color="Black"
-                                                      RenderingBias="Quality" Opacity="1"/>
-                                </TextBlock.Effect>
+                            <!-- Image du trophée -->
+
+                            <Border Height="35" Width="35" VerticalAlignment="Center"
+                                HorizontalAlignment="Right" Margin="0,10,10,0" ClipToBounds="True">
+                                <Image RenderOptions.BitmapScalingMode="Fant" Margin="2"
+                                    Source="{ThemeFile 'Images/Trophy.png'}" />
+                            </Border>
+
+                            <!-- TextBlocks associés à SuccessStory -->
+
+                            <TextBlock
+                                Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked, FallbackValue='-'}"
+                                Style="{StaticResource TextBlockAltDetailStyle}"
+                                FontSize="26"
+                                Margin="0,10,0,0" />
+                            <TextBlock Text="/"
+                                Style="{StaticResource TextBlockAltDetailStyle}"
+                                FontSize="26"
+                                Margin="2,10,2,0" />
+                            <TextBlock
+                                Text="{PluginSettings Plugin=SuccessStory, Path=Total, FallbackValue='-'}"
+                                Style="{StaticResource TextBlockAltDetailStyle}"
+                                FontSize="26"
+                                Margin="0,10,0,0" />
+                        </StackPanel>
+
+                        <!-- Interface -->
+
+                        <Grid x:Name="MainBackgroundBlurGrid" Panel.ZIndex="-50">
+                            <Grid.Background>
+                                <!-- Fond -->
+                                <ImageBrush ImageSource="{ThemeFile 'Images/Interface.png'}"
+                                    Stretch="UniformToFill" />
+                            </Grid.Background>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Grid.RowSpan" Value="3" />
+                                    <Setter Property="Grid.ColumnSpan" Value="3" />
+
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                            Value="Visible">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:0.6" Duration="0:0:0.3"
+                                                            From="0" To="1" />
+
+                                                        <!-- <ThicknessAnimation
+                                                        Storyboard.TargetProperty="Margin"
+                                                        Duration="0:0:0.6" From="0,-90,0,0"
+                                                        To="0,0,0,0" AccelerationRatio="0.3"
+                                                        DecelerationRatio="0.7" /> -->
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:0" Duration="0:0:0"
+                                                            To="0" />
+
+                                                        <!-- <ThicknessAnimation
+                                                        Storyboard.TargetProperty="Margin"
+                                                        Duration="0:0:0.6" From="0,0,0,0"
+                                                        To="0,90,0,0" AccelerationRatio="0.5" /> -->
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+
+
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                        </Grid>
+
+                        <!-- Wallpaper -->
+
+                        <Border x:Name="MediaBorder" Panel.ZIndex="-49" Grid.ColumnSpan="3"
+                            Grid.RowSpan="3">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Height" Value="1080" />
+
+                                    <Style.Triggers>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <Grid Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                                VerticalAlignment="Top" HorizontalAlignment="Center"
+                                Panel.ZIndex="-48">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Opacity" Value="1" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                Value="Visible">
+                                                <Setter Property="Visibility" Value="Visible" />
+
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <!-- <ThicknessAnimation
+                                                            Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.6" From="0,0,0,0"
+                                                            To="-90,-90,-90,-90"
+                                                            DecelerationRatio="0.5"
+                                                            AccelerationRatio="0.5" /> -->
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <!-- <ThicknessAnimation
+                                                            Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.6" From="0,0,0,0"
+                                                            To="0,90,0,0" AccelerationRatio="0.5"
+                                                            DecelerationRatio="0.5" /> -->
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <FadeImage x:Name="PART_ImageBackground"
+                                    RenderOptions.BitmapScalingMode="Fant">
+                                    <FadeImage.Style>
+                                        <Style TargetType="FadeImage">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <Setter Property="Stretch" Value="UniformToFill" />
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment" Value="Top" />
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
+                                                    Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding Items.Count, ElementName=PART_ListGameItems}"
+                                                    Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                    <Setter Property="Opacity" Value="0" />
+                                                </DataTrigger>
+                                                <!--Vertical-->
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                    Value="Visible">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </FadeImage.Style>
+                                </FadeImage>
+
+                            </Grid>
+                        </Border>
+
+                        <!-- Image de Source -->
+
+                        <Border x:Name="SourceIconBorder"
+                            Visibility="Visible"
+                            Opacity="0">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                    Value="1" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <!-- Animation d'apparition -->
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:0" Duration="0:0:0.5"
+                                                            To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.EnterActions>
+                                            <MultiDataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <!-- Animation de disparition -->
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.ExitActions>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Image
+                                Source="{ThemeFileBinding Source.Name, PathFormat='Icons/Source/{0}.png'}"
+                                RenderOptions.BitmapScalingMode="Fant"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                MaxHeight="50"
+                                MaxWidth="180"
+                                Margin="60,20,0,0"
+                                Grid.ColumnSpan="2" />
+                        </Border>
+
+                        <!-- Panel Details -->
+
+                        <Grid x:Name="GameDetailsStack" Grid.Row="1" Grid.ColumnSpan="3"
+                            HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Margin" Value="80,50,0,0" />
+                                    <Setter Property="Grid.Row" Value="0" />
+                                    <Style.Triggers>
+
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=LogoTrigger, Path=Opacity}"
+                                            Value="1">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                            Value="Collapsed">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <StackPanel Orientation="Vertical">
+                                <ContentControl x:Name="ExtraMetadataLoader_LogoLoaderControl">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="MaxWidth" Value="600" />
+                                            <Setter Property="MaxHeight" Value="320" />
+                                            <Setter Property="Opacity" Value="0" />
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect ShadowDepth="2" />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                    Value="1">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="Opacity"
+                                                                    BeginTime="0:0:0"
+                                                                    Duration="0:0:0" From="0" To="1" />
+                                                                <ThicknessAnimation
+                                                                    Storyboard.TargetProperty="Margin"
+                                                                    From="70,0,0,-500" To="0,0,0,0"
+                                                                    Duration="0:0:1.5"
+                                                                    AccelerationRatio="0.3"
+                                                                    DecelerationRatio="0.7" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                    <DataTrigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="Opacity"
+                                                                    Duration="0:0:0" To="0" />
+                                                                <ThicknessAnimation
+                                                                    Storyboard.TargetProperty="Margin"
+                                                                    From="70,0,0,-500" To="0,0,0,0"
+                                                                    Duration="0:0:1.5"
+                                                                    AccelerationRatio="0.3"
+                                                                    DecelerationRatio="0.7" />
+
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.ExitActions>
+                                                </DataTrigger>
+
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition
+                                                            Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
+                                                            Value="False" />
+                                                        <Condition
+                                                            Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                            Value="1" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard FillBehavior="Stop">
+                                                                <ThicknessAnimation
+                                                                    Storyboard.TargetProperty="Margin"
+                                                                    From="-1000,0,0,0" To="0,0,0,0"
+                                                                    Duration="0:0:2"
+                                                                    AccelerationRatio="0.5"
+                                                                    DecelerationRatio="0.5" />
+
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </MultiDataTrigger.EnterActions>
+
+                                                </MultiDataTrigger>
+
+                                                <DataTrigger
+                                                    Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
+                                                    Value="false">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                    Value="Collapsed">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Opacity" Value="0" />
+                                            <Setter Property="Margin" Value="0,10,0,0" />
+                                            <Setter Property="MaxWidth" Value="800" />
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                    Value="1">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="Opacity"
+                                                                    BeginTime="0:0:1"
+                                                                    Duration="0:0:1" From="0" To="1" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                    <DataTrigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="Opacity"
+                                                                    Duration="0:0:0" From="1" To="0" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.ExitActions>
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                    Value="Collapsed">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsLogoAvailable}"
+                                                    Value="False">
+                                                    <Setter Property="Margin" Value="0,0,0,0" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <StackPanel>
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Margin" Value="0,0,0,0" />
+                                                <Style.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                        Value="Collapsed">
+                                                        <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+                                        <StackPanel x:Name="AdditionalGameDetailsPanel"
+                                            Orientation="Horizontal">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Setter Property="Margin" Value="0,10,0,0" />
+                                                    <Setter Property="HorizontalAlignment"
+                                                        Value="Left" />
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                    <Style.Triggers>
+
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--GameTitles Infobar-->
+
+                                                <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Bottom"
+                                                    HorizontalAlignment="Left"
+                                                    SnapsToDevicePixels="True">
+                                                    <TextBlock
+                                                        Style="{StaticResource TextBlockDetailStyle}"
+                                                        Text="{Binding Developers[0], Converter={StaticResource ListToStringConverter}}"
+                                                        VerticalAlignment="Top"
+                                                        FontSize="26" Margin="0,10,0,0.5">
+                                                    </TextBlock>
+                                                    <TextBlock Text=":"
+                                                        Style="{StaticResource TextBlockDetailStyle}"
+                                                        TextAlignment="Center" FontSize="26"
+                                                        Margin="10,10,10,0" />
+                                                    <TextBlock
+                                                        Style="{StaticResource TextBlockAltDetailStyle}"
+                                                        Text="{Binding ReleaseYear, Converter={StaticResource ListToStringConverter}}"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="26" Margin="0.2,10,5,0">
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                <TextBlock Text="{DynamicResource LOCTimePlayed}"
+                                                    Margin="0,2,0,0" FontSize="26"
+                                                    Style="{StaticResource TextBlockDetailStyle}" />
+                                                <TextBlock Text=":"
+                                                    Style="{StaticResource TextBlockDetailStyle}"
+                                                    TextAlignment="Center" FontSize="26"
+                                                    Margin="10,2,10,0" />
+                                                <TextBlock
+                                                    Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
+                                                    Margin="0,2,0,0" FontSize="26"
+                                                    Style="{StaticResource TextBlockAltDetailStyle}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                <TextBlock
+                                                    Text="{DynamicResource LOCCommunityScore}"
+                                                    Margin="0,2,0,0" FontSize="26"
+                                                    Style="{StaticResource TextBlockDetailStyle}" />
+                                                <TextBlock Text=":"
+                                                    Style="{StaticResource TextBlockDetailStyle}"
+                                                    TextAlignment="Center" FontSize="26"
+                                                    Margin="10,2,10,0" />
+                                                <TextBlock
+                                                    Text="{Binding CommunityScore, StringFormat={}{0}}"
+                                                    Margin="0,2,0,0" FontSize="26"
+                                                    Style="{StaticResource TextBlockAltDetailStyle}" />
+                                                <TextBlock Text="/100"
+                                                    Style="{StaticResource TextBlockAltDetailStyle}"
+                                                    TextAlignment="Center" FontSize="26"
+                                                    Margin="0,2,0,0" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                <TextBlock
+                                                    Text="{DynamicResource LOCCompletionStatus}"
+                                                    Margin="0,2,5,0" FontSize="26"
+                                                    Style="{StaticResource TextBlockDetailStyle}" />
+                                                <TextBlock
+                                                    Text="{DynamicResource LOCSuccessStoryAchievements}"
+                                                    Margin="0,2,0,0" FontSize="26"
+                                                    Style="{StaticResource TextBlockDetailStyle}" />
+                                                <TextBlock Text=":"
+                                                    Style="{StaticResource TextBlockDetailStyle}"
+                                                    TextAlignment="Center" FontSize="26"
+                                                    Margin="10,2,10,0" />
+                                                <TextBlock
+                                                    Text="{PluginSettings Plugin=SuccessStory, Path=Percent, StringFormat='{}{0}%'}"
+                                                    Margin="0,2,0,0" FontSize="26"
+                                                    Style="{StaticResource TextBlockAltDetailStyle}" />
+                                            </StackPanel>
+
+                                            <!--Game Button-->
+
+                                            <Grid x:Name="GameButtons" IsEnabled="True">
+                                                <Grid.Style>
+                                                    <Style TargetType="Grid">
+                                                        <Setter Property="Opacity" Value="1" />
+                                                        <Setter Property="HorizontalAlignment"
+                                                            Value="Left" />
+                                                        <Setter Property="Margin" Value="0,40,0,0" />
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect ShadowDepth="4"
+                                                                    BlurRadius="5" Opacity="0.5" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Style.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                                Value="Collapsed">
+                                                                <Setter Property="Visibility"
+                                                                    Value="Collapsed" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Grid.Style>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <ButtonEx x:Name="PART_ButtonContext"
+                                                        Style="{DynamicResource ButtonContext}"
+                                                        Margin="0,0,20,0" Height="50" MinWidth="130"
+                                                        HorizontalContentAlignment="Center">
+                                                    </ButtonEx>
+                                                    <ToggleButtonEx x:Name="TrailerPlay" Height="50"
+                                                        Width="130"
+                                                        Style="{DynamicResource TrailerPlayToggle}"
+                                                        Content="Trailer" Margin="0,0,20,0"
+                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}"
+                                                        Grid.Row="1" />
+                                                    <ToggleButtonEx x:Name="TrailerMute" Width="120"
+                                                        Margin="0,0,20,0"
+                                                        Style="{DynamicResource TrailerMuteToggle}"
+                                                        Visibility="Visible"
+                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}"
+                                                        Grid.Row="2" />
+
+                                                    <ButtonEx x:Name="PART_ButtonOptions"
+                                                        Height="50" Width="130"
+                                                        Style="{DynamicResource GameDetailsGameOptionsButton}"
+                                                        Content="" Margin="0,0,0,0" />                                                 
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!--Description-->
+
+                            <Grid x:Name="ScrollGrid" HorizontalAlignment="Left"
+                                VerticalAlignment="Center" FocusVisualStyle="{x:Null}">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Opacity" Value="0" />
+                                        <Setter Property="Margin" Value="0,50,0,0" />
+                                        <Setter Property="Width" Value="600" />
+                                        <Setter Property="Grid.Row" Value="1" />
+                                        <Setter Property="Grid.RowSpan" Value="2" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                Value="1">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                BeginTime="0:0:1" Duration="0:0:1"
+                                                                From="0" To="1" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                Duration="0:0:0" From="1" To="0" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsKeyboardFocusWithin}"
+                                                Value="False">
+                                                <Setter Property="Grid.OpacityMask"
+                                                    Value="{DynamicResource ScrollFadeBrush}" />
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                Value="Collapsed">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=HltbIcon, Path=Visibility}"
+                                                Value="Visible">
+                                                <Setter Property="Grid.RowSpan" Value="1" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <ScrollViewerEx x:Name="PART_ScrollHtmlDescription"
+                                    FocusVisualStyle="{x:Null}"
+                                    ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                    <HtmlTextView x:Name="PART_HtmlDescription"
+                                        HtmlFontSize="24" HtmlFontFamily="SST"
+                                        HtmlForeground="{DynamicResource Description}"
+                                        LinkForeground="{DynamicResource GlyphColor}"
+                                        FocusVisualStyle="{x:Null}" />
+                                </ScrollViewerEx>
+                            </Grid>
+                        </Grid>
+
+                        <!-- GameTrailer -->
+
+                        <StackPanel>
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Margin" Value="0,30,10,0" />
+                                    <Setter Property="Grid.Row" Value="0" />
+                                    <Setter Property="Grid.RowSpan" Value="3" />
+                                    <Setter Property="Grid.ColumnSpan" Value="3" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=Id, Path=Opacity}"
+                                            Value="1">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:1" Duration="0:0:1"
+                                                            From="0" To="1" AccelerationRatio="0.5" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0" From="1" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}"
+                                            Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                        </StackPanel>
+
+                        <!-- HowLongToBeat -->
+
+                        <StackPanel x:Name="HltbStack" Orientation="Horizontal">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="VerticalAlignment" Value="Bottom" />
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Grid.Row" Value="3" />
+                                    <Setter Property="Height" Value="60" />
+                                    <Setter Property="Margin" Value="50,0,0,15" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                            Value="{x:Null}">
+                                            <Setter Property="Opacity" Value="0" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{PluginSettings Plugin=HowLongToBeat, Path=HasData}"
+                                            Value="{x:Null}">
+                                            <Setter Property="Opacity" Value="0" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=Id, Path=Opacity}"
+                                            Value="1">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:0" Duration="0:0:1"
+                                                            To="1" />
+                                                        <ThicknessAnimation
+                                                            Storyboard.TargetProperty="Margin"
+                                                            BeginTime="0:0:0" From="50,0,0,-120"
+                                                            Duration="0:0:1.5"
+                                                            AccelerationRatio="0.3"
+                                                            DecelerationRatio="0.7" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0" From="1" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <Image x:Name="HltbIcon" RenderOptions.BitmapScalingMode="Fant"
+                                Source="{ThemeFile 'Images/HLTB.png'}" Height="30" Margin="0,10,0,0"
+                                Stretch="Uniform">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition
+                                                        Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                                        Value="--" />
+                                                    <Condition
+                                                        Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                                        Value="--" />
+                                                    <Condition
+                                                        Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                                        Value="--" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                                <Image.Effect>
+                                    <DropShadowEffect ShadowDepth="1" Color="Black"
+                                        RenderingBias="Quality" BlurRadius="0" Opacity="0.8" />
+                                </Image.Effect>
+                            </Image>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Margin" Value="20,10,10,5" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                                Value="--">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}"
+                                    FontSize="28"
+                                    TextAlignment="Center" Style="{StaticResource HltbStyle}"
+                                    Margin="0,2,0,0" />
+                                <TextBlock Text=":" Style="{StaticResource HltbStyle}"
+                                    TextAlignment="Center" FontSize="24" Margin="10,2,10,0" />
+                                <TextBlock
+                                    Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                    Style="{StaticResource HltbAltStyle}"
+                                    TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Margin" Value="20,10,10,5" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                                Value="--">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}"
+                                    FontSize="28"
+                                    TextAlignment="Center" Style="{StaticResource HltbStyle}"
+                                    Margin="0,2,0,0" />
+                                <TextBlock Text=":" Style="{StaticResource HltbStyle}"
+                                    TextAlignment="Center" FontSize="24" Margin="10,3,10,0" />
+                                <TextBlock
+                                    Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                    Style="{StaticResource HltbAltStyle}"
+                                    TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Margin" Value="20,10,10,5" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                                Value="--">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}"
+                                    FontSize="28"
+                                    TextAlignment="Center" Style="{StaticResource HltbStyle}"
+                                    Margin="0,2,0,0" />
+                                <TextBlock Text=":" Style="{StaticResource HltbStyle}"
+                                    TextAlignment="Center" FontSize="24" Margin="10,3,10,0" />
+                                <TextBlock
+                                    Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                    Style="{StaticResource HltbAltStyle}"
+                                    TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Genres -->
+
+                        <Grid x:Name="Genres" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                            VerticalAlignment="Center">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                    Value="1" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:0" Duration="0:0:1"
+                                                            To="1" />
+                                                        <ThicknessAnimation
+                                                            Storyboard.TargetProperty="Margin"
+                                                            BeginTime="0:0:0" From="0,0,0,-220"
+                                                            Duration="0:0:1.5"
+                                                            AccelerationRatio="0.3"
+                                                            DecelerationRatio="0.7" />
+
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.EnterActions>
+                                            <MultiDataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.ExitActions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
+                                            Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock"
+                                        BasedOn="{StaticResource HltbStyle}">
+                                        <Setter Property="FontSize" Value="30" />
+                                        <Setter Property="Margin" Value="980,5,60,-10" />
+                                        <Setter Property="TextTrimming" Value="WordEllipsis" />
+                                        <Setter Property="Text"
+                                            Value="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' | '}" />
+                                        <Style.Triggers>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
                             </TextBlock>
+                        </Grid>
 
-                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,20,20,20">
-                                <StackPanel>
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               FontFamily="{DynamicResource FontTitilliumWebBold}"
-                                               Text="{DynamicResource LOCTimePlayed}"
-                                               Margin="0,0,0,10" />
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}" />
-                                </StackPanel>
-                                
-                                <StackPanel Margin="50,0,0,0">
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               FontFamily="{DynamicResource FontTitilliumWebBold}"
-                                               Text="{DynamicResource LOCGameLastActivityTitle}"
-                                               Margin="0,0,0,10" />
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{Binding LastActivity, Converter={StaticResource DateTimeToLastPlayedConverter}}" />
-                                </StackPanel>
+                        <Grid Grid.Row="0" Height="10" Width="10" Focusable="False">
+                            <TextBlock x:Name="LogoTrigger"
+                                Text="{Binding Game.Id, NotifyOnTargetUpdated=True}"
+                                Foreground="Transparent">
+                                <TextBlock.Triggers>
+                                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                    Duration="0:0:0" To="0" />
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                    Duration="0:0:0" From="0" To="1"
+                                                    BeginTime="0:0:1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </TextBlock.Triggers>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock"
+                                        BasedOn="{StaticResource TextBlockBaseStyle}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
 
-                                <StackPanel Margin="50,0,0,0">
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               FontFamily="{DynamicResource FontTitilliumWebBold}"
-                                               Text="{DynamicResource LOCGameReleaseDateTitle}"
-                                               Margin="0,0,0,10" />
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{Binding ReleaseDate}" />
-                                </StackPanel>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock x:Name="Id"
+                                Text="{Binding Game.Id, NotifyOnTargetUpdated=True}"
+                                Foreground="Transparent">
+                                <TextBlock.Triggers>
+                                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                    Duration="0:0:0" To="0" />
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                    Duration="0:0:0.1" From="0" To="1"
+                                                    BeginTime="0:0:0" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </TextBlock.Triggers>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock"
+                                        BasedOn="{StaticResource TextBlockBaseStyle}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
 
-                                <StackPanel Margin="50,0,0,0">
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               FontFamily="{DynamicResource FontTitilliumWebBold}"
-                                               Text="{DynamicResource LOCGamePlatformTitle}"
-                                               Margin="0,0,0,10" />
-                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{Binding Platforms, Converter={StaticResource ListToStringConverter}}" />
-                                </StackPanel>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock x:Name="TrailerTrigger"
+                                Text="{Binding Game.Id, NotifyOnTargetUpdated=True}"
+                                Foreground="Transparent">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock"
+                                        BasedOn="{StaticResource TextBlockBaseStyle}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Setter Property="Opacity" Value="0" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition
+                                                        Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                        Value="1" />
+                                                    <Condition
+                                                        Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                        Value="Visible" />
+                                                    <Condition
+                                                        Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
+                                                        Value="True" />
+                                                </MultiDataTrigger.Conditions>
+                                                <MultiDataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                BeginTime="0:0:0" Duration="0:0:0"
+                                                                To="1" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </MultiDataTrigger.EnterActions>
+                                                <MultiDataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                Duration="0:0:0" To="0" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </MultiDataTrigger.ExitActions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
+                        <!-- Trailer -->
+
+                        <Grid x:Name="TrailerContainer" Panel.ZIndex="-49">
+                            <Grid.Background>
+                                <VisualBrush Visual="{Binding ElementName=TrailerVideo}"
+                                    Stretch="Uniform" />
+                            </Grid.Background>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Margin" Value="0,0,50,-10" />
+                                    <Setter Property="Grid.Row" Value="1" />
+                                    <Setter Property="Grid.Column" Value="0" />
+                                    <Setter Property="Grid.ColumnSpan" Value="3" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="VerticalAlignment" Value="Bottom" />
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Setter Property="MaxWidth" Value="500" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                    Value="1" />
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
+                                                    Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:1.5" Duration="0:0:1"
+                                                            To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.EnterActions>
+                                            <MultiDataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.ExitActions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                            Value="Collapsed">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Border x:Name="TrailerMask" Background="Black" BorderThickness="0">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Setter Property="Opacity" Value="0" />
+                                        <Setter Property="CornerRadius" Value="0" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                Value="1">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                BeginTime="0:0:1" Duration="0:0:1"
+                                                                To="1" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                Duration="0:0:0" To="0" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}"
+                                                Value="True">
+                                                <Setter Property="CornerRadius" Value="0" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                            <ContentControl
+                                x:Name="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound">
+                                <ContentControl.Style>
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Opacity" Value="0" />
+                                        <Setter Property="Background" Value="Black" />
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Setter Property="Margin" Value="0,0,0,0" />
+                                        <Setter Property="Height" Value="910" />
+                                        <!-- <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" /> -->
+                                        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                Value="1">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                BeginTime="0:0:0" Duration="0:0:1"
+                                                                To="1" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                Duration="0:0:0" To="0" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=TrailerTrigger, Path=Opacity}"
+                                                Value="1">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                Value="Collapsed">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition
+                                                        Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}"
+                                                        Value="False" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect ShadowDepth="2"
+                                                            Color="#000000"
+                                                            RenderingBias="Performance"
+                                                            BlurRadius="20" Opacity="0.8" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </MultiDataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}"
+                                                Value="False">
+                                                <Setter Property="ContentControl.OpacityMask">
+                                                    <Setter.Value>
+                                                        <VisualBrush
+                                                            Visual="{Binding ElementName=TrailerMask}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ContentControl.Style>
+                            </ContentControl>
+                            <StackPanel x:Name="MediaButtons" FocusVisualStyle="{x:Null}"
+                                VerticalAlignment="Top" HorizontalAlignment="Right"
+                                Orientation="Vertical" Margin="0,0,0,0">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Setter Property="Opacity" Value="0" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=TrailerContainer, Path=Opacity}"
+                                                Value="1">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                BeginTime="0:0:0" Duration="0:0:0.5"
+                                                                To="1" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                Duration="0:0:0" To="0" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=TrailerContainer, Path=Opacity}"
+                                                Value="1">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ToggleButtonEx x:Name="TrailerZoom" IsChecked="True"
+                                        Visibility="Collapsed" Width="50" Margin="15,15,15,0"
+                                        Panel.ZIndex="-47"
+                                        Style="{DynamicResource TrailerZoomToggle}" Grid.Row="0" />
+
+
+                                </Grid>
                             </StackPanel>
-                            
-                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                                <ButtonEx x:Name="PART_ButtonContext"
-                                          Margin="2" BorderThickness="2" MinWidth="220" HorizontalContentAlignment="Center" />
-                                <ButtonEx x:Name="PART_ButtonOptions"
-                                          Content="{DynamicResource LOCGameOptions}"
-                                          Margin="5,2,2,2" BorderThickness="2" MinWidth="220" HorizontalContentAlignment="Center" />
-                            </StackPanel>
-      
-                            <ScrollViewerEx Margin="0,20,0,0" DockPanel.Dock="Top"
-                                            x:Name="PART_ScrollHtmlDescription">
-                                <HtmlTextView x:Name="PART_HtmlDescription"
-                                                HtmlFontSize="16"
-                                                HtmlForeground="{DynamicResource TextColor}"
-                                                LinkForeground="{DynamicResource GlyphColor}"
-                                                FocusVisualStyle="{x:Null}" />
-                            </ScrollViewerEx>
-                        </DockPanel>
+                        </Grid>
+
+                        <!-- Sound -->
+
+                        <MediaElement x:Name="EnterGameDetailsChime"
+                            Source="{ThemeFile 'audio/EnterGameDetails.wav'}"
+                            MediaElementBehaviors.Repeat="False">
+                            <MediaElement.Style>
+                                <Style TargetType="MediaElement">
+                                    <Setter Property="LoadedBehavior" Value="Manual" />
+                                    <Setter Property="UnloadedBehavior" Value="Close" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                            Value="Visible">
+                                            <Setter Property="LoadedBehavior" Value="Play" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MediaElement.Style>
+                        </MediaElement>
+
+                        <MediaElement x:Name="ExitGameDetailsChime"
+                            Source="{ThemeFile 'audio/ExitGameDetails.wav'}"
+                            MediaElementBehaviors.Repeat="False">
+                            <MediaElement.Style>
+                                <Style TargetType="MediaElement">
+                                    <Setter Property="LoadedBehavior" Value="Manual" />
+                                    <Setter Property="UnloadedBehavior" Value="Close" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                            Value="Collapsed">
+                                            <Setter Property="LoadedBehavior" Value="Play" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MediaElement.Style>
+                        </MediaElement>
+
+                        <TextBlock x:Name="MusicTrigger"
+                            Text="{Binding Game.Id, NotifyOnTargetUpdated=True}"
+                            Foreground="Transparent">
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                Duration="0:0:0" To="0" />
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                Duration="0:0:0.1" From="0" To="1"
+                                                BeginTime="0:0:0.9" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock"
+                                    BasedOn="{StaticResource TextBlockBaseStyle}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <TextBlock x:Name="MusicPath" Tag="{DynamicResource ExtraMetadataPath}"
+                            Visibility="Collapsed">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text">
+                                        <Setter.Value>
+                                            <MultiBinding StringFormat="{}{0}{1}{2}{3}">
+                                                <Binding RelativeSource="{RelativeSource Self}"
+                                                    Path="Tag" />
+                                                <Binding Source="\ExtraMetadata\games\" />
+                                                <Binding Path="Game.Id" />
+                                                <Binding Source="\Music.mp3" />
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <MediaElement x:Name="MusicSource" MediaElementBehaviors.Repeat="True"
+                            Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
+                            <MediaElement.Style>
+                                <Style TargetType="MediaElement">
+                                    <Setter Property="Volume" Value="0" />
+                                    <Setter Property="MediaElement.Source"
+                                        Value="{Binding ElementName=MusicPath, Path=Text}" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{SettingsBinding Fullscreen.IsMusicMuted}"
+                                                    Value="False" />
+                                                <Condition
+                                                    Binding="{Binding ElementName=MusicTrigger, Path=Opacity}"
+                                                    Value="1" />
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
+                                                    Value="True" />
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsVideoPlaying}"
+                                                    Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Volume"
+                                                            BeginTime="0:0:0.5" Duration="0:0:2"
+                                                            To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.EnterActions>
+                                            <MultiDataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Volume"
+                                                            Duration="0:0:1.5" To="0"
+                                                            FillBehavior="Stop" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.ExitActions>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                    Value="1" />
+                                                <Condition
+                                                    Binding="{SettingsBinding Fullscreen.IsMusicMuted}"
+                                                    Value="False" />
+                                                <Condition
+                                                    Binding="{Binding ElementName=MusicTrigger, Path=Opacity}"
+                                                    Value="1" />
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
+                                                    Value="False" />
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsVideoPlaying}"
+                                                    Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Volume"
+                                                            BeginTime="0:0:0.5" Duration="0:0:2"
+                                                            To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.EnterActions>
+                                            <MultiDataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Volume"
+                                                            Duration="0:0:1.5" To="0"
+                                                            FillBehavior="Stop" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.ExitActions>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
+                                                    Value="True" />
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsVideoPlaying}"
+                                                    Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Volume" Value="0" />
+                                        </MultiDataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=MusicTrigger, Path=Opacity}"
+                                            Value="0">
+                                            <Setter Property="MediaElement.Source" Value="" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{SettingsBinding Fullscreen.IsMusicMuted}"
+                                            Value="True">
+                                            <Setter Property="MediaElement.Source" Value="" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MediaElement.Style>
+                        </MediaElement>
+
+                        <!-- Cover des jeux -->
+
+                        <Grid x:Name="CoverContainer" Background="Transparent"
+                            FocusVisualStyle="{x:Null}" Panel.ZIndex="-47">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Margin" Value="0,-60,10,0" />
+                                    <Setter Property="Grid.Row" Value="1" />
+                                    <Setter Property="Grid.RowSpan" Value="1" />
+                                    <Setter Property="Grid.Column" Value="1" />
+                                    <Setter Property="Grid.ColumnSpan" Value="2" />
+                                    <Setter Property="MaxHeight" Value="60" />
+                                    <Setter Property="Width" Value="Auto" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=Id, Path=Opacity}"
+                                            Value="1">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:1" Duration="0:0:1"
+                                                            To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                            Value="Collapsed">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
+                                                    Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Border x:Name="CoverMask" Background="Black" BorderThickness="0">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="0" />
+                                        <Setter Property="Height" Value="Auto" />
+                                        <Setter Property="Width" Value="Auto" />
+                                        <Style.Triggers>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                            <Image x:Name="CoverImage" RenderOptions.BitmapScalingMode="Fant"
+                                RenderTransformOrigin="0.5,0.5"
+                                Source="{Binding CoverImageObject}" HorizontalAlignment="Center"
+                                MaxWidth="700">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Image.OpacityMask">
+                                            <Setter.Value>
+                                                <VisualBrush
+                                                    Visual="{Binding ElementName=CoverMask}" />
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Grid>
                     </Grid>
+
+                    <!-- Visibilité des elements quand trailer joue-->
+
+                    <ControlTemplate.Triggers>
+
+                        <DataTrigger Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}"
+                            Value="True">
+                            <Setter Property="Margin" Value="0,0,0,0" TargetName="TrailerContainer" />
+                            <!-- <Setter Property="Height" Value="1080"
+                            TargetName="TrailerContainer"/> -->
+                            <Setter Property="MaxWidth" Value="2161" TargetName="TrailerContainer" />
+                            <Setter Property="Width" Value="Auto" TargetName="TrailerContainer" />
+                            <Setter Property="Grid.Row" Value="0" TargetName="TrailerContainer" />
+                            <Setter Property="Grid.RowSpan" Value="3" TargetName="TrailerContainer" />
+                            <Setter Property="Grid.Column" Value="0" TargetName="TrailerContainer" />
+                            <Setter Property="Grid.ColumnSpan" Value="3"
+                                TargetName="TrailerContainer" />
+                            <Setter Property="VerticalAlignment" Value="Stretch"
+                                TargetName="TrailerContainer" />
+                            <Setter Property="HorizontalAlignment" Value="Right"
+                                TargetName="TrailerContainer" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="GameDetailsStack" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="ScrollGrid" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="HltbStack" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Genres" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="CoverContainer" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Overlay" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="MainBackgroundBlurGrid" />
+
+
+                            <Setter Property="VerticalAlignment" Value="Center"
+                                TargetName="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound" />
+                            <Setter Property="HorizontalAlignment" Value="Center"
+                                TargetName="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding ElementName=TrailerTrigger, Path=Opacity}"
+                            Value="0">
+                            <Setter Property="IsChecked" Value="False" TargetName="TrailerZoom" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding ElementName=TrailerMute, Path=Visibility}"
+                            Value="Collapsed">
+                            <Setter Property="Margin" Value="15,15,15,15" TargetName="TrailerPlay" />
+                        </DataTrigger>
+
+                        <DataTrigger
+                            Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying}"
+                            Value="{StaticResource True}">
+                            <Setter Property="Command"
+                                Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}"
+                                TargetName="TrailerPlay" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
