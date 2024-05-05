@@ -556,14 +556,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="{TemplateBinding Background}">
-                        <ContentControl x:Name="MainBackground" 
-                            Focusable="False" Template="{DynamicResource ButtonMainBackground}" 
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                        />
-                        <Border x:Name="MainBorder" Margin="-5"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                        <ContentControl Style="{DynamicResource ButtonFrame}" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -575,25 +568,6 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.5" />
-                        </Trigger>
-
-                        <Trigger Property="IsFocused" Value="True">
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
-                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <Setter Property="Opacity" Value="0" TargetName="MainBackground" />
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
-                        </Trigger>
-
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
-                            <Setter Property="Opacity" Value="0" TargetName="MainBackground" />
-                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="Transparent" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -702,14 +676,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid x:Name="MainGrid" Background="{TemplateBinding Background}">
-                        <ContentControl x:Name="MainBackground" 
-                            Focusable="False" Template="{DynamicResource ButtonMainBackground}" 
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                        />
-                        <Border x:Name="MainBorder" Margin="-5"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                        <ContentControl Style="{DynamicResource ButtonFrame}" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel x:Name="OFF" VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
@@ -731,11 +698,6 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
-                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <Setter Property="Opacity" Value="0" TargetName="MainBackground" />
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
                             <Setter Property="Opacity" Value="1" TargetName="OFF" />
                             <Setter Property="Opacity" Value="1" TargetName="ON" />
                         </Trigger>
@@ -744,19 +706,11 @@
                             <Setter Property="Opacity" Value="1" TargetName="ON" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
-                            <Setter Property="Opacity" Value="0" TargetName="MainBackground" />
-
-                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                             <Setter Property="Opacity" Value="1" TargetName="OFF" />
                             <Setter Property="Opacity" Value="1" TargetName="ON" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Opacity" Value="0" TargetName="MainBackground" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Visibility" TargetName="ON" Value="Collapsed" />

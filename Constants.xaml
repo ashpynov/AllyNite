@@ -457,20 +457,67 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="ButtonMainBackground">
-        <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-            <Border CornerRadius="0" BorderThickness="1" BorderBrush="{DynamicResource ControlBackgroundLightBrush}"
-                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-            />
-            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_lt.png'}" Stretch="None"
-            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_rt.png'}" Stretch="None"
-            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="Right" VerticalAlignment="Top" />
-            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_lb.png'}" Stretch="None"
-            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_rb.png'}" Stretch="None"
-            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
-        </Grid>
-    </ControlTemplate>
+
+    <Style x:Key="ButtonFrame" TargetType="ContentControl">
+        <Setter Property = "Focusable" Value="False" />
+        <Setter Property = "Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid>
+                        <Border x:Name="Back" Background ="Black" Opacity="0.4" />
+                        <Grid x:Name="NormalFrame">                        
+                            <Border CornerRadius="0" 
+                                BorderThickness="1" 
+                                BorderBrush="{DynamicResource ControlBackgroundLightBrush}"
+                            />
+                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_lt.png'}" Stretch="None"
+                            HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_rt.png'}" Stretch="None"
+                            HorizontalAlignment="Right" VerticalAlignment="Top" />
+                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_lb.png'}" Stretch="None"
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_rb.png'}" Stretch="None"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        </Grid>
+                        <Grid x:Name="FocusFrame" Visibility="Collapsed" >
+                            <Border 
+                                CornerRadius="0" 
+                                BorderThickness="1" 
+                                BorderBrush="{DynamicResource ControlBackgroundLightBrush}"
+                            />
+                            <Border
+                                Margin="-5"
+                                Style="{DynamicResource SolidBorderLightBrush}"
+                                Tag="False"
+                                BorderThickness="3"
+                                CornerRadius="0"
+                            /> 
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                            <Setter Property="Foreground" Value="Transparent" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="FocusFrame" />
+                            <Setter Property="Opacity" Value="0" TargetName="NormalFrame" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="FocusFrame" />
+                            <Setter Property="Opacity" Value="0" TargetName="NormalFrame" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+
 
 </ResourceDictionary>

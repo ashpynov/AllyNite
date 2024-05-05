@@ -41,8 +41,8 @@
 
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
+                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
+                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
                             <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
                             <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                         </Trigger>
