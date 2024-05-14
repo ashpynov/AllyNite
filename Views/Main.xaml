@@ -2,6 +2,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
     mc:Ignorable="d">
 
     <!-- Définition du style pour le type Main -->
@@ -258,7 +259,7 @@
                                     <ColumnDefinition Width="30" />     
                                 </Grid.ColumnDefinitions>
 
-
+                                
                                 <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center"
                                     Margin="30,0,0,0" Height="40" Width="72"
                                     Style="{DynamicResource ButtonAvatar}"
@@ -567,6 +568,53 @@
                                     </Grid.Effect>
                                 </Grid>
 
+
+                            </Grid>
+
+                            <Grid x:Name="SongTitle" FocusVisualStyle="{x:Null}"
+                                    Grid.Column="0"
+                                    Grid.Row="0" 
+                                    Grid.ColumnSpan="3"
+                                    Grid.RowSpan="3"
+                                    Margin="0,-40,0,0"
+                            >
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ThicknessAnimation
+                                                            Storyboard.TargetProperty="Margin"
+                                                            To="0,90,0,0"
+                                                            Duration="0:0:1"
+                                                            AccelerationRatio="0.3"
+                                                            DecelerationRatio="0.7" />
+                                                        <ThicknessAnimation
+                                                            Storyboard.TargetProperty="Margin"
+                                                            To="0,-40,0,0"
+                                                            Duration="0:0:1"
+                                                            BeginTime="0:0:5"
+                                                            AccelerationRatio="0.7"
+                                                            DecelerationRatio="0.3" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                        </Style>
+                                </Grid.Style>
+
+
+                                <ContentControl x:Name="Sounds_MusicControl" />
+                                <TextBlock 
+                                    Text="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName, NotifyOnTargetUpdated=True}"
+                                    Style="{StaticResource TextBlockAltDetailStyle}"
+                                    FontSize="26"
+                                    
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,0" 
+                                />
 
                             </Grid>
 
@@ -1371,7 +1419,7 @@
                                         <Setter Property="Grid.RowSpan" Value="2" />
                                         <Setter Property="Grid.ColumnSpan" Value="3" />
                                         <Setter Property="Height" Value="380" />
-                                        <Setter Property="Effect">
+                                        <Setter Property="Effect">           
                                             <Setter.Value>
                                                 <DropShadowEffect ShadowDepth="3" BlurRadius="5"
                                                     Direction="250"
@@ -1392,7 +1440,7 @@
                                                                 Duration="0:0:1.5" From="0" To="1" />
                                                             <ThicknessAnimation
                                                                 Storyboard.TargetProperty="Margin"
-                                                                BeginTime="0:0:3" From="0,0,0,-200"
+                                                                BeginTime="0:0:3" From="0,0,0,-600"
                                                                 Duration="0:0:1.5"
                                                                 AccelerationRatio="0.3"
                                                                 DecelerationRatio="0.7" />
@@ -1413,7 +1461,7 @@
                                                                 Duration="0:0:1" From="0" To="1" />
                                                             <ThicknessAnimation
                                                                 Storyboard.TargetProperty="Margin"
-                                                                BeginTime="0:0:0" From="0,0,0,-200"
+                                                                BeginTime="0:0:0" From="0,0,0,-600"
                                                                 Duration="0:0:1"
                                                                 AccelerationRatio="0.7"
                                                                 DecelerationRatio="0.3" />
