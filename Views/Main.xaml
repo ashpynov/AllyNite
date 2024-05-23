@@ -576,8 +576,10 @@
                                     Grid.Row="0"
                                     Grid.ColumnSpan="3"
                                     Grid.RowSpan="3"
-                                    Margin="0,-40,0,0"
+                                    Panel.ZIndex="100"
+                                    Margin="0,-80,0,0"
                             >
+
                                 <Grid.Style>
                                     <Style TargetType="Grid">
                                         <Style.Triggers>
@@ -586,36 +588,73 @@
                                                     <Storyboard>
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
-                                                            To="0,90,0,0"
+                                                            To="0,5,0,0"
+                                                            From="0,-80,0,0"
                                                             Duration="0:0:1"
                                                             AccelerationRatio="0.3"
                                                             DecelerationRatio="0.7" />
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:1"
+                                                            To="1" />
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
-                                                            To="0,-40,0,0"
+                                                            To="0,-80,0,0"
                                                             Duration="0:0:1"
                                                             BeginTime="0:0:5"
                                                             AccelerationRatio="0.7"
                                                             DecelerationRatio="0.3" />
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:1"
+                                                            BeginTime="0:0:5"
+                                                            To="0" />
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName}"
+                                                Value="">
+                                                <Setter Property = "Visibility" Value = "Collapsed" />
+                                            </DataTrigger>
                                         </Style.Triggers>
                                         </Style>
                                 </Grid.Style>
 
+                                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height = "70" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                                <ContentControl x:Name="Sounds_MusicControl" />
-                                <TextBlock
-                                    Text="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName, NotifyOnTargetUpdated=True}"
-                                    Style="{StaticResource TextBlockAltDetailStyle}"
-                                    FontSize="26"
-
-                                    VerticalAlignment="Top"
-                                    HorizontalAlignment="Center"
-                                    Margin="0,0,0,0"
-                                />
-
+                                    <Border Opacity="0.7" Grid.ColumnSpan="2">
+                                        <Border.Background>
+                                        <ImageBrush ImageSource="{ThemeFile 'Images/Interface.png'}"
+                                            Stretch="UniformToFill" />
+                                        </Border.Background>
+                                    </Border>
+                                        <ContentControl x:Name="Sounds_MusicControl" />
+                                        <Image Source="{ThemeFile 'Images/FullVolume.png'}"
+                                            Grid.Column="0"
+                                            Height="40" Width="40"
+                                            RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
+                                            VerticalAlignment="Center" 
+                                            Margin="20, 5, 0, 0" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Text="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName, NotifyOnTargetUpdated=True}"
+                                            Style="{DynamicResource TextBlockBoldBaseStyle}"
+                                            FontFamily="Segoe UI"
+                                            FontSize="34"
+                                            VerticalAlignment="Center"
+                                            Margin="10,0,20,0"
+                                        >
+                                            <TextBlock.LayoutTransform>
+                                                <ScaleTransform ScaleX="0.85"  />
+                                            </TextBlock.LayoutTransform>
+                                        </TextBlock>
+                                    
+                                </Grid>
                             </Grid>
 
                             <Grid x:Name="BackgroundImageGrid" FocusVisualStyle="{x:Null}"
