@@ -249,17 +249,17 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />     <!-- 0. Main menu -->
                                     <ColumnDefinition Width="Auto" />     <!-- 1. ChangeView button -->
-                                    <ColumnDefinition Width="*" />    
+                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />     <!-- 3. Update button -->
                                     <ColumnDefinition Width="Auto" />     <!-- 4. Notification button -->
-                                    <ColumnDefinition Width="Auto" />     
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />     <!-- 6. Battery text -->
                                     <ColumnDefinition Width="Auto" />     <!-- 7. Battery icon -->
                                     <ColumnDefinition Width="Auto" />     <!-- 8. Clock -->
-                                    <ColumnDefinition Width="30" />     
+                                    <ColumnDefinition Width="30" />
                                 </Grid.ColumnDefinitions>
 
-                                
+
                                 <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center"
                                     Margin="30,0,0,0" Height="40" Width="72"
                                     Style="{DynamicResource ButtonAvatar}"
@@ -417,7 +417,7 @@
                                     Style="{DynamicResource TextBlockBoldBaseStyle}"
                                     FontFamily="Segoe UI"
                                     FontSize="32"
-                                    VerticalAlignment="Center" Margin="30,-10,0,0" 
+                                    VerticalAlignment="Center" Margin="30,-10,0,0"
                                     Grid.Column="6">
                                 </TextBlock>
                                 <ContentControl x:Name="PART_ElemBatteryStatus"
@@ -573,7 +573,7 @@
 
                             <Grid x:Name="SongTitle" FocusVisualStyle="{x:Null}"
                                     Grid.Column="0"
-                                    Grid.Row="0" 
+                                    Grid.Row="0"
                                     Grid.ColumnSpan="3"
                                     Grid.RowSpan="3"
                                     Margin="0,-40,0,0"
@@ -606,14 +606,14 @@
 
 
                                 <ContentControl x:Name="Sounds_MusicControl" />
-                                <TextBlock 
+                                <TextBlock
                                     Text="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName, NotifyOnTargetUpdated=True}"
                                     Style="{StaticResource TextBlockAltDetailStyle}"
                                     FontSize="26"
-                                    
+
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Center"
-                                    Margin="0,0,0,0" 
+                                    Margin="0,0,0,0"
                                 />
 
                             </Grid>
@@ -1160,8 +1160,8 @@
                                         </Style>
                                     </StackPanel.Style>
 
-                                    <!-- <TextBlock Text="" 
-               TextWrapping="Wrap" 
+                                    <!-- <TextBlock Text=""
+               TextWrapping="Wrap"
                TextTrimming="CharacterEllipsis">
         <TextBlock.Style>
             <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBoldBaseStyle}">
@@ -1419,7 +1419,7 @@
                                         <Setter Property="Grid.RowSpan" Value="2" />
                                         <Setter Property="Grid.ColumnSpan" Value="3" />
                                         <Setter Property="Height" Value="380" />
-                                        <Setter Property="Effect">           
+                                        <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect ShadowDepth="3" BlurRadius="5"
                                                     Direction="250"

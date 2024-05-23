@@ -31,9 +31,6 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
-
-                        <ContentControl x:Name="Sounds_MusicControl" />
-
                         <Border x:Name="Overlay" Grid.RowSpan="3" Grid.ColumnSpan="3"
                             RenderOptions.BitmapScalingMode="Fant" Panel.ZIndex="-48">
                             <Border.Style>
@@ -686,7 +683,7 @@
                                                     <ButtonEx x:Name="PART_ButtonOptions"
                                                         Height="50" Width="130"
                                                         Style="{DynamicResource GameDetailsGameOptionsButton}"
-                                                        Content="" Margin="0,0,0,0" />                                                 
+                                                        Content="" Margin="0,0,0,0" />
                                                 </StackPanel>
                                             </Grid>
                                         </StackPanel>
@@ -1706,35 +1703,7 @@
                                 Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}"
                                 TargetName="TrailerPlay" />
                         </DataTrigger>
-
-                        <DataTrigger
-                            Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted, FallbackValue={StaticResource False}}"
-                            Value="{StaticResource False}">
-                            <Setter 
-                                Property="Tag" 
-                                Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying}" 
-                                TargetName="Sounds_MusicControl" />
-                        </DataTrigger>
-
-                        <DataTrigger
-                            Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted, FallbackValue={StaticResource False}}"
-                            Value="{StaticResource True}">
-                            <Setter 
-                                Property="Tag" 
-                                Value="False" 
-                                TargetName="Sounds_MusicControl" />
-                        </DataTrigger>           
-                        
-                        <DataTrigger
-                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                            Value="Collapsed">
-                            <Setter 
-                                Property="Tag" 
-                                Value="False" 
-                                TargetName="Sounds_MusicControl" />
-                        </DataTrigger>
                     </ControlTemplate.Triggers>
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
