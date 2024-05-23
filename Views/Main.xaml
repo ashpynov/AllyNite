@@ -577,9 +577,8 @@
                                     Grid.ColumnSpan="3"
                                     Grid.RowSpan="3"
                                     Panel.ZIndex="100"
-                                    Margin="0,-80,0,0"
+                                    Margin="-1024,0,1024,0"
                             >
-
                                 <Grid.Style>
                                     <Style TargetType="Grid">
                                         <Style.Triggers>
@@ -588,27 +587,35 @@
                                                     <Storyboard>
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
-                                                            To="0,5,0,0"
-                                                            From="0,-80,0,0"
-                                                            Duration="0:0:1"
+                                                            To="0,80,0,0"
+                                                            Duration="0:0:0.5"
                                                             AccelerationRatio="0.3"
                                                             DecelerationRatio="0.7" />
                                                         <DoubleAnimation
                                                             Storyboard.TargetProperty="Opacity"
-                                                            Duration="0:0:1"
+                                                            Duration="0:0:0.5"
                                                             To="1" />
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
-                                                            To="0,-80,0,0"
-                                                            Duration="0:0:1"
+                                                            To="1024,80,-1024,0"
+                                                            Duration="0:0:0.5"
                                                             BeginTime="0:0:5"
                                                             AccelerationRatio="0.7"
-                                                            DecelerationRatio="0.3" />
+                                                            DecelerationRatio="0.3" 
+                                                            />
                                                         <DoubleAnimation
                                                             Storyboard.TargetProperty="Opacity"
-                                                            Duration="0:0:1"
+                                                            Duration="0:0:0.5"
                                                             BeginTime="0:0:5"
-                                                            To="0" />
+                                                            To="0" 
+                                                            />
+                                                        <ThicknessAnimation
+                                                            Storyboard.TargetProperty="Margin"
+                                                            From="-1024,80,1024,0"
+                                                            To="-1024,80,1024,0"
+                                                            Duration="0:0:0"
+                                                            BeginTime="0:0:5.5"
+                                                        />
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>
@@ -627,7 +634,7 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Border Opacity="0.7" Grid.ColumnSpan="2">
+                                    <Border Opacity="0.4" Grid.ColumnSpan="2">
                                         <Border.Background>
                                         <ImageBrush ImageSource="{ThemeFile 'Images/Interface.png'}"
                                             Stretch="UniformToFill" />
