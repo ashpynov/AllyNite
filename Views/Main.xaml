@@ -601,13 +601,13 @@
                                                             Duration="0:0:0.5"
                                                             BeginTime="0:0:5"
                                                             AccelerationRatio="0.7"
-                                                            DecelerationRatio="0.3" 
+                                                            DecelerationRatio="0.3"
                                                             />
                                                         <DoubleAnimation
                                                             Storyboard.TargetProperty="Opacity"
                                                             Duration="0:0:0.5"
                                                             BeginTime="0:0:5"
-                                                            To="0" 
+                                                            To="0"
                                                             />
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
@@ -634,7 +634,7 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Border Opacity="0.4" Grid.ColumnSpan="2">
+                                    <Border Opacity="0.8" Grid.ColumnSpan="2">
                                         <Border.Background>
                                         <ImageBrush ImageSource="{ThemeFile 'Images/Interface.png'}"
                                             Stretch="UniformToFill" />
@@ -645,7 +645,7 @@
                                             Grid.Column="0"
                                             Height="40" Width="40"
                                             RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
-                                            VerticalAlignment="Center" 
+                                            VerticalAlignment="Center"
                                             Margin="20, 5, 0, 0" />
                                         <TextBlock
                                             Grid.Column="1"
@@ -660,7 +660,6 @@
                                                 <ScaleTransform ScaleX="0.85"  />
                                             </TextBlock.LayoutTransform>
                                         </TextBlock>
-                                    
                                 </Grid>
                             </Grid>
 
