@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     mc:Ignorable="d">
 
     <!-- Définition du style pour les éléments de la liste de jeux -->
@@ -22,7 +22,7 @@
                                Stretch="{Settings CoverArtStretch}" />
                         <!-- Indicateur visuel de jeu en cours -->
                         <Canvas x:Name="Playing" Visibility="Collapsed">
-                            <Polygon Points="0,0 50,0 0,50" Fill="#FFB32B" Opacity="1"/>    
+                            <Polygon Points="0,0 50,0 0,50" Fill="#FFB32B" Opacity="1"/>
                         </Canvas>
                         <!-- Fond sombre pour assombrir l'image -->
                         <Border Background="#181A1E" x:Name="BorderDarken" CornerRadius="0" Visibility="Collapsed" Opacity="0.7" />
@@ -30,9 +30,9 @@
                         <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
                                    Visibility="Collapsed"
                                    Style="{DynamicResource TextBlockBaseStyle}"
-                                   FontSize="{DynamicResource FontSizeSmall}"
+                                   FontSize="{DynamicResource ThemeFontSizeSmall}"
                                    HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                                   TextAlignment="Center" Padding="5"                                    
+                                   TextAlignment="Center" Padding="5"
                                    Background="{DynamicResource ControlBackgroundDarkBrush}"/>
                         <!-- Masque pour l'opacité de l'image -->
                         <Grid.OpacityMask>

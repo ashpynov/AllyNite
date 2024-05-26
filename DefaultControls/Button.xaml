@@ -21,8 +21,7 @@
                             Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                             BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
-                            FontSize="26"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Margin="25,0">
@@ -78,8 +77,7 @@
                             Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                             BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
-                            FontSize="26"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Margin="25,0">
@@ -127,8 +125,8 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentControl Style="{DynamicResource ButtonFrame}" />
-                        <TextBlock x:Name="Text" Style="{DynamicResource TextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Margin="0,0,0,5">
@@ -177,7 +175,7 @@
                                     FontSize="8" Margin="0,0,3,0" />
                             </StackPanel>
                         </StackPanel>
-                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                        <TextBlock Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -262,8 +260,8 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentControl Style="{DynamicResource ButtonFrame}" />
-                        <TextBlock x:Name="Text" Style="{DynamicResource TextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Margin="0,0,0,12"
@@ -312,8 +310,7 @@
 
                             <TextBlock x:Name="Text"
                                 Style="{DynamicResource ButtonTextBlockBaseStyle}" Margin="0,0,10,0"
-                                Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
-                                FontSize="26"
+                                Foreground="{TemplateBinding Foreground}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 TextAlignment="Center"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -377,8 +374,7 @@
 
                             <TextBlock x:Name="Text"
                                 Style="{DynamicResource ButtonTextBlockBaseStyle}" Margin="0,0,10,0"
-                                Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
-                                FontSize="26"
+                                Foreground="{TemplateBinding Foreground}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 TextAlignment="Center"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -436,7 +432,7 @@
                             Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                             BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <ContentPresenter />
@@ -492,7 +488,7 @@
                             Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                             BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <ContentPresenter />
@@ -544,7 +540,7 @@
                             Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                             BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <ContentPresenter />
@@ -597,7 +593,7 @@
                             Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                             BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <ContentPresenter />
@@ -659,8 +655,7 @@
 
                             <TextBlock x:Name="Text"
                                 Style="{DynamicResource ButtonTextBlockBaseStyle}" Margin="20,0,0,0"
-                                Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
-                                FontSize="26"
+                                Foreground="{TemplateBinding Foreground}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 TextAlignment="Center"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">

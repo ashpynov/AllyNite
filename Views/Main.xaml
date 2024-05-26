@@ -261,22 +261,19 @@
 
 
                                 <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center"
-                                    Margin="30,0,0,0" Height="40" Width="72"
+                                    Margin="30,0,0,0"
+                                    Height="{DynamicResource ThemeBaseSizex2}"
+                                    Width="{DynamicResource ThemeBaseSizex4}"
                                     Style="{DynamicResource ButtonAvatar}"
                                     Grid.Column="0">
                                     <ButtonEx.Content>
-                                        <Grid>
-                                            <Border CornerRadius="0" Height="40" Width="72"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center" ClipToBounds="True">
-                                                <Border.Background>
-                                                    <ImageBrush
-                                                        RenderOptions.BitmapScalingMode="Fant"
-                                                        ImageSource="{ThemeFile 'Images/ASUS/rog-eye.png'}"
-                                                        Stretch="UniformToFill" />
-                                                </Border.Background>
-                                            </Border>
-                                        </Grid>
+                                        <Image RenderOptions.BitmapScalingMode="Fant"
+                                                Source="{ThemeFile 'Images/ASUS/rog-eye.png'}"
+                                                Height="{DynamicResource ThemeBaseSizex2}"
+                                                Width="{DynamicResource ThemeBaseSizex4}"
+                                                Stretch="Uniform"
+                                        />
+
                                     </ButtonEx.Content>
                                 </ButtonEx>
 
@@ -410,13 +407,9 @@
                                     </Button.Style>
                                 </ButtonEx>
 
-
-
                                 <!-- PART_ElemBatteryStatus -->
                                 <TextBlock x:Name="PART_TextBatteryPercentage"
                                     Style="{DynamicResource TextBlockBoldBaseStyle}"
-                                    FontFamily="Segoe UI"
-                                    FontSize="32"
                                     VerticalAlignment="Center" Margin="30,-10,0,0"
                                     Grid.Column="6">
                                 </TextBlock>
@@ -556,8 +549,6 @@
                                         Style="{DynamicResource TextBlockBoldBaseStyle}"
                                         VerticalAlignment="Center"
                                         Margin="30,-10,0,0"
-                                        FontFamily="Segoe UI"
-                                        FontSize="32"
                                         Grid.Column="0">
                                     </TextBlock>
 
@@ -651,8 +642,6 @@
                                             Grid.Column="1"
                                             Text="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName, NotifyOnTargetUpdated=True}"
                                             Style="{DynamicResource TextBlockBoldBaseStyle}"
-                                            FontFamily="Segoe UI"
-                                            FontSize="34"
                                             VerticalAlignment="Center"
                                             Margin="10,0,20,0"
                                         >
@@ -1204,19 +1193,6 @@
                                             </Style.Triggers>
                                         </Style>
                                     </StackPanel.Style>
-
-                                    <!-- <TextBlock Text=""
-               TextWrapping="Wrap"
-               TextTrimming="CharacterEllipsis">
-        <TextBlock.Style>
-            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBoldBaseStyle}">
-                <Setter Property="FontSize" Value="35" />
-                <Setter Property="MaxWidth" Value="920" />
-                <Setter Property="TextAlignment" Value="Left"/>
-            </Style>
-        </TextBlock.Style>
-    </TextBlock> -->
-
 
                                 </StackPanel>
                             </Grid>

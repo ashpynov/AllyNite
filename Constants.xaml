@@ -76,8 +76,12 @@
     <SolidColorBrush x:Key="TextVerticalBrush" Color="{DynamicResource TextVertical}" />
 
 
-    <sys:Double x:Key="FontSizeSmall">20</sys:Double>
-    <sys:Double x:Key="FontSize">26</sys:Double>
+    <sys:Double x:Key="ThemeBaseSize">40</sys:Double>
+    <sys:Double x:Key="ThemeBaseSizex2">80</sys:Double>
+    <sys:Double x:Key="ThemeBaseSizex4">160</sys:Double>
+
+    <sys:Double x:Key="FontSizeSmall">28</sys:Double>
+    <sys:Double x:Key="ThemeFontSize">40</sys:Double>
 
     <sys:Double x:Key="FilterPanelWidth">400</sys:Double>
 
@@ -87,83 +91,63 @@
         <GradientStop Color="#4e4e4e" Offset="4" />
     </LinearGradientBrush>
 
-    <Style x:Key="TextBlockTrophyStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-    </Style>
-
     <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
     <Style x:Key="TextBlockDetailStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource TextDetailBrush}" />
     </Style>
 
     <Style x:Key="TextBlockAltDetailStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource TextDetailAltBrush}" />
     </Style>
 
     <Style x:Key="TextVerticalStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
         <Setter Property="FontFamily" Value="SST" />
         <Setter Property="Foreground" Value="{DynamicResource TextVerticalBrush}" />
     </Style>
 
     <Style x:Key="HltbStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource HltbBrush}" />
     </Style>
 
     <Style x:Key="HltbAltStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource HltbAltBrush}" />
     </Style>
 
-    <Style x:Key="TextBlockAltBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
-        <Setter Property="Foreground" Value="{DynamicResource TextAltBrush}" />
-    </Style>
-
     <Style x:Key="TextBlockBoldBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
         <Setter Property="FontFamily" Value="Segoe UI Bold" />
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
     </Style>
 
     <Style x:Key="TextBlockAltBoldBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
         <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
         <Setter Property="Foreground" Value="{DynamicResource TextAltBrush}" />
     </Style>
 
     <Style x:Key="TextBlockAltLightBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="Foreground" Value="{DynamicResource TextAltBrush}" />
     </Style>
 
-    <Style x:Key="TextBlockBaseStyleAlt" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-    </Style>
-
-
     <Style x:Key="ButtonTextBlockBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
@@ -448,7 +432,7 @@
         RenderOptions.BitmapScalingMode="Fant" Stretch="UniformToFill" />
 
     <SolidColorBrush x:Key="WarningBrush" Color="#ff6b6b" />
-    
+
     <Style x:Key="SolidBorderLightBrush" TargetType="Border">
         <Setter Property="BorderBrush">
             <Setter.Value>
@@ -465,9 +449,9 @@
                 <ControlTemplate TargetType="ContentControl">
                     <Grid>
                         <Border x:Name="Back" Background ="Black" Opacity="0.4" />
-                        <Grid x:Name="NormalFrame">                        
-                            <Border CornerRadius="0" 
-                                BorderThickness="1" 
+                        <Grid x:Name="NormalFrame">
+                            <Border CornerRadius="0"
+                                BorderThickness="1"
                                 BorderBrush="{DynamicResource ControlBackgroundLightBrush}"
                             />
                             <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_lt.png'}" Stretch="None"
@@ -480,9 +464,9 @@
                             HorizontalAlignment="Right" VerticalAlignment="Bottom" />
                         </Grid>
                         <Grid x:Name="FocusFrame" Visibility="Collapsed" >
-                            <Border 
-                                CornerRadius="0" 
-                                BorderThickness="1" 
+                            <Border
+                                CornerRadius="0"
+                                BorderThickness="1"
                                 BorderBrush="{DynamicResource ControlBackgroundLightBrush}"
                             />
                             <Border
@@ -491,23 +475,23 @@
                                 Tag="False"
                                 BorderThickness="3"
                                 CornerRadius="0"
-                            /> 
+                            />
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource TemplatedParent}}" 
+                        <DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource TemplatedParent}}"
                                     Value="False">
                             <Setter Property="Opacity" Value="0.5" />
                             <Setter Property="Foreground" Value="Transparent" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource TemplatedParent}}" 
+                        <DataTrigger Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource TemplatedParent}}"
                                     Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="FocusFrame" />
                             <Setter Property="Opacity" Value="0" TargetName="NormalFrame" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" 
+                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}"
                                     Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="FocusFrame" />
                             <Setter Property="Opacity" Value="0" TargetName="NormalFrame" />
@@ -517,7 +501,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 
 
 </ResourceDictionary>

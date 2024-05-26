@@ -60,7 +60,7 @@
                                 Text="{Binding DisplayName}"
                                 TextTrimming="WordEllipsis"
                                 Style="{DynamicResource TextBlockBaseStyle}"
-                                FontSize="{DynamicResource FontSizeSmall}"
+                                FontSize="{DynamicResource ThemeFontSizeSmall}"
                                 VerticalAlignment="Bottom"
                                 TextAlignment="Left" Margin="0,6,0,0" />
                         </StackPanel>

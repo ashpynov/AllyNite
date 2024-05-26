@@ -10,15 +10,15 @@
         <Setter Property="Padding" Value="12,5,12,5" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="TextBox">                    
-                    <Grid Background="{TemplateBinding Background}">  
+                <ControlTemplate TargetType="TextBox">
+                    <Grid Background="{TemplateBinding Background}">
                         <ScrollViewer x:Name="PART_ContentHost"
                         	VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                         	HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"/>
-			<Border x:Name="MainBorder" Margin="-3" BorderThickness="3" Opacity="1" CornerRadius="0" 
+			<Border x:Name="MainBorder" Margin="-3" BorderThickness="3" Opacity="1" CornerRadius="0"
 				BorderBrush="{DynamicResource StaticBorderBrushAlt}" Visibility="Visible" >
 			</Border>
                     </Grid>

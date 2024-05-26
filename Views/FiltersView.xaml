@@ -108,12 +108,11 @@
 	<Style x:Key="FilterPanelText" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
 		<Setter Property="Margin" Value="25,20,15,5" />
 		<Setter Property="FontSize" Value="24" />
-		<Setter Property="FontFamily" Value="Segoe UI" />
 		<Setter Property="FontWeight" Value="Bold" />
 	</Style>
 
 	<!-- Style pour les boutons d'action de filtres prédéfinis -->
-	
+
 
 	<!-- Modèles de données pour les boutons d'ajout, de renommage et de suppression de filtres prédéfinis -->
 	<DataTemplate x:Key="FilterPanelAddPresetTemplate">
