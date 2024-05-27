@@ -2,6 +2,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:pcon="clr-namespace:Playnite.Converters;assembly=Playnite"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     mc:Ignorable="d">
@@ -10,6 +11,7 @@
     <sys:String x:Key="ExtraMetadataPath">C:\Users\Admin\AppData\Roaming\Playnite</sys:String>
     <!-- Here Change your Name -->
     <sys:String x:Key="UserName">AllyNite</sys:String>
+
 
 
     <Color x:Key="BlackColor">#FF000000</Color>
@@ -35,8 +37,8 @@
     <Color x:Key="ButtonBack">#2a2a2a</Color>
     <Color x:Key="ButtonBack2">#343434</Color>
     <Color x:Key="ThemeColorMain">#181A1E</Color>
-    <Color x:Key="TextDetail">#888481</Color>
-    <Color x:Key="TextAltDetail">#e5e4e2</Color>
+    <Color x:Key="TextDetail">#e5e4e2</Color>
+    <Color x:Key="TextAltDetail">#888481</Color>
     <Color x:Key="Hltb">#F0FFFF</Color>
     <Color x:Key="HltbAlt">#888481</Color>
     <Color x:Key="Description">#e5e4e2</Color>
@@ -82,6 +84,8 @@
 
     <sys:Double x:Key="FontSizeSmall">28</sys:Double>
     <sys:Double x:Key="ThemeFontSize">40</sys:Double>
+    <sys:Double x:Key="ThemeFontMediumSize">32</sys:Double>
+    <FontFamily x:Key="FontAltIcoFont">Segoe MDL2 Assets</FontFamily>
 
     <sys:Double x:Key="FilterPanelWidth">400</sys:Double>
 
@@ -98,13 +102,13 @@
     </Style>
 
     <Style x:Key="TextBlockDetailStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource TextDetailBrush}" />
     </Style>
 
     <Style x:Key="TextBlockAltDetailStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource TextDetailAltBrush}" />
     </Style>
@@ -115,14 +119,14 @@
         <Setter Property="Foreground" Value="{DynamicResource TextVerticalBrush}" />
     </Style>
 
-    <Style x:Key="HltbStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+    <Style x:Key="BottomBarStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource HltbBrush}" />
     </Style>
 
     <Style x:Key="HltbAltStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource HltbAltBrush}" />
     </Style>
@@ -150,6 +154,20 @@
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
+
+    <Style x:Key="ButtonTextBlockBoldStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
+    <Style x:Key="GameDetailsHtmlTextStyle" TargetType="HtmlTextView">
+        <Setter Property="HtmlFontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="HtmlFontFamily" Value="Segoe UI Light" />
+        <Setter Property="HtmlForeground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="LinkForeground" Value="{DynamicResource GlyphColor}" />
+    </Style>
+
 
     <LinearGradientBrush x:Key="StaticBorderBrush" StartPoint="0,1" EndPoint="1,0">
         <GradientStop Color="{DynamicResource BorderDark}" Offset="0" />
@@ -502,6 +520,6 @@
         </Setter>
     </Style>
 
-
+    <pcon:ListSizeToVisibilityConverter x:Key="ListSizeToVisibilityConverter" />
 
 </ResourceDictionary>

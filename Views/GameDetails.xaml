@@ -145,22 +145,19 @@
                             <TextBlock
                                 Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked, FallbackValue='-'}"
                                 Style="{StaticResource TextBlockAltDetailStyle}"
-                                FontSize="26"
                                 Margin="0,10,0,0" />
                             <TextBlock Text="/"
                                 Style="{StaticResource TextBlockAltDetailStyle}"
-                                FontSize="26"
                                 Margin="2,10,2,0" />
                             <TextBlock
                                 Text="{PluginSettings Plugin=SuccessStory, Path=Total, FallbackValue='-'}"
                                 Style="{StaticResource TextBlockAltDetailStyle}"
-                                FontSize="26"
                                 Margin="0,10,0,0" />
                         </StackPanel>
 
                         <!-- Interface -->
 
-                        <Grid x:Name="MainBackgroundBlurGrid" Panel.ZIndex="-50">
+                        <Grid x:Name="MainBackgroundBlurGrid" Panel.ZIndex="-52">
                             <Grid.Background>
                                 <!-- Fond -->
                                 <ImageBrush ImageSource="{ThemeFile 'Images/Interface.png'}"
@@ -218,7 +215,7 @@
 
                         <!-- Wallpaper -->
 
-                        <Border x:Name="MediaBorder" Panel.ZIndex="-49" Grid.ColumnSpan="3"
+                        <Border x:Name="MediaBorder" Panel.ZIndex="-51" Grid.ColumnSpan="3"
                             Grid.RowSpan="3">
                             <Border.Style>
                                 <Style TargetType="Border">
@@ -229,7 +226,39 @@
                                     <Setter Property="Height" Value="1080" />
 
                                     <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying}"
+                                                    Value="{StaticResource True}" />
+                                                <Condition
+                                                    Binding="{Binding ElementName=TrailerContainer, Path=Opacity}"
+                                                    Value="1" />
+                                            </MultiDataTrigger.Conditions>
 
+                                             <MultiDataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            BeginTime="0:0:0"
+                                                            Duration="0:0:0.5"
+                                                            From="1" To="0" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.EnterActions>
+
+                                            <MultiDataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="Opacity"
+                                                            Duration="0:0:0.5"
+                                                            From="0" To="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </MultiDataTrigger.ExitActions>
+                                        </MultiDataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
@@ -241,6 +270,7 @@
                                     <Style TargetType="Grid">
                                         <Setter Property="Opacity" Value="1" />
                                         <Style.Triggers>
+
                                             <DataTrigger
                                                 Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
                                                 Value="Visible">
@@ -371,7 +401,7 @@
                             <Grid.Style>
                                 <Style TargetType="Grid">
                                     <Setter Property="Opacity" Value="1" />
-                                    <Setter Property="Margin" Value="80,50,0,0" />
+                                    <Setter Property="Margin" Value="50,50,0,0" />
                                     <Setter Property="Grid.Row" Value="0" />
                                     <Style.Triggers>
 
@@ -561,80 +591,61 @@
 
                                                 <StackPanel Orientation="Horizontal"
                                                     VerticalAlignment="Bottom"
-                                                    HorizontalAlignment="Left"
+                                                    HorizontalAlignment="Center"
                                                     SnapsToDevicePixels="True">
 
                                                     <TextBlock
                                                         Style="{StaticResource TextBlockDetailStyle}"
                                                         Text="{Binding Developers[0], Converter={StaticResource ListToStringConverter}}"
-                                                        VerticalAlignment="Top"
-                                                        FontSize="26" Margin="0,10,0,0.5">
+                                                        VerticalAlignment="Top" Margin="0,10,0,0">
                                                     </TextBlock>
-                                                    <TextBlock Text=":"
+                                                    <TextBlock Text="&#x0660;"
+                                                        Visibility="{Binding Developers, Converter={StaticResource ListSizeToVisibilityConverter}}"
                                                         Style="{StaticResource TextBlockDetailStyle}"
-                                                        TextAlignment="Center" FontSize="26"
+                                                        TextAlignment="Center"
                                                         Margin="10,10,10,0" />
                                                     <TextBlock
-                                                        Style="{StaticResource TextBlockAltDetailStyle}"
+                                                        Style="{StaticResource TextBlockDetailStyle}"
                                                         Text="{Binding ReleaseYear, Converter={StaticResource ListToStringConverter}}"
-                                                        VerticalAlignment="Center"
-                                                        FontSize="26" Margin="0.2,10,5,0">
+                                                        VerticalAlignment="Center" Margin="0,10,0,0">
                                                     </TextBlock>
+                                                    <TextBlock Text="&#x0660;"
+                                                        Style="{StaticResource TextBlockDetailStyle}"
+                                                        Visibility="{Binding ReleaseYear, Converter={StaticResource NullToVisibilityConverter}}"
+                                                        TextAlignment="Center"
+                                                        Margin="10,10,10,0" />
+                                                    <!-- Community Score Stars Start -->
+                                                    <Grid x:Name="CommunityScoreStars" Margin="0,10,0,0">
+                                                        <Grid>
+                                                            <Grid.LayoutTransform>
+                                                                <ScaleTransform ScaleX="1.6" ScaleY="1.6" />
+                                                            </Grid.LayoutTransform>
+                                                            <TextBlock
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                Style="{StaticResource TextBlockAltDetailStyle}"
+                                                                Text="&#xe734;&#xe734;&#xe734;&#xe734;&#xe734;"
+                                                                FontFamily="{DynamicResource FontAltIcoFont}"
+                                                                TextAlignment="left" FontSize="20"
+                                                                >
+                                                            </TextBlock>
+                                                            <TextBlock
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                Text="&#xe735;&#xe735;&#xe735;&#xe735;&#xe735;"
+                                                                FontFamily="{DynamicResource FontAltIcoFont}"
+                                                                TextAlignment="Left" FontSize="20"
+                                                                Width="{Binding CommunityScore}">
+                                                            </TextBlock>
+                                                        </Grid>
+                                                    </Grid>
+                                                    <!-- Community Score Stars End -->
                                                 </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                <TextBlock Text="{DynamicResource LOCTimePlayed}"
-                                                    Margin="0,2,0,0" FontSize="26"
-                                                    Style="{StaticResource TextBlockDetailStyle}" />
-                                                <TextBlock Text=":"
-                                                    Style="{StaticResource TextBlockDetailStyle}"
-                                                    TextAlignment="Center" FontSize="26"
-                                                    Margin="10,2,10,0" />
-                                                <TextBlock
-                                                    Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
-                                                    Margin="0,2,0,0" FontSize="26"
-                                                    Style="{StaticResource TextBlockAltDetailStyle}" />
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                                <TextBlock
-                                                    Text="{DynamicResource LOCCommunityScore}"
-                                                    Margin="0,2,0,0" FontSize="26"
-                                                    Style="{StaticResource TextBlockDetailStyle}" />
-                                                <TextBlock Text=":"
-                                                    Style="{StaticResource TextBlockDetailStyle}"
-                                                    TextAlignment="Center" FontSize="26"
-                                                    Margin="10,2,10,0" />
-                                                <TextBlock
-                                                    Text="{Binding CommunityScore, StringFormat={}{0}}"
-                                                    Margin="0,2,0,0" FontSize="26"
-                                                    Style="{StaticResource TextBlockAltDetailStyle}" />
-                                                <TextBlock Text="/100"
-                                                    Style="{StaticResource TextBlockAltDetailStyle}"
-                                                    TextAlignment="Center" FontSize="26"
-                                                    Margin="0,2,0,0" />
-                                            </StackPanel>
-
-                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                                <TextBlock
-                                                    Text="{DynamicResource LOCCompletionStatus}"
-                                                    Margin="0,2,5,0" FontSize="26"
-                                                    Style="{StaticResource TextBlockDetailStyle}" />
-                                                <TextBlock
-                                                    Text="{DynamicResource LOCSuccessStoryAchievements}"
-                                                    Margin="0,2,0,0" FontSize="26"
-                                                    Style="{StaticResource TextBlockDetailStyle}" />
-                                                <TextBlock Text=":"
-                                                    Style="{StaticResource TextBlockDetailStyle}"
-                                                    TextAlignment="Center" FontSize="26"
-                                                    Margin="10,2,10,0" />
-                                                <TextBlock
-                                                    Text="{PluginSettings Plugin=SuccessStory, Path=Percent, StringFormat='{}{0}%'}"
-                                                    Margin="0,2,0,0" FontSize="26"
-                                                    Style="{StaticResource TextBlockAltDetailStyle}" />
-                                            </StackPanel>
 
                                             <!--Game Button-->
 
@@ -664,16 +675,16 @@
                                                 <StackPanel Orientation="Horizontal">
                                                     <ButtonEx x:Name="PART_ButtonContext"
                                                         Style="{DynamicResource ButtonContext}"
-                                                        Margin="0,0,20,0" Height="50" MinWidth="130"
+                                                        Margin="0,0,20,0"
+                                                        MinWidth="260"
                                                         HorizontalContentAlignment="Center">
                                                     </ButtonEx>
-                                                    <ToggleButtonEx x:Name="TrailerPlay" Height="50"
-                                                        Width="130"
+                                                    <ToggleButtonEx x:Name="TrailerPlay"
                                                         Style="{DynamicResource TrailerPlayToggle}"
-                                                        Content="Trailer" Margin="0,0,20,0"
+                                                        Margin="0,0,20,0"
                                                         Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}"
                                                         Grid.Row="1" />
-                                                    <ToggleButtonEx x:Name="TrailerMute" Width="120"
+                                                    <ToggleButtonEx x:Name="TrailerMute"
                                                         Margin="0,0,20,0"
                                                         Style="{DynamicResource TrailerMuteToggle}"
                                                         Visibility="Visible"
@@ -681,8 +692,7 @@
                                                         Grid.Row="2" />
 
                                                     <ButtonEx x:Name="PART_ButtonOptions"
-                                                        Height="50" Width="130"
-                                                        Style="{DynamicResource GameDetailsGameOptionsButton}"
+                                                         Style="{DynamicResource GameDetailsGameOptionsButton}"
                                                         Content="" Margin="0,0,0,0" />
                                                 </StackPanel>
                                             </Grid>
@@ -749,7 +759,8 @@
                                     FocusVisualStyle="{x:Null}"
                                     ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                     <HtmlTextView x:Name="PART_HtmlDescription"
-                                        HtmlFontSize="24" HtmlFontFamily="SST"
+                                        HtmlFontSize="{DynamicResource ThemeFontMediumSize}"
+                                        HtmlFontFamily="Segoe UI Light"
                                         HtmlForeground="{DynamicResource Description}"
                                         LinkForeground="{DynamicResource GlyphColor}"
                                         FocusVisualStyle="{x:Null}" />
@@ -803,29 +814,16 @@
                             </StackPanel.Style>
                         </StackPanel>
 
-                        <!-- HowLongToBeat -->
-
-                        <StackPanel x:Name="HltbStack" Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
-                                    <Setter Property="Opacity" Value="1" />
-                                    <Setter Property="Visibility" Value="Visible" />
                                     <Setter Property="VerticalAlignment" Value="Bottom" />
+
                                     <Setter Property="HorizontalAlignment" Value="Left" />
                                     <Setter Property="Grid.Row" Value="3" />
                                     <Setter Property="Height" Value="60" />
                                     <Setter Property="Margin" Value="50,0,0,15" />
                                     <Style.Triggers>
-                                        <DataTrigger
-                                            Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
-                                            Value="{x:Null}">
-                                            <Setter Property="Opacity" Value="0" />
-                                        </DataTrigger>
-                                        <DataTrigger
-                                            Binding="{PluginSettings Plugin=HowLongToBeat, Path=HasData}"
-                                            Value="{x:Null}">
-                                            <Setter Property="Opacity" Value="0" />
-                                        </DataTrigger>
                                         <DataTrigger
                                             Binding="{Binding ElementName=Id, Path=Opacity}"
                                             Value="1">
@@ -858,109 +856,140 @@
                                     </Style.Triggers>
                                 </Style>
                             </StackPanel.Style>
-                            <Image x:Name="HltbIcon" RenderOptions.BitmapScalingMode="Fant"
-                                Source="{ThemeFile 'Images/HLTB.png'}" Height="30" Margin="0,10,0,0"
-                                Stretch="Uniform">
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition
-                                                        Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
-                                                        Value="--" />
-                                                    <Condition
-                                                        Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
-                                                        Value="--" />
-                                                    <Condition
-                                                        Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
-                                                        Value="--" />
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="Visibility" Value="Collapsed" />
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                                <Image.Effect>
-                                    <DropShadowEffect ShadowDepth="1" Color="Black"
-                                        RenderingBias="Quality" BlurRadius="0" Opacity="0.8" />
-                                </Image.Effect>
-                            </Image>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,40,0">
+                                <TextBlock Text="&#xf022;"
+                                    Margin="0,14,0,5"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{StaticResource FontIcoFont}"
+                                    Style="{StaticResource BottomBarStyle}" />
+                                <TextBlock
+                                    Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
+                                    Margin="10,10,5,5"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource BottomBarStyle}" />
+                            </StackPanel>
+                            <!-- HowLongToBeat -->
+
+                            <StackPanel x:Name="HltbStack" Orientation="Horizontal">
                                 <StackPanel.Style>
                                     <Style TargetType="StackPanel">
-                                        <Setter Property="Margin" Value="20,10,10,5" />
+                                        <Setter Property="Opacity" Value="1" />
+                                        <Setter Property="Visibility" Value="Visible" />
                                         <Style.Triggers>
                                             <DataTrigger
                                                 Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
-                                                Value="--">
+                                                Value="{x:Null}">
                                                 <Setter Property="Visibility" Value="Collapsed" />
                                             </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                                <TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}"
-                                    FontSize="28"
-                                    TextAlignment="Center" Style="{StaticResource HltbStyle}"
-                                    Margin="0,2,0,0" />
-                                <TextBlock Text=":" Style="{StaticResource HltbStyle}"
-                                    TextAlignment="Center" FontSize="24" Margin="10,2,10,0" />
-                                <TextBlock
-                                    Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
-                                    Style="{StaticResource HltbAltStyle}"
-                                    TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <StackPanel.Style>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Margin" Value="20,10,10,5" />
-                                        <Style.Triggers>
                                             <DataTrigger
-                                                Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
-                                                Value="--">
+                                                Binding="{PluginSettings Plugin=HowLongToBeat, Path=HasData}"
+                                                Value="{x:Null}">
                                                 <Setter Property="Visibility" Value="Collapsed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </StackPanel.Style>
-                                <TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}"
-                                    FontSize="28"
-                                    TextAlignment="Center" Style="{StaticResource HltbStyle}"
-                                    Margin="0,2,0,0" />
-                                <TextBlock Text=":" Style="{StaticResource HltbStyle}"
-                                    TextAlignment="Center" FontSize="24" Margin="10,3,10,0" />
-                                <TextBlock
-                                    Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
-                                    Style="{StaticResource HltbAltStyle}"
-                                    TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <StackPanel.Style>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Margin" Value="20,10,10,5" />
-                                        <Style.Triggers>
-                                            <DataTrigger
-                                                Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
-                                                Value="--">
-                                                <Setter Property="Visibility" Value="Collapsed" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                                <TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}"
-                                    FontSize="28"
-                                    TextAlignment="Center" Style="{StaticResource HltbStyle}"
-                                    Margin="0,2,0,0" />
-                                <TextBlock Text=":" Style="{StaticResource HltbStyle}"
-                                    TextAlignment="Center" FontSize="24" Margin="10,3,10,0" />
-                                <TextBlock
-                                    Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
-                                    Style="{StaticResource HltbAltStyle}"
-                                    TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
+                                <Image x:Name="HltbIcon" RenderOptions.BitmapScalingMode="Fant"
+                                    Source="{ThemeFile 'Images/HLTB.png'}" Height="30" Margin="0,10,0,0"
+                                    Stretch="Uniform">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition
+                                                            Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                                            Value="--" />
+                                                        <Condition
+                                                            Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                                            Value="--" />
+                                                        <Condition
+                                                            Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                                            Value="--" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                    <Image.Effect>
+                                        <DropShadowEffect ShadowDepth="1" Color="Black"
+                                            RenderingBias="Quality" BlurRadius="0" Opacity="0.8" />
+                                    </Image.Effect>
+                                </Image>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Margin" Value="10,10,10,5" />
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                                    Value="--">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}"
+                                        TextAlignment="Center" Style="{StaticResource BottomBarStyle}"
+                                        Margin="0,0,0,0" />
+                                    <TextBlock Text=":" Style="{StaticResource BottomBarStyle}"
+                                        TextAlignment="Center" Margin="10,0,10,0" />
+                                    <TextBlock
+                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                        Style="{StaticResource HltbAltStyle}"
+                                        TextAlignment="Center" Margin="0,0,0,0" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Margin" Value="10,10,10,5" />
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                                    Value="--">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}"
+                                        TextAlignment="Center" Style="{StaticResource BottomBarStyle}"
+                                        Margin="0,0,0,0" />
+                                    <TextBlock Text=":" Style="{StaticResource BottomBarStyle}"
+                                        TextAlignment="Center" Margin="10,0,10,0" />
+                                    <TextBlock
+                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                        Style="{StaticResource HltbAltStyle}"
+                                        TextAlignment="Center" Margin="0,0,0,0" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Margin" Value="10,10,10,5" />
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                                    Value="--">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}"
+                                        TextAlignment="Center" Style="{StaticResource BottomBarStyle}"
+                                        Margin="0,0,0,0" />
+                                    <TextBlock Text=":" Style="{StaticResource BottomBarStyle}"
+                                        TextAlignment="Center" Margin="10,0,10,0" />
+                                    <TextBlock
+                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                        Style="{StaticResource HltbAltStyle}"
+                                        TextAlignment="Center" Margin="0,0,0,0" />
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
-
                         <!-- Genres -->
 
                         <Grid x:Name="Genres" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
@@ -1016,12 +1045,11 @@
                             <TextBlock>
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock"
-                                        BasedOn="{StaticResource HltbStyle}">
-                                        <Setter Property="FontSize" Value="30" />
+                                        BasedOn="{StaticResource BottomBarStyle}">
                                         <Setter Property="Margin" Value="980,5,60,-10" />
                                         <Setter Property="TextTrimming" Value="WordEllipsis" />
                                         <Setter Property="Text"
-                                            Value="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' | '}" />
+                                            Value="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' &#x0660; '}" />
                                         <Style.Triggers>
 
                                         </Style.Triggers>
@@ -1133,7 +1161,7 @@
 
                         <!-- Trailer -->
 
-                        <Grid x:Name="TrailerContainer" Panel.ZIndex="-49">
+                        <Grid x:Name="TrailerContainer" Panel.ZIndex="-50">
                             <Grid.Background>
                                 <VisualBrush Visual="{Binding ElementName=TrailerVideo}"
                                     Stretch="Uniform" />
@@ -1164,7 +1192,7 @@
                                                     <Storyboard>
                                                         <DoubleAnimation
                                                             Storyboard.TargetProperty="Opacity"
-                                                            BeginTime="0:0:1.5" Duration="0:0:1"
+                                                            BeginTime="0:0:2" Duration="0:0:0"
                                                             To="1" />
                                                     </Storyboard>
                                                 </BeginStoryboard>
@@ -1203,7 +1231,7 @@
                                                         <Storyboard>
                                                             <DoubleAnimation
                                                                 Storyboard.TargetProperty="Opacity"
-                                                                BeginTime="0:0:1" Duration="0:0:1"
+                                                                BeginTime="0:0:0" Duration="0:0:0"
                                                                 To="1" />
                                                         </Storyboard>
                                                     </BeginStoryboard>
@@ -1250,7 +1278,7 @@
                                                         <Storyboard>
                                                             <DoubleAnimation
                                                                 Storyboard.TargetProperty="Opacity"
-                                                                BeginTime="0:0:0" Duration="0:0:1"
+                                                                BeginTime="0:0:0" Duration="0:0:0"
                                                                 To="1" />
                                                         </Storyboard>
                                                     </BeginStoryboard>
@@ -1671,7 +1699,7 @@
                             <Setter Property="Visibility" Value="Visible"
                                 TargetName="GameDetailsStack" />
                             <Setter Property="Visibility" Value="Visible" TargetName="ScrollGrid" />
-                            <Setter Property="Visibility" Value="Visible" TargetName="HltbStack" />
+                            <!-- <Setter Property="Visibility" Value="Visible" TargetName="HltbStack" /> -->
                             <Setter Property="Visibility" Value="Visible" TargetName="Genres" />
                             <Setter Property="Visibility" Value="Visible"
                                 TargetName="CoverContainer" />
@@ -1702,6 +1730,12 @@
                             <Setter Property="Command"
                                 Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}"
                                 TargetName="TrailerPlay" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding ElementName=TrailerContainer, Path=Opacity}"
+                            Value="1">
+                            <Setter Property="Panel.ZIndex" Value = "-49" TargetName="MediaBorder" />
+                            <!-- <Setter Property="Opacity" Value = "0" TargetName="MediaBorder" /> -->
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

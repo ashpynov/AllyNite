@@ -277,8 +277,9 @@
                                     </ButtonEx.Content>
                                 </ButtonEx>
 
-                                <CheckBoxEx x:Name="ChangeViewButton" Margin="30,0,0,0" Height="40"
-                                    Width="40"
+                                <CheckBoxEx x:Name="ChangeViewButton" Margin="30,0,0,0"
+                                    Height="{DynamicResource ThemeBaseSizex2}"
+                                    Width="{DynamicResource ThemeBaseSizex2}"
                                     IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"
                                     Style="{DynamicResource ChangeViewButton}" Grid.Column="1" />
 
@@ -363,7 +364,9 @@
 
                                 <ButtonEx x:Name="PART_ButtonProgramUpdate"
                                     VerticalAlignment="Center"
-                                    Margin="0,0,0,0" Height="40" Width="40"
+                                    Margin="0,0,0,0"
+                                    Height="{DynamicResource ThemeBaseSizex2}"
+                                    Width="{DynamicResource ThemeBaseSizex2}"
                                     Style="{DynamicResource ButtonMenu}"
                                     Grid.Column="3">
                                     <ButtonEx.Content>
@@ -371,22 +374,23 @@
                                             FontFamily="{StaticResource FontIcoFont}"
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             Foreground="#ff6b6b"
-                                            FontSize="32" />
+                                            FontSize="{DynamicResource ThemeFontSize}" />
                                     </ButtonEx.Content>
                                 </ButtonEx>
 
-
-
                                 <ButtonEx x:Name="PART_ButtonNotifications"
                                     VerticalAlignment="Center"
-                                    Margin="30,0,0,0" Height="40" Width="40" Focusable="True"
+                                    Margin="30,0,0,0"
+                                    Height="{DynamicResource ThemeBaseSizex2}"
+                                    Width="{DynamicResource ThemeBaseSizex2}"
+                                    Focusable="True"
                                     Grid.Column="4">
                                     <Button.Content>
                                         <Grid>
                                             <TextBlock Text="&#xeea3;"
                                                 FontFamily="{StaticResource FontIcoFont}"
                                                 HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" FontSize="34" />
+                                                VerticalAlignment="Center" FontSize="{DynamicResource ThemeFontSize}" />
                                             <TextBlock Text="&#x25CF;"
                                                 Foreground="{DynamicResource GlyphBrush}"
                                                 HorizontalAlignment="Right"
@@ -409,13 +413,13 @@
 
                                 <!-- PART_ElemBatteryStatus -->
                                 <TextBlock x:Name="PART_TextBatteryPercentage"
-                                    Style="{DynamicResource TextBlockBoldBaseStyle}"
+                                    Style="{DynamicResource TextBlockBaseStyle}"
                                     VerticalAlignment="Center" Margin="30,-10,0,0"
                                     Grid.Column="6">
                                 </TextBlock>
                                 <ContentControl x:Name="PART_ElemBatteryStatus"
-                                    Focusable="False" FontSize="30"
-                                    VerticalAlignment="Center" Margin="0,-10,0,0"
+                                    Focusable="False" FontSize="{DynamicResource ThemeFontSize}"
+                                    VerticalAlignment="Center" Margin="0,-8,0,0"
                                     Grid.Column="7">
                                     <ContentControl.Style>
                                         <Style TargetType="ContentControl">
@@ -432,7 +436,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_20.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -446,7 +450,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_40.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -460,7 +464,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_60.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -474,7 +478,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_100.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -488,7 +492,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_20_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -502,7 +506,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_40_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -516,7 +520,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_60_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -530,7 +534,7 @@
                                                             <Image
                                                                 Source="{ThemeFile 'Images/ASUS/asus_cac_si_status_100_charging.png'}"
                                                                 RenderOptions.BitmapScalingMode="Fant"
-                                                                Height="60" />
+                                                                Height="{DynamicResource ThemeBaseSizex2}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </MultiDataTrigger>
@@ -546,7 +550,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock x:Name="PART_TextClock"
-                                        Style="{DynamicResource TextBlockBoldBaseStyle}"
+                                        Style="{DynamicResource TextBlockBaseStyle}"
                                         VerticalAlignment="Center"
                                         Margin="30,-10,0,0"
                                         Grid.Column="0">
@@ -1692,7 +1696,7 @@
                                 </StackPanel>
                             </Border>
                             <!--NombredeJeuxfiltrer-->
-                            <Border Background="{DynamicResource OverlayMenu}" CornerRadius="0"
+                            <Border Background="Transparent" CornerRadius="0"
                                 Height="60" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                                 Panel.ZIndex="1">
                                 <Border.Style>
@@ -1733,15 +1737,15 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
                                     VerticalAlignment="Center" Margin="15,0,0,0">
                                     <TextBlock Text="{DynamicResource LOCMetaGameSourceFiltered}"
-                                        Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
+                                        Style="{DynamicResource BottomBarStyle}"
                                         Foreground="GhostWhite" />
                                     <TextBlock Text=": "
-                                        Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
+                                        Style="{DynamicResource BottomBarStyle}"
                                         Foreground="GhostWhite" />
                                     <TextBlock
                                         Text="{Binding Items.Count, ElementName=PART_ListGameItems}"
-                                        Style="{DynamicResource TextBlockBaseStyle}"
-                                        Margin="0,0,15,0" FontSize="20" />
+                                        Style="{DynamicResource BottomBarStyle}"
+                                        Margin="0,0,15,0"/>
                                 </StackPanel>
                             </Border>
 

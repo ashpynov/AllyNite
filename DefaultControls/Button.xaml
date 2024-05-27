@@ -115,8 +115,6 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Margin" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -125,11 +123,11 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentControl Style="{DynamicResource ButtonFrame}" />
-                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
+                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBoldStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="0,0,0,5">
+                            Margin="15,10,15,15">
                             <ContentPresenter />
                         </TextBlock>
                     </Grid>
@@ -250,8 +248,6 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Margin" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -260,12 +256,13 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentControl Style="{DynamicResource ButtonFrame}" />
-                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
+                        <TextBlock x:Name="Text"
+                            Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="0,0,0,12"
-                            Text="Options">
+                            Margin="20,10,20,15"
+                            Text="&#xefa2;" FontFamily="{DynamicResource FontIcoFont}">
                             <ContentPresenter />
                         </TextBlock>
                     </Grid>

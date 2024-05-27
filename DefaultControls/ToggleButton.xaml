@@ -64,8 +64,6 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="Transparent" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Height" Value="60" />
-        <Setter Property="Width" Value="60" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -83,18 +81,9 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel x:Name="OFF" VerticalAlignment="Center"
                                 HorizontalAlignment="Center" Margin="2,0,0,0">
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                    <Image RenderOptions.BitmapScalingMode="Fant" MaxHeight="75"
-                                        Source="{ThemeFile 'Images/Horizontal.png'}">
-                                    </Image>
-                                </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                    <Image RenderOptions.BitmapScalingMode="Fant" MaxHeight="75"
-                                        Source="{ThemeFile 'Images/Vertical.png'}">
-                                    </Image>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                    <Image RenderOptions.BitmapScalingMode="Fant" MaxHeight="75"
+                                    <Image RenderOptions.BitmapScalingMode="Fant"
+                                        Height="{DynamicResource ThemeBaseSizex2}"
                                         Source="{ThemeFile 'Images/Vertical.png'}">
                                     </Image>
                                 </StackPanel>
@@ -102,7 +91,8 @@
                             <StackPanel x:Name="ON" VerticalAlignment="Center"
                                 HorizontalAlignment="Center" Margin="2,0,0,0">
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                    <Image RenderOptions.BitmapScalingMode="Fant" MaxHeight="75"
+                                    <Image RenderOptions.BitmapScalingMode="Fant"
+                                        Height="{DynamicResource ThemeBaseSizex2}"
                                         Source="{ThemeFile 'Images/Horizontal.png'}">
                                     </Image>
                                 </StackPanel>
@@ -546,9 +536,6 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Width" Value="50" />
-        <Setter Property="Margin" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -557,18 +544,33 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentControl Style="{DynamicResource ButtonFrame}" />
-                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                        <TextBlock x:Name="ON" Style="{DynamicResource ButtonTextBlockBaseStyle}"
+                            Foreground="{TemplateBinding Foreground}"
+                            FontFamily="{DynamicResource FontIcoFont}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="0,0,0,5">
-                            <ContentPresenter />
+                            Margin="25,12,25,13"
+                            Text="&#xef4b;">
+                        </TextBlock>
+                        <TextBlock x:Name="OFF" Style="{DynamicResource ButtonTextBlockBaseStyle}"
+                            Foreground="{TemplateBinding Foreground}"
+                            FontFamily="{DynamicResource FontIcoFont}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Margin="25,12,25,13"
+                            Text="&#xecb2;">
                         </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.5" />
                             <Setter Property="Foreground" Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="ON" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Visibility" TargetName="OFF" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -666,9 +668,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Width" Value="50" />
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Margin" Value="10,10,10,15" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -680,18 +680,18 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel x:Name="OFF" VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="20,0,20,0">
                                     <Image Source="{ThemeFile 'Images/Mute.png'}"
                                         RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
-                                        Height="25" />
+                                        Height="{DynamicResource ThemeBaseSize}" />
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel x:Name="ON" VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="20,0,20,0">
                                     <Image Source="{ThemeFile 'Images/FullVolume.png'}"
                                         RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
-                                        Height="25" />
+                                        Height="{DynamicResource ThemeBaseSize}" />
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
