@@ -10,7 +10,7 @@
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Height" Value="50" />
-        <Setter Property="Margin" Value="0, 5, 0, 5" />
+        <Setter Property="Margin" Value="10, 5, 10, 5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -167,7 +167,14 @@
 
                         <!-- Boutons d'action -->
                         <StackPanel Name="PART_PanelActionButtons" Orientation="Horizontal"
-                            HorizontalAlignment="Center" Margin="0,540,0,20" />
+                            HorizontalAlignment="Center" Margin="0,540,0,20" >
+                            <ButtonEx
+                                Visibility="{PluginSettings Plugin=BackToGame, Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Style="{StaticResource ButtonGameStatusAction}"
+                                Content="{DynamicResource LOCBackToGame}"
+                                Command="{PluginSettings Plugin=BackToGame, Path=ActivateGame}"
+                            />
+                        </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
