@@ -8,7 +8,6 @@
     mc:Ignorable="d">
 
 
-    <sys:String x:Key="ExtraMetadataPath">C:\Users\Admin\AppData\Roaming\Playnite</sys:String>
     <!-- Here Change your Name -->
     <sys:String x:Key="UserName">AllyNite</sys:String>
 
@@ -49,7 +48,8 @@
     <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource TextColorDark}" />
     <SolidColorBrush x:Key="TextWhiteBrush" Color="{DynamicResource TextWhiteColor}" />
     <SolidColorBrush x:Key="TextAltBrush" Color="{DynamicResource TextSecondaryColor}" />
-    <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource SelectionLightColor}" />
+    <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource GlyphColor}" />
+    <SolidColorBrush x:Key="GlyphTransparentBrush" Color="{DynamicResource GlyphColor}" Opacity="0.7" />
     <SolidColorBrush x:Key="GlyphLightBrush" Color="{DynamicResource GlyphLightColor}" />
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource ControlBackgroundColor}" />
     <SolidColorBrush x:Key="ControlBackgroundLightBrush"
@@ -85,6 +85,8 @@
     <sys:Double x:Key="FontSizeSmall">28</sys:Double>
     <sys:Double x:Key="ThemeFontSize">40</sys:Double>
     <sys:Double x:Key="ThemeFontMediumSize">32</sys:Double>
+    <sys:Double x:Key="ThemeFontSmallSize">28</sys:Double>
+
     <FontFamily x:Key="FontAltIcoFont">Segoe MDL2 Assets</FontFamily>
 
     <sys:Double x:Key="FilterPanelWidth">400</sys:Double>
@@ -95,10 +97,17 @@
         <GradientStop Color="#4e4e4e" Offset="4" />
     </LinearGradientBrush>
 
-    <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
+    <Style x:Key="ThemeTextBlockBaseStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
+    <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="TextBlockDetailStyle" TargetType="TextBlock">
@@ -168,6 +177,36 @@
         <Setter Property="LinkForeground" Value="{DynamicResource GlyphColor}" />
     </Style>
 
+    <Style x:Key="ButtonBaseStyle" TargetType="Button">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBoldStyle}"
+                            Foreground="{TemplateBinding Foreground}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Margin="15,10,15,15">
+                            <ContentPresenter />
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                            <Setter Property="Foreground" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <LinearGradientBrush x:Key="StaticBorderBrush" StartPoint="0,1" EndPoint="1,0">
         <GradientStop Color="{DynamicResource BorderDark}" Offset="0" />
@@ -521,5 +560,7 @@
     </Style>
 
     <pcon:ListSizeToVisibilityConverter x:Key="ListSizeToVisibilityConverter" />
+
+
 
 </ResourceDictionary>

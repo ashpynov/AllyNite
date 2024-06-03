@@ -15,7 +15,7 @@
 						<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed" />
 						<DockPanel>
 							<TextBlock Text="&#xeaa0;" FontFamily="{DynamicResource FontIcoFont}" FontSize="32" Margin="0,0,10,0" x:Name="IconText" DockPanel.Dock="Right" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
-							<TextBlock Style="{DynamicResource TextBlockBaseStyle}" x:Name="TextContent" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+							<TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}" x:Name="TextContent" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 								<ContentPresenter />
 							</TextBlock>
 						</DockPanel>

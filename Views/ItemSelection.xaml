@@ -11,8 +11,8 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
-                                x:Name="MainBackground"/>						
-                        <Border x:Name="MainBorder" Margin="-3" 
+                                x:Name="MainBackground"/>
+                        <Border x:Name="MainBorder" Margin="-3"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
                                 BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
@@ -20,7 +20,7 @@
                                    Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Margin="25,0">                            
+                                   Margin="25,0">
                                 <ContentPresenter />
                         </TextBlock>
                     </Grid>
@@ -77,11 +77,11 @@
     </Style>
 
     <Style x:Key="ItemSelectionFooterButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
-        <Setter Property="Focusable" Value="False" /> 
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Height" Value="50" />
-        <Setter Property="Margin" Value="15,0" />	
+        <Setter Property="Margin" Value="15,0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -93,7 +93,7 @@
                                    Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Margin="0,0">                            
+                                   Margin="0,0">
                                 <ContentPresenter />
                         </TextBlock>
                     </Grid>

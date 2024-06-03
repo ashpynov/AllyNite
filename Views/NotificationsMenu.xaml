@@ -16,17 +16,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid Background="{TemplateBinding Background}">                            
-                        <Border x:Name="MainBorder" Margin="0,0,0,0" CornerRadius="0" BorderThickness="3" Opacity="1" Style="{DynamicResource SolidBorderLightBrush}" 
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border x:Name="MainBorder" Margin="0,0,0,0" CornerRadius="0" BorderThickness="3" Opacity="1" Style="{DynamicResource SolidBorderLightBrush}"
                                 Tag="False" Visibility="Collapsed" >
                         </Border>
                         <Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed">
-                        </Border>							
-                        <TextBlock x:Name="NotificationsText" Style="{DynamicResource TextBlockBaseStyle}"
+                        </Border>
+                        <TextBlock x:Name="NotificationsText" Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                     Margin="10" FontSize="28"
                                     Foreground="{DynamicResource TextBrush}"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">                            	
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <ContentPresenter />
                         </TextBlock>
                     </Grid>
@@ -45,7 +45,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!-- Style pour le bouton de rejet du menu de notifications -->
     <Style x:Key="NotificationsMenuDismissButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
         <Setter Property="Margin" Value="20,5,20,30" />

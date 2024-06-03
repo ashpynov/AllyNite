@@ -8,6 +8,7 @@
     <Style x:Key="ListGameItemTemplate" TargetType="{x:Type GameListItem}">
         <!-- Définition des propriétés par défaut -->
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False" />
         <!-- Définition du modèle de contrôle -->
         <Setter Property="Template">
             <Setter.Value>
@@ -22,18 +23,31 @@
                                Stretch="{Settings CoverArtStretch}" />
                         <!-- Indicateur visuel de jeu en cours -->
                         <Canvas x:Name="Playing" Visibility="Collapsed">
-                            <Polygon Points="0,0 50,0 0,50" Fill="#FFB32B" Opacity="1"/>
+                            <Polygon Points="0,0 50,0 0,50" Fill="{DynamicResource GlyphBrush}" Opacity="1"/>
                         </Canvas>
                         <!-- Fond sombre pour assombrir l'image -->
                         <Border Background="#181A1E" x:Name="BorderDarken" CornerRadius="0" Visibility="Collapsed" Opacity="0.7" />
                         <!-- Texte du nom du jeu -->
                         <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
-                                   Visibility="Collapsed"
-                                   Style="{DynamicResource TextBlockBaseStyle}"
-                                   FontSize="{DynamicResource ThemeFontSizeSmall}"
-                                   HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                                   TextAlignment="Center" Padding="5"
-                                   Background="{DynamicResource ControlBackgroundDarkBrush}"/>
+                            Visibility="Collapsed"
+                            Style="{DynamicResource ThemeTextBlockBaseStyle}"
+                            FontSize="{DynamicResource ThemeFontSizeSmall}"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                            TextAlignment="Center" Padding="5"
+                            Background="{DynamicResource ControlBackgroundDarkBrush}"/>
+
+                        <ContentControl x:Name="BackToGame_Control" />
+                        <TextBlock x:Name="GameIsRunningBadge"
+                            Visibility="{Binding ElementName=BackToGame_Control, Path=Content.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Background="{DynamicResource GlyphTransparentBrush}"
+                            Text="{DynamicResource LOCGameRunning}"
+                            VerticalAlignment="Bottom"
+                            TextAlignment="Center"
+                            Margin="0,0,0,15"
+                            Padding="0,0,0,5"
+                            FontSize="{DynamicResource ThemeFontSmallSize}"
+                            Style="{DynamicResource ButtonTextBlockBoldStyle}" />
+
                         <!-- Masque pour l'opacité de l'image -->
                         <Grid.OpacityMask>
                             <VisualBrush Visual="{Binding ElementName=Mask}" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
@@ -52,6 +66,9 @@
                         <!-- Affichage de l'indicateur de jeu en cours de lecture -->
                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Playing">
                             <Setter Property="Visibility" Value="Visible" TargetName="Playing" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=BackToGame_Control, Path=Content.IsRunning}" Value="True" >
+                            <Setter Property="Text" Value="{DynamicResource LOCBackToGame}" TargetName="GameIsRunningBadge" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

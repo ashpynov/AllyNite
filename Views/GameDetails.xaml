@@ -1077,7 +1077,7 @@
                                 </TextBlock.Triggers>
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock"
-                                        BasedOn="{StaticResource TextBlockBaseStyle}">
+                                        BasedOn="{StaticResource ThemeTextBlockBaseStyle}">
                                         <Setter Property="Visibility" Value="Collapsed" />
                                         <Style.Triggers>
 
@@ -1103,7 +1103,7 @@
                                 </TextBlock.Triggers>
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock"
-                                        BasedOn="{StaticResource TextBlockBaseStyle}">
+                                        BasedOn="{StaticResource ThemeTextBlockBaseStyle}">
                                         <Setter Property="Visibility" Value="Collapsed" />
                                         <Style.Triggers>
 
@@ -1116,7 +1116,7 @@
                                 Foreground="Transparent">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock"
-                                        BasedOn="{StaticResource TextBlockBaseStyle}">
+                                        BasedOn="{StaticResource ThemeTextBlockBaseStyle}">
                                         <Setter Property="Visibility" Value="Collapsed" />
                                         <Setter Property="Opacity" Value="0" />
                                         <Style.Triggers>
@@ -1162,10 +1162,10 @@
                         <!-- Trailer -->
 
                         <Grid x:Name="TrailerContainer" Panel.ZIndex="-50">
-                            <Grid.Background>
+                            <!-- <Grid.Background>
                                 <VisualBrush Visual="{Binding ElementName=TrailerVideo}"
                                     Stretch="Uniform" />
-                            </Grid.Background>
+                            </Grid.Background> -->
                             <Grid.Style>
                                 <Style TargetType="Grid">
                                     <Setter Property="Margin" Value="0,0,50,-10" />
@@ -1448,7 +1448,7 @@
                             </TextBlock.Triggers>
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock"
-                                    BasedOn="{StaticResource TextBlockBaseStyle}">
+                                    BasedOn="{StaticResource ThemeTextBlockBaseStyle}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
 

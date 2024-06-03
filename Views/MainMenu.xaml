@@ -24,13 +24,15 @@
             <EventTrigger RoutedEvent="Window.Loaded">
                 <BeginStoryboard>
                     <Storyboard>
+                        <!-- Force to use left column to be nonstandart screen height friendly -->
+                        <Int32Animation Storyboard.TargetProperty="(Grid.Column)" Duration="0:0:0" To ="0"/>
                         <!-- Animation d'opacité -->
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2"
                             From="0" To="1" />
                         <!-- Animation de marge pour déplacer le cadre du menu depuis l'extérieur de
                         la fenêtre -->
                         <ThicknessAnimation Storyboard.TargetProperty=" Margin" Duration="0:0:0.2"
-                            From="-1920,0,0,0" To="-1420,0,0,0" AccelerationRatio="0.5"
+                            From="-400,0,0,0" To="0,0,0,0" AccelerationRatio="0.5"
                             DecelerationRatio="0.5" />
                     </Storyboard>
                 </BeginStoryboard>

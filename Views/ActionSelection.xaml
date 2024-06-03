@@ -24,7 +24,7 @@
 						<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed">
 						</Border>
 						<!-- Texte à l'intérieur du bouton -->
-						<TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+						<TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}"
 									Margin="10,5,10,0" DockPanel.Dock="Left"
 									Foreground="{TemplateBinding Foreground}" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -62,7 +62,7 @@
 	</Style>
 
 	<!-- Style du texte d'en-tête de sélection d'action -->
-	<Style x:Key="ActionSelectionHeaderText" BasedOn="{StaticResource TextBlockBaseStyle}" TargetType="TextBlock" >
+	<Style x:Key="ActionSelectionHeaderText" BasedOn="{StaticResource ThemeTextBlockBaseStyle}" TargetType="TextBlock" >
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<!-- Alignement vertical centré -->
 		<Setter Property="HorizontalAlignment" Value="Stretch" />

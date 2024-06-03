@@ -6,7 +6,7 @@
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Height" Value="50" />  
+        <!-- <Setter Property="Height" Value="50" /> -->
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -14,12 +14,12 @@
                 <ControlTemplate TargetType="ComboBox">
 
                     <Grid Background="{TemplateBinding Background}">
-		    <Border x:Name="StaticBorder" Margin="0,0,0,0" BorderThickness="2" Opacity="0.5" CornerRadius="0" 
+		    <Border x:Name="StaticBorder" Margin="0,0,0,0" BorderThickness="2" Opacity="0.5" CornerRadius="0"
 		    	BorderBrush="{DynamicResource GlyphBrush}" />
-		    <Border x:Name="MainBorder" Margin="0,0,0,0" BorderThickness="3" Opacity="1" CornerRadius="0" 
+		    <Border x:Name="MainBorder" Margin="0,0,0,0" BorderThickness="3" Opacity="1" CornerRadius="0"
 		    	Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
 		    </Border>
-		    <Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" 
+		    <Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}"
 		    	Tag="False" Visibility="Collapsed">
 		    </Border>
                     <ToggleButton x:Name="ToggleButton" Focusable="False" ClickMode="Press"
@@ -30,6 +30,7 @@
                                     <DockPanel LastChildFill="False" Background="Transparent">
                                         <Viewbox DockPanel.Dock="Right" Height="32">
                                             <TextBlock Text="&#xea99;" FontFamily="{DynamicResource FontIcoFont}"
+                                                FontSize="40"
                                             	Foreground="{DynamicResource SelectionLightBrush}"
                                                 VerticalAlignment="Center" />
                                         </Viewbox>
@@ -42,19 +43,19 @@
                         	IsHitTestVisible="False"
 				HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         	VerticalAlignment="Center"
-                        	x:Name="TextContent" Margin="20,0,10,0">
+                        	x:Name="TextContent" Margin="20,0,60,10">
                         <ContentPresenter IsHitTestVisible="False"
                         	Content="{TemplateBinding SelectionBoxItem}"
                         	ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                         	ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
                         </TextBlock>
-         
+
                         <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}"
                                Placement="Bottom" Focusable="False" AllowsTransparency="True">
                             <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                   MinWidth="{TemplateBinding ActualWidth}"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                <Border CornerRadius="0" Padding="2" BorderBrush="{DynamicResource ComboBoxBorderBrush}" BorderThickness="2" 
+                                <Border CornerRadius="0" Padding="2" BorderBrush="{DynamicResource ComboBoxBorderBrush}" BorderThickness="2"
 					Background="{DynamicResource OverlayMenu}" >
                                     <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                                     	VerticalScrollBarVisibility="Auto">
@@ -75,7 +76,7 @@
                         	<Setter Property="Tag" Value="True" TargetName="FlashMenuBorder" />
                         	<Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
 				<Setter Property="Visibility" Value="Visible" TargetName="FlashMenuBorder" />
-				<Setter Property="Visibility" Value="Collapsed" TargetName="StaticBorder" />	
+				<Setter Property="Visibility" Value="Collapsed" TargetName="StaticBorder" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                         	<Setter Property="Foreground" Value="{DynamicResource SelectionLightBrush}" />
@@ -92,20 +93,20 @@
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-	<Setter Property="Height" Value="50" />						 
+	<!-- <Setter Property="Height" Value="50" /> -->
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Grid Background="{TemplateBinding Background}" >
-                    	<Border x:Name="MainBorder" Margin="0" BorderThickness="3" Opacity="1" CornerRadius="0" Style="{DynamicResource SolidBorderLightBrush}" 
+                    	<Border x:Name="MainBorder" Margin="0" BorderThickness="3" Opacity="1" CornerRadius="0" Style="{DynamicResource SolidBorderLightBrush}"
 				Tag="False" Visibility="Collapsed" >
 			</Border>
-			<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" 
+			<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}"
 				Tag="False" Visibility="Collapsed">
-			</Border>    
-			<TextBlock Style="{DynamicResource TextBlockBaseStyle}"                                   
+			</Border>
+			<TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                         	HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         	VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         	x:Name="TextContent" Margin="10,5,10,5">
@@ -118,7 +119,7 @@
                             <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                             <Setter Property="Tag" Value="True" TargetName="FlashMenuBorder" />
                             <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-			     <Setter Property="Visibility" Value="Visible" TargetName="FlashMenuBorder" />	
+			     <Setter Property="Visibility" Value="Visible" TargetName="FlashMenuBorder" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"  />

@@ -34,6 +34,7 @@
                             <Grid.Style>
                                 <Style TargetType="Grid">
                                     <Setter Property="Visibility" Value="Visible" />
+
                                     <Style.Triggers>
                                         <DataTrigger
                                             Binding="{Binding Opacity, ElementName=IntroVideo}"
@@ -72,6 +73,9 @@
                             <!-- Élément multimédia pour la vidéo -->
                             <MediaElement x:Name="IntroVideoElement"
                                 Source="{ThemeFile 'Startup Video/IntroVideo.mp4'}"
+                                Stretch="UniformToFill"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 SnapsToDevicePixels="True">
                                 <!-- Style de l'élément multimédia -->
                                 <MediaElement.Style>
@@ -413,7 +417,7 @@
 
                                 <!-- PART_ElemBatteryStatus -->
                                 <TextBlock x:Name="PART_TextBatteryPercentage"
-                                    Style="{DynamicResource TextBlockBaseStyle}"
+                                    Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                     VerticalAlignment="Center" Margin="30,-10,0,0"
                                     Grid.Column="6">
                                 </TextBlock>
@@ -550,7 +554,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock x:Name="PART_TextClock"
-                                        Style="{DynamicResource TextBlockBaseStyle}"
+                                        Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                         VerticalAlignment="Center"
                                         Margin="30,-10,0,0"
                                         Grid.Column="0">
@@ -1558,7 +1562,7 @@
                                 VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock"
-                                        BasedOn="{StaticResource TextBlockBaseStyle}">
+                                        BasedOn="{StaticResource ThemeTextBlockBaseStyle}">
                                         <Setter Property="Visibility" Value="Collapsed" />
                                         <Setter Property="Opacity" Value="0" />
                                         <Setter Property="Margin" Value="0,0,0,0" />
@@ -1683,7 +1687,7 @@
                                     Grid.Column="3" VerticalAlignment="Center" Panel.ZIndex="1">
                                     <TextBlock x:Name="PART_TextProgressTooltip"
                                         Margin="15,0,15,0" FontSize="20" VerticalAlignment="Center"
-                                        Style="{DynamicResource TextBlockBaseStyle}">
+                                        Style="{DynamicResource ThemeTextBlockBaseStyle}">
                                         <TextBlock.Effect>
                                             <DropShadowEffect ShadowDepth="1" Color="Black"
                                                 RenderingBias="Quality" BlurRadius="0" Opacity="0.8" />
@@ -1774,11 +1778,11 @@
                                     VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                     Margin="70,20,0,0" Orientation="Horizontal" Panel.ZIndex="1">
                                     <TextBlock FontSize="18" TextAlignment="Center"
-                                        Style="{DynamicResource TextBlockBaseStyle}"
+                                        Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                         Text="{DynamicResource LOCGameListSearchResultsS}" />
                                     <TextBlock Foreground="White"
                                         TextAlignment="Center" FontSize="18" Margin="5,0,0,0"
-                                        Style="{DynamicResource TextBlockBaseStyle}"
+                                        Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                         Text="{Binding AppSettings.Fullscreen.FilterSettings.Name}" />
                                     <StackPanel.Effect>
                                         <DropShadowEffect ShadowDepth="1" Color="Black"
@@ -1789,7 +1793,7 @@
                                     FontSize="18" Margin="70,50,0,0"
                                     VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                     TextAlignment="Center"
-                                    Style="{DynamicResource TextBlockBaseStyle}"
+                                    Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                     Text="{DynamicResource LOCGameListExtraFilteredD}"
                                     Panel.ZIndex="1">
                                     <TextBlock.Effect>

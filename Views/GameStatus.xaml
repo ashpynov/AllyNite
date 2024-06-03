@@ -5,34 +5,31 @@
     mc:Ignorable="d">
 
     <!-- Style pour le bouton d'action de statut de jeu -->
-    <Style x:Key="ButtonGameStatusAction" TargetType="Button">
+    <Style x:Key="ButtonGameStatusAction" TargetType="Button" >
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Margin" Value="10, 5, 10, 5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="MinWidth" Value="240" />
+        <Setter Property="Margin" Value="10,10,10,10" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentControl Style="{DynamicResource ButtonFrame}" />
-                        <TextBlock x:Name="Text"
-                            Style="{DynamicResource TextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBoldStyle}"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="0,0,0,5">
+                            Margin="15,10,15,15">
                             <ContentPresenter />
                         </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <!-- <Setter Property="Opacity" Value="0.5" />
-                            <Setter Property="Foreground" Value="Transparent" /> -->
+                            <Setter Property="Opacity" Value="0.5" />
+                            <Setter Property="Foreground" Value="Transparent" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -52,9 +49,7 @@
                         d:DesignHeight="{Binding ActualHeight, ElementName=PART_ViewHost}"
                         d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}"
                         KeyboardNavigation.DirectionalNavigation="Contained"
-                        KeyboardNavigation.TabNavigation="Contained"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
+                        KeyboardNavigation.TabNavigation="Contained">
                         <!-- Marges ajoutées -->
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -97,7 +92,7 @@
                         </Image>
 
                         <!-- Chemin du logo -->
-                        <TextBlock Name="LogoPath" Tag="{DynamicResource ExtraMetadataPath}"
+                        <TextBlock Name="LogoPath" Tag="{Api Paths.ConfigurationPath}"
                             Visibility="Collapsed">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
@@ -117,15 +112,15 @@
                         </TextBlock>
 
                         <!-- Image du logo -->
-                        <Image Name="LogoImage" Width="600" MaxHeight="300" Stretch="Uniform"
+                        <Image Name="LogoImage" Width="800" MaxHeight="600" Stretch="Uniform"
                             RenderOptions.BitmapScalingMode="Fant"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             Margin="0,0,0,50"
-                            Tag="{DynamicResource ExtraMetadataPath}">
+                            Tag="{Api Paths.ConfigurationPath}">
                             <Image.Style>
                                 <Style TargetType="Image">
                                     <Setter Property="Source"
-                                        Value="{Binding ElementName=LogoPath, Path=Text}" />
+                                        Value="{Binding ElementName=LogoPath, Path=Text, Converter={StaticResource ImageStringToImageConverter}}" />
                                     <Style.Triggers>
                                         <DataTrigger
                                             Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"
@@ -167,7 +162,9 @@
 
                         <!-- Boutons d'action -->
                         <StackPanel Name="PART_PanelActionButtons" Orientation="Horizontal"
-                            HorizontalAlignment="Center" Margin="0,540,0,20" >
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,800,0,0" >
                             <ButtonEx
                                 Visibility="{PluginSettings Plugin=BackToGame, Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 Style="{StaticResource ButtonGameStatusAction}"

@@ -59,7 +59,7 @@
                             <TextBlock x:Name="GameTitle" Visibility="Collapsed"
                                 Text="{Binding DisplayName}"
                                 TextTrimming="WordEllipsis"
-                                Style="{DynamicResource TextBlockBaseStyle}"
+                                Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                 FontSize="{DynamicResource ThemeFontSizeSmall}"
                                 VerticalAlignment="Bottom"
                                 TextAlignment="Left" Margin="0,6,0,0" />

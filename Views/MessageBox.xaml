@@ -5,13 +5,13 @@
     <Style x:Key="MessageBoxBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
         <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Margin" Value="-400,-100,-400,-100" />
     </Style>
 
     <!-- Style for the MessageBox Caption Text -->
     <Style x:Key="MessageBoxCaptionText" BasedOn="{StaticResource TextBlockBaseStyle}" TargetType="TextBlock" >
-        <Setter Property="FontSize" Value="26" />
-        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Margin" Value="0,0,0,15" />
+        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="TextAlignment" Value="Left" />
     </Style>
@@ -22,7 +22,7 @@
 
     <!-- Style for the MessageBox Button -->
     <Style x:Key="MessageBoxButton" BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
-        <Setter Property="Margin" Value="5" />
+        <Setter Property="Margin" Value="0,20,20,0" />
         <Setter Property="MinWidth" Value="150" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="BorderBrush" Value="{DynamicResource OverlayMenu}" />

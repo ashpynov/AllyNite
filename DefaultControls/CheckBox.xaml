@@ -17,7 +17,7 @@
 		    <Border x:Name="MainBorder" Margin="0" CornerRadius="0" BorderThickness="3" Opacity="1" Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
 		    </Border>
 		    <Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed">
-		    </Border>		
+		    </Border>
 		    <Grid Margin="{TemplateBinding Padding}">
 
                     	<Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
                     </Viewbox>
                     </Border>
                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                    	Foreground="{TemplateBinding Foreground}" Margin="0,10,15,10" 
+                    	Foreground="{TemplateBinding Foreground}" Margin="0,10,15,10"
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         Grid.Column="1" TextTrimming="WordEllipsis" >
@@ -62,7 +62,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="CheckBoxEx" BasedOn="{StaticResource {x:Type CheckBox}}">    
+    <Style TargetType="CheckBoxEx" BasedOn="{StaticResource {x:Type CheckBox}}">
     </Style>
 
 </ResourceDictionary>
