@@ -5,7 +5,6 @@
 	<Style x:Key="FilterPanelNagivationButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
 		<Setter Property="Margin" Value="20,0,15,0" />
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Height" Value="50" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<!-- Modèle de contrôle pour le bouton de navigation -->
@@ -15,7 +14,7 @@
 						<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed" />
 						<DockPanel>
 							<TextBlock Text="&#xeaa0;" FontFamily="{DynamicResource FontIcoFont}" FontSize="32" Margin="0,0,10,0" x:Name="IconText" DockPanel.Dock="Right" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
-							<TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}" x:Name="TextContent" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+							<TextBlock Style="{DynamicResource TextBlockBaseStyle}" x:Name="TextContent" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 								<ContentPresenter />
 							</TextBlock>
 						</DockPanel>
@@ -44,70 +43,53 @@
 	<!-- Style pour les éléments de sélection -->
 	<Style x:Key="FilterItemtSelectionStyle" TargetType="CheckBoxEx" BasedOn="{StaticResource {x:Type CheckBoxEx}}">
 		<Setter Property="Margin" Value="20,0,15,0" />
-		<Setter Property="Height" Value="50" />
 	</Style>
 
 	<!-- Style pour les cases à cocher dans le panneau de filtres -->
 	<Style x:Key="FilterPanelCheckBoxEx" TargetType="CheckBoxEx" BasedOn="{StaticResource {x:Type CheckBoxEx}}">
 		<Setter Property="Margin" Value="20,0,15,0" />
-		<Setter Property="Height" Value="50" />
 	</Style>
 
 	<!-- Style pour les boutons dans le panneau de filtres -->
 	<Style x:Key="FilterPanelButtonEx" TargetType="ButtonEx" BasedOn="{StaticResource {x:Type ButtonEx}}">
-		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
-		<Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Height" Value="50" />
-		<Setter Property="MaxWidth" Value="400" />
-		<Setter Property="Margin" Value="30,40,30,40" />
-		<Setter Property="SnapsToDevicePixels" Value="True" />
-		<Setter Property="HorizontalContentAlignment" Value="Center" />
-		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<!-- Modèle de contrôle pour les boutons dans le panneau de filtres -->
-				<ControlTemplate TargetType="Button">
-					<Grid Background="{TemplateBinding Background}">
-						<Border CornerRadius="0" x:Name="MainBackground"/>
-						<Border x:Name="MainBorder" Margin="-6" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Style="{DynamicResource SolidBorderLightBrush}" Tag="False" BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
-						<TextBlock Style="{DynamicResource ButtonTextBlockBaseStyle}" Foreground="{TemplateBinding Foreground}" FontSize="24" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0">
-							<ContentPresenter />
-						</TextBlock>
-					</Grid>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsEnabled" Value="False">
-							<Setter Property="Opacity" Value="0.5" />
-						</Trigger>
-						<Trigger Property="IsFocused" Value="True">
-							<Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-							<Setter Property="Tag" Value="True" TargetName="MainBorder" />
-							<Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-							<Setter Property="Background" Value="#f8f8ff" TargetName="MainBackground" />
-						</Trigger>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Background" Value="#f8f8ff" TargetName="MainBackground" />
-							<Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-						</Trigger>
-						<Trigger Property="IsEnabled" Value="False">
-							<Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockSmallStyle}"
+                            Foreground="{TemplateBinding Foreground}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Margin="5,0,5,5">
+                            <ContentPresenter />
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                            <Setter Property="Foreground" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
 	</Style>
 
 	<!-- Style pour les ComboBox dans le panneau de filtres -->
 	<Style x:Key="FilterPanelComboBoxEx" TargetType="ComboBoxEx" BasedOn="{StaticResource {x:Type ComboBoxEx}}">
 		<Setter Property="Margin" Value="20,0,15,10" />
-		<Setter Property="Height" Value="50" />
 	</Style>
 
 	<!-- Style pour les textes dans le panneau de filtres -->
 	<Style x:Key="FilterPanelText" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
 		<Setter Property="Margin" Value="25,20,15,5" />
-		<Setter Property="FontSize" Value="24" />
 		<Setter Property="FontWeight" Value="Bold" />
 	</Style>
 

@@ -164,6 +164,12 @@
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
+    <Style x:Key="ButtonTextBlockSmallStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
     <Style x:Key="ButtonTextBlockBoldStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
         <Setter Property="FontFamily" Value="Segoe UI SemiBold" />

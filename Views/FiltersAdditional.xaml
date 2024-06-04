@@ -8,20 +8,19 @@
                 <!-- Modèle de contrôle pour FiltersAdditional -->
                 <ControlTemplate TargetType="{x:Type FiltersAdditional}">
                     <!-- DockPanel contenant les éléments du contrôle -->
-                    <DockPanel Background="{DynamicResource OverlayMenu}" 
-                                MinWidth="420" Height="{StaticResource DesignHeight}"
+                    <DockPanel Background="{DynamicResource OverlayMenu}"
+                                MinWidth="{StaticResource FilterPanelWidth}" Height="{StaticResource DesignHeight}"
                                 x:Name="PART_MenuHost">
                         <!-- Bouton pour retourner en arrière -->
                         <ButtonEx DockPanel.Dock="Top"
                                   Style="{DynamicResource FilterPanelButtonEx}" Margin="30,40,30,40"
-                                  Height="50"
                                   x:Name="PART_ButtonBack">
                             <!-- Contenu du bouton -->
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <!-- Texte du bouton -->
                                     <TextBlock Text="{DynamicResource LOCFilters}" TextAlignment="Center" FontWeight="SemiBold"
-                                            VerticalAlignment="Center" FontSize="24" Margin="0,0,0,5" />
+                                            VerticalAlignment="Center" FontSize="40" Margin="0,0,0,5" />
                                 </StackPanel>
                             </Button.Content>
                         </ButtonEx>
