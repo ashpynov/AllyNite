@@ -166,13 +166,18 @@
                             VerticalAlignment="Top"
                             Margin="0,800,0,0" >
                             <ButtonEx
-                                Visibility="{PluginSettings Plugin=BackToGame, Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                x:Name="BackToGameButton"
+                                Visibility="Collapsed"
                                 Style="{StaticResource ButtonGameStatusAction}"
                                 Content="{DynamicResource LOCBackToGame}"
-                                Command="{PluginSettings Plugin=BackToGame, Path=ActivateGame}"
-                            />
+                                Command="{PluginSettings Plugin=BackToGame, Path=ActivateGame}" />
                         </StackPanel>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{PluginSettings Plugin=BackToGame, Path=IsRunning}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="BackToGameButton"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
