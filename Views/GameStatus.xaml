@@ -5,7 +5,7 @@
     mc:Ignorable="d">
 
     <!-- Style pour le bouton d'action de statut de jeu -->
-    <Style x:Key="ButtonGameStatusAction" TargetType="Button" >
+    <Style x:Key="ButtonGameBaseStatusAction" TargetType="Button" >
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
         <Setter Property="Background" Value="Transparent" />

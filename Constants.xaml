@@ -89,7 +89,7 @@
 
     <FontFamily x:Key="FontAltIcoFont">Segoe MDL2 Assets</FontFamily>
 
-    <sys:Double x:Key="FilterPanelWidth">400</sys:Double>
+    <sys:Double x:Key="FilterPanelWidth">500</sys:Double>
 
     <LinearGradientBrush x:Key="OverlayMenu" StartPoint="0,1" EndPoint="1,0">
         <GradientStop Color="#FF000000" Offset="0.1" />

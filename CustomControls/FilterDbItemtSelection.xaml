@@ -10,27 +10,26 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type FilterDbItemtSelection}">
                     <!-- Contenu principal du modèle -->
-                    <DockPanel MinWidth="{StaticResource FilterPanelWidth}" Height="{StaticResource DesignHeight}"
-                               Background="Transparent"
-                               x:Name="PART_MenuHost">
-                        <TextBlock Text="{Binding Title}"  DockPanel.Dock="Top" FontSize="40" Margin="10,0,10,10" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
-                               VerticalAlignment="Center" FontWeight="SemiBold"
-                               />
-                        <!-- Bouton de retour -->
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                            <ButtonEx  Margin="30,40,30,10"
-                                    Style="{DynamicResource FilterPanelButtonEx}" x:Name="PART_ButtonBack"
-                                    Content="Back" />
-                            <!-- Bouton de suppression -->
-                            <ButtonEx Content="{DynamicResource LOCClearLabel}"
-                                    Margin="30,20,30,10"
+                    <DockPanel Background="{DynamicResource OverlayMenu}"
+                            MinWidth="{StaticResource FilterPanelWidth}"
+                            Height="{StaticResource DesignHeight}"
+                            Margin="0,20,0,20"
+                            x:Name="PART_MenuHost">
+
+                        <ButtonEx DockPanel.Dock="Top"
+                            Style="{DynamicResource FilterPanelNagivationBackButton}" Margin="25,30,35,10"
+                            x:Name="PART_ButtonBack"
+                            Content="{Binding Title}" />
+
+                        <ButtonEx Content="{DynamicResource LOCClearLabel}"
+                                    DockPanel.Dock="Top"
+                                    Margin="25,10,35,10"
                                     Style="{DynamicResource FilterPanelButtonEx}" x:Name="PART_ButtonClear"/>
-                        </StackPanel>
                         <!-- Conteneur des éléments -->
                         <ItemsControlEx x:Name="PART_ItemsHost"
-                                        Margin="0,20,0,0" DockPanel.Dock="Top" Focusable="False"
-                                        KeyboardNavigation.DirectionalNavigation="Once" />
-
+                            DockPanel.Dock="Top" Focusable="False"
+                            Margin="0,0,15,0"
+                            KeyboardNavigation.DirectionalNavigation="Once" />
                     </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
