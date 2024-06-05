@@ -19,7 +19,10 @@
                         <Border x:Name="Mask" Background="#181A1E" BorderThickness="0" CornerRadius="0" />
                         <!-- Image de couverture du jeu -->
                         <Image x:Name="PART_ImageCover"
-                               RenderOptions.BitmapScalingMode="Fant" StretchDirection="Both"
+                               RenderOptions.BitmapScalingMode="Fant"
+                               StretchDirection="Both"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
                                Stretch="{Settings CoverArtStretch}" />
                         <!-- Indicateur visuel de jeu en cours -->
                         <Canvas x:Name="Playing" Visibility="Collapsed">
@@ -32,13 +35,13 @@
                             Visibility="Collapsed"
                             Style="{DynamicResource ThemeTextBlockBaseStyle}"
                             FontSize="{DynamicResource ThemeFontSizeSmall}"
-                            HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Top"
                             TextAlignment="Center" Padding="5"
                             Background="{DynamicResource ControlBackgroundDarkBrush}"/>
 
                         <ContentControl x:Name="BackToGame_Control" />
                         <TextBlock x:Name="GameIsRunningBadge"
-                            Visibility="{Binding ElementName=BackToGame_Control, Path=Content.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Visibility="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Background="{DynamicResource GlyphTransparentBrush}"
                             Text="{DynamicResource LOCGameRunning}"
                             VerticalAlignment="Bottom"
