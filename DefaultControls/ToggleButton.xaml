@@ -543,7 +543,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="{TemplateBinding Background}">
-                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <ContentControl Style="{DynamicResource ControlFrame}" />
                         <TextBlock x:Name="ON" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             FontFamily="{DynamicResource FontIcoFont}"
@@ -676,7 +676,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid x:Name="MainGrid" Background="{TemplateBinding Background}">
-                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <ContentControl Style="{DynamicResource ControlFrame}" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel x:Name="OFF" VerticalAlignment="Center"
                                 HorizontalAlignment="Center">

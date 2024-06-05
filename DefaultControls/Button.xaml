@@ -12,7 +12,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <ContentControl Style="{DynamicResource ControlFrame}" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBoldStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -43,7 +43,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <ContentControl Style="{DynamicResource ControlFrame}" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBoldStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -176,7 +176,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <ContentControl Style="{DynamicResource ControlFrame}" />
                         <TextBlock x:Name="Text"
                             Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"

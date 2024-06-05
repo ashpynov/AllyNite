@@ -194,7 +194,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <ContentControl Style="{DynamicResource ButtonFrame}" />
+                        <ContentControl Style="{DynamicResource ControlFrame}" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBoldStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -505,8 +505,9 @@
     </Style>
 
 
-    <Style x:Key="ButtonFrame" TargetType="ContentControl">
+    <Style x:Key="ControlFrame" TargetType="ContentControl">
         <Setter Property = "Focusable" Value="False" />
+        <Setter Property = "Tag" Value="True" />
         <Setter Property = "Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
@@ -548,22 +549,31 @@
                             <Setter Property="Foreground" Value="Transparent" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource TemplatedParent}}"
-                                    Value="True">
+                        <DataTrigger Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="FocusFrame" />
                             <Setter Property="Opacity" Value="0" TargetName="NormalFrame" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}"
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+                                <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" TargetName="FocusFrame" />
+                            <Setter Property="Opacity" Value="0" TargetName="NormalFrame" />
+                        </MultiDataTrigger>
+
+                        <!-- <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}"
                                     Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="FocusFrame" />
                             <Setter Property="Opacity" Value="0" TargetName="NormalFrame" />
-                        </DataTrigger>
+                        </DataTrigger> -->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 
     <pcon:ListSizeToVisibilityConverter x:Key="ListSizeToVisibilityConverter" />
 
