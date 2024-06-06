@@ -28,7 +28,7 @@
                         <!-- Conteneur des éléments -->
                         <ItemsControlEx x:Name="PART_ItemsHost"
                             DockPanel.Dock="Top" Focusable="False"
-                            Margin="0,0,15,0"
+                            Margin="0,0,0,20"
                             KeyboardNavigation.DirectionalNavigation="Once" />
                     </DockPanel>
                 </ControlTemplate>

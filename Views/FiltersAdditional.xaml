@@ -21,6 +21,7 @@
 
                         <!-- Conteneur pour les éléments à afficher -->
                         <ItemsControlEx x:Name="PART_ItemsHost"
+                                        Margin="0,0,0,20"
                                         DockPanel.Dock="Top" Focusable="False"
                                         KeyboardNavigation.DirectionalNavigation="Once" />
                     </DockPanel>

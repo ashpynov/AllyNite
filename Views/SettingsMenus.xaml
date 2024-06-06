@@ -233,6 +233,18 @@
         BasedOn="{StaticResource {x:Type ComboBoxEx}}">
         <Setter Property="MinWidth" Value="400" />
         <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
+        <Style.Resources>
+            <Style x:Key="ComboBoxTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+                <Setter Property="FontFamily" Value="Segoe UI Light" />
+                <Setter Property="Foreground" Value="{DynamicResource TextDetailBrush}" />
+            </Style>
+            <Style x:Key="ComboBoxIconStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontFamily" Value="{DynamicResource FontIcoFont}" />
+                <Setter Property="Foreground" Value="{DynamicResource SelectionLightBrush}" />
+            </Style>
+        </Style.Resources>
     </Style>
 
     <!-- Style pour le texte de section -->
