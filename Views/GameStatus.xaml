@@ -167,7 +167,9 @@
                             Margin="0,800,0,0" >
                             <ButtonEx
                                 x:Name="BackToGameButton"
+                                Margin="0,0,40,0"
                                 Visibility="Collapsed"
+                                HorizontalAlignment="Left"
                                 Style="{StaticResource ButtonGameStatusAction}"
                                 Content="{DynamicResource LOCBackToGame}"
                                 Command="{PluginSettings Plugin=BackToGame, Path=ActivateGame}" />
