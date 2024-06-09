@@ -49,7 +49,7 @@
     <SolidColorBrush x:Key="TextWhiteBrush" Color="{DynamicResource TextWhiteColor}" />
     <SolidColorBrush x:Key="TextAltBrush" Color="{DynamicResource TextSecondaryColor}" />
     <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource GlyphColor}" />
-    <SolidColorBrush x:Key="GlyphTransparentBrush" Color="{DynamicResource GlyphColor}" Opacity="0.7" />
+    <SolidColorBrush x:Key="StatusBadgeBrush" Color="{DynamicResource BorderDark}" Opacity="0.8" />
     <SolidColorBrush x:Key="GlyphLightBrush" Color="{DynamicResource GlyphLightColor}" />
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource ControlBackgroundColor}" />
     <SolidColorBrush x:Key="ControlBackgroundLightBrush"

@@ -52,22 +52,21 @@
                         KeyboardNavigation.TabNavigation="Contained">
                         <!-- Marges ajoutées -->
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
 
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="*" />
 
                         </Grid.ColumnDefinitions>
 
                         <!-- Arrière-plan de l'image -->
-                        <Border RenderOptions.BitmapScalingMode="Fant" Grid.RowSpan="5"
-                            Grid.ColumnSpan="3" Panel.ZIndex="-44">
+                        <Border RenderOptions.BitmapScalingMode="Fant" Panel.ZIndex="-44">
                             <Border.Background>
                                 <ImageBrush
                                     ImageSource="{ThemeFile 'Images/MainBorderBackground.png'}"
                                     RenderOptions.BitmapScalingMode="Fant" Opacity="0.5"
-                                    Stretch="Fill" />
+                                    Stretch="UniformToFill" />
                             </Border.Background>
                         </Border>
 
@@ -75,7 +74,7 @@
                         <Image
                             Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverterCached}}"
                             RenderOptions.BitmapScalingMode="Fant" Panel.ZIndex="-45"
-                            Grid.RowSpan="5" Grid.ColumnSpan="3" RenderTransformOrigin="0.5,0.5">
+                            RenderTransformOrigin="0.5,0.5">
                             <Image.Style>
                                 <Style TargetType="Image">
                                     <Setter Property="Stretch" Value="UniformToFill" />

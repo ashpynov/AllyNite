@@ -138,12 +138,12 @@
                                 TargetName="GameTitleBackground" />
                         </Trigger>
                         <!-- Affichage du titre du jeu -->
-                        <DataTrigger Binding="{Settings Fullscreen.ShowGameTitles}" Value="True">
+                        <!-- <DataTrigger Binding="{Settings Fullscreen.ShowGameTitles}" Value="True">
                             <Setter Property="Opacity" Value="0.9" TargetName="GameTitleBackground" />
                             <Setter Property="Visibility" Value="Visible"
                                 TargetName="GameTitleBackground" />
                             <Setter Property="Visibility" Value="Visible" TargetName="GameTitle" />
-                        </DataTrigger>
+                        </DataTrigger> -->
 
                         <!-- Affichage de l'icône d'installation -->
                         <MultiDataTrigger>

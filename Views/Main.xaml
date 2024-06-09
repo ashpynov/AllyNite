@@ -3,6 +3,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:ctrl="clr-namespace:Playnite.FullscreenApp.Controls;assembly=Playnite.FullscreenApp"
+    xmlns:pin="clr-namespace:Playnite.Input;assembly=Playnite"
+
     mc:Ignorable="d">
 
     <!-- Définition du style pour le type Main -->
@@ -272,10 +275,10 @@
                                     Grid.Column="0">
                                     <ButtonEx.Content>
                                         <Image RenderOptions.BitmapScalingMode="Fant"
-                                                Source="{ThemeFile 'Images/ASUS/rog-eye.png'}"
-                                                Height="{DynamicResource ThemeBaseSizex2}"
-                                                Width="{DynamicResource ThemeBaseSizex4}"
-                                                Stretch="Uniform"
+                                            Source="{ThemeFile 'Images/ASUS/rog-eye.png'}"
+                                            Height="{DynamicResource ThemeBaseSizex2}"
+                                            Width="{DynamicResource ThemeBaseSizex4}"
+                                            Stretch="Uniform"
                                         />
 
                                     </ButtonEx.Content>
@@ -285,7 +288,21 @@
                                     Height="{DynamicResource ThemeBaseSizex2}"
                                     Width="{DynamicResource ThemeBaseSizex2}"
                                     IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"
+                                    Visibility="Visible"
                                     Style="{DynamicResource ChangeViewButton}" Grid.Column="1" />
+
+                                <CheckBoxEx x:Name="ChangeDetailsButton" Margin="30,0,0,0"
+                                    Height="{DynamicResource ThemeBaseSizex2}"
+                                    Width="{DynamicResource ThemeBaseSizex2}"
+                                    IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay}"
+                                    Visibility="Collapsed"
+                                    Style="{DynamicResource ChangeDetailsButton}" Grid.Column="1" />
+
+                                <StackPanel x:Name="T_SwitchModes" Visibility="Collapsed">
+                                    <RadioButton Content="Horizontal" IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"/>
+                                    <RadioButton Content="Details" IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay}" Margin="0,5,0,0"/>
+                                    <RadioButton Content="Tiles" IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay, Converter={StaticResource NegateConverter}}" Margin="0,5,0,0"/>
+                                </StackPanel>
 
                                 <!-- Filtre Bottom Bar-->
                                 <Grid>
@@ -314,7 +331,8 @@
                                                                     Duration="0:0:0.5" To="1" />
                                                                 <ThicknessAnimation
                                                                     Storyboard.TargetProperty="Margin"
-                                                                    BeginTime="0:0:3" From="0,-120,0,0"
+                                                                    BeginTime="0:0:3"
+                                                                    From="0,-120,0,0"
                                                                     Duration="0:0:1.5"
                                                                     AccelerationRatio="0.3"
                                                                     DecelerationRatio="0.7" />
@@ -331,7 +349,8 @@
 
                                                                 <ThicknessAnimation
                                                                     Storyboard.TargetProperty="Margin"
-                                                                    BeginTime="0:0:0" From="0,-120,0,0"
+                                                                    BeginTime="0:0:0"
+                                                                    From="0,-120,0,0"
                                                                     Duration="0:0:1"
                                                                     AccelerationRatio="0.7"
                                                                     DecelerationRatio="0.3" />
@@ -361,7 +380,8 @@
                                         </Style>
                                     </Grid.Style>
 
-                                    <FilterPresetSelector x:Name="ItemsFilterPresets" Margin="0,0,0,0"
+                                    <FilterPresetSelector x:Name="ItemsFilterPresets"
+                                        Margin="0,0,0,0"
                                         HorizontalAlignment="Center" FocusVisualStyle="{x:Null}" />
                                 </Grid>
 
@@ -394,7 +414,8 @@
                                             <TextBlock Text="&#xeea3;"
                                                 FontFamily="{StaticResource FontIcoFont}"
                                                 HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" FontSize="{DynamicResource ThemeFontSize}" />
+                                                VerticalAlignment="Center"
+                                                FontSize="{DynamicResource ThemeFontSize}" />
                                             <TextBlock Text="&#x25CF;"
                                                 Foreground="{DynamicResource GlyphBrush}"
                                                 HorizontalAlignment="Right"
@@ -432,8 +453,12 @@
                                             <Style.Triggers>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="Critical"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="False" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="Critical" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="False" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -446,8 +471,12 @@
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="Low"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="False" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="Low" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="False" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -460,8 +489,12 @@
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="Medium"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="False" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="Medium" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="False" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -474,8 +507,12 @@
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="High"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="False" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="High" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="False" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -488,8 +525,12 @@
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="Critical"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="True" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="Critical" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="True" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -502,8 +543,12 @@
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="Low"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="True" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="Low" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="True" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -516,8 +561,12 @@
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="Medium"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="True" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="Medium" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="True" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -530,8 +579,12 @@
                                                 </MultiDataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PowerStatus.Charge}" Value="High"/>
-                                                        <Condition Binding="{Binding PowerStatus.IsCharging}" Value="True" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.Charge}"
+                                                            Value="High" />
+                                                        <Condition
+                                                            Binding="{Binding PowerStatus.IsCharging}"
+                                                            Value="True" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="Content">
                                                         <Setter.Value>
@@ -571,12 +624,12 @@
                             </Grid>
 
                             <Grid x:Name="SongTitle" FocusVisualStyle="{x:Null}"
-                                    Grid.Column="0"
-                                    Grid.Row="0"
-                                    Grid.ColumnSpan="3"
-                                    Grid.RowSpan="3"
-                                    Panel.ZIndex="100"
-                                    Margin="-1024,0,1024,0"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Grid.ColumnSpan="3"
+                                Grid.RowSpan="3"
+                                Panel.ZIndex="100"
+                                Margin="-1024,0,1024,0"
                             >
                                 <Grid.Style>
                                     <Style TargetType="Grid">
@@ -601,13 +654,13 @@
                                                             BeginTime="0:0:5"
                                                             AccelerationRatio="0.7"
                                                             DecelerationRatio="0.3"
-                                                            />
+                                                        />
                                                         <DoubleAnimation
                                                             Storyboard.TargetProperty="Opacity"
                                                             Duration="0:0:0.5"
                                                             BeginTime="0:0:5"
                                                             To="0"
-                                                            />
+                                                        />
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
                                                             From="-1024,80,1024,0"
@@ -621,13 +674,14 @@
                                             <DataTrigger
                                                 Binding="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName}"
                                                 Value="">
-                                                <Setter Property = "Visibility" Value = "Collapsed" />
+                                                <Setter Property="Visibility" Value="Collapsed" />
                                             </DataTrigger>
                                         </Style.Triggers>
-                                        </Style>
+                                    </Style>
                                 </Grid.Style>
 
-                                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Height = "70" >
+                                <Grid VerticalAlignment="Top" HorizontalAlignment="Center"
+                                    Height="70">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
@@ -635,28 +689,29 @@
 
                                     <Border Opacity="0.8" Grid.ColumnSpan="2">
                                         <Border.Background>
-                                        <ImageBrush ImageSource="{ThemeFile 'Images/Interface.png'}"
-                                            Stretch="UniformToFill" />
+                                            <ImageBrush
+                                                ImageSource="{ThemeFile 'Images/Interface.png'}"
+                                                Stretch="UniformToFill" />
                                         </Border.Background>
                                     </Border>
-                                        <ContentControl x:Name="Sounds_MusicControl" />
-                                        <Image Source="{ThemeFile 'Images/FullVolume.png'}"
-                                            Grid.Column="0"
-                                            Height="40" Width="40"
-                                            RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
-                                            VerticalAlignment="Center"
-                                            Margin="20, 5, 0, 0" />
-                                        <TextBlock
-                                            Grid.Column="1"
-                                            Text="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName, NotifyOnTargetUpdated=True}"
-                                            Style="{DynamicResource TextBlockBoldBaseStyle}"
-                                            VerticalAlignment="Center"
-                                            Margin="10,0,20,0"
-                                        >
-                                            <TextBlock.LayoutTransform>
-                                                <ScaleTransform ScaleX="0.85"  />
-                                            </TextBlock.LayoutTransform>
-                                        </TextBlock>
+                                    <ContentControl x:Name="Sounds_MusicControl" />
+                                    <Image Source="{ThemeFile 'Images/FullVolume.png'}"
+                                        Grid.Column="0"
+                                        Height="40" Width="40"
+                                        RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
+                                        VerticalAlignment="Center"
+                                        Margin="20, 5, 0, 0" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Text="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName, NotifyOnTargetUpdated=True}"
+                                        Style="{DynamicResource TextBlockBoldBaseStyle}"
+                                        VerticalAlignment="Center"
+                                        Margin="10,0,20,0"
+                                    >
+                                        <TextBlock.LayoutTransform>
+                                            <ScaleTransform ScaleX="0.85" />
+                                        </TextBlock.LayoutTransform>
+                                    </TextBlock>
                                 </Grid>
                             </Grid>
 
@@ -912,55 +967,6 @@
                             </StackPanel>
 
 
-
-
-                            <!--SourceLogo-->
-                            <!-- <Grid Grid.Column="1" Grid.Row="1">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"
-                                    HorizontalAlignment="Left" Margin="60,20,0,0">
-                                    <StackPanel.Style>
-                                        <Style TargetType="StackPanel">
-                                            <Setter Property="Margin" Value="0,0,20,0" />
-                                            <Setter Property="Effect">
-                                                <Setter.Value>
-                                                    <DropShadowEffect ShadowDepth="1" BlurRadius="1"
-                                                        Direction="270" />
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <DataTrigger
-                                                    Binding="{Binding SelectedGame.Source.Name}"
-                                                    Value="">
-                                                    <Setter Property="Visibility" Value="Collapsed" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </StackPanel.Style>
-                                    <Image x:Name="LibraryIcon"
-                                        RenderOptions.BitmapScalingMode="Fant" MaxHeight="50"
-                                        MaxWidth="180"
-                                        VerticalAlignment="Center" HorizontalAlignment="Center"
-                                        Source="{ThemeFileBinding SelectedGame.Source.Name, PathFormat='Icons/Source/{0}.png'}">
-                                        <Image.Style>
-                                            <Style TargetType="Image">
-                                                <Style.Triggers>
-                                                    <MultiDataTrigger>
-                                                        <MultiDataTrigger.Conditions>
-                                                            <Condition
-                                                                Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
-                                                                Value="False" />
-                                                        </MultiDataTrigger.Conditions>
-                                                        <Setter Property="Visibility"
-                                                            Value="Visible" />
-                                                    </MultiDataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>
-                                </StackPanel>
-                            </Grid> -->
-
-
                             <!--AgeRatings-->
                             <Grid Grid.Column="5" Grid.Row="1">
                                 <Grid.Style>
@@ -1205,69 +1211,37 @@
                                 </StackPanel>
                             </Grid>
                             <!--Wallpaper Vertical List-->
-                            <Grid Name="Wallpaper" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
-                                Margin="20,20,1430,-40">
-                                <DockPanel Height="220" Width="420" Margin="20,5,0,0" Opacity="0.8"
-                                    HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid Name="Wallpaper" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
+                                Margin="0,0,0,0">
+                                <DockPanel x:Name="ListDetailsPannel" Width="600" Margin="20,5,0,0"
+                                    HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                                    Visibility="Collapsed"
+                                    LastChildFill="True">
                                     <FadeImage Source="{Binding SelectedGame.BackgroundImage}"
                                         Stretch="UniformToFill"
+                                        Width="400" Height="240"
+                                        DockPanel.Dock="Top"
                                         HorizontalContentAlignment="Center"
                                         HorizontalAlignment="Center">
-                                        <FadeImage.Style>
-                                            <Style TargetType="FadeImage">
-                                                <Style.Triggers>
-                                                    <DataTrigger
-                                                        Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
-                                                        Value="True">
-                                                        <Setter Property="Visibility"
-                                                            Value="Collapsed" />
-                                                    </DataTrigger>
-                                                    <DataTrigger
-                                                        Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
-                                                        Value="False">
-                                                        <Setter Property="Visibility"
-                                                            Value="Visible" />
-                                                    </DataTrigger>
-
-                                                </Style.Triggers>
-                                            </Style>
-                                        </FadeImage.Style>
                                     </FadeImage>
-                                </DockPanel>
-                                <DockPanel>
-                                    <DockPanel.Style>
-                                        <Style TargetType="DockPanel">
-                                            <Style.Triggers>
-
-                                                <DataTrigger
-                                                    Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
-                                                    Value="True">
-                                                    <Setter Property="Visibility" Value="Collapsed" />
-                                                </DataTrigger>
-                                                <DataTrigger
-                                                    Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
-                                                    Value="False">
-                                                    <Setter Property="Visibility" Value="Visible" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DockPanel.Style>
-
-                                    <StackPanel Orientation="Vertical" Margin="10,230,0,0">
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Center"
-                                            Margin="0,0,0,0">
-                                            <TextBlock Text="{Binding SelectedGame.DisplayName}"
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Stretch"
+                                                DockPanel.Dock="Top"
+                                                Margin="10,10,10,0">
+                                        <TextBlock Text="{Binding SelectedGame.DisplayName}"
                                                 Margin="0,2,0,0"
                                                 FontSize="30"
+                                                HorizontalAlignment="Center"
+                                                TextAlignment="Center"
                                                 Style="{StaticResource TextVerticalStyle}"
                                                 TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
-                                                MaxWidth="460" />
-                                        </StackPanel>
+                                        />
                                         <Rectangle Fill="{DynamicResource TextAltBrush}" Height="2"
-                                            HorizontalAlignment="Stretch" Margin="-20,5,0,0"
-                                            MaxWidth="390" Opacity="0.4" />
-
+                                                HorizontalAlignment="Stretch" Margin="-10,5,-10,0"
+                                                Opacity="0.4" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="10,10,10,0"
+                                        DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
 
                                         <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Left"
@@ -1302,8 +1276,6 @@
                                                 Style="{StaticResource TextVerticalStyle}"
                                                 TextTrimming="CharacterEllipsis" MaxWidth="300" />
                                         </StackPanel>
-
-
                                         <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Left"
                                             Margin="0,10,0,0">
@@ -1355,7 +1327,6 @@
                                                 Style="{StaticResource TextVerticalStyle}"
                                                 TextTrimming="CharacterEllipsis" MaxWidth="350" />
                                         </StackPanel>
-
                                         <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Left"
                                             Margin="0,10,0,0">
@@ -1373,7 +1344,6 @@
                                                 Style="{StaticResource TextVerticalStyle}"
                                                 TextTrimming="CharacterEllipsis" MaxWidth="350" />
                                         </StackPanel>
-
                                         <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Left"
                                             Margin="0,10,0,0">
@@ -1432,9 +1402,33 @@
                                         </StackPanel>
 
                                     </StackPanel>
+                                    <Grid x:Name="ScrollGrid" HorizontalAlignment="Stretch"
+                                        FocusVisualStyle="{x:Null}"
+                                        VerticalAlignment="Top"
+                                        KeyboardNavigation.TabNavigation="None"
+                                        KeyboardNavigation.DirectionalNavigation="None"
+                                        Margin="10,10,10,0">
+                                        <ScrollViewerEx x:Name="PART_ScrollHtmlDescription"
+
+                                            IsTabStop="False"
+                                            Focusable="False"
+                                            FocusVisualStyle="{x:Null}"
+                                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                            <HtmlTextView x:Name="PART_HtmlDescription"
+                                                IsTabStop="False"
+                                                Focusable="False"
+                                                FocusVisualStyle="{x:Null}"
+
+                                                HtmlFontSize="{DynamicResource FontSizeSmall}"
+                                                HtmlFontFamily="SST"
+                                                HtmlForeground="{DynamicResource TextVertical}"
+                                                TemplatePath="{ThemeFile 'DescriptionView.html'}"
+                                                HtmlText="{Binding SelectedGame.Description}"
+                                                LinkForeground="{DynamicResource GlyphColor}"
+                                                />
+                                        </ScrollViewerEx>
+                                    </Grid>
                                 </DockPanel>
-
-
                             </Grid>
 
 
@@ -1500,16 +1494,33 @@
                                             </DataTrigger>
 
                                             <!--Vertical-->
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
-                                                Value="False">
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="True" />
+                                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
+                                                </MultiDataTrigger.Conditions>
                                                 <Setter Property="Grid.Row" Value="0" />
                                                 <Setter Property="Grid.RowSpan" Value="2" />
                                                 <Setter Property="Grid.ColumnSpan" Value="2" />
                                                 <Setter Property="Height" Value="900" />
-                                                <Setter Property="Width" Value="1300" />
-                                                <Setter Property="Margin" Value="470,0,0,-550" />
-                                            </DataTrigger>
+                                                <Setter Property="Width" Value="1000" />
+                                                <Setter Property="Margin" Value="670,0,0,-550" />
+                                            </MultiDataTrigger>
+
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="False" />
+                                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Grid.Row" Value="0" />
+                                                <Setter Property="Grid.RowSpan" Value="3" />
+                                                <Setter Property="Grid.ColumnSpan" Value="2" />
+                                                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                <Setter Property="VerticalAlignment" Value="Stretch" />
+                                                <Setter Property="Height" Value="900" />
+                                                <Setter Property="Width" Value="1600" />
+                                                <Setter Property="Margin" Value="0,0,0,0" />
+                                            </MultiDataTrigger>
 
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
@@ -1545,15 +1556,59 @@
                                     </Style>
                                 </DockPanel.Style>
 
-                                <ListBoxEx x:Name="PART_ListGameItems" DockPanel.Dock="Bottom"
+                                <TextBlock Name="T_SwapButtons" Visibility="Collapsed">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="A" />
+                                            <Setter Property="Tag" Value="X" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Settings SwapStartDetailsAction}" Value="True">
+                                                    <Setter Property="Text" Value="A" />
+                                                    <Setter Property="Tag" Value="X" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                        </TextBlock.Style>
+                                </TextBlock>
+
+                                <ListBox x:Name="PART_ListGameItemsAlt" DockPanel.Dock="Bottom"
                                     Background="Transparent" BorderThickness="0"
                                     BorderBrush="Transparent"
                                     FocusVisualStyle="{x:Null}"
+                                    Visibility="Collapsed"
                                     KeyboardNavigation.DirectionalNavigation="Once"
                                     VirtualizingStackPanel.IsVirtualizing="True"
+                                    VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                    VirtualizingStackPanel.ScrollUnit="Pixel"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                </ListBoxEx>
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    FocusBahaviors.FocusBinding="{Binding GameListFocused}"
+                                    ItemTemplate="{StaticResource DetailListGameItemTemplate}"
+                                    SelectedItem="{Binding SelectedGame}"
+                                    ItemsSource="{Binding GamesView.CollectionView}"
+                                    >
+                                    <ListBox.InputBindings>
+                                        <KeyBinding Key="{Binding ElementName=T_SwapButtons, Path=Text}" Command = "{Binding OpenGameMenuCommand}" />
+                                        <KeyBinding Key="{Binding ElementName=T_SwapButtons, Path=Tag}"  Command = "{Binding ToggleGameDetailsCommand}" />
+                                        <KeyBinding Key="Enter" Command = "{Binding ActivateSelectedCommand}" />
+                                        <pin:GameControllerInputBinding  Button="Start" Command="{Binding OpenGameMenuCommand}" />
+                                        <pin:GameControllerInputBinding  Button="{Binding ElementName=T_SwapButtons, Path=Text}" Command="{Binding ActivateSelectedCommand}" />
+                                        <pin:GameControllerInputBinding  Button="{Binding ElementName=T_SwapButtons, Path=Tag}" Command="{Binding ToggleGameDetailsCommand}" />
+                                    </ListBox.InputBindings>
+                                </ListBox>
+
+                                <Grid x:Name="T_ListGameItemsContainer">
+                                    <ListBoxEx x:Name="PART_ListGameItems" DockPanel.Dock="Bottom"
+                                        Background="Transparent" BorderThickness="0"
+                                        BorderBrush="Transparent"
+                                        FocusVisualStyle="{x:Null}"
+                                        KeyboardNavigation.DirectionalNavigation="Once"
+                                        VirtualizingStackPanel.IsVirtualizing="True"
+                                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    </ListBoxEx>
+                                </Grid>
+
                             </DockPanel>
 
                             <TextBlock Grid.RowSpan="5" Grid.ColumnSpan="3" FontSize="40"
@@ -1749,7 +1804,7 @@
                                     <TextBlock
                                         Text="{Binding Items.Count, ElementName=PART_ListGameItems}"
                                         Style="{DynamicResource BottomBarStyle}"
-                                        Margin="0,0,15,0"/>
+                                        Margin="0,0,15,0" />
                                 </StackPanel>
                             </Border>
 
@@ -1992,6 +2047,49 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="True" />
+                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeViewButton"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="ChangeDetailsButton"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItems"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="T_ListGameItemsContainer"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItemsAlt"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="ListDetailsPannel"/>
+
+                            </MultiDataTrigger>
+                            <!-- <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="False" />
+                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible" TargetName="ChangeViewButton"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeDetailsButton"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItems"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItemsAlt"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="False" />
+                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                    <Setter Property="Visibility" Value="Visible" TargetName="ChangeViewButton"/>
+                                    <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeDetailsButton"/>
+                                    <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItems"/>
+                                    <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItemsAlt"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="True" />
+                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible" TargetName="ChangeViewButton"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeDetailsButton"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItems"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItemsAlt"/>
+                            </MultiDataTrigger> -->
 
 
                     </ControlTemplate.Triggers>

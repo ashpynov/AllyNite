@@ -64,7 +64,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
                                     <Image RenderOptions.BitmapScalingMode="Fant"
                                         Height="{DynamicResource ThemeBaseSizex2}"
-                                        Source="{ThemeFile 'Images/Vertical.png'}">
+                                        Source="{ThemeFile 'Images/List.png'}">
                                     </Image>
                                 </StackPanel>
                             </StackPanel>
@@ -74,6 +74,88 @@
                                     <Image RenderOptions.BitmapScalingMode="Fant"
                                         Height="{DynamicResource ThemeBaseSizex2}"
                                         Source="{ThemeFile 'Images/Horizontal.png'}">
+                                    </Image>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Style.Triggers>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
+                            <Setter Property="Background" Value="Transparent"
+                                TargetName="MainBackground" />
+                            <Setter Property="Opacity" Value="1" TargetName="OFF" />
+                            <Setter Property="Opacity" Value="1" TargetName="ON" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Background" Value="Transparent"
+                                TargetName="MainBackground" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Opacity" Value="1" TargetName="OFF" />
+                            <Setter Property="Opacity" Value="1" TargetName="ON" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="ON" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Visibility" TargetName="OFF" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChangeDetailsButton" TargetType="ToggleButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid x:Name="MainGrid" Background="Transparent">
+                        <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
+                            x:Name="MainBackground" />
+                        <Border x:Name="MainBorder" Margin="-6"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
+                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel x:Name="OFF" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Margin="2,0,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                    <Image RenderOptions.BitmapScalingMode="Fant"
+                                        Height="{DynamicResource ThemeBaseSizex2}"
+                                        Source="{ThemeFile 'Images/Tiles.png'}">
+                                    </Image>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel x:Name="ON" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Margin="2,0,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                    <Image RenderOptions.BitmapScalingMode="Fant"
+                                        Height="{DynamicResource ThemeBaseSizex2}"
+                                        Source="{ThemeFile 'Images/List.png'}">
                                     </Image>
                                 </StackPanel>
                             </StackPanel>

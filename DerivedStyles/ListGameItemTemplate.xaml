@@ -78,4 +78,55 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <DataTemplate x:Key="DetailListGameItemTemplate">
+        <StackPanel Orientation="Horizontal">
+            <!-- Contenu principal du modèle -->
+            <Grid>
+                <!-- Masque pour l'opacité de l'image -->
+                <Border x:Name="Mask" Background="#181A1E" BorderThickness="0" CornerRadius="0" />
+                <!-- Image de couverture du jeu -->
+                <Image x:Name="PART_ImageCover"
+                    RenderOptions.BitmapScalingMode="Fant"
+                    RenderTransformOrigin="0.5,0.5"
+                    Source="{Binding CoverImageObject}"
+                    StretchDirection="Both"
+                    VerticalAlignment="Top"
+                    MaxHeight="100"
+                    HorizontalAlignment="Center"
+                    Stretch="{Settings CoverArtStretch}" />
+                <!-- Indicateur visuel de jeu en cours -->
+                <Canvas x:Name="Playing" Visibility="Collapsed">
+                    <Polygon Points="0,0 50,0 0,50" Fill="{DynamicResource GlyphBrush}" Opacity="1"/>
+                </Canvas>
+                <!-- Fond sombre pour assombrir l'image -->
+                <Border Background="#181A1E" x:Name="BorderDarken" CornerRadius="0" Visibility="Collapsed" Opacity="0.7" />
+                <!-- Texte du nom du jeu -->
+                <ContentControl x:Name="BackToGame_Control" />
+                <TextBlock x:Name="GameIsRunningBadge"
+                    Visibility="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Background="{DynamicResource StatusBadgeBrush}"
+                    Text="{DynamicResource LOCGameRunning}"
+                    VerticalAlignment="Bottom"
+                    TextAlignment="Center"
+                    Margin="0,0,0,15"
+                    Padding="0,0,0,5"
+                    FontSize="{DynamicResource ThemeFontSmallSize}"
+                    Style="{DynamicResource ButtonTextBlockBoldStyle}" />
+
+                <!-- Masque pour l'opacité de l'image -->
+                <Grid.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=Mask}" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
+                </Grid.OpacityMask>
+            </Grid>
+            <StackPanel MinWidth="300" >
+                <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
+                    Style="{DynamicResource ThemeTextBlockBaseStyle}"
+                    FontSize="{DynamicResource ThemeFontSizeSmall}"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    TextAlignment="Left" Padding="5"
+                    Background="{DynamicResource ControlBackgroundDarkBrush}"/>
+            </StackPanel>
+        </StackPanel>
+      </DataTemplate>
 </ResourceDictionary>
