@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:ctrl="clr-namespace:Playnite.FullscreenApp.Controls;assembly=Playnite.FullscreenApp"
                     mc:Ignorable="d">
 
     <!-- Définition du style pour les éléments de la liste de jeux -->
@@ -16,20 +17,23 @@
                     <!-- Contenu principal du modèle -->
                     <Grid>
                         <!-- Masque pour l'opacité de l'image -->
-                        <Border x:Name="Mask" Background="#181A1E" BorderThickness="0" CornerRadius="0" />
+                        <Border x:Name="Mask" Background="#181A1E" BorderThickness="0"
+                            CornerRadius="0" />
                         <!-- Image de couverture du jeu -->
                         <Image x:Name="PART_ImageCover"
-                               RenderOptions.BitmapScalingMode="Fant"
-                               StretchDirection="Both"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Center"
-                               Stretch="{Settings CoverArtStretch}" />
+                            RenderOptions.BitmapScalingMode="Fant"
+                            StretchDirection="Both"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Center"
+                            Stretch="{Settings CoverArtStretch}" />
                         <!-- Indicateur visuel de jeu en cours -->
                         <Canvas x:Name="Playing" Visibility="Collapsed">
-                            <Polygon Points="0,0 50,0 0,50" Fill="{DynamicResource GlyphBrush}" Opacity="1"/>
+                            <Polygon Points="0,0 50,0 0,50" Fill="{DynamicResource GlyphBrush}"
+                                Opacity="1" />
                         </Canvas>
                         <!-- Fond sombre pour assombrir l'image -->
-                        <Border Background="#181A1E" x:Name="BorderDarken" CornerRadius="0" Visibility="Collapsed" Opacity="0.7" />
+                        <Border Background="#181A1E" x:Name="BorderDarken" CornerRadius="0"
+                            Visibility="Collapsed" Opacity="0.7" />
                         <!-- Texte du nom du jeu -->
                         <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
                             Visibility="Collapsed"
@@ -37,12 +41,13 @@
                             FontSize="{DynamicResource ThemeFontSizeSmall}"
                             HorizontalAlignment="Stretch" VerticalAlignment="Top"
                             TextAlignment="Center" Padding="5"
-                            Background="{DynamicResource ControlBackgroundDarkBrush}"/>
+                            Background="{DynamicResource ControlBackgroundDarkBrush}" />
 
                         <ContentControl x:Name="BackToGame_Control" />
                         <TextBlock x:Name="GameIsRunningBadge"
                             Visibility="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Background="{DynamicResource GlyphTransparentBrush}"
+                            Foreground="{DynamicResource TextWhiteBrush}"
+                            Background="{DynamicResource StatusBadgeBrush}"
                             Text="{DynamicResource LOCGameRunning}"
                             VerticalAlignment="Bottom"
                             TextAlignment="Center"
@@ -53,7 +58,8 @@
 
                         <!-- Masque pour l'opacité de l'image -->
                         <Grid.OpacityMask>
-                            <VisualBrush Visual="{Binding ElementName=Mask}" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
+                            <VisualBrush Visual="{Binding ElementName=Mask}"
+                                RenderOptions.BitmapScalingMode="Fant" Stretch="Fill" />
                         </Grid.OpacityMask>
                     </Grid>
                     <!-- Déclenchement des changements visuels en fonction des états -->
@@ -62,7 +68,9 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsInstalled}" Value="False" />
-                                <Condition Binding="{Settings Fullscreen.DarkenUninstalledGamesGrid}" Value="True" />
+                                <Condition
+                                    Binding="{Settings Fullscreen.DarkenUninstalledGamesGrid}"
+                                    Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Visible" TargetName="BorderDarken" />
                         </MultiDataTrigger>
@@ -71,7 +79,8 @@
                             <Setter Property="Visibility" Value="Visible" TargetName="Playing" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding ElementName=BackToGame_Control, Path=Content.IsRunning}" Value="True" >
-                            <Setter Property="Text" Value="{DynamicResource LOCBackToGame}" TargetName="GameIsRunningBadge" />
+                            <Setter Property="Text" Value="{DynamicResource LOCBackToGame}"
+                                TargetName="GameIsRunningBadge" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -80,53 +89,102 @@
     </Style>
 
     <DataTemplate x:Key="DetailListGameItemTemplate">
-        <StackPanel Orientation="Horizontal">
-            <!-- Contenu principal du modèle -->
-            <Grid>
-                <!-- Masque pour l'opacité de l'image -->
-                <Border x:Name="Mask" Background="#181A1E" BorderThickness="0" CornerRadius="0" />
-                <!-- Image de couverture du jeu -->
-                <Image x:Name="PART_ImageCover"
-                    RenderOptions.BitmapScalingMode="Fant"
-                    RenderTransformOrigin="0.5,0.5"
-                    Source="{Binding CoverImageObject}"
-                    StretchDirection="Both"
-                    VerticalAlignment="Top"
-                    MaxHeight="100"
-                    HorizontalAlignment="Center"
-                    Stretch="{Settings CoverArtStretch}" />
-                <!-- Indicateur visuel de jeu en cours -->
-                <Canvas x:Name="Playing" Visibility="Collapsed">
-                    <Polygon Points="0,0 50,0 0,50" Fill="{DynamicResource GlyphBrush}" Opacity="1"/>
-                </Canvas>
-                <!-- Fond sombre pour assombrir l'image -->
-                <Border Background="#181A1E" x:Name="BorderDarken" CornerRadius="0" Visibility="Collapsed" Opacity="0.7" />
-                <!-- Texte du nom du jeu -->
-                <ContentControl x:Name="BackToGame_Control" />
-                <TextBlock x:Name="GameIsRunningBadge"
-                    Visibility="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Background="{DynamicResource StatusBadgeBrush}"
-                    Text="{DynamicResource LOCGameRunning}"
-                    VerticalAlignment="Bottom"
-                    TextAlignment="Center"
-                    Margin="0,0,0,15"
-                    Padding="0,0,0,5"
-                    FontSize="{DynamicResource ThemeFontSmallSize}"
-                    Style="{DynamicResource ButtonTextBlockBoldStyle}" />
+        <ctrl:GameListItem>
+            <ctrl:GameListItem.Style>
+                <Style TargetType="{x:Type ctrl:GameListItem}">
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                    <Setter Property="Focusable" Value="False" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ctrl:GameListItem}">
+                                <StackPanel Orientation="Horizontal" Margin="10"
+                                    Background="Transparent">
+                                    <!-- Contenu principal du modèle -->
+                                    <Grid Width="75">
+                                        <!-- Masque pour l'opacité de l'image -->
+                                        <Border x:Name="Mask" Background="#181A1E"
+                                            BorderThickness="0" CornerRadius="0" />
+                                        <!-- Image de couverture du jeu -->
+                                        <Image x:Name="PART_ImageCover"
+                                            RenderOptions.BitmapScalingMode="Fant"
+                                            RenderTransformOrigin="0.5,0.5"
+                                            Source="{Binding CoverImageObject}"
+                                            StretchDirection="Both"
+                                            VerticalAlignment="Top"
+                                            MaxHeight="100"
+                                            HorizontalAlignment="Center"
+                                            Stretch="UniformToFill" />
+                                        <!-- Indicateur visuel de jeu en cours -->
+                                        <Canvas x:Name="Playing" Visibility="Collapsed">
+                                            <Polygon Points="0,0 50,0 0,50"
+                                                Fill="{DynamicResource GlyphBrush}" Opacity="1" />
+                                        </Canvas>
+                                        <!-- Fond sombre pour assombrir l'image -->
+                                        <Border Background="#181A1E" x:Name="BorderDarken"
+                                            CornerRadius="0" Visibility="Collapsed" Opacity="0.7" />
 
-                <!-- Masque pour l'opacité de l'image -->
-                <Grid.OpacityMask>
-                    <VisualBrush Visual="{Binding ElementName=Mask}" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
-                </Grid.OpacityMask>
-            </Grid>
-            <StackPanel MinWidth="300" >
-                <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
-                    Style="{DynamicResource ThemeTextBlockBaseStyle}"
-                    FontSize="{DynamicResource ThemeFontSizeSmall}"
-                    HorizontalAlignment="Left" VerticalAlignment="Top"
-                    TextAlignment="Left" Padding="5"
-                    Background="{DynamicResource ControlBackgroundDarkBrush}"/>
-            </StackPanel>
-        </StackPanel>
-      </DataTemplate>
+                                        <!-- Masque pour l'opacité de l'image -->
+                                        <Grid.OpacityMask>
+                                            <VisualBrush Visual="{Binding ElementName=Mask}"
+                                                RenderOptions.BitmapScalingMode="Fant"
+                                                Stretch="Fill" />
+                                        </Grid.OpacityMask>
+                                    </Grid>
+                                    <StackPanel MinWidth="300" Orientation="Vertical"
+                                        Margin="10,0,0,0" VerticalAlignment="Bottom">
+                                        <TextBlock Text="{Binding DisplayName}"
+                                            TextTrimming="CharacterEllipsis"
+                                            Style="{DynamicResource ThemeTextBlockBaseStyle}"
+                                            FontSize="{DynamicResource ThemeFontSizeSmall}"
+                                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                                            TextAlignment="Left"
+                                            Padding="0,0,0,5"
+                                            Background="Transparent" />
+                                        <ContentControl x:Name="BackToGame_Control" />
+                                        <StackPanel HorizontalAlignment="Left"
+                                            Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock x:Name="GameIsRunningBadge"
+                                                Visibility="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                Foreground="{DynamicResource TextWhiteBrush}"
+                                                Background="{DynamicResource StatusBadgeBrush}"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Left"
+                                                TextAlignment="Center"
+                                                Width="200"
+                                                Padding="0,0,0,4"
+                                                FontSize="{DynamicResource ThemeFontSmallSize}"
+                                                Style="{DynamicResource ButtonTextBlockBoldStyle}">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text" Value="{DynamicResource LOCGameRunning}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=BackToGame_Control, Path=Content.IsRunning}" Value="True" >
+                                                                <Setter Property="Text" Value="{DynamicResource LOCBackToGame}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <TextBlock Text="&#xf022;"
+                                                Margin="10,0,5,0"
+                                                VerticalAlignment="Center"
+                                                FontFamily="{StaticResource FontIcoFont}"
+                                                FontSize="{DynamicResource ThemeFontSmallSize}"
+                                                Style="{StaticResource HltbAltStyle}" />
+                                            <TextBlock
+                                                Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
+                                                Margin="0,0,0,4"
+                                                VerticalAlignment="Center"
+                                                FontSize="{DynamicResource ThemeFontSmallSize}"
+                                                Style="{StaticResource HltbAltStyle}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ctrl:GameListItem.Style>
+        </ctrl:GameListItem>
+    </DataTemplate>
 </ResourceDictionary>

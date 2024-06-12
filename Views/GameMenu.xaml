@@ -5,7 +5,7 @@
     <Style x:Key="GameMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
         <Setter Property="Margin" Value="10,10,10,15" />
         <Setter Property="MinWidth" Value="400" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Template">
             <Setter.Value>
@@ -59,8 +59,10 @@
     <Style x:Key="GameMenuBorder" TargetType="Border">
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="MinWidth" Value="400" />
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="Padding" Value="10,10,10,20" />
         <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
+        <Setter Property="BorderThickness" Value="1"  />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundLightBrush}"  />
     </Style>
 
     <!-- Style pour le texte d'en-tête du menu de jeu -->
@@ -140,7 +142,7 @@
 
     <!-- Modèle de données pour le bouton de suppression du menu de jeu -->
     <DataTemplate x:Key="GameMenuRemoveButtonTemplate">
-        <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
+        <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xeee4;" FontFamily="{DynamicResource FontIcoFont}" FontSize="32"
                 Width="50" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0" />
             <TextBlock Text="{Binding}" VerticalAlignment="Center" />

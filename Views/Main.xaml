@@ -2,10 +2,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:s="clr-namespace:System;assembly=mscorlib"
     xmlns:ctrl="clr-namespace:Playnite.FullscreenApp.Controls;assembly=Playnite.FullscreenApp"
     xmlns:pin="clr-namespace:Playnite.Input;assembly=Playnite"
-
     mc:Ignorable="d">
 
     <!-- Définition du style pour le type Main -->
@@ -299,9 +299,14 @@
                                     Style="{DynamicResource ChangeDetailsButton}" Grid.Column="1" />
 
                                 <StackPanel x:Name="T_SwitchModes" Visibility="Collapsed">
-                                    <RadioButton Content="Horizontal" IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"/>
-                                    <RadioButton Content="Details" IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay}" Margin="0,5,0,0"/>
-                                    <RadioButton Content="Tiles" IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay, Converter={StaticResource NegateConverter}}" Margin="0,5,0,0"/>
+                                    <RadioButton Content="Horizontal"
+                                        IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}" />
+                                    <RadioButton Content="Details"
+                                        IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay}"
+                                        Margin="0,5,0,0" />
+                                    <RadioButton Content="Tiles"
+                                        IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay, Converter={StaticResource NegateConverter}}"
+                                        Margin="0,5,0,0" />
                                 </StackPanel>
 
                                 <!-- Filtre Bottom Bar-->
@@ -1211,225 +1216,339 @@
                                 </StackPanel>
                             </Grid>
                             <!--Wallpaper Vertical List-->
-                            <Grid Name="Wallpaper" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"
-                                Margin="0,0,0,0">
-                                <DockPanel x:Name="ListDetailsPannel" Width="600" Margin="20,5,0,0"
-                                    HorizontalAlignment="Left" VerticalAlignment="Stretch"
-                                    Visibility="Collapsed"
-                                    LastChildFill="True">
-                                    <FadeImage Source="{Binding SelectedGame.BackgroundImage}"
-                                        Stretch="UniformToFill"
-                                        Width="400" Height="240"
-                                        DockPanel.Dock="Top"
-                                        HorizontalContentAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                    </FadeImage>
-                                    <StackPanel Orientation="Vertical"
-                                                HorizontalAlignment="Stretch"
-                                                DockPanel.Dock="Top"
-                                                Margin="10,10,10,0">
-                                        <TextBlock Text="{Binding SelectedGame.DisplayName}"
-                                                Margin="0,2,0,0"
-                                                FontSize="30"
-                                                HorizontalAlignment="Center"
-                                                TextAlignment="Center"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
-                                        />
-                                        <Rectangle Fill="{DynamicResource TextAltBrush}" Height="2"
-                                                HorizontalAlignment="Stretch" Margin="-10,5,-10,0"
-                                                Opacity="0.4" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="10,10,10,0"
-                                        DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+                            <GameDetails x:Name="LIST_GameDetails"
+                                Visibility="Collapsed"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Grid.Row="1"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Margin="20,0,0,-20"
+                                DataContext="{Binding SelectedGame}">
+                                <GameDetails.Style>
+                                    <Style TargetType="{x:Type GameDetails}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type GameDetails}">
+                                                    <DockPanel x:Name="ListDetailsPannel"
+                                                        Width="600"
+                                                        Margin="20,5,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Stretch"
+                                                        LastChildFill="True">
+                                                        <Grid DockPanel.Dock="Top" >
+                                                            <!-- Community Score Stars Start -->
+                                                            <Grid x:Name="CommunityScoreStars"
+                                                                  Margin="0,0,0,0"
+                                                                  HorizontalAlignment="Left"
+                                                                  VerticalAlignment="Top"
+                                                                >
+                                                                <Grid.LayoutTransform>
+                                                                    <ScaleTransform ScaleX="1.6" ScaleY="1.6" />
+                                                                </Grid.LayoutTransform>
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Bottom"
+                                                                    Width="30"
+                                                                    Style="{StaticResource TextBlockAltDetailStyle}"
+                                                                    Text="&#xe734;&#xe734;&#xe734;&#xe734;&#xe734;"
+                                                                    FontFamily="{DynamicResource FontAltIcoFont}"
+                                                                    TextAlignment="left" FontSize="20"
+                                                                    TextWrapping="Wrap"
+                                                                    Height="100"
+                                                                    >
+                                                                </TextBlock>
+                                                                <Grid VerticalAlignment="Bottom"
+                                                                    Height="{Binding CommunityScore, FallbackValue=0}" >
+                                                                    <TextBlock
+                                                                        HorizontalAlignment="Left"
+                                                                        VerticalAlignment="Bottom"
+                                                                        Width="30"
+                                                                        Style="{StaticResource TextBlockDetailStyle}"
+                                                                        Text="&#xe735;&#xe735;&#xe735;&#xe735;&#xe735;"
+                                                                        FontFamily="{DynamicResource FontAltIcoFont}"
+                                                                        TextAlignment="Left" FontSize="20"
+                                                                        TextWrapping="Wrap"
+                                                                        Height="100">
+                                                                    </TextBlock>
+                                                                </Grid>
+                                                            </Grid>
+                                                            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-8,0,0,-50">
+                                                                <TextBlock
+                                                                    VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Center"
+                                                                    Style="{StaticResource TextBlockDetailStyle}"
+                                                                    Text="{Binding ReleaseYear, Converter={StaticResource ListToStringConverter}}"
+                                                                    >
+                                                                    <TextBlock.RenderTransform>
+                                                                        <RotateTransform Angle="-90"/>
+                                                                    </TextBlock.RenderTransform>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                            <!-- Community Score Stars End -->
+                                                            <FadeImage
+                                                                x:Name="PART_ImageBackground"
+                                                                RenderOptions.BitmapScalingMode="Fant"
+                                                                Stretch="UniformToFill"
+                                                                Width="400" Height="240"
+                                                                DockPanel.Dock="Top"
+                                                                HorizontalContentAlignment="Center"
+                                                                HorizontalAlignment="Center">
+                                                            </FadeImage>
+                                                        </Grid>
+                                                        <StackPanel Orientation="Vertical"
+                                                            HorizontalAlignment="Stretch"
+                                                            DockPanel.Dock="Top"
+                                                            Margin="10,10,10,0">
+                                                            <TextBlock Text="{Binding DisplayName}"
+                                                                Margin="0,2,0,0"
+                                                                FontSize="40"
+                                                                HorizontalAlignment="Center"
+                                                                TextAlignment="Center"
+                                                                Style="{StaticResource TextVerticalStyle}"
+                                                                TextTrimming="CharacterEllipsis"
+                                                                TextWrapping="Wrap"
+                                                            />
+                                                            <Rectangle
+                                                                Fill="{DynamicResource TextAltBrush}"
+                                                                Height="2"
+                                                                HorizontalAlignment="Stretch"
+                                                                Margin="-10,5,-10,0"
+                                                                Opacity="0.4" />
+                                                        </StackPanel>
+                                                        <DockPanel DockPanel.Dock="Bottom">
+                                                            <TextBlock
+                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                Text="{Binding Developers[0], Converter={StaticResource ListToStringConverter}}"
+                                                                DockPanel.Dock="Left" Margin="0,10,0,0">
+                                                            </TextBlock>
+                                                            <!-- <TextBlock Text="&#x0660;"
+                                                                Visibility="{Binding Developers, Converter={StaticResource ListSizeToVisibilityConverter}}"
+                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                TextAlignment="Center"
+                                                                Margin="10,10,10,0" /> -->
+                                                            <TextBlock
+                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                DockPanel.Dock="Right"
+                                                                TextAlignment="Right"
+                                                                Text="{Binding Genres[0], Converter={StaticResource ListToStringConverter}}"
+                                                                VerticalAlignment="Center" Margin="0,10,0,0">
+                                                            </TextBlock>
+                                                        </DockPanel>
+                                                        <!--
+                                                        <StackPanel Orientation="Vertical"
+                                                            Margin="10,10,10,0"
+                                                            DockPanel.Dock="Bottom"
+                                                            HorizontalAlignment="Stretch">
 
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCLibrary}"
-                                                Margin="0,2,0,0" FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock Text="{Binding SelectedGame.Source}"
-                                                Margin="0,2,0,0" FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis"
-                                                TextWrapping="Wrap" MaxWidth="350" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCGamePlatformTitle}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock
-                                                Text="{Binding SelectedGame.Platforms, Converter={StaticResource ListToStringConverter}}"
-                                                Margin="0,2,0,0" FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis" MaxWidth="300" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCCriticScore}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock Text="{Binding SelectedGame.CriticScore}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis" MaxWidth="350" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCCommunityScore}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock Text="{Binding SelectedGame.CommunityScore}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis" MaxWidth="350" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCTimePlayed}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock
-                                                Text="{Binding SelectedGame.Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
-                                                Margin="0,2,0,0" FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis" MaxWidth="350" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCAgeRatingsLabel}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock
-                                                Text="{Binding SelectedGame.AgeRatings, Converter={StaticResource ListToStringConverter}}"
-                                                Margin="0,2,0,0" FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis" MaxWidth="350" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCSize}"
-                                                Margin="0,2,0,0" FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock
-                                                Text="{Binding SelectedGame.InstallSize, Converter={StaticResource NullableUlongBytesSizeToStringConverter}, ConverterParameter=' / '}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis" MaxWidth="350" />
-                                        </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCLibrary}"
+                                                                    Margin="0,2,0,0" FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock Text="{Binding Source}"
+                                                                    Margin="0,2,0,0" FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    TextWrapping="Wrap"
+                                                                    MaxWidth="350" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCGamePlatformTitle}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding Platforms, Converter={StaticResource ListToStringConverter}}"
+                                                                    Margin="0,2,0,0" FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    MaxWidth="300" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCCriticScore}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding CriticScore}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    MaxWidth="350" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCCommunityScore}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding CommunityScore}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    MaxWidth="350" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCTimePlayed}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
+                                                                    Margin="0,2,0,0" FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    MaxWidth="350" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCAgeRatingsLabel}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding AgeRatings, Converter={StaticResource ListToStringConverter}}"
+                                                                    Margin="0,2,0,0" FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    MaxWidth="350" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCSize}"
+                                                                    Margin="0,2,0,0" FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding InstallSize, Converter={StaticResource NullableUlongBytesSizeToStringConverter}, ConverterParameter=' / '}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    MaxWidth="350" />
+                                                            </StackPanel>
 
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCGenresLabel}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock
-                                                Text="{Binding SelectedGame.Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' / '}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextTrimming="CharacterEllipsis"
-                                                TextWrapping="Wrap" MaxHeight="100" MaxWidth="350" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left"
-                                            Margin="0,10,0,0">
-                                            <TextBlock Text="{DynamicResource LOCFeaturesLabel}"
-                                                Margin="0,2,0,0"
-                                                FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}" />
-                                            <TextBlock Text=":"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextAlignment="Left" FontSize="26"
-                                                Margin="10,2,10,0" />
-                                            <TextBlock
-                                                Text="{Binding SelectedGame.Features, Converter={StaticResource ListToStringConverter}}"
-                                                Margin="0,2,0,0" FontSize="26"
-                                                Style="{StaticResource TextVerticalStyle}"
-                                                TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
-                                                MaxHeight="100"
-                                                MaxWidth="350" />
-                                        </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCGenresLabel}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' / '}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    TextWrapping="Wrap"
+                                                                    MaxHeight="100" MaxWidth="350" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0,10,0,0">
+                                                                <TextBlock
+                                                                    Text="{DynamicResource LOCFeaturesLabel}"
+                                                                    Margin="0,2,0,0"
+                                                                    FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}" />
+                                                                <TextBlock Text=":"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextAlignment="Left"
+                                                                    FontSize="26"
+                                                                    Margin="10,2,10,0" />
+                                                                <TextBlock
+                                                                    Text="{Binding Features, Converter={StaticResource ListToStringConverter}}"
+                                                                    Margin="0,2,0,0" FontSize="26"
+                                                                    Style="{StaticResource TextVerticalStyle}"
+                                                                    TextWrapping="Wrap"
+                                                                    TextTrimming="CharacterEllipsis"
+                                                                    MaxHeight="100"
+                                                                    MaxWidth="350" />
+                                                            </StackPanel>
+                                                        </StackPanel>-->
 
-                                    </StackPanel>
-                                    <Grid x:Name="ScrollGrid" HorizontalAlignment="Stretch"
-                                        FocusVisualStyle="{x:Null}"
-                                        VerticalAlignment="Top"
-                                        KeyboardNavigation.TabNavigation="None"
-                                        KeyboardNavigation.DirectionalNavigation="None"
-                                        Margin="10,10,10,0">
-                                        <ScrollViewerEx x:Name="PART_ScrollHtmlDescription"
 
-                                            IsTabStop="False"
-                                            Focusable="False"
-                                            FocusVisualStyle="{x:Null}"
-                                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                            <HtmlTextView x:Name="PART_HtmlDescription"
-                                                IsTabStop="False"
-                                                Focusable="False"
-                                                FocusVisualStyle="{x:Null}"
-
-                                                HtmlFontSize="{DynamicResource FontSizeSmall}"
-                                                HtmlFontFamily="SST"
-                                                HtmlForeground="{DynamicResource TextVertical}"
-                                                TemplatePath="{ThemeFile 'DescriptionView.html'}"
-                                                HtmlText="{Binding SelectedGame.Description}"
-                                                LinkForeground="{DynamicResource GlyphColor}"
-                                                />
-                                        </ScrollViewerEx>
-                                    </Grid>
-                                </DockPanel>
-                            </Grid>
+                                                        <ScrollViewerEx
+                                                            x:Name="PART_ScrollHtmlDescription"
+                                                            FocusVisualStyle="{x:Null}"
+                                                            ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                                            <HtmlTextView
+                                                                x:Name="PART_HtmlDescription"
+                                                                HtmlFontSize="{DynamicResource ThemeFontMediumSize}"
+                                                                HtmlFontFamily="Segoe UI Light"
+                                                                HtmlForeground="{DynamicResource Description}"
+                                                                LinkForeground="{DynamicResource GlyphColor}"
+                                                                FocusVisualStyle="{x:Null}" />
+                                                        </ScrollViewerEx>
+                                                    </DockPanel>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GameDetails.Style>
+                            </GameDetails>
 
 
                             <!--CoverListHorizontal-->
@@ -1496,8 +1615,12 @@
                                             <!--Vertical-->
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="True" />
-                                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
+                                                    <Condition
+                                                        Binding="{Settings Fullscreen.ShowGameTitles}"
+                                                        Value="True" />
+                                                    <Condition
+                                                        Binding="{Settings Fullscreen.HorizontalLayout}"
+                                                        Value="False" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Grid.Row" Value="0" />
                                                 <Setter Property="Grid.RowSpan" Value="2" />
@@ -1509,13 +1632,18 @@
 
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
-                                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="False" />
-                                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
+                                                    <Condition
+                                                        Binding="{Settings Fullscreen.ShowGameTitles}"
+                                                        Value="False" />
+                                                    <Condition
+                                                        Binding="{Settings Fullscreen.HorizontalLayout}"
+                                                        Value="False" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Grid.Row" Value="0" />
                                                 <Setter Property="Grid.RowSpan" Value="3" />
                                                 <Setter Property="Grid.ColumnSpan" Value="2" />
-                                                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                <Setter Property="HorizontalAlignment"
+                                                    Value="Stretch" />
                                                 <Setter Property="VerticalAlignment" Value="Stretch" />
                                                 <Setter Property="Height" Value="900" />
                                                 <Setter Property="Width" Value="1600" />
@@ -1562,17 +1690,20 @@
                                             <Setter Property="Text" Value="A" />
                                             <Setter Property="Tag" Value="X" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Settings SwapStartDetailsAction}" Value="True">
+                                                <DataTrigger
+                                                    Binding="{Settings SwapStartDetailsAction}"
+                                                    Value="True">
                                                     <Setter Property="Text" Value="A" />
                                                     <Setter Property="Tag" Value="X" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                        </TextBlock.Style>
+                                    </TextBlock.Style>
                                 </TextBlock>
 
-                                <ListBox x:Name="PART_ListGameItemsAlt" DockPanel.Dock="Bottom"
+                                <ListBox x:Name="PART_ListGameItemsAlt" DockPanel.Dock="Top"
                                     Background="Transparent" BorderThickness="0"
+                                    Margin="0,-50,0,0"
                                     BorderBrush="Transparent"
                                     FocusVisualStyle="{x:Null}"
                                     Visibility="Collapsed"
@@ -1586,14 +1717,24 @@
                                     ItemTemplate="{StaticResource DetailListGameItemTemplate}"
                                     SelectedItem="{Binding SelectedGame}"
                                     ItemsSource="{Binding GamesView.CollectionView}"
-                                    >
+                                >
                                     <ListBox.InputBindings>
-                                        <KeyBinding Key="{Binding ElementName=T_SwapButtons, Path=Text}" Command = "{Binding OpenGameMenuCommand}" />
-                                        <KeyBinding Key="{Binding ElementName=T_SwapButtons, Path=Tag}"  Command = "{Binding ToggleGameDetailsCommand}" />
-                                        <KeyBinding Key="Enter" Command = "{Binding ActivateSelectedCommand}" />
-                                        <pin:GameControllerInputBinding  Button="Start" Command="{Binding OpenGameMenuCommand}" />
-                                        <pin:GameControllerInputBinding  Button="{Binding ElementName=T_SwapButtons, Path=Text}" Command="{Binding ActivateSelectedCommand}" />
-                                        <pin:GameControllerInputBinding  Button="{Binding ElementName=T_SwapButtons, Path=Tag}" Command="{Binding ToggleGameDetailsCommand}" />
+                                        <KeyBinding
+                                            Key="{Binding ElementName=T_SwapButtons, Path=Text}"
+                                            Command="{Binding OpenGameMenuCommand}" />
+                                        <KeyBinding
+                                            Key="{Binding ElementName=T_SwapButtons, Path=Tag}"
+                                            Command="{Binding ToggleGameDetailsCommand}" />
+                                        <KeyBinding Key="Enter"
+                                            Command="{Binding ActivateSelectedCommand}" />
+                                        <pin:GameControllerInputBinding Button="Start"
+                                            Command="{Binding OpenGameMenuCommand}" />
+                                        <pin:GameControllerInputBinding
+                                            Button="{Binding ElementName=T_SwapButtons, Path=Text}"
+                                            Command="{Binding ActivateSelectedCommand}" />
+                                        <pin:GameControllerInputBinding
+                                            Button="{Binding ElementName=T_SwapButtons, Path=Tag}"
+                                            Command="{Binding ToggleGameDetailsCommand}" />
                                     </ListBox.InputBindings>
                                 </ListBox>
 
@@ -2043,58 +2184,30 @@
                                 </Style>
                             </MediaElement.Style>
                         </MediaElement>
-
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="True" />
-                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeViewButton"/>
-                                <Setter Property="Visibility" Value="Visible" TargetName="ChangeDetailsButton"/>
-                                <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItems"/>
-                                <Setter Property="Visibility" Value="Collapsed" TargetName="T_ListGameItemsContainer"/>
-                                <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItemsAlt"/>
-                                <Setter Property="Visibility" Value="Visible" TargetName="ListDetailsPannel"/>
-
-                            </MultiDataTrigger>
-                            <!-- <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="False" />
-                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="False" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Visibility" Value="Visible" TargetName="ChangeViewButton"/>
-                                <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeDetailsButton"/>
-                                <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItems"/>
-                                <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItemsAlt"/>
-                            </MultiDataTrigger>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="False" />
-                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="True" />
-                                </MultiDataTrigger.Conditions>
-                                    <Setter Property="Visibility" Value="Visible" TargetName="ChangeViewButton"/>
-                                    <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeDetailsButton"/>
-                                    <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItems"/>
-                                    <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItemsAlt"/>
-                            </MultiDataTrigger>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition  Binding="{Settings Fullscreen.ShowGameTitles}" Value="True" />
-                                    <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="True" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Visibility" Value="Visible" TargetName="ChangeViewButton"/>
-                                <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeDetailsButton"/>
-                                <Setter Property="Visibility" Value="Visible" TargetName="PART_ListGameItems"/>
-                                <Setter Property="Visibility" Value="Collapsed" TargetName="PART_ListGameItemsAlt"/>
-                            </MultiDataTrigger> -->
-
-
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Settings Fullscreen.ShowGameTitles}"
+                                    Value="True" />
+                                <Condition Binding="{Settings Fullscreen.HorizontalLayout}"
+                                    Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"
+                                TargetName="ChangeViewButton" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="ChangeDetailsButton" />
+                            <Setter Property="Visibility" Value="Collapsed"
+                                TargetName="PART_ListGameItems" />
+                            <Setter Property="Visibility" Value="Collapsed"
+                                TargetName="T_ListGameItemsContainer" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="PART_ListGameItemsAlt" />
+                            <Setter Property="Visibility" Value="Visible"
+                                TargetName="LIST_GameDetails" />
+                        </MultiDataTrigger>
                     </ControlTemplate.Triggers>
-
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
