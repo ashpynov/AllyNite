@@ -98,6 +98,12 @@
         <GradientStop Color="#4e4e4e" Offset="4" />
     </LinearGradientBrush>
 
+    <Style x:Key="GameTitleHeaderText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
     <Style x:Key="ThemeTextBlockBaseStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
         <Setter Property="FontFamily" Value="Segoe UI" />

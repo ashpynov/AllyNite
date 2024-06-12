@@ -6,6 +6,8 @@
         <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="Margin" Value="-400,-100,-400,-100" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundLightBrush}" />
     </Style>
 
     <!-- Style for the MessageBox Caption Text -->

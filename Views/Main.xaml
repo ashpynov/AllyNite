@@ -299,12 +299,12 @@
                                     Style="{DynamicResource ChangeDetailsButton}" Grid.Column="1" />
 
                                 <StackPanel x:Name="T_SwitchModes" Visibility="Collapsed">
-                                    <RadioButton Content="Horizontal"
+                                    <RadioButton Content="Horizontal" GroupName="Group"
                                         IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}" />
                                     <RadioButton Content="Details"
-                                        IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay}"
+                                        IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=OneWay}"
                                         Margin="0,5,0,0" />
-                                    <RadioButton Content="Tiles"
+                                    <RadioButton Content="Tiles" GroupName="Group"
                                         IsChecked="{Settings Fullscreen.ShowGameTitles, Mode=TwoWay, Converter={StaticResource NegateConverter}}"
                                         Margin="0,5,0,0" />
                                 </StackPanel>
@@ -337,9 +337,9 @@
                                                                 <ThicknessAnimation
                                                                     Storyboard.TargetProperty="Margin"
                                                                     BeginTime="0:0:3"
+                                                                    AccelerationRatio="0.3"
                                                                     From="0,-120,0,0"
                                                                     Duration="0:0:1.5"
-                                                                    AccelerationRatio="0.3"
                                                                     DecelerationRatio="0.7" />
                                                             </Storyboard>
                                                         </BeginStoryboard>
@@ -1236,15 +1236,16 @@
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Stretch"
                                                         LastChildFill="True">
-                                                        <Grid DockPanel.Dock="Top" >
+                                                        <Grid DockPanel.Dock="Top">
                                                             <!-- Community Score Stars Start -->
                                                             <Grid x:Name="CommunityScoreStars"
-                                                                  Margin="0,0,0,0"
-                                                                  HorizontalAlignment="Left"
-                                                                  VerticalAlignment="Top"
-                                                                >
+                                                                Margin="0,0,0,0"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Top"
+                                                            >
                                                                 <Grid.LayoutTransform>
-                                                                    <ScaleTransform ScaleX="1.6" ScaleY="1.6" />
+                                                                    <ScaleTransform ScaleX="1.6"
+                                                                        ScaleY="1.6" />
                                                                 </Grid.LayoutTransform>
                                                                 <TextBlock
                                                                     HorizontalAlignment="Left"
@@ -1253,13 +1254,14 @@
                                                                     Style="{StaticResource TextBlockAltDetailStyle}"
                                                                     Text="&#xe734;&#xe734;&#xe734;&#xe734;&#xe734;"
                                                                     FontFamily="{DynamicResource FontAltIcoFont}"
-                                                                    TextAlignment="left" FontSize="20"
+                                                                    TextAlignment="left"
+                                                                    FontSize="20"
                                                                     TextWrapping="Wrap"
                                                                     Height="100"
-                                                                    >
+                                                                >
                                                                 </TextBlock>
                                                                 <Grid VerticalAlignment="Bottom"
-                                                                    Height="{Binding CommunityScore, FallbackValue=0}" >
+                                                                    Height="{Binding CommunityScore, FallbackValue=0}">
                                                                     <TextBlock
                                                                         HorizontalAlignment="Left"
                                                                         VerticalAlignment="Bottom"
@@ -1267,34 +1269,84 @@
                                                                         Style="{StaticResource TextBlockDetailStyle}"
                                                                         Text="&#xe735;&#xe735;&#xe735;&#xe735;&#xe735;"
                                                                         FontFamily="{DynamicResource FontAltIcoFont}"
-                                                                        TextAlignment="Left" FontSize="20"
+                                                                        TextAlignment="Left"
+                                                                        FontSize="20"
                                                                         TextWrapping="Wrap"
                                                                         Height="100">
                                                                     </TextBlock>
                                                                 </Grid>
                                                             </Grid>
-                                                            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-8,0,0,-50">
+                                                            <Grid VerticalAlignment="Bottom"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="-8,0,0,-50">
                                                                 <TextBlock
                                                                     VerticalAlignment="Center"
                                                                     HorizontalAlignment="Center"
                                                                     Style="{StaticResource TextBlockDetailStyle}"
                                                                     Text="{Binding ReleaseYear, Converter={StaticResource ListToStringConverter}}"
-                                                                    >
+                                                                >
                                                                     <TextBlock.RenderTransform>
-                                                                        <RotateTransform Angle="-90"/>
+                                                                        <RotateTransform Angle="-90" />
                                                                     </TextBlock.RenderTransform>
                                                                 </TextBlock>
                                                             </Grid>
                                                             <!-- Community Score Stars End -->
-                                                            <FadeImage
-                                                                x:Name="PART_ImageBackground"
-                                                                RenderOptions.BitmapScalingMode="Fant"
-                                                                Stretch="UniformToFill"
-                                                                Width="400" Height="240"
+                                                            <Grid Width="400" Height="240"
                                                                 DockPanel.Dock="Top"
-                                                                HorizontalContentAlignment="Center"
-                                                                HorizontalAlignment="Center">
-                                                            </FadeImage>
+                                                            >
+                                                                <FadeImage
+                                                                    x:Name="PART_ImageBackground"
+                                                                    RenderOptions.BitmapScalingMode="Fant"
+                                                                    Stretch="UniformToFill"
+                                                                    HorizontalContentAlignment="Center"
+                                                                    HorizontalAlignment="Center">
+                                                                    <FadeImage.Style>
+                                                                        <Style
+                                                                            TargetType="FadeImage">
+                                                                            <Style.Resources>
+                                                                                <Storyboard
+                                                                                    x:Key="ImageIn"
+                                                                                    FillBehavior="Stop">
+                                                                                    <ThicknessAnimation
+                                                                                        Storyboard.TargetProperty="Margin"
+                                                                                        Duration="0:0:0.6"
+                                                                                        From="-130,-100,-1380,-745"
+                                                                                        To="0,0,0,0"
+                                                                                        DecelerationRatio="0.5"
+                                                                                        AccelerationRatio="0.5" />
+                                                                                </Storyboard>
+                                                                            </Style.Resources>
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger
+                                                                                    Binding="{Binding ElementName=LIST_GameDetails, Path=Visibility}"
+                                                                                    Value="Visible">
+                                                                                    <DataTrigger.EnterActions>
+                                                                                        <BeginStoryboard
+                                                                                            Storyboard="{StaticResource ImageIn}" />
+                                                                                    </DataTrigger.EnterActions>
+                                                                                </DataTrigger>
+                                                                                <DataTrigger
+                                                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                                                    Value="Collapsed">
+                                                                                    <DataTrigger.EnterActions>
+                                                                                        <BeginStoryboard
+                                                                                            Storyboard="{StaticResource ImageIn}" />
+                                                                                    </DataTrigger.EnterActions>
+                                                                                </DataTrigger>
+                                                                                <DataTrigger
+                                                                                    Binding="{Binding ElementName=PART_ElemGameStatus, Path=Visibility}"
+                                                                                    Value="Collapsed">
+                                                                                    <DataTrigger.EnterActions>
+                                                                                        <BeginStoryboard
+                                                                                            Storyboard="{StaticResource ImageIn}" />
+                                                                                    </DataTrigger.EnterActions>
+                                                                                </DataTrigger>
+
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </FadeImage.Style>
+                                                                </FadeImage>
+                                                            </Grid>
                                                         </Grid>
                                                         <StackPanel Orientation="Vertical"
                                                             HorizontalAlignment="Stretch"
@@ -1302,10 +1354,9 @@
                                                             Margin="10,10,10,0">
                                                             <TextBlock Text="{Binding DisplayName}"
                                                                 Margin="0,2,0,0"
-                                                                FontSize="40"
                                                                 HorizontalAlignment="Center"
                                                                 TextAlignment="Center"
-                                                                Style="{StaticResource TextVerticalStyle}"
+                                                                Style="{StaticResource GameTitleHeaderText}"
                                                                 TextTrimming="CharacterEllipsis"
                                                                 TextWrapping="Wrap"
                                                             />
@@ -1320,7 +1371,8 @@
                                                             <TextBlock
                                                                 Style="{StaticResource TextBlockDetailStyle}"
                                                                 Text="{Binding Developers[0], Converter={StaticResource ListToStringConverter}}"
-                                                                DockPanel.Dock="Left" Margin="0,10,0,0">
+                                                                DockPanel.Dock="Left"
+                                                                Margin="0,10,0,0">
                                                             </TextBlock>
                                                             <!-- <TextBlock Text="&#x0660;"
                                                                 Visibility="{Binding Developers, Converter={StaticResource ListSizeToVisibilityConverter}}"
@@ -1332,7 +1384,8 @@
                                                                 DockPanel.Dock="Right"
                                                                 TextAlignment="Right"
                                                                 Text="{Binding Genres[0], Converter={StaticResource ListToStringConverter}}"
-                                                                VerticalAlignment="Center" Margin="0,10,0,0">
+                                                                VerticalAlignment="Center"
+                                                                Margin="0,10,0,0">
                                                             </TextBlock>
                                                         </DockPanel>
                                                         <!--
@@ -1475,7 +1528,8 @@
                                                                     FontSize="26"
                                                                     Margin="10,2,10,0" />
                                                                 <TextBlock
-                                                                    Text="{Binding InstallSize, Converter={StaticResource NullableUlongBytesSizeToStringConverter}, ConverterParameter=' / '}"
+                                                                    Text="{Binding InstallSize, Converter={StaticResource NullableUlongBytesSizeToStringConverter},
+                                                        ConverterParameter=' / '}"
                                                                     Margin="0,2,0,0"
                                                                     FontSize="26"
                                                                     Style="{StaticResource TextVerticalStyle}"
@@ -1552,15 +1606,17 @@
 
 
                             <!--CoverListHorizontal-->
-                            <DockPanel>
-                                <DockPanel.Style>
-                                    <Style TargetType="DockPanel">
-                                        <Setter Property="Margin" Value="0,100,0,0" />
-                                        <Setter Property="Opacity" Value="1" />
+                            <Grid x:Name="GameListContainer">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Margin" Value="0,2000,0,-2000" />
+                                        <Setter Property="Opacity" Value="0" />
                                         <Setter Property="Grid.Row" Value="2" />
                                         <Setter Property="Grid.RowSpan" Value="2" />
                                         <Setter Property="Grid.ColumnSpan" Value="3" />
+                                        <!-- <Setter Property="Background" Value="White" /> -->
                                         <Setter Property="Height" Value="380" />
+                                        <Setter Property="Tag" Value="" />
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect ShadowDepth="3" BlurRadius="5"
@@ -1574,71 +1630,56 @@
                                                 Binding="{Binding ElementName=PART_MainHost, Path=Visibility}"
                                                 Value="Visible">
                                                 <DataTrigger.EnterActions>
-                                                    <BeginStoryboard>
+                                                    <BeginStoryboard HandoffBehavior="Compose">
                                                         <Storyboard>
                                                             <DoubleAnimation
                                                                 Storyboard.TargetProperty="Opacity"
-                                                                BeginTime="0:0:2"
+                                                                BeginTime="0:0:5"
                                                                 Duration="0:0:1.5" From="0" To="1" />
                                                             <ThicknessAnimation
                                                                 Storyboard.TargetProperty="Margin"
-                                                                BeginTime="0:0:3" From="0,0,0,-600"
+                                                                BeginTime="0:0:6" From="0,0,0,-900"
                                                                 Duration="0:0:1.5"
                                                                 AccelerationRatio="0.3"
                                                                 DecelerationRatio="0.7" />
                                                         </Storyboard>
                                                     </BeginStoryboard>
                                                 </DataTrigger.EnterActions>
-
                                             </DataTrigger>
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                                                Value="Collapsed">
-                                                <DataTrigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation
-                                                                Storyboard.TargetProperty="Opacity"
-                                                                BeginTime="0:0:0"
-                                                                Duration="0:0:1" From="0" To="1" />
+
+                                            <!-- HorizontalMode -->
+                                            <Trigger Property="Tag" Value="HorizontalMode">
+                                                <Setter Property="Margin" Value="0,2000,0,-2000" />
+                                                <Setter Property="Opacity" Value="0" />
+                                                <Setter Property="Grid.Row" Value="2" />
+                                                <Setter Property="Grid.RowSpan" Value="2" />
+                                                <Setter Property="Grid.ColumnSpan" Value="3" />
+                                                <Setter Property="Width" Value="1920" />
+                                                <Setter Property="Height" Value="380" />
+                                                <!-- <Setter Property="Background" Value="Red" /> -->
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard Name="HorizontalModeStoryboard">
+                                                        <Storyboard FillBehavior="HoldEnd">
                                                             <ThicknessAnimation
                                                                 Storyboard.TargetProperty="Margin"
-                                                                BeginTime="0:0:0" From="0,0,0,-600"
+                                                                From="0,0,0,-400"
+                                                                To="0,100,0,0"
                                                                 Duration="0:0:1"
-                                                                AccelerationRatio="0.7"
-                                                                DecelerationRatio="0.3" />
+                                                                DecelerationRatio="0.5" />
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                Duration="0:0:1" From="0" To="1" />
                                                         </Storyboard>
                                                     </BeginStoryboard>
-                                                </DataTrigger.EnterActions>
-                                            </DataTrigger>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <RemoveStoryboard
+                                                        BeginStoryboardName="HorizontalModeStoryboard" />
+                                                </Trigger.ExitActions>
+                                            </Trigger>
 
-                                            <!--Vertical-->
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition
-                                                        Binding="{Settings Fullscreen.ShowGameTitles}"
-                                                        Value="True" />
-                                                    <Condition
-                                                        Binding="{Settings Fullscreen.HorizontalLayout}"
-                                                        Value="False" />
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="Grid.Row" Value="0" />
-                                                <Setter Property="Grid.RowSpan" Value="2" />
-                                                <Setter Property="Grid.ColumnSpan" Value="2" />
-                                                <Setter Property="Height" Value="900" />
-                                                <Setter Property="Width" Value="1000" />
-                                                <Setter Property="Margin" Value="670,0,0,-550" />
-                                            </MultiDataTrigger>
-
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition
-                                                        Binding="{Settings Fullscreen.ShowGameTitles}"
-                                                        Value="False" />
-                                                    <Condition
-                                                        Binding="{Settings Fullscreen.HorizontalLayout}"
-                                                        Value="False" />
-                                                </MultiDataTrigger.Conditions>
+                                            <!-- TileMode -->
+                                            <Trigger Property="Tag" Value="TileMode">
                                                 <Setter Property="Grid.Row" Value="0" />
                                                 <Setter Property="Grid.RowSpan" Value="3" />
                                                 <Setter Property="Grid.ColumnSpan" Value="2" />
@@ -1647,48 +1688,71 @@
                                                 <Setter Property="VerticalAlignment" Value="Stretch" />
                                                 <Setter Property="Height" Value="900" />
                                                 <Setter Property="Width" Value="1600" />
-                                                <Setter Property="Margin" Value="0,0,0,0" />
-                                            </MultiDataTrigger>
-
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition
-                                                        Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}"
-                                                        Value="False" />
-                                                    <Condition
-                                                        Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                                                        Value="Collapsed" />
-                                                </MultiDataTrigger.Conditions>
-                                                <MultiDataTrigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard FillBehavior="Stop">
+                                                <Setter Property="Margin" Value="0,2000,0,-2000" />
+                                                <Setter Property="Opacity" Value="0" />
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard Name="TileModeStoryboard">
+                                                        <Storyboard FillBehavior="HoldEnd">
                                                             <ThicknessAnimation
                                                                 Storyboard.TargetProperty="Margin"
-                                                                From="470,0,-30,-550"
-                                                                To="470,0,0,-550"
-                                                                BeginTime="0:0:0.5"
-                                                                Duration="0:0:0"
-                                                                AccelerationRatio="0.5"
+                                                                From="0,-200,0,200"
+                                                                To="0,0,0,0"
+                                                                BeginTime="0:0:0"
+                                                                Duration="0:0:1"
                                                                 DecelerationRatio="0.5" />
                                                             <DoubleAnimation
                                                                 Storyboard.TargetProperty="Opacity"
                                                                 BeginTime="0:0:0"
-                                                                Duration="0:0:1.5" From="0" To="1" />
+                                                                Duration="0:0:1" From="0" To="1" />
                                                         </Storyboard>
                                                     </BeginStoryboard>
-                                                </MultiDataTrigger.EnterActions>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <RemoveStoryboard
+                                                        BeginStoryboardName="TileModeStoryboard" />
+                                                </Trigger.ExitActions>
+                                            </Trigger>
 
-                                            </MultiDataTrigger>
+                                            <!-- ListMode -->
+                                            <Trigger Property="Tag" Value="ListMode">
+                                                <Setter Property="Grid.Row" Value="0" />
+                                                <Setter Property="Grid.RowSpan" Value="2" />
+                                                <Setter Property="Grid.ColumnSpan" Value="2" />
+                                                <Setter Property="Height" Value="900" />
+                                                <Setter Property="Width" Value="1000" />
+                                                <Setter Property="Opacity" Value="0" />
+                                                <Setter Property="Margin" Value="-1920,0,1920,-550" />
+                                                <Setter Property="Opacity" Value="0" />
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard Name="ListModeStoryboard">
+                                                        <Storyboard FillBehavior="HoldEnd">
+                                                            <ThicknessAnimation
+                                                                Storyboard.TargetProperty="Margin"
+                                                                From="1200,0,-670,-550"
+                                                                To="670,0,0,-550"
+                                                                Duration="0:0:1"
+                                                                DecelerationRatio="0.5" />
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                Duration="0:0:1" From="0" To="1" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <RemoveStoryboard
+                                                        BeginStoryboardName="ListModeStoryboard" />
+                                                </Trigger.ExitActions>
+                                            </Trigger>
 
                                         </Style.Triggers>
                                     </Style>
-                                </DockPanel.Style>
+                                </Grid.Style>
 
                                 <TextBlock Name="T_SwapButtons" Visibility="Collapsed">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
-                                            <Setter Property="Text" Value="A" />
-                                            <Setter Property="Tag" Value="X" />
+                                            <Setter Property="Text" Value="X" />
+                                            <Setter Property="Tag" Value="A" />
                                             <Style.Triggers>
                                                 <DataTrigger
                                                     Binding="{Settings SwapStartDetailsAction}"
@@ -1701,7 +1765,7 @@
                                     </TextBlock.Style>
                                 </TextBlock>
 
-                                <ListBox x:Name="PART_ListGameItemsAlt" DockPanel.Dock="Top"
+                                <ListBox x:Name="PART_ListGameItemsAlt"
                                     Background="Transparent" BorderThickness="0"
                                     Margin="0,-50,0,0"
                                     BorderBrush="Transparent"
@@ -1739,7 +1803,7 @@
                                 </ListBox>
 
                                 <Grid x:Name="T_ListGameItemsContainer">
-                                    <ListBoxEx x:Name="PART_ListGameItems" DockPanel.Dock="Bottom"
+                                    <ListBoxEx x:Name="PART_ListGameItems"
                                         Background="Transparent" BorderThickness="0"
                                         BorderBrush="Transparent"
                                         FocusVisualStyle="{x:Null}"
@@ -1750,7 +1814,7 @@
                                     </ListBoxEx>
                                 </Grid>
 
-                            </DockPanel>
+                            </Grid>
 
                             <TextBlock Grid.RowSpan="5" Grid.ColumnSpan="3" FontSize="40"
                                 Text="{DynamicResource LOCNoGamesFound}"
@@ -2194,18 +2258,71 @@
                                 <Condition Binding="{Settings Fullscreen.HorizontalLayout}"
                                     Value="False" />
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Visibility" Value="Collapsed"
-                                TargetName="ChangeViewButton" />
-                            <Setter Property="Visibility" Value="Visible"
-                                TargetName="ChangeDetailsButton" />
-                            <Setter Property="Visibility" Value="Collapsed"
-                                TargetName="PART_ListGameItems" />
-                            <Setter Property="Visibility" Value="Collapsed"
-                                TargetName="T_ListGameItemsContainer" />
-                            <Setter Property="Visibility" Value="Visible"
-                                TargetName="PART_ListGameItemsAlt" />
-                            <Setter Property="Visibility" Value="Visible"
-                                TargetName="LIST_GameDetails" />
+                            <Setter TargetName="ChangeViewButton" Property="Visibility"
+                                Value="Collapsed" />
+                            <Setter TargetName="ChangeDetailsButton" Property="Visibility"
+                                Value="Visible" />
+                            <Setter TargetName="T_ListGameItemsContainer" Property="Visibility"
+                                Value="Collapsed" />
+                            <Setter TargetName="PART_ListGameItemsAlt" Property="Visibility"
+                                Value="Visible" />
+                            <Setter TargetName="LIST_GameDetails" Property="Visibility"
+                                Value="Visible" />
+
+                            <!-- need to perevent flasing on list Mode-->
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="PART_ListGameItemsAlt"
+                                        TargetProperty="Opacity" FillBehavior="HoldEnd">
+                                        <DoubleAnimation Duration="0:0:0" To="1" BeginTime="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="PART_ListGameItemsAlt"
+                                        TargetProperty="Opacity" FillBehavior="HoldEnd">
+                                        <DoubleAnimation Duration="0:0:0" To="0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+
+                        </MultiDataTrigger>
+
+                        <!-- Modes -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Settings Fullscreen.HorizontalLayout}"
+                                    Value="True" />
+                                <!-- <Condition Binding="{Binding ElementName=PART_ElemGameDetails,
+                                Path=Visibility}" Value="Collapsed" /> -->
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Tag" Value="HorizontalMode"
+                                TargetName="GameListContainer" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Settings Fullscreen.ShowGameTitles}"
+                                    Value="False" />
+                                <Condition Binding="{Settings Fullscreen.HorizontalLayout}"
+                                    Value="False" />
+                                <!-- <Condition Binding="{Binding ElementName=PART_ElemGameDetails,
+                                Path=Visibility}" Value="Collapsed" /> -->
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Tag" Value="TileMode" TargetName="GameListContainer" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Settings Fullscreen.ShowGameTitles}"
+                                    Value="True" />
+                                <Condition Binding="{Settings Fullscreen.HorizontalLayout}"
+                                    Value="False" />
+                                <!-- <Condition Binding="{Binding ElementName=PART_ElemGameDetails,
+                                Path=Visibility}" Value="Collapsed" /> -->
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Tag" Value="ListMode" TargetName="GameListContainer" />
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

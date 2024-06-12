@@ -183,11 +183,6 @@
                                                             BeginTime="0:0:0.6" Duration="0:0:0.3"
                                                             From="0" To="1" />
 
-                                                        <!-- <ThicknessAnimation
-                                                        Storyboard.TargetProperty="Margin"
-                                                        Duration="0:0:0.6" From="0,-90,0,0"
-                                                        To="0,0,0,0" AccelerationRatio="0.3"
-                                                        DecelerationRatio="0.7" /> -->
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </DataTrigger.EnterActions>
@@ -271,36 +266,26 @@
                                     <Style TargetType="Grid">
                                         <Setter Property="Opacity" Value="1" />
                                         <Style.Triggers>
-
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                                                Value="Visible">
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"   Value="Visible" />
+                                                    <Condition Binding="{Binding ElementName=GameListContainer, Path=Tag}"   Value="ListMode" />
+                                                </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
 
-                                                <DataTrigger.EnterActions>
+                                                <MultiDataTrigger.EnterActions>
                                                     <BeginStoryboard>
                                                         <Storyboard>
-                                                            <!-- <ThicknessAnimation
+                                                            <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
-                                                            Duration="0:0:0.6" From="0,0,0,0"
-                                                            To="-90,-90,-90,-90"
+                                                            Duration="0:0:0.6" From="130,100,1380,745"
+                                                            To="0,0,0,0"
                                                             DecelerationRatio="0.5"
-                                                            AccelerationRatio="0.5" /> -->
+                                                            AccelerationRatio="0.5" />
                                                         </Storyboard>
                                                     </BeginStoryboard>
-                                                </DataTrigger.EnterActions>
-                                                <DataTrigger.ExitActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <!-- <ThicknessAnimation
-                                                            Storyboard.TargetProperty="Margin"
-                                                            Duration="0:0:0.6" From="0,0,0,0"
-                                                            To="0,90,0,0" AccelerationRatio="0.5"
-                                                            DecelerationRatio="0.5" /> -->
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.ExitActions>
-                                            </DataTrigger>
+                                                </MultiDataTrigger.EnterActions>
+                                            </MultiDataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Grid.Style>
@@ -446,7 +431,7 @@
                                                                     Duration="0:0:0" From="0" To="1" />
                                                                 <ThicknessAnimation
                                                                     Storyboard.TargetProperty="Margin"
-                                                                    From="70,0,0,-500" To="0,0,0,0"
+                                                                    From="100,0,0,-575" To="0,0,0,0"
                                                                     Duration="0:0:1.5"
                                                                     AccelerationRatio="0.3"
                                                                     DecelerationRatio="0.7" />
