@@ -1224,9 +1224,6 @@
                                 Grid.RowSpan="2"
                                 Grid.Column="0"
                                 Margin="20,0,0,-20"
-                                FocusVisualStyle="{x:Null}"
-                                KeyboardNavigation.DirectionalNavigation="None"
-                                Focusable="False"
                                 DataContext="{Binding SelectedGame}">
                                 <GameDetails.Style>
                                     <Style TargetType="{x:Type GameDetails}">
