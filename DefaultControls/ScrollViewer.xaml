@@ -116,7 +116,10 @@
                             Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-
+                        <Trigger Property="IsFocused" Value="False" >
+                            <Setter Property="Opacity" Value="0" TargetName="PART_VerticalScrollBar" />
+                            <Setter Property="Opacity" Value="0" TargetName="PART_HorizontalScrollBar" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

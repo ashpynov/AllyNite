@@ -1390,19 +1390,8 @@
                                                             FocusVisualStyle="{x:Null}"
                                                             Margin="20,20,20,20"
                                                             pbeh:FocusBahaviors.FocusBinding="{Binding ElementName=LIST_GameDetails, Path=IsFocused }"
+                                                            ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                             >
-                                                            <ScrollViewerEx.Style>
-                                                                <Style TargetType= "ScrollViewerEx">
-                                                                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
-                                                                    <Style.Triggers>
-                                                                        <Trigger Property="IsFocused" Value="True">
-                                                                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-                                                                        </Trigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-
-                                                            </ScrollViewerEx.Style>
-
                                                             <StackPanel Orientation="Vertical"
                                                                 HorizontalAlignment="Stretch">
                                                                 <HtmlTextView
@@ -1765,6 +1754,7 @@
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                     pbeh:FocusBahaviors.FocusBinding="{Binding GameListFocused}"
+                                    pbeh:FocusBahaviors.OnVisibilityFocus="True"
                                     ItemTemplate="{StaticResource DetailListGameItemTemplate}"
                                     SelectedItem="{Binding SelectedGame}"
                                     ItemsSource="{Binding GamesView.CollectionView}"
