@@ -1,4 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Style du bouton de texte -->
@@ -18,7 +19,7 @@
                         <TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                    Margin="15,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Foreground="{TemplateBinding Foreground}" FontSize="24"  >
+                                   Foreground="{TemplateBinding Foreground}" >
                             <ContentPresenter />
                         </TextBlock>
                     </Grid>
@@ -43,7 +44,6 @@
     <!-- Style de la zone de texte de texte -->
     <Style x:Key="TextInputTextbox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
         <Setter Property="Margin" Value="0,0,0,20" />
-        <Setter Property="FontSize" Value="26" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Height" Value="60" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -61,4 +61,13 @@
         <Setter Property="Margin" Value="-3" />
         <Setter Property="CornerRadius" Value="0" />
     </Style>
+
+    <sys:String x:Key="LOCClearLabel">&#x2298;</sys:String>
+    <sys:String x:Key="LOCTextInputSpace"></sys:String>
+    <sys:String x:Key="LOCTextInputCapitalize">caps</sys:String>
+    <sys:String x:Key="LOCDoneCapLabel">enter</sys:String>
+    <sys:String x:Key="LOCCancelLabel">esc</sys:String>
+
+
+
 </ResourceDictionary>

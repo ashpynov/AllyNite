@@ -1587,6 +1587,7 @@
                                                         <ScrollViewerEx
                                                             x:Name="PART_ScrollHtmlDescription"
                                                             FocusVisualStyle="{x:Null}"
+                                                            Margin="20,20,20,20"
                                                             ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                                             <HtmlTextView
                                                                 x:Name="PART_HtmlDescription"

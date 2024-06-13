@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Key="ButtonPromptA">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                        Foreground="{DynamicResource TextBrush}"
                        Text="q" />
@@ -10,7 +10,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptB">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="e" />
@@ -18,7 +18,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptX">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                        Foreground="{DynamicResource TextBrush}"
                        Text="t" />
@@ -26,7 +26,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptY">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="u" />
@@ -34,7 +34,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptLB">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="f" />
@@ -42,7 +42,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptRB">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="z" />
@@ -50,7 +50,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptLT">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="j" />
@@ -58,7 +58,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptRT">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="v" />
@@ -66,7 +66,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptBack">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="b" />
@@ -74,7 +74,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptStart">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="k" />
@@ -82,7 +82,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptLS">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="g" />
@@ -90,7 +90,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ButtonPromptRS">
-        <Viewbox>
+        <Viewbox Margin="{DynamicResource GamepadButtonAdjust}">
             <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
                         Foreground="{DynamicResource TextBrush}"
                         Text="x" />
