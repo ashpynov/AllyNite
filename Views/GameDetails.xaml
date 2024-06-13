@@ -269,7 +269,8 @@
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
                                                     <Condition Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"   Value="Visible" />
-                                                    <Condition Binding="{Binding ElementName=GameListContainer, Path=Tag}"   Value="ListMode" />
+                                                    <Condition Binding="{Settings Fullscreen.ShowGameTitles}" Value="True" />
+                                                    <Condition Binding="{Settings Fullscreen.HorizontalLayout}"  Value="False" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Visibility" Value="Visible" />
 

@@ -128,12 +128,6 @@
         <Setter Property="Foreground" Value="{DynamicResource TextDetailAltBrush}" />
     </Style>
 
-    <Style x:Key="TextVerticalStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="FontFamily" Value="SST" />
-        <Setter Property="Foreground" Value="{DynamicResource TextVerticalBrush}" />
-    </Style>
-
     <Style x:Key="BottomBarStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
         <Setter Property="FontFamily" Value="Segoe UI" />
