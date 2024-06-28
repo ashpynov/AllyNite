@@ -15,7 +15,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border x:Name="MainBorder" CornerRadius="0" Margin="-3" BorderThickness="3" Opacity="1" BorderBrush="#BFEAD3CF" Visibility="Collapsed" />
+                        <Border x:Name="MainBorder"
+                                CornerRadius="0"
+                                Margin="-3"
+                                BorderThickness="3"
+                                Opacity="1"
+                                Style="{DynamicResource SolidBorderLightBrush}"
+                                Visibility="Collapsed" />
                         <TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                    Margin="15,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -34,6 +40,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <sys:String x:Key="LOCClearLabel">&#x2298;</sys:String>
+            <sys:String x:Key="LOCTextInputSpace"></sys:String>
+            <sys:String x:Key="LOCTextInputCapitalize">caps</sys:String>
+            <sys:String x:Key="LOCDoneCapLabel">enter</sys:String>
+            <sys:String x:Key="LOCCancelLabel">esc</sys:String>
+        </Style.Resources>
     </Style>
 
     <!-- Style de la case à cocher de texte -->
@@ -61,13 +74,6 @@
         <Setter Property="Margin" Value="-3" />
         <Setter Property="CornerRadius" Value="0" />
     </Style>
-
-    <sys:String x:Key="LOCClearLabel">&#x2298;</sys:String>
-    <sys:String x:Key="LOCTextInputSpace"></sys:String>
-    <sys:String x:Key="LOCTextInputCapitalize">caps</sys:String>
-    <sys:String x:Key="LOCDoneCapLabel">enter</sys:String>
-    <sys:String x:Key="LOCCancelLabel">esc</sys:String>
-
 
 
 </ResourceDictionary>

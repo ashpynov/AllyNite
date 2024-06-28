@@ -38,7 +38,7 @@
                         <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
                             Visibility="Collapsed"
                             Style="{DynamicResource ThemeTextBlockBaseStyle}"
-                            FontSize="{DynamicResource ThemeFontSizeSmall}"
+                            FontSize="{DynamicResource FontSizeSmall}"
                             HorizontalAlignment="Stretch" VerticalAlignment="Top"
                             TextAlignment="Center" Padding="5"
                             Background="{DynamicResource ControlBackgroundDarkBrush}" />
@@ -53,7 +53,7 @@
                             TextAlignment="Center"
                             Margin="0,0,0,15"
                             Padding="0,0,0,5"
-                            FontSize="{DynamicResource ThemeFontSmallSize}"
+                            FontSize="{DynamicResource FontSizeSmall}"
                             Style="{DynamicResource ButtonTextBlockBoldStyle}" />
 
                         <!-- Masque pour l'opacité de l'image -->
@@ -100,7 +100,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="10"
                                     Background="Transparent">
                                     <!-- Contenu principal du modèle -->
-                                    <Grid Width="75">
+                                    <Grid x:Name="ImageCover" Width="75" MaxHeight="100" VerticalAlignment="Center">
                                         <!-- Masque pour l'opacité de l'image -->
                                         <Border x:Name="Mask" Background="#181A1E"
                                             BorderThickness="0" CornerRadius="0" />
@@ -131,18 +131,28 @@
                                         </Grid.OpacityMask>
                                     </Grid>
                                     <StackPanel MinWidth="300" Orientation="Vertical"
-                                        Margin="10,0,0,0" VerticalAlignment="Bottom">
+                                        Margin="10,0,0,0" VerticalAlignment="Center">
                                         <TextBlock Text="{Binding DisplayName}"
                                             TextTrimming="CharacterEllipsis"
                                             Style="{DynamicResource ThemeTextBlockBaseStyle}"
-                                            FontSize="{DynamicResource ThemeFontSizeSmall}"
+                                            FontSize="{DynamicResource FontSizeSmall}"
                                             HorizontalAlignment="Left" VerticalAlignment="Top"
                                             TextAlignment="Left"
                                             Padding="0,0,0,5"
                                             Background="Transparent" />
-                                        <ContentControl x:Name="BackToGame_Control" />
-                                        <StackPanel HorizontalAlignment="Left"
+                                        <Canvas x:Name="GameIsRunningLine" Visibility="Collapsed" Margin="0, 0, 0, 14">
+                                            <Polygon Points="3,0 33,0 30,3 0,3" Fill="{DynamicResource StatusBadgeBrush}"
+                                                Opacity="1" />
+                                            <Polygon Points="35,0 43,0 40,3 32,3" Fill="{DynamicResource StatusBadgeBrush}"
+                                                Opacity="1" />
+                                            <Polygon Points="45,0 50,0 47,3 42,3" Fill="{DynamicResource StatusBadgeBrush}"
+                                                Opacity="1" />
+                                            <Polygon Points="52,0 55,0 52,3 49,3" Fill="{DynamicResource StatusBadgeBrush}"
+                                                Opacity="1" />
+                                        </Canvas>
+                                        <StackPanel x:Name="GameInfoPanel" HorizontalAlignment="Left"
                                             Orientation="Horizontal" VerticalAlignment="Center">
+                                            <ContentControl x:Name="BackToGame_Control" />
                                             <TextBlock x:Name="GameIsRunningBadge"
                                                 Visibility="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                 Foreground="{DynamicResource TextWhiteBrush}"
@@ -150,9 +160,9 @@
                                                 VerticalAlignment="Bottom"
                                                 HorizontalAlignment="Left"
                                                 TextAlignment="Center"
-                                                Width="200"
-                                                Padding="0,0,0,4"
-                                                FontSize="{DynamicResource ThemeFontSmallSize}"
+                                                MinWidth="220"
+                                                Padding="5,0,5,4"
+                                                FontSize="{DynamicResource FontSizeSmall}"
                                                 Style="{DynamicResource ButtonTextBlockBoldStyle}">
                                                 <TextBlock.Style>
                                                     <Style TargetType="TextBlock">
@@ -169,17 +179,31 @@
                                                 Margin="10,0,5,0"
                                                 VerticalAlignment="Center"
                                                 FontFamily="{StaticResource FontIcoFont}"
-                                                FontSize="{DynamicResource ThemeFontSmallSize}"
+                                                FontSize="{DynamicResource FontSizeSmall}"
                                                 Style="{StaticResource HltbAltStyle}" />
                                             <TextBlock
                                                 Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
                                                 Margin="0,0,0,4"
                                                 VerticalAlignment="Center"
-                                                FontSize="{DynamicResource ThemeFontSmallSize}"
+                                                FontSize="{DynamicResource FontSizeSmall}"
                                                 Style="{StaticResource HltbAltStyle}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"
+                                        Value="False">
+                                        <Setter TargetName="GameInfoPanel" Property="Visibility" Value="Collapsed"/>
+                                        <Setter TargetName="GameIsRunningLine" Property="Visibility" Value="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                        <Setter TargetName="ImageCover" Property="LayoutTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -187,4 +211,37 @@
             </ctrl:GameListItem.Style>
         </ctrl:GameListItem>
     </DataTemplate>
+
+    <Style x:Key="DetailListGameItemContainerStyle" TargetType="ListBoxItem">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Name="Content" >
+                        <Border Name="MainBorder"
+                                Opacity="0.5"
+                                Style="{DynamicResource SolidBorderLightBrush}"
+                                BorderThickness="3"
+                                SnapsToDevicePixels="True"
+                                Visibility="Collapsed"/>
+                        <ContentPresenter/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="MainBorder" Property="Opacity" Value="1"/>
+                            <Setter TargetName="MainBorder" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Content" Property="Margin" Value="38,0,0,0"/>
+                            <Setter TargetName="Content" Property="Opacity" Value="0.8"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

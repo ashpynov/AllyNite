@@ -746,8 +746,8 @@
                                     FocusVisualStyle="{x:Null}"
                                     ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                     <HtmlTextView x:Name="PART_HtmlDescription"
-                                        HtmlFontSize="{DynamicResource ThemeFontMediumSize}"
-                                        HtmlFontFamily="Segoe UI Light"
+                                        HtmlFontSize="{DynamicResource FontSizeMedium}"
+                                        HtmlFontFamily="{DynamicResource FontThemeMain}"
                                         HtmlForeground="{DynamicResource Description}"
                                         LinkForeground="{DynamicResource GlyphColor}"
                                         FocusVisualStyle="{x:Null}" />

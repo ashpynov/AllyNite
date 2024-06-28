@@ -51,7 +51,7 @@
                         </Border>
                         <TextBlock x:Name="InstallFont" Visibility="Collapsed" Text="&#xef08;"
                             FontFamily="{StaticResource FontIcoFont}" Opacity="0"
-                            FontSize="40" Foreground="White"
+                            FontSize="{DynamicResource FontSizeLarge}"  Foreground="White"
                             VerticalAlignment="Top" HorizontalAlignment="Right"
                             TextAlignment="Center" Margin="12,15" />
                         <StackPanel x:Name="DetailsStack" VerticalAlignment="Bottom" Margin="12,15"
@@ -60,7 +60,7 @@
                                 Text="{Binding DisplayName}"
                                 TextTrimming="WordEllipsis"
                                 Style="{DynamicResource ThemeTextBlockBaseStyle}"
-                                FontSize="{DynamicResource ThemeFontSizeSmall}"
+                                FontSize="{DynamicResource FontSizeSmall}"
                                 VerticalAlignment="Bottom"
                                 TextAlignment="Left" Margin="0,6,0,0" />
                         </StackPanel>

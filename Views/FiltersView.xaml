@@ -27,7 +27,7 @@
                         <DockPanel>
                             <TextBlock Text="&#xeaa0;"
                                 FontFamily="{DynamicResource FontIcoFont}"
-                                FontSize="32"
+                                FontSize="{DynamicResource FontSizeMedium}"
                                 Margin="0,0,0,0"
                                 x:Name="IconText"
                                 DockPanel.Dock="Right"
@@ -90,7 +90,7 @@
                         <DockPanel>
                             <TextBlock Text="&#xeab5;"
                                 FontFamily="{DynamicResource FontIcoFont}"
-                                FontSize="32"
+                                FontSize="{DynamicResource FontSizeMedium}"
                                 Margin="0,0,0,0"
                                 x:Name="IconText"
                                 DockPanel.Dock="Left"
@@ -171,12 +171,12 @@
         <Setter Property="Margin" Value="20,0,15,10" />
         <Style.Resources>
             <Style x:Key="ComboBoxTextStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
-                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+                <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
                 <Setter Property="Foreground" Value="{DynamicResource TextDetailBrush}" />
             </Style>
             <Style x:Key="ComboBoxIconStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"  />
                 <Setter Property="FontFamily" Value="{DynamicResource FontIcoFont}" />
                 <Setter Property="Foreground" Value="{DynamicResource SelectionLightBrush}" />
             </Style>
@@ -187,8 +187,8 @@
     <Style x:Key="FilterPanelText" TargetType="TextBlock"
         BasedOn="{StaticResource TextBlockBaseStyle}">
         <Setter Property="Margin" Value="25,20,15,5" />
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource TextDetailBrush}" />
     </Style>
 
@@ -204,7 +204,7 @@
     <DataTemplate x:Key="FilterPanelAddPresetTemplate">
         <TextBlock Text="&#xee00;"
             TextAlignment="Center" Margin="0,2,0,0"
-            FontFamily="{StaticResource FontIcoFont}" FontSize="32"
+            FontFamily="{StaticResource FontIcoFont}" FontSize="{DynamicResource FontSizeMedium}"
             Foreground="{DynamicResource TextBrush}"
             VerticalAlignment="Center" HorizontalAlignment="Center" />
     </DataTemplate>
@@ -212,7 +212,7 @@
     <DataTemplate x:Key="FilterPanelRenamePresetTemplate">
         <TextBlock Text="&#xec55;"
             TextAlignment="Center" Margin="0,2,0,0"
-            FontFamily="{StaticResource FontIcoFont}" FontSize="32"
+            FontFamily="{StaticResource FontIcoFont}" FontSize="{DynamicResource FontSizeMedium}"
             Foreground="{DynamicResource TextBrush}"
             VerticalAlignment="Center" HorizontalAlignment="Center" />
     </DataTemplate>
@@ -220,7 +220,7 @@
     <DataTemplate x:Key="FilterPanelRemovePresetTemplate">
         <TextBlock Text="&#xec53;"
             TextAlignment="Center" Margin="0,2,0,0"
-            FontFamily="{StaticResource FontIcoFont}" FontSize="32"
+            FontFamily="{StaticResource FontIcoFont}" FontSize="{DynamicResource FontSizeMedium}"
             Foreground="{DynamicResource TextBrush}"
             VerticalAlignment="Center" HorizontalAlignment="Center" />
     </DataTemplate>

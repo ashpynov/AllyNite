@@ -65,7 +65,7 @@
     <DataTemplate x:Key="HelpMenuRestartPlayniteButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="{DynamicResource LOCCrashRestartPlaynite}" VerticalAlignment="Center" Margin="30,5,0,0"/>
-            <TextBlock Text="&#xefd1;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+            <TextBlock Text="&#xefd1;" FontFamily="{DynamicResource FontIcoFont}" FontSize="{DynamicResource FontSizeSmall}"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,5,0,0"/>
         </StackPanel>
     </DataTemplate>
@@ -74,7 +74,7 @@
     <DataTemplate x:Key="HelpMenuSafeModeButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="{DynamicResource LOCCrashRestartSafe}" VerticalAlignment="Center" Margin="30,5,0,0"/>
-            <TextBlock Text="&#xefdc;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+            <TextBlock Text="&#xefdc;" FontFamily="{DynamicResource FontIcoFont}" FontSize="{DynamicResource FontSizeSmall}"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,5,0,0"/>
         </StackPanel>
     </DataTemplate>
@@ -83,7 +83,7 @@
     <DataTemplate x:Key="HelpMenuFeedbackButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="{DynamicResource LOCMenuIssues}" VerticalAlignment="Center" Margin="30,5,0,0"/>
-            <TextBlock Text="&#xea54;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+            <TextBlock Text="&#xea54;" FontFamily="{DynamicResource FontIcoFont}" FontSize="{DynamicResource FontSizeSmall}"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,5,0,0"/>
         </StackPanel>
     </DataTemplate>

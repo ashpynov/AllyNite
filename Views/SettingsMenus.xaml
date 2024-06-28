@@ -197,7 +197,7 @@
                                     <TextBlock Text="&#xeffc;"
                                         FontFamily="{DynamicResource FontIcoFont}"
                                         Foreground="{TemplateBinding Foreground}"
-                                        FontSize="40"
+                                        FontSize="{DynamicResource FontSizeLarge}"
                                         x:Name="IconText" HorizontalAlignment="Center"
                                         VerticalAlignment="Center" Opacity="0.4" />
                                 </Viewbox>
@@ -235,12 +235,12 @@
         <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
         <Style.Resources>
             <Style x:Key="ComboBoxTextStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-                <Setter Property="FontFamily" Value="Segoe UI Light" />
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+                <Setter Property="FontFamily" Value="{DynamicResource FontThemeMain}" />
                 <Setter Property="Foreground" Value="{DynamicResource TextDetailBrush}" />
             </Style>
             <Style x:Key="ComboBoxIconStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"  />
                 <Setter Property="FontFamily" Value="{DynamicResource FontIcoFont}" />
                 <Setter Property="Foreground" Value="{DynamicResource SelectionLightBrush}" />
             </Style>
@@ -303,4 +303,50 @@
                 Margin="5,0,0,0" />
         </StackPanel>
     </DataTemplate>
+
+    <DataTemplate x:Key="SettingsMenuThemeOptionsButtonTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{DynamicResource LOCThemeOptionsSettingsMenu}"
+                VerticalAlignment="Center" Margin="5,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
+
+    <Style TargetType="Grid" x:Key="ThemeOptionsPreviewImageGridStyle">
+        <Setter Property="Margin" Value="-680,550,0,-650" />
+        <Setter Property="Width" Value="550" />
+        <Setter Property="Height" Value="550" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style TargetType="Image" x:Key="ThemeOptionsPreviewImageStyle">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+
+    <Style x:Key="SettingsSectionInputBoxStyle" TargetType="{x:Type ButtonEx}" BasedOn="{StaticResource {x:Type ButtonEx}}">
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="MinWidth" Value="600" />
+        <Setter Property="Margin"  Value="0,0,0,0" />
+    </Style>
+
+    <DataTemplate x:Key="SettingsSectionInputBoxTemplate">
+        <DockPanel Margin="0,-10,0,-10" MinWidth="{Binding MinWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonEx}}}">
+            <Viewbox DockPanel.Dock="Right" Height="{DynamicResource FontSizeMedium}"  Margin="20,0,0,0">
+                <TextBlock Text="&#xec55;" FontFamily="{StaticResource FontIcoFont}"
+                           Foreground="{DynamicResource TextBrush}"
+                           FontSize="{DynamicResource FontSize}"
+                           VerticalAlignment="Center"/>
+            </Viewbox>
+            <TextBlock  DockPanel.Dock="Left"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource FontThemeMain}">
+                <ContentPresenter Content="{Binding}" />
+            </TextBlock>
+        </DockPanel>
+    </DataTemplate>
+
+
 </ResourceDictionary>

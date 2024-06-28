@@ -82,11 +82,12 @@
     <sys:Double x:Key="ThemeBaseSizex4">160</sys:Double>
 
     <sys:Double x:Key="FontSizeSmall">28</sys:Double>
-    <sys:Double x:Key="ThemeFontSize">40</sys:Double>
-    <sys:Double x:Key="ThemeFontMediumSize">32</sys:Double>
-    <sys:Double x:Key="ThemeFontSmallSize">28</sys:Double>
+    <sys:Double x:Key="FontSizeLarge">40</sys:Double>
+    <sys:Double x:Key="FontSizeMedium">32</sys:Double>
 
     <FontFamily x:Key="FontAltIcoFont">Segoe MDL2 Assets</FontFamily>
+    <FontFamily x:Key="FontThemeMain">Segoe UI Light</FontFamily>
+    <FontFamily x:Key="FontThemeBold">Segoe UI</FontFamily>
 
     <sys:Double x:Key="FilterPanelWidth">500</sys:Double>
     <Thickness x:Key="GamepadButtonAdjust">0,-5,0,-10</Thickness>
@@ -98,87 +99,87 @@
     </LinearGradientBrush>
 
     <Style x:Key="GameTitleHeaderText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
     <Style x:Key="ThemeTextBlockBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
     <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeMain}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="TextBlockDetailStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource TextDetailBrush}" />
     </Style>
 
     <Style x:Key="TextBlockAltDetailStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource TextDetailAltBrush}" />
     </Style>
 
     <Style x:Key="BottomBarStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource HltbBrush}" />
     </Style>
 
     <Style x:Key="HltbAltStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource HltbAltBrush}" />
     </Style>
 
     <Style x:Key="TextBlockBoldBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
         <Setter Property="FontFamily" Value="Segoe UI Bold" />
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
     </Style>
 
     <Style x:Key="TextBlockAltBoldBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
         <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
         <Setter Property="Foreground" Value="{DynamicResource TextAltBrush}" />
     </Style>
 
     <Style x:Key="TextBlockAltLightBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeMain}" />
         <Setter Property="Foreground" Value="{DynamicResource TextAltBrush}" />
     </Style>
 
     <Style x:Key="ButtonTextBlockBaseStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeMain}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
     <Style x:Key="ButtonTextBlockSmallStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontMediumSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
     <Style x:Key="ButtonTextBlockBoldStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
         <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
     <Style x:Key="GameDetailsHtmlTextStyle" TargetType="HtmlTextView">
-        <Setter Property="HtmlFontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="HtmlFontFamily" Value="Segoe UI Light" />
+        <Setter Property="HtmlFontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="HtmlFontFamily" Value="{DynamicResource FontThemeMain}" />
         <Setter Property="HtmlForeground" Value="{DynamicResource TextBrush}" />
         <Setter Property="LinkForeground" Value="{DynamicResource GlyphColor}" />
     </Style>

@@ -106,7 +106,7 @@
     <DataTemplate x:Key="MainMenuSettingsButtonTemplate">
         <StackPanel Orientation="Horizontal"  >
             <TextBlock Text="&#xef3a;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"/>
         </StackPanel>
@@ -116,7 +116,7 @@
     <DataTemplate x:Key="MainMenuLibUpdateButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xefd1;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8"  />
             <TextBlock Text="{DynamicResource LOCMenuReloadLibrary}" VerticalAlignment="Center" />
         </StackPanel>
@@ -126,7 +126,7 @@
     <DataTemplate x:Key="MainMenuCancelLibUpdateButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xecb1;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuCancelLibraryUpdate}"
                 VerticalAlignment="Center" />
@@ -137,7 +137,7 @@
     <DataTemplate x:Key="MainMenuExitPlayniteButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xef16;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCExitPlaynite}" VerticalAlignment="Center" />
         </StackPanel>
@@ -147,7 +147,7 @@
     <DataTemplate x:Key="MainMenuSwithDesktopButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xef1d;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCBackToDesktopMode}" VerticalAlignment="Center" />
         </StackPanel>
@@ -157,7 +157,7 @@
     <DataTemplate x:Key="MainMenuRandomGameButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xefcf;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuSelectRandomGame}" VerticalAlignment="Center" />
         </StackPanel>
@@ -167,7 +167,7 @@
     <DataTemplate x:Key="MainMenuShutdowButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xefc4;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuShutdownSystem}" VerticalAlignment="Center" />
         </StackPanel>
@@ -177,7 +177,7 @@
     <DataTemplate x:Key="MainMenuSuspendButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xef9e;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuSuspendSystem}" VerticalAlignment="Center" />
         </StackPanel>
@@ -187,7 +187,7 @@
     <DataTemplate x:Key="MainMenuHibernateButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xef9e;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuHibernateSystem}" VerticalAlignment="Center" />
         </StackPanel>
@@ -197,7 +197,7 @@
     <DataTemplate x:Key="MainMenuRestartButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xef80;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuRestartSystem}" VerticalAlignment="Center" />
         </StackPanel>
@@ -206,7 +206,7 @@
     <DataTemplate x:Key="MainMenuMinimizeButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#128471;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMinimize}" VerticalAlignment="Center" />
         </StackPanel>
@@ -216,7 +216,7 @@
     <DataTemplate x:Key="MainMenuHelpButtonTemplate">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="&#xefca;" FontFamily="{DynamicResource FontIcoFont}"
-                Width="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuHelpTitle}" VerticalAlignment="Center" />
         </StackPanel>
@@ -226,7 +226,7 @@
     <DataTemplate x:Key="MainMenuPatreonButtonTemplate">
         <StackPanel Orientation="Horizontal" Focusable="False">
             <Image Source="{ThemeFile 'Images/patreon.png'}" Stretch="Uniform"
-                Width="{DynamicResource ThemeFontSize}" Height="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}" Height="{DynamicResource FontSizeLarge}"
                 HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuPatreonSupport}"  VerticalAlignment="Center" />
         </StackPanel>
@@ -235,7 +235,7 @@
     <DataTemplate x:Key="MainMenuKofiButtonTemplate">
         <StackPanel Orientation="Horizontal" Focusable="False">
             <Image Source="{ThemeFile 'Images/kofi.png'}" Stretch="Uniform"
-                Width="{DynamicResource ThemeFontSize}" Height="{DynamicResource ThemeFontSize}"
+                Width="{DynamicResource FontSizeLarge}" Height="{DynamicResource FontSizeLarge}"
                 HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuKofiSupport}" VerticalAlignment="Center" />
         </StackPanel>

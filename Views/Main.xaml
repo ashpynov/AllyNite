@@ -403,7 +403,7 @@
                                             FontFamily="{StaticResource FontIcoFont}"
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             Foreground="#ff6b6b"
-                                            FontSize="{DynamicResource ThemeFontSize}" />
+                                            FontSize="{DynamicResource FontSizeLarge}" />
                                     </ButtonEx.Content>
                                 </ButtonEx>
 
@@ -420,12 +420,12 @@
                                                 FontFamily="{StaticResource FontIcoFont}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                FontSize="{DynamicResource ThemeFontSize}" />
+                                                FontSize="{DynamicResource FontSizeLarge}" />
                                             <TextBlock Text="&#x25CF;"
                                                 Foreground="{DynamicResource GlyphBrush}"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Bottom"
-                                                FontSize="24" Margin="20,20,0,0" />
+                                                FontSize="{DynamicResource FontSizeSmall}"  Margin="20,20,0,0" />
                                         </Grid>
                                     </Button.Content>
                                     <Button.Style>
@@ -448,7 +448,7 @@
                                     Grid.Column="6">
                                 </TextBlock>
                                 <ContentControl x:Name="PART_ElemBatteryStatus"
-                                    Focusable="False" FontSize="{DynamicResource ThemeFontSize}"
+                                    Focusable="False" FontSize="{DynamicResource FontSizeLarge}"
                                     VerticalAlignment="Center" Margin="0,-8,0,0"
                                     Grid.Column="7">
                                     <ContentControl.Style>
@@ -702,7 +702,7 @@
                                     <ContentControl x:Name="Sounds_MusicControl" />
                                     <Image Source="{ThemeFile 'Images/FullVolume.png'}"
                                         Grid.Column="0"
-                                        Height="40" Width="40"
+                                        Height="{DynamicResource FontSizeLarge}"  Width="{DynamicResource FontSizeLarge}"
                                         RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
                                         VerticalAlignment="Center"
                                         Margin="20, 5, 0, 0" />
@@ -1396,8 +1396,8 @@
                                                                 HorizontalAlignment="Stretch">
                                                                 <HtmlTextView
                                                                     x:Name="PART_HtmlDescription"
-                                                                    HtmlFontSize="{DynamicResource ThemeFontMediumSize}"
-                                                                    HtmlFontFamily="Segoe UI Light"
+                                                                    HtmlFontSize="{DynamicResource FontSizeMedium}"
+                                                                    HtmlFontFamily="{DynamicResource FontThemeMain}"
                                                                     HtmlForeground="{DynamicResource Description}"
                                                                     LinkForeground="{DynamicResource GlyphColor}"
                                                                     FocusVisualStyle="{x:Null}" />
@@ -1756,6 +1756,7 @@
                                     pbeh:FocusBahaviors.FocusBinding="{Binding GameListFocused}"
                                     pbeh:FocusBahaviors.OnVisibilityFocus="True"
                                     ItemTemplate="{StaticResource DetailListGameItemTemplate}"
+                                    ItemContainerStyle="{DynamicResource DetailListGameItemContainerStyle}"
                                     SelectedItem="{Binding SelectedGame}"
                                     ItemsSource="{Binding GamesView.CollectionView}"
                                 >
@@ -1798,7 +1799,7 @@
 
                             </Grid>
 
-                            <TextBlock Grid.RowSpan="5" Grid.ColumnSpan="3" FontSize="40"
+                            <TextBlock Grid.RowSpan="5" Grid.ColumnSpan="3" FontSize="{DynamicResource FontSizeLarge}"
                                 Text="{DynamicResource LOCNoGamesFound}"
                                 TextAlignment="Center" HorizontalAlignment="Center"
                                 VerticalAlignment="Center">

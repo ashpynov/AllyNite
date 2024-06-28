@@ -230,7 +230,7 @@
                                 HorizontalAlignment="Center" Margin="0,0,0,0" Opacity="1">
                                 <StackPanel Margin="0,0,0,0">
                                     <TextBlock Text="&#xefc2;"
-                                        FontFamily="{StaticResource FontIcoFont}" FontSize="32"
+                                        FontFamily="{StaticResource FontIcoFont}" FontSize="{DynamicResource FontSizeMedium}"
                                         Margin="0,0,0,0">
                                         <TextBlock.LayoutTransform>
                                             <RotateTransform />
@@ -467,7 +467,7 @@
                                 <StackPanel Margin="0,0,0,0">
                                     <TextBlock Text="&#xeef5;"
                                         FontFamily="{StaticResource FontIcoFont}"
-                                        FontWeight="SemiBold" FontSize="40" Margin="0,0,0,0" />
+                                        FontWeight="SemiBold" FontSize="{DynamicResource FontSizeLarge}"  Margin="0,0,0,0" />
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel x:Name="Plus" VerticalAlignment="Center"
@@ -475,7 +475,7 @@
                                 <StackPanel Margin="0,0,0,0">
                                     <TextBlock Text="&#xef8c;"
                                         FontFamily="{StaticResource FontIcoFont}"
-                                        FontWeight="SemiBold" FontSize="40" Margin="0,0,0,0" />
+                                        FontWeight="SemiBold" FontSize="{DynamicResource FontSizeLarge}"  Margin="0,0,0,0" />
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
@@ -667,7 +667,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                     <Image Source="{ThemeFile 'Images/Minus.png'}"
                                         RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
-                                        Height="40" />
+                                        Height="{DynamicResource FontSizeLarge}"  />
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel x:Name="ON" VerticalAlignment="Center"
@@ -675,7 +675,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                     <Image Source="{ThemeFile 'Images/Plus.png'}"
                                         RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform"
-                                        Height="40" />
+                                        Height="{DynamicResource FontSizeLarge}"  />
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>

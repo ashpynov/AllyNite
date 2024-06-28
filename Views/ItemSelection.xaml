@@ -119,8 +119,8 @@
     <Style x:Key="ItemSelectionHeaderText" BasedOn="{StaticResource TextBlockBaseStyle}" TargetType="TextBlock" >
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Padding" Value="15,15,15,15" />
