@@ -1232,7 +1232,7 @@
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type GameDetails}">
                                                     <DockPanel x:Name="ListDetailsPannel"
-                                                        Width="750"
+                                                        Width="860"
                                                         Margin="20,5,0,0"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Stretch"
@@ -1695,7 +1695,7 @@
                                                 <Setter Property="Grid.RowSpan" Value="2" />
                                                 <Setter Property="Grid.ColumnSpan" Value="2" />
                                                 <Setter Property="Height" Value="900" />
-                                                <Setter Property="Width" Value="900" />
+                                                <Setter Property="Width" Value="800" />
                                                 <Setter Property="Opacity" Value="0" />
                                                 <Setter Property="Margin" Value="-1920,0,1920,-550" />
                                                 <Setter Property="Opacity" Value="0" />
@@ -1705,7 +1705,7 @@
                                                             <ThicknessAnimation
                                                                 Storyboard.TargetProperty="Margin"
                                                                 From="1200,0,-670,-550"
-                                                                To="800,0,0,-550"
+                                                                To="1000,0,0,-550"
                                                                 Duration="0:0:1"
                                                                 DecelerationRatio="0.5" />
                                                             <DoubleAnimation
