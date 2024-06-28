@@ -82,6 +82,7 @@
     <sys:Double x:Key="ThemeBaseSizex4">160</sys:Double>
 
     <sys:Double x:Key="FontSizeSmall">28</sys:Double>
+    <sys:Double x:Key="FontSize">32</sys:Double>
     <sys:Double x:Key="FontSizeLarge">40</sys:Double>
     <sys:Double x:Key="FontSizeMedium">32</sys:Double>
 
