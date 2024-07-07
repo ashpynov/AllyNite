@@ -674,7 +674,7 @@
                                                     <ToggleButtonEx x:Name="TrailerMute"
                                                         Margin="0,0,20,0"
                                                         Style="{DynamicResource TrailerMuteToggle}"
-                                                        Visibility="Visible"
+                                                        Visibility="Collapsed"
                                                         Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}"
                                                         Grid.Row="2" />
 
@@ -1706,23 +1706,20 @@
                             <Setter Property="IsChecked" Value="False" TargetName="TrailerZoom" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding ElementName=TrailerMute, Path=Visibility}"
-                            Value="Collapsed">
-                            <Setter Property="Margin" Value="15,15,15,15" TargetName="TrailerPlay" />
-                        </DataTrigger>
-
                         <DataTrigger
                             Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying}"
                             Value="{StaticResource True}">
                             <Setter Property="Command"
                                 Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}"
                                 TargetName="TrailerPlay" />
+                            <Setter Property="Visibility"
+                                Value="Visible"
+                                TargetName="TrailerMute" />
                         </DataTrigger>
                         <DataTrigger
                             Binding="{Binding ElementName=TrailerContainer, Path=Opacity}"
                             Value="1">
                             <Setter Property="Panel.ZIndex" Value = "-49" TargetName="MediaBorder" />
-                            <!-- <Setter Property="Opacity" Value = "0" TargetName="MediaBorder" /> -->
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

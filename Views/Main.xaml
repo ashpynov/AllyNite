@@ -1695,7 +1695,7 @@
                                                 <Setter Property="Grid.RowSpan" Value="2" />
                                                 <Setter Property="Grid.ColumnSpan" Value="2" />
                                                 <Setter Property="Height" Value="900" />
-                                                <Setter Property="Width" Value="800" />
+                                                <Setter Property="Width" Value="700" />
                                                 <Setter Property="Opacity" Value="0" />
                                                 <Setter Property="Margin" Value="-1920,0,1920,-550" />
                                                 <Setter Property="Opacity" Value="0" />

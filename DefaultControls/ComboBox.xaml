@@ -17,7 +17,7 @@
                             IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                         </ToggleButton>
 
-                        <DockPanel LastChildFill="True" Margin="10,0,5,0" Focusable="False">
+                        <DockPanel LastChildFill="True" Margin="10,0,5,0" >
                             <TextBlock Style="{DynamicResource ComboBoxIconStyle}"
                                 Text="&#xea99;"
                                 DockPanel.Dock="Right"
@@ -63,8 +63,8 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
-                        <Trigger Property="IsDropDownOpen" Value="True">
-                            <Setter Property="Tag" Value="False" TargetName="ToggleButton" />
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Tag" Value="True" TargetName="ToggleButton"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
