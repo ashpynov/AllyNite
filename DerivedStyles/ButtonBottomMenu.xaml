@@ -20,10 +20,11 @@
                         <StackPanel Orientation="Horizontal">
                             <!-- Affichage de l'indication de saisie -->
                             <ContentControl ContentTemplate="{TemplateBinding InputHint}"
-                                            Height="20" VerticalAlignment="Center"
+                                            Height="32" VerticalAlignment="Center"
                                             Margin="0,0,10,0" Focusable="False"/>
                             <!-- Texte du bouton -->
-                            <TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}" FontSize="16"
+                            <TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}"
+                                       FontSize="32"
                                        VerticalAlignment="Center">
                                 <ContentPresenter />
                             </TextBlock>

@@ -5,9 +5,10 @@
     <!-- Style pour le cadre du menu principal -->
     <Style x:Key="MainMenuBorder" TargetType="Border">
         <!-- <Setter Property="Background" Value="{DynamicResource OverlayMenu}" /> -->
-        <Setter Property="Height" Value="1080" />
+        <Setter Property="Height" Value="1020" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property=" Margin" Value="0,0,0,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
 

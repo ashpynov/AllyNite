@@ -7,6 +7,12 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     mc:Ignorable="d">
 
+    <FontFamily x:Key="FontXboxOneController">XBOXONE</FontFamily>
+    <FontFamily x:Key="FontPlayStation4Controller">PlayStation4</FontFamily>
+    <FontFamily x:Key="FontTitilliumWeb">Titillium Web</FontFamily>
+    <FontFamily x:Key="FontTitilliumWebLight">Titillium Web</FontFamily>
+    <FontFamily x:Key="FontTitilliumWebBold">Titillium Web</FontFamily>
+    <FontFamily x:Key="FontIcoFont">icofont</FontFamily>
 
     <!-- Here Change your Name -->
     <sys:String x:Key="UserName">AllyNite</sys:String>
@@ -60,13 +66,13 @@
     <SolidColorBrush x:Key="MainBackgourndBrush" Color="{DynamicResource BlackColor}" />
     <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{DynamicResource TextSecondaryColor}" />
     <SolidColorBrush x:Key="SelectionLightBrush" Color="{DynamicResource SelectionLightColor}" />
-    <SolidColorBrush x:Key="OverlayBrush" Color="{DynamicResource OverlayColor}" />
+
     <SolidColorBrush x:Key="CheckBoxCheckMarkBkBrush"
         Color="{DynamicResource ControlBackgroundColorDark}" />
     <SolidColorBrush x:Key="AlternativeButtonBrush" Color="{DynamicResource AlternativeButtonColor}" />
     <SolidColorBrush x:Key="BottomBarBackgroundBrush" Color="{DynamicResource Background}" />
     <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource Background}" />
-    <SolidColorBrush x:Key="TopBarBackgroundBrush" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="TopBarBackgroundBrush" Color="{DynamicResource Background}" Opacity="0.7" />
     <SolidColorBrush x:Key="ContainerBackgroundBrush" Color="#000000" Opacity="0.1" />
     <SolidColorBrush x:Key="ThemeDark" Color="{DynamicResource ButtonBack}" />
     <SolidColorBrush x:Key="ThemeMain" Color="{DynamicResource ThemeColorMain}" />
@@ -76,6 +82,12 @@
     <SolidColorBrush x:Key="HltbAltBrush" Color="{DynamicResource HltbAlt}" />
     <SolidColorBrush x:Key="TextVerticalBrush" Color="{DynamicResource TextVertical}" />
 
+    <LinearGradientBrush x:Key="OverlayBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="{DynamicResource OverlayColor}" Offset="0"/>
+        <GradientStop Color="{DynamicResource OverlayColor}" Offset="0.9451"/> <!-- 1020/1080 -->
+        <GradientStop Color="#00000000" Offset="0.9451"/>
+        <GradientStop Color="#00000000" Offset="1"/>
+    </LinearGradientBrush>
 
     <sys:Double x:Key="ThemeBaseSize">40</sys:Double>
     <sys:Double x:Key="ThemeBaseSizex2">80</sys:Double>
@@ -578,6 +590,15 @@
 
 
     <pcon:ListSizeToVisibilityConverter x:Key="ListSizeToVisibilityConverter" />
+
+    <DataTemplate x:Key="ButtonPromptDPad">
+        <Viewbox>
+            <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
+                        Height="8"
+                        Foreground="{DynamicResource TextBrush}"
+                        Text="d" />
+        </Viewbox>
+    </DataTemplate>
 
 
 
