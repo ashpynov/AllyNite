@@ -7,12 +7,12 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     mc:Ignorable="d">
 
-    <FontFamily x:Key="FontXboxOneController">XBOXONE</FontFamily>
+    <!-- <FontFamily x:Key="FontXboxOneController">XBOXONE</FontFamily>
     <FontFamily x:Key="FontPlayStation4Controller">PlayStation4</FontFamily>
     <FontFamily x:Key="FontTitilliumWeb">Titillium Web</FontFamily>
     <FontFamily x:Key="FontTitilliumWebLight">Titillium Web</FontFamily>
     <FontFamily x:Key="FontTitilliumWebBold">Titillium Web</FontFamily>
-    <FontFamily x:Key="FontIcoFont">icofont</FontFamily>
+    <FontFamily x:Key="FontIcoFont">icofont</FontFamily> -->
 
     <!-- Here Change your Name -->
     <sys:String x:Key="UserName">AllyNite</sys:String>

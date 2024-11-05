@@ -807,7 +807,7 @@
                                     <Setter Property="VerticalAlignment" Value="Bottom" />
 
                                     <Setter Property="HorizontalAlignment" Value="Left" />
-                                    <Setter Property="Grid.Row" Value="3" />
+                                    <Setter Property="Grid.Row" Value="0" />
                                     <Setter Property="Height" Value="60" />
                                     <Setter Property="Margin" Value="50,0,0,15" />
                                     <Style.Triggers>
@@ -979,7 +979,7 @@
                         </StackPanel>
                         <!-- Genres -->
 
-                        <Grid x:Name="Genres" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                        <Grid x:Name="Genres" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
                             VerticalAlignment="Center">
                             <Grid.Style>
                                 <Style TargetType="Grid">
@@ -1043,6 +1043,74 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
+                        </Grid>
+
+                        <Grid x:Name="BottomButtonPanel" 
+                            Panel.ZIndex="1000" 
+                            Grid.Row="3" 
+                            Grid.ColumnSpan="3"
+                            VerticalAlignment="Bottom"
+                            Background="{DynamicResource TopBarBackgroundBrush}"
+                            Height="60" Width="1920">
+                            <ContentControl x:Name="COMMAND_Play" Content="Play" Visibility="Collapsed" 
+                                Tag="{Binding ActivateSelectedCommand}"
+                            />
+                            <ContentControl x:Name="COMMAND_Trailer" Content="Mute" Visibility="Collapsed" 
+                            />
+                            <!-- 
+                                <ToggleButtonEx x:Name="TrailerPlay"
+                                    Style="{DynamicResource TrailerPlayToggle}"
+                                    Margin="0,0,20,0"
+                                    Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}"
+                                    Grid.Row="1" />
+                                <ToggleButtonEx x:Name="TrailerMute"
+                                    Margin="0,0,20,0"
+                                    Style="{DynamicResource TrailerMuteToggle}"
+                                    Visibility="Collapsed"
+                                    Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}"
+                                    Grid.Row="2" />
+
+                                <ButtonEx x:Name="PART_ButtonOptions"
+                                        Style="{DynamicResource GameDetailsGameOptionsButton}"
+                                    Content="" Margin="0,0,0,0" />
+                            -->
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                                <ButtonEx x:Name="HELP_ButtonPlay"
+                                    InputHint="{DynamicResource ButtonPromptX}"
+                                    Style="{DynamicResource ButtonBottomMenu}"
+                                    Content="{Binding SelectedGameDetails.ContextActionDescription, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                    Command="{Binding SelectedGameDetails.ContextActionCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                />
+                                <ButtonEx x:Name="HELP_ButtonTrailerControl"
+                                    InputHint="{DynamicResource ButtonPromptY}"
+                                    Style="{DynamicResource ButtonBottomMenu}"
+                                    Content="{Binding ElementName=COMMAND_Trailer, Path=Content}"
+                                    Command="{Binding ElementName=COMMAND_Trailer, Path=Tag}"
+                                />
+                                <ButtonEx x:Name="HELP_ButtonActions"
+                                    InputHint="{DynamicResource ButtonPromptStart}"
+                                    Style="{DynamicResource ButtonBottomMenu}"
+                                    Content="{DynamicResource LOCActionsLabel}"
+                                    Command="{Binding OpenGameMenuCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                />
+                                <ButtonEx x:Name="HELP_ButtonConfirm"
+                                    InputHint="{Binding ElementName=GAMEPAD_Confirm, Path=Tag}"
+                                    Style="{DynamicResource ButtonBottomMenu}"
+                                    Content="{DynamicResource LOCSelect}"
+                                    Command="{Binding ElementName=ThemeOptions_Command, Path=Content.Toggle}"
+                                    CommandParameter="{Binding (FocusManager.FocusedElement), RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                />
+                                <ButtonEx x:Name="HELP_ButtonBack"
+                                    InputHint="{Binding ElementName=GAMEPAD_Cancel, Path=Tag}"
+                                    Style="{DynamicResource ButtonBottomMenu}"
+                                    Content="{DynamicResource LOCBackLabel}"
+                                    Command="{Binding ElementName=ThemeOptions_Command, Path=Content.Toggle}"
+                                    CommandParameter="{Binding (FocusManager.FocusedElement), RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                />
+
+                            </StackPanel>
                         </Grid>
 
                         <Grid Grid.Row="0" Height="10" Width="10" Focusable="False">
