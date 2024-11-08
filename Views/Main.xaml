@@ -1073,7 +1073,7 @@
                                         <ContentControl
                                             x:Name="FILTER_CurrentName"
                                             Visibility="Collapsed"
-                                            Tag="{Binding ActiveFilterPreset.Name}"
+                                            Tag="{Binding ActiveFilterPreset.Name, FallbackValue='None', TargetNullValue='None'}"
                                         />
 
                                         <ContentControl
@@ -2028,7 +2028,7 @@
                                                                                                 <BehaviorsCore:ConditionalExpression>
                                                                                                     <BehaviorsCore:ConditionalExpression.Conditions>
                                                                                                         <BehaviorsCore:ComparisonCondition
-                                                                                                            LeftOperand="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsVideoMuted}"
+                                                                                                            LeftOperand="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted}"
                                                                                                             RightOperand="{Binding Tag, ElementName=TrailerTrigger}"
                                                                                                             Operator="NotEqual" />
                                                                                                         </BehaviorsCore:ConditionalExpression.Conditions>

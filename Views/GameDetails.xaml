@@ -1513,12 +1513,14 @@
                                             <DataTrigger
                                                 Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}"
                                                 Value="False">
+                                                <!-- Error Here
                                                 <Setter Property="ContentControl.OpacityMask">
                                                     <Setter.Value>
                                                         <VisualBrush
                                                             Visual="{Binding ElementName=TrailerMask}" />
                                                     </Setter.Value>
                                                 </Setter>
+                                                -->
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -1853,12 +1855,14 @@
                                 MaxWidth="700">
                                 <Image.Style>
                                     <Style TargetType="Image">
+                                        <!-- Error Here
                                         <Setter Property="Image.OpacityMask">
                                             <Setter.Value>
                                                 <VisualBrush
                                                     Visual="{Binding ElementName=CoverMask}" />
                                             </Setter.Value>
                                         </Setter>
+                                        -->
                                         <Style.Triggers>
 
                                         </Style.Triggers>
