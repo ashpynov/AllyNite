@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOCAllyNite_ShowTrailer">Show Trailer</sys:String>
+    <sys:String x:Key="LOCAllyNite_HideTrailer">Hide Trailer</sys:String>
+    <sys:String x:Key="LOCAllyNite_MuteTrailer">Mute Trailer</sys:String>
+    <sys:String x:Key="LOCAllyNite_UnmuteTrailer">Unmute Trailer</sys:String>
+
+</ResourceDictionary>

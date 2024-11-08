@@ -590,6 +590,10 @@
 
 
     <pcon:ListSizeToVisibilityConverter x:Key="ListSizeToVisibilityConverter" />
+    <pcon:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <pcon:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+    <pcon:InvertedObjectEqualityToBoolConverter x:Key="InvertedObjectEqualityToBoolConverter" />
+
 
     <DataTemplate x:Key="ButtonPromptDPad">
         <Viewbox>

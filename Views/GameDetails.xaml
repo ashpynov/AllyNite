@@ -2,7 +2,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pin="clr-namespace:Playnite.Input;assembly=Playnite"
     xmlns:ctrl="clr-namespace:Playnite.FullscreenApp.Controls;assembly=Playnite.FullscreenApp"
+    xmlns:Behaviors="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
     mc:Ignorable="d">
 
     <Style TargetType="{x:Type GameDetails}">
@@ -20,6 +22,36 @@
                         KeyboardNavigation.DirectionalNavigation="Contained"
                         KeyboardNavigation.TabNavigation="Cycle"
                         KeyboardNavigation.ControlTabNavigation="Cycle">
+
+                        <Grid.InputBindings>
+                            <pin:GameControllerInputBinding
+                                Button="X"
+                                Command="{Binding DataContext.ActivateSelectedCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                            />
+                            <pin:GameControllerInputBinding
+                                Button="Y"
+                                Command="{Binding ElementName=COMMAND_Trailer, Path=Tag}"
+                                CommandParameter="{Binding ElementName=COMMAND_PlayTrailer}"
+                            />
+                            <pin:GameControllerInputBinding
+                                Button="Start"
+                                Command="{Binding DataContext.OpenGameMenuCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                            />
+                            <KeyBinding
+                                Key="X"
+                                Command="{Binding DataContext.OpenGameMenuCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                            />
+                            <KeyBinding
+                                Key="Y"
+                                Command="{Binding ElementName=COMMAND_Trailer, Path=Tag}"
+                                CommandParameter="{Binding ElementName=COMMAND_PlayTrailer}"
+                            />
+                            <KeyBinding
+                                Key="Enter"
+                                Command="{Binding DataContext.ActivateSelectedCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                            />
+
+                        </Grid.InputBindings>
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80" />
@@ -388,7 +420,7 @@
                             <Grid.Style>
                                 <Style TargetType="Grid">
                                     <Setter Property="Opacity" Value="1" />
-                                    <Setter Property="Margin" Value="50,50,0,0" />
+                                    <Setter Property="Margin" Value="50,0,0,-20" />
                                     <Setter Property="Grid.Row" Value="0" />
                                     <Style.Triggers>
 
@@ -669,6 +701,7 @@
                                                     <ToggleButtonEx x:Name="TrailerPlay"
                                                         Style="{DynamicResource TrailerPlayToggle}"
                                                         Margin="0,0,20,0"
+                                                        Visibility="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                         Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}"
                                                         Grid.Row="1" />
                                                     <ToggleButtonEx x:Name="TrailerMute"
@@ -807,9 +840,9 @@
                                     <Setter Property="VerticalAlignment" Value="Bottom" />
 
                                     <Setter Property="HorizontalAlignment" Value="Left" />
-                                    <Setter Property="Grid.Row" Value="0" />
+                                    <Setter Property="Grid.Row" Value="2" />
                                     <Setter Property="Height" Value="60" />
-                                    <Setter Property="Margin" Value="50,0,0,15" />
+                                    <Setter Property="Margin" Value="50,0,0,2" />
                                     <Style.Triggers>
                                         <DataTrigger
                                             Binding="{Binding ElementName=Id, Path=Opacity}"
@@ -823,7 +856,7 @@
                                                             To="1" />
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
-                                                            BeginTime="0:0:0" From="50,0,0,-120"
+                                                            BeginTime="0:0:0" From="-250,0,0,2"
                                                             Duration="0:0:1.5"
                                                             AccelerationRatio="0.3"
                                                             DecelerationRatio="0.7" />
@@ -979,8 +1012,8 @@
                         </StackPanel>
                         <!-- Genres -->
 
-                        <Grid x:Name="Genres" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                            VerticalAlignment="Center">
+                        <Grid x:Name="Genres" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                            VerticalAlignment="Bottom">
                             <Grid.Style>
                                 <Style TargetType="Grid">
                                     <Setter Property="Opacity" Value="0" />
@@ -1002,7 +1035,7 @@
                                                             To="1" />
                                                         <ThicknessAnimation
                                                             Storyboard.TargetProperty="Margin"
-                                                            BeginTime="0:0:0" From="0,0,0,-220"
+                                                            BeginTime="0:0:0" From="0,5,-400,-10"
                                                             Duration="0:0:1.5"
                                                             AccelerationRatio="0.3"
                                                             DecelerationRatio="0.7" />
@@ -1037,6 +1070,13 @@
                                         <Setter Property="TextTrimming" Value="WordEllipsis" />
                                         <Setter Property="Text"
                                             Value="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' &#x0660; '}" />
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="2" Color="Black"
+                                                    RenderingBias="Quality" BlurRadius="2"
+                                                    Opacity="0.8" />
+                                            </Setter.Value>
+                                        </Setter>
                                         <Style.Triggers>
 
                                         </Style.Triggers>
@@ -1045,71 +1085,168 @@
                             </TextBlock>
                         </Grid>
 
-                        <Grid x:Name="BottomButtonPanel" 
-                            Panel.ZIndex="1000" 
-                            Grid.Row="3" 
+                        <Grid x:Name="BottomButtonPanel"
+                            Panel.ZIndex="1000"
+                            Grid.Row="3"
                             Grid.ColumnSpan="3"
                             VerticalAlignment="Bottom"
                             Background="{DynamicResource TopBarBackgroundBrush}"
-                            Height="60" Width="1920">
-                            <ContentControl x:Name="COMMAND_Play" Content="Play" Visibility="Collapsed" 
-                                Tag="{Binding ActivateSelectedCommand}"
-                            />
-                            <ContentControl x:Name="COMMAND_Trailer" Content="Mute" Visibility="Collapsed" 
-                            />
-                            <!-- 
-                                <ToggleButtonEx x:Name="TrailerPlay"
-                                    Style="{DynamicResource TrailerPlayToggle}"
-                                    Margin="0,0,20,0"
-                                    Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}"
-                                    Grid.Row="1" />
-                                <ToggleButtonEx x:Name="TrailerMute"
-                                    Margin="0,0,20,0"
-                                    Style="{DynamicResource TrailerMuteToggle}"
-                                    Visibility="Collapsed"
-                                    Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}"
-                                    Grid.Row="2" />
-
-                                <ButtonEx x:Name="PART_ButtonOptions"
-                                        Style="{DynamicResource GameDetailsGameOptionsButton}"
-                                    Content="" Margin="0,0,0,0" />
-                            -->
-
+                            Height="60">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <ContentControl x:Name="COMMAND_Trailer" Visibility="Collapsed">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}"
+                                                        Value="True" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying, FallbackValue={StaticResource False}}"
+                                                        Value="True" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted, FallbackValue={StaticResource False}}"
+                                                        Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Tag" Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
+                                                    <Setter Property="Content" Value="{DynamicResource LOCAllyNite_UnmuteTrailer}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}"
+                                                        Value="False" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying, FallbackValue={StaticResource False}}"
+                                                        Value="True" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted, FallbackValue={StaticResource False}}"
+                                                        Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Tag" Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
+                                                    <Setter Property="Content" Value="{DynamicResource LOCAllyNite_MuteTrailer}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}"
+                                                        Value="True" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying, FallbackValue={StaticResource False}}"
+                                                        Value="True" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted, FallbackValue={StaticResource False}}"
+                                                        Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Tag" Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}" />
+                                                    <Setter Property="Content" Value="{DynamicResource LOCAllyNite_HideTrailer}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}"
+                                                        Value="False" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying, FallbackValue={StaticResource False}}"
+                                                        Value="True" />
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted, FallbackValue={StaticResource False}}"
+                                                        Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Tag" Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}" />
+                                                    <Setter Property="Content" Value="{DynamicResource LOCAllyNite_HideTrailer}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying, FallbackValue={StaticResource False}}"
+                                                        Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Tag" Value="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}" />
+                                                    <Setter Property="Content" Value="{DynamicResource LOCAllyNite_ShowTrailer}" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
 
-                                <ButtonEx x:Name="HELP_ButtonPlay"
-                                    InputHint="{DynamicResource ButtonPromptX}"
-                                    Style="{DynamicResource ButtonBottomMenu}"
-                                    Content="{Binding SelectedGameDetails.ContextActionDescription, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
-                                    Command="{Binding SelectedGameDetails.ContextActionCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
-                                />
-                                <ButtonEx x:Name="HELP_ButtonTrailerControl"
-                                    InputHint="{DynamicResource ButtonPromptY}"
-                                    Style="{DynamicResource ButtonBottomMenu}"
-                                    Content="{Binding ElementName=COMMAND_Trailer, Path=Content}"
-                                    Command="{Binding ElementName=COMMAND_Trailer, Path=Tag}"
-                                />
-                                <ButtonEx x:Name="HELP_ButtonActions"
-                                    InputHint="{DynamicResource ButtonPromptStart}"
-                                    Style="{DynamicResource ButtonBottomMenu}"
-                                    Content="{DynamicResource LOCActionsLabel}"
-                                    Command="{Binding OpenGameMenuCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
-                                />
-                                <ButtonEx x:Name="HELP_ButtonConfirm"
-                                    InputHint="{Binding ElementName=GAMEPAD_Confirm, Path=Tag}"
-                                    Style="{DynamicResource ButtonBottomMenu}"
-                                    Content="{DynamicResource LOCSelect}"
-                                    Command="{Binding ElementName=ThemeOptions_Command, Path=Content.Toggle}"
-                                    CommandParameter="{Binding (FocusManager.FocusedElement), RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
-                                />
-                                <ButtonEx x:Name="HELP_ButtonBack"
-                                    InputHint="{Binding ElementName=GAMEPAD_Cancel, Path=Tag}"
-                                    Style="{DynamicResource ButtonBottomMenu}"
-                                    Content="{DynamicResource LOCBackLabel}"
-                                    Command="{Binding ElementName=ThemeOptions_Command, Path=Content.Toggle}"
-                                    CommandParameter="{Binding (FocusManager.FocusedElement), RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <ContentControl x:Name="BackToGame_Control" />
+                                    <StackPanel Orientation="Horizontal"
+                                        x:Name="HELP_DetailsButton"
+                                        Visibility="{Binding Path=IsKeyboardFocusWithin, ElementName=PART_ViewHost, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        >
 
+                                        <ContentControl Visibility="Collapsed" x:Name="COMMAND_PlayTrailer"
+                                            Tag="{Binding NotifyOnTargetUpdated=true}">
+                                            <Behaviors:Interaction.Triggers>
+                                                <Behaviors:EventTrigger EventName="TargetUpdated">
+                                                    <Behaviors:InvokeCommandAction
+                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
+                                                    <Behaviors:InvokeCommandAction
+                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}" />
+                                                </Behaviors:EventTrigger>
+                                            </Behaviors:Interaction.Triggers>
+                                        </ContentControl>
+                                        <ButtonEx x:Name="HELP_ButtonTrailerControl"
+                                            InputHint="{DynamicResource ButtonPromptY}"
+                                            Style="{DynamicResource ButtonBottomMenu}"
+                                            Content="{Binding ElementName=COMMAND_Trailer, Path=Content}"
+                                            Command="{Binding ElementName=COMMAND_Trailer, Path=Tag}"
+                                            CommandParameter="{Binding ElementName=COMMAND_PlayTrailer}"
+                                            Visibility="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        >
+
+                                            <Behaviors:Interaction.Triggers>
+                                                <Behaviors:EventTrigger EventName="TargetUpdated">
+                                                    <Behaviors:InvokeCommandAction
+                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
+                                                    <Behaviors:InvokeCommandAction
+                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}" />
+                                                </Behaviors:EventTrigger>
+                                            </Behaviors:Interaction.Triggers>
+                                        </ButtonEx>
+
+                                        <ButtonEx x:Name="HELP_ButtonPlay"
+                                            InputHint="{DynamicResource ButtonPromptX}"
+                                            Command="{Binding DataContext.ActivateSelectedCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                        >
+                                            <ButtonEx.Style>
+                                                <Style TargetType="ButtonEx"
+                                                    BasedOn="{StaticResource ButtonBottomMenu}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsInstalled}" Value="True">
+                                                            <Setter Property="Content" Value="{DynamicResource LOCPlayGame}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsInstalled}" Value="False">
+                                                            <Setter Property="Content" Value="{DynamicResource LOCInstallGame}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ElementName=BackToGame_Control, Path=Content.IsRunning}" Value="True">
+                                                            <Setter Property="Content" Value="{DynamicResource LOCBackToGame}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ButtonEx.Style>
+                                        </ButtonEx>
+
+                                        <ButtonEx x:Name="HELP_ButtonActions"
+                                            InputHint="{DynamicResource ButtonPromptStart}"
+                                            Style="{DynamicResource ButtonBottomMenu}"
+                                            Content="{DynamicResource LOCActionsLabel}"
+                                            Command="{Binding DataContext.OpenGameMenuCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                        />
+                                    </StackPanel>
+                                    <ButtonEx x:Name="HELP_ButtonConfirm"
+                                        InputHint="{Binding ElementName=GAMEPAD_Confirm, Path=Tag}"
+                                        Style="{DynamicResource ButtonBottomMenu}"
+                                        Content="{DynamicResource LOCSelect}"
+                                        Command="{Binding ElementName=ThemeOptions_Command, Path=Content.Toggle}"
+                                        CommandParameter="{Binding (FocusManager.FocusedElement), RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                    />
+                                    <ButtonEx x:Name="HELP_ButtonBack"
+                                        InputHint="{Binding ElementName=GAMEPAD_Cancel, Path=Tag}"
+                                        Style="{DynamicResource ButtonBottomMenu}"
+                                        Content="{DynamicResource LOCBackLabel}"
+                                        Command="{Binding DataContext.ToggleGameDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type Main}}}"
+                                    />
+
+                                </StackPanel>
+                                <TextBlock x:Name="TextClock"
+                                    Style="{DynamicResource ThemeTextBlockBaseStyle}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,0,50,0"
+                                    Text="{Binding DataContext.CurrentTime.Time, RelativeSource={RelativeSource AncestorType={x:Type Main}}, Mode=OneWay}"
+                                   >
+                                </TextBlock>
                             </StackPanel>
                         </Grid>
 

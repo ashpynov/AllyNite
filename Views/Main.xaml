@@ -218,6 +218,22 @@
                                     </Style>
                                 </Grid.Style>
                                 <Grid.InputBindings>
+                                    <KeyBinding
+                                        Key="{Binding ElementName=GAMEPAD_Run, Path=Content}"
+                                        Command="{Binding OpenGameMenuCommand}" />
+                                    <KeyBinding
+                                        Key="{Binding ElementName=GAMEPAD_Details, Path=Content}"
+                                        Command="{Binding ToggleGameDetailsCommand}" />
+                                    <KeyBinding Key="Enter"
+                                        Command="{Binding ActivateSelectedCommand}" />
+                                    <pin:GameControllerInputBinding Button="Start"
+                                        Command="{Binding OpenGameMenuCommand}" />
+                                    <pin:GameControllerInputBinding
+                                        Button="{Binding ElementName=GAMEPAD_Run, Path=Content}"
+                                        Command="{Binding ActivateSelectedCommand}" />
+                                    <pin:GameControllerInputBinding
+                                        Button="{Binding ElementName=GAMEPAD_Details, Path=Content}"
+                                        Command="{Binding ToggleGameDetailsCommand}" />
                                     <pin:GameControllerInputBinding
                                         Button="LeftShoulder"
                                         Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
@@ -831,6 +847,10 @@
                                     </Grid>
                                 </Grid>
 
+                                <ContentControl x:Name="ThemeOptions_AutoFilter" />
+
+                                <TextBlock Foreground="White" FontSize="28" Text="{Binding ElementName=ThemeOptions_AutoFilter, Path=Content.ActiveFilter.Name}" />
+
                                 <Grid x:Name="FILTER_GRID" FocusVisualStyle="{x:Null}"
                                     Grid.Column="0"
                                     Grid.Row="0"
@@ -838,7 +858,8 @@
                                     Grid.RowSpan="4"
                                     Panel.ZIndex="2"
                                     Opacity="0.999"
-                                    IsEnabled="False"
+                                    Focusable="True"
+                                    pbeh:FocusBahaviors.FocusBinding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"
                                 >
                                     <Grid.Resources>
                                         <Storyboard x:Key="FILTER_SwipeLeft"
@@ -1026,6 +1047,7 @@
                                     <Grid.Style>
                                         <Style TargetType="Grid">
                                             <!-- <Setter Property="Focusable" Value="True" /> -->
+                                            <Setter Property="IsEnabled" Value="False" />
                                             <Setter Property="Visibility" Value="Visible" />
                                             <Setter Property="Margin" Value="0,10,0,1000"/>
                                             <Style.Triggers>
@@ -1127,6 +1149,23 @@
                                             </Behaviors:Interaction.Triggers>
                                         </ContentControl>
 
+                                        <!-- <ContentControl x:Name="FILTER_Search">
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="Tag" Value="{Binding ActiveFilterPreset.Name}" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSearchActive}" Value="True">
+                                                            <Setter Property="Tag" Value="{Binding AppSettings.Fullscreen.FilterSettings.Name}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ActiveFilterPreset.Name}" Value="{x:Null}">
+                                                            <Setter Property="Tag" Value="No Filter"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl> -->
+
+
                                         <ContentControl x:Name="FILTER_Actual"
                                             Visibility="Collapsed"
                                             Tag="{Binding ActiveFilterPreset.Name, NotifyOnTargetUpdated=true}"
@@ -1162,11 +1201,7 @@
                                                 RenderOptions.BitmapScalingMode="Fant"
                                                 RenderTransformOrigin="0.5,0.5"
                                                 Stretch="Uniform"
-                                                Focusable="True"
                                                 MaxHeight="300"
-                                                pbeh:FocusBahaviors.OnVisibilityFocus="True"
-                                                pbeh:FocusBahaviors.FocusBinding="True"
-                                                FocusVisualStyle="{x:Null}"
                                                 Source="{ThemeFileBinding Data.Tag, Source={StaticResource FILTER_ActualImagePath}, PathFormat='Icons/Filter/{0}.png'}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
@@ -1830,136 +1865,186 @@
                                     </StackPanel>
                                 </Grid>
                                 <!--Wallpaper Vertical List-->
-                                <GameDetails x:Name="LIST_GameDetails"
-                                    Visibility="Collapsed"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
+                                <Grid x:Name="DetailsPanel"
                                     Grid.Row="1"
                                     Grid.RowSpan="2"
-                                    Grid.Column="0"
-                                    FocusVisualStyle="{x:Null}"
-                                    Margin="20,0,20,0"
-                                    DataContext="{Binding SelectedGame}">
-                                    <GameDetails.Style>
-                                        <Style TargetType="{x:Type GameDetails}">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate
-                                                        TargetType="{x:Type GameDetails}">
-                                                        <DockPanel x:Name="ListDetailsPannel"
-                                                            Width="860"
-                                                            Margin="20,5,0,0"
-                                                            HorizontalAlignment="Left"
-                                                            VerticalAlignment="Stretch"
-                                                            LastChildFill="True">
-                                                            <Grid DockPanel.Dock="Top">
-                                                                <Grid Width="640" Height="360"
-                                                                    DockPanel.Dock="Top"
-                                                                >
-                                                                    <FadeImage
-                                                                        x:Name="PART_ImageBackground"
-                                                                        RenderOptions.BitmapScalingMode="Fant"
-                                                                        Stretch="Uniform"
-                                                                        HorizontalContentAlignment="Center"
-                                                                        HorizontalAlignment="Center">
-                                                                        <FadeImage.Style>
-                                                                            <Style
-                                                                                TargetType="FadeImage">
-                                                                                <Style.Resources>
-                                                                                    <Storyboard
-                                                                                        x:Key="ImageIn"
-                                                                                        FillBehavior="Stop">
-                                                                                        <ThicknessAnimation
-                                                                                            Storyboard.TargetProperty="Margin"
-                                                                                            Duration="0:0:0.6"
-                                                                                            From="-90,-100,-1180,-625"
-                                                                                            To="0,0,0,0"
-                                                                                            DecelerationRatio="0.5"
-                                                                                            AccelerationRatio="0.5" />
-                                                                                    </Storyboard>
-                                                                                </Style.Resources>
-                                                                                <Style.Triggers>
-                                                                                    <DataTrigger
-                                                                                        Binding="{Binding ElementName=LIST_GameDetails, Path=Visibility}"
-                                                                                        Value="Visible">
-                                                                                        <DataTrigger.EnterActions>
-                                                                                            <BeginStoryboard
-                                                                                                Storyboard="{StaticResource ImageIn}" />
-                                                                                        </DataTrigger.EnterActions>
-                                                                                    </DataTrigger>
-                                                                                    <DataTrigger
-                                                                                        Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                                                                                        Value="Collapsed">
-                                                                                        <DataTrigger.EnterActions>
-                                                                                            <BeginStoryboard
-                                                                                                Storyboard="{StaticResource ImageIn}" />
-                                                                                        </DataTrigger.EnterActions>
-                                                                                    </DataTrigger>
-                                                                                    <DataTrigger
-                                                                                        Binding="{Binding ElementName=PART_ElemGameStatus, Path=Visibility}"
-                                                                                        Value="Collapsed">
-                                                                                        <DataTrigger.EnterActions>
-                                                                                            <BeginStoryboard
-                                                                                                Storyboard="{StaticResource ImageIn}" />
-                                                                                        </DataTrigger.EnterActions>
-                                                                                    </DataTrigger>
+                                    Grid.Column="0">
+                                    <GameDetails x:Name="LIST_GameDetails"
+                                        Visibility="Collapsed"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        FocusVisualStyle="{x:Null}"
+                                        Margin="20,0,20,0"
+                                        DataContext="{Binding SelectedGame}">
+                                        <GameDetails.Style>
+                                            <Style TargetType="{x:Type GameDetails}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate
+                                                            TargetType="{x:Type GameDetails}">
+                                                            <DockPanel x:Name="ListDetailsPannel"
+                                                                Width="860"
+                                                                Margin="20,5,0,0"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Stretch"
+                                                                LastChildFill="True">
+                                                                <Grid DockPanel.Dock="Top">
+                                                                    <Grid Width="640" Height="360"
+                                                                        DockPanel.Dock="Top"
+                                                                    >
+                                                                        <FadeImage
+                                                                            x:Name="PART_ImageBackground"
+                                                                            RenderOptions.BitmapScalingMode="Fant"
+                                                                            Stretch="Uniform"
+                                                                            HorizontalContentAlignment="Center"
+                                                                            HorizontalAlignment="Center">
+                                                                            <FadeImage.Style>
+                                                                                <Style
+                                                                                    TargetType="FadeImage">
+                                                                                    <Style.Resources>
+                                                                                        <Storyboard
+                                                                                            x:Key="ImageIn"
+                                                                                            FillBehavior="Stop">
+                                                                                            <DoubleAnimation
+                                                                                                Storyboard.TargetProperty="Opacity"
+                                                                                                Duration="0:0:1"
+                                                                                                From="0.99" To="0.99"/>
+                                                                                            <DoubleAnimation
+                                                                                                Storyboard.TargetProperty="Opacity"
+                                                                                                Duration="0:0:0"
+                                                                                                BeginTime="0:0:1"
+                                                                                                To="1"/>
+                                                                                            <ThicknessAnimation
+                                                                                                Storyboard.TargetProperty="Margin"
+                                                                                                Duration="0:0:0.6"
+                                                                                                From="-90,-100,-1180,-625"
+                                                                                                To="0,0,0,0"
+                                                                                                DecelerationRatio="0.5"
+                                                                                                AccelerationRatio="0.5" />
+                                                                                        </Storyboard>
+                                                                                    </Style.Resources>
+                                                                                    <Style.Triggers>
+                                                                                        <MultiDataTrigger>
+                                                                                            <MultiDataTrigger.Conditions>
+                                                                                                <Condition Binding="{Binding ElementName=LIST_GameDetails, Path=Visibility}" Value="Visible" />
+                                                                                            </MultiDataTrigger.Conditions>
 
-                                                                                </Style.Triggers>
-                                                                            </Style>
-                                                                        </FadeImage.Style>
-                                                                    </FadeImage>
-                                                                    <!-- Detail bar Video-->
-                                                                <!-- Trailer -->
-                                                                <Grid x:Name="TrailerTrigger">
-                                                                    <Grid.Style>
-                                                                        <Style TargetType="Grid">
-                                                                            <Setter Property="Background" Value="Black" />
-                                                                            <Setter Property="Opacity" Value="0" />
-                                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                                            <Setter Property="Tag" Value="NoSound" />
-                                                                    <Style.Triggers>
-                                                                    <MultiDataTrigger>
-                                                                        <MultiDataTrigger.Conditions>
-                                                                            <Condition
-                                                                                Binding="{Binding ElementName=Id, Path=Opacity}"
-                                                                                Value="1" />
-                                                                            <Condition
-                                                                                Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
-                                                                                Value="True" />
-                                                                        </MultiDataTrigger.Conditions>
-                                                                        <MultiDataTrigger.EnterActions>
-                                                                            <BeginStoryboard>
-                                                                                <Storyboard>
-                                                                                    <DoubleAnimation
-                                                                                        Storyboard.TargetProperty="Opacity"
-                                                                                        BeginTime="0:0:2" Duration="0:0:1"
-                                                                                        To="1" />
-                                                                                </Storyboard>
-                                                                            </BeginStoryboard>
-                                                                        </MultiDataTrigger.EnterActions>
-                                                                        <MultiDataTrigger.ExitActions>
-                                                                            <BeginStoryboard>
-                                                                                <Storyboard>
-                                                                                    <DoubleAnimation
-                                                                                        Storyboard.TargetProperty="Opacity"
-                                                                                        Duration="0:0:0" To="0" />
-                                                                                </Storyboard>
-                                                                            </BeginStoryboard>
-                                                                        </MultiDataTrigger.ExitActions>
-                                                                        <Setter Property="Visibility" Value="Visible" />
-                                                                    </MultiDataTrigger>
-                                                                    <DataTrigger Binding="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName}" Value="">
-                                                                        <Setter Property="Tag" Value="Sound" />
-                                                                    </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                                </Grid.Style>
-                                                                    <ContentControl
-                                                                        x:Name="ExtraMetadataLoader_VideoLoaderControl_NoControls_NoSound">
+                                                                                            <MultiDataTrigger.EnterActions>
+                                                                                                <BeginStoryboard
+                                                                                                    Storyboard="{StaticResource ImageIn}" />
+                                                                                            </MultiDataTrigger.EnterActions>
+                                                                                        </MultiDataTrigger>
+                                                                                        <DataTrigger
+                                                                                            Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                                                            Value="Collapsed">
+                                                                                            <DataTrigger.EnterActions>
+                                                                                                <BeginStoryboard
+                                                                                                    Storyboard="{StaticResource ImageIn}" />
+                                                                                            </DataTrigger.EnterActions>
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger
+                                                                                            Binding="{Binding ElementName=PART_ElemGameStatus, Path=Visibility}"
+                                                                                            Value="Collapsed">
+                                                                                            <DataTrigger.EnterActions>
+                                                                                                <BeginStoryboard
+                                                                                                    Storyboard="{StaticResource ImageIn}" />
+                                                                                            </DataTrigger.EnterActions>
+                                                                                        </DataTrigger>
+
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </FadeImage.Style>
+                                                                        </FadeImage>
+                                                                        <!-- Detail bar Video-->
+                                                                    <!-- Trailer -->
+                                                                    <Grid x:Name="TrailerTrigger">
+                                                                        <Grid.Style>
+                                                                            <Style TargetType="Grid">
+                                                                                <Setter Property="Background" Value="Black" />
+                                                                                <Setter Property="Opacity" Value="0" />
+                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                <Setter Property="Tag" Value="True"/>
+                                                                        <Style.Triggers>
+                                                                        <MultiDataTrigger>
+                                                                            <MultiDataTrigger.Conditions>
+                                                                                <Condition
+                                                                                    Binding="{Binding ElementName=PART_ImageBackground, Path=Opacity}"
+                                                                                    Value="1" />
+                                                                                <Condition
+                                                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
+                                                                                    Value="1" />
+                                                                                <Condition
+                                                                                    Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}"
+                                                                                    Value="True" />
+                                                                            </MultiDataTrigger.Conditions>
+                                                                            <MultiDataTrigger.EnterActions>
+                                                                                <BeginStoryboard>
+                                                                                    <Storyboard>
+                                                                                        <DoubleAnimation
+                                                                                            Storyboard.TargetProperty="Opacity"
+                                                                                            BeginTime="0:0:2" Duration="0:0:1"
+                                                                                            To="1" />
+                                                                                    </Storyboard>
+                                                                                </BeginStoryboard>
+                                                                            </MultiDataTrigger.EnterActions>
+                                                                            <MultiDataTrigger.ExitActions>
+                                                                                <BeginStoryboard>
+                                                                                    <Storyboard>
+                                                                                        <DoubleAnimation
+                                                                                            Storyboard.TargetProperty="Opacity"
+                                                                                            Duration="0:0:0" To="0" />
+                                                                                    </Storyboard>
+                                                                                </BeginStoryboard>
+                                                                            </MultiDataTrigger.ExitActions>
+                                                                            <Setter Property="Visibility" Value="Visible" />
+                                                                        </MultiDataTrigger>
+                                                                        <MultiDataTrigger>
+                                                                            <MultiDataTrigger.Conditions>
+                                                                                <Condition Binding="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName}" Value=""/>
+                                                                                <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}" Value="False" />
+                                                                            </MultiDataTrigger.Conditions>
+                                                                            <Setter Property="Tag" Value="False" />
+                                                                        </MultiDataTrigger>
+                                                                        <MultiDataTrigger>
+                                                                            <MultiDataTrigger.Conditions>
+                                                                                <Condition Binding="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName}" Value=""/>
+                                                                                <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Opacity}" Value="1"/>
+                                                                                <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}" Value="True" />
+                                                                            </MultiDataTrigger.Conditions>
+                                                                            <Setter Property="Tag" Value="False" />
+                                                                        </MultiDataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                    </Grid.Style>
+
+                                                                        <ContentControl
+                                                                            Tag="{Binding Tag, ElementName=TrailerTrigger, NotifyOnTargetUpdated=True}"
+                                                                            x:Name="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound">
+                                                                            <Behaviors:Interaction.Triggers>
+                                                                                <Behaviors:EventTrigger EventName="TargetUpdated">
+                                                                                    <Behaviors:Interaction.Behaviors>
+                                                                                        <BehaviorsCore:ConditionBehavior>
+                                                                                            <BehaviorsCore:ConditionBehavior.Condition>
+                                                                                                <BehaviorsCore:ConditionalExpression>
+                                                                                                    <BehaviorsCore:ConditionalExpression.Conditions>
+                                                                                                        <BehaviorsCore:ComparisonCondition
+                                                                                                            LeftOperand="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsVideoMuted}"
+                                                                                                            RightOperand="{Binding Tag, ElementName=TrailerTrigger}"
+                                                                                                            Operator="NotEqual" />
+                                                                                                        </BehaviorsCore:ConditionalExpression.Conditions>
+                                                                                                    </BehaviorsCore:ConditionalExpression>
+                                                                                                </BehaviorsCore:ConditionBehavior.Condition>
+                                                                                            </BehaviorsCore:ConditionBehavior>
+                                                                                    </Behaviors:Interaction.Behaviors>
+                                                                                    <Behaviors:InvokeCommandAction
+                                                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
+                                                                                </Behaviors:EventTrigger>
+                                                                            </Behaviors:Interaction.Triggers>
+
                                                                         <ContentControl.Style>
                                                                             <Style TargetType="ContentControl">
                                                                                 <Setter Property="Opacity" Value="0" />
-                                                                                <Setter Property="Background" Value="Black" />
+                                                                                <!-- <Setter Property="Background" Value="Black" /> -->
                                                                                 <Setter Property="Visibility" Value="Collapsed" />
                                                                                 <Setter Property="Margin" Value="0,0,0,0" />
                                                                                 <!-- <Setter Property="HorizontalContentAlignment"
@@ -1971,7 +2056,6 @@
                                                                                     <MultiDataTrigger>
                                                                                         <MultiDataTrigger.Conditions>
                                                                                             <Condition Binding="{Binding ElementName=TrailerTrigger, Path=Opacity}" Value="1" />
-                                                                                            <Condition Binding="{Binding ElementName=TrailerTrigger, Path=Tag}" Value="NoSound" />
                                                                                         </MultiDataTrigger.Conditions>
                                                                                         <Setter Property="Visibility" Value="Visible" />
                                                                                     </MultiDataTrigger>
@@ -1983,7 +2067,7 @@
                                                                                                 <Storyboard>
                                                                                                     <DoubleAnimation
                                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                                        BeginTime="0:0:0" Duration="0:0:0"
+                                                                                                        Duration="0:0:0"
                                                                                                         To="1" />
                                                                                                 </Storyboard>
                                                                                             </BeginStoryboard>
@@ -2012,368 +2096,309 @@
                                                                             </Style>
                                                                         </ContentControl.Style>
                                                                     </ContentControl>
-                                                                    <ContentControl
-                                                                        x:Name="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound">
+                                                                    </Grid>
 
-                                                                    <ContentControl.Style>
-                                                                        <Style TargetType="ContentControl">
-                                                                            <Setter Property="Opacity" Value="0" />
-                                                                            <Setter Property="Background" Value="Black" />
-                                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                                            <Setter Property="Margin" Value="0,0,0,0" />
-                                                                            <!-- <Setter Property="HorizontalContentAlignment"
-                                                                            Value="Stretch" /> -->
-                                                                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                                                                            <Setter Property="HorizontalAlignment" Value="Center" />
-                                                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                                                             <Style.Triggers>
-                                                                                <MultiDataTrigger>
-                                                                                    <MultiDataTrigger.Conditions>
-                                                                                        <Condition Binding="{Binding ElementName=TrailerTrigger, Path=Opacity}" Value="1" />
-                                                                                        <Condition Binding="{Binding ElementName=TrailerTrigger, Path=Tag}" Value="Sound" />
-                                                                                    </MultiDataTrigger.Conditions>
-                                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                                </MultiDataTrigger>
-                                                                                <DataTrigger
-                                                                                    Binding="{Binding ElementName=Id, Path=Opacity}"
-                                                                                    Value="1">
-                                                                                    <DataTrigger.EnterActions>
-                                                                                        <BeginStoryboard>
-                                                                                            <Storyboard>
-                                                                                                <DoubleAnimation
-                                                                                                    Storyboard.TargetProperty="Opacity"
-                                                                                                    BeginTime="0:0:0" Duration="0:0:0"
-                                                                                                    To="1" />
-                                                                                            </Storyboard>
-                                                                                        </BeginStoryboard>
-                                                                                    </DataTrigger.EnterActions>
-                                                                                    <DataTrigger.ExitActions>
-                                                                                        <BeginStoryboard>
-                                                                                            <Storyboard>
-                                                                                                <DoubleAnimation
-                                                                                                    Storyboard.TargetProperty="Opacity"
-                                                                                                    Duration="0:0:0" To="0" />
-                                                                                            </Storyboard>
-                                                                                        </BeginStoryboard>
-                                                                                    </DataTrigger.ExitActions>
-                                                                                </DataTrigger>
-                                                                                <!-- <DataTrigger
-                                                                                    Binding="{Binding ElementName=TrailerTrigger, Path=Opacity}"
-                                                                                    Value="1">
-                                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                                </DataTrigger> -->
-                                                                                <DataTrigger
-                                                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
-                                                                                    Value="Visible">
-                                                                                    <Setter Property="Visibility" Value="Collapsed" />
-                                                                                </DataTrigger>
-                                                                            </Style.Triggers>
-                                                                        </Style>
-                                                                    </ContentControl.Style>
-                                                                </ContentControl>
+
                                                                 </Grid>
-
-
-                                                            </Grid>
-                                                                <!-- Community Score Stars Start -->
-                                                                <Grid x:Name="CommunityScoreStars"
-                                                                    Margin="0,0,0,0"
-                                                                    HorizontalAlignment="Left"
-                                                                    VerticalAlignment="Top"
-                                                                >
-                                                                    <Grid.LayoutTransform>
-                                                                        <ScaleTransform ScaleX="2"
-                                                                            ScaleY="2" />
-                                                                    </Grid.LayoutTransform>
-                                                                    <TextBlock
+                                                                    <!-- Community Score Stars Start -->
+                                                                    <Grid x:Name="CommunityScoreStars"
+                                                                        Margin="0,0,0,0"
                                                                         HorizontalAlignment="Left"
-                                                                        VerticalAlignment="Bottom"
-                                                                        Width="30"
-                                                                        Style="{StaticResource TextBlockAltDetailStyle}"
-                                                                        Text="&#xe734;&#xe734;&#xe734;&#xe734;&#xe734;"
-                                                                        FontFamily="{DynamicResource FontAltIcoFont}"
-                                                                        TextAlignment="left"
-                                                                        FontSize="20"
-                                                                        TextWrapping="Wrap"
-                                                                        Height="100"
+                                                                        VerticalAlignment="Top"
                                                                     >
-                                                                    </TextBlock>
-                                                                    <Grid VerticalAlignment="Bottom"
-                                                                        Height="{Binding CommunityScore, FallbackValue=0}">
+                                                                        <Grid.LayoutTransform>
+                                                                            <ScaleTransform ScaleX="2"
+                                                                                ScaleY="2" />
+                                                                        </Grid.LayoutTransform>
                                                                         <TextBlock
                                                                             HorizontalAlignment="Left"
                                                                             VerticalAlignment="Bottom"
                                                                             Width="30"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            Text="&#xe735;&#xe735;&#xe735;&#xe735;&#xe735;"
+                                                                            Style="{StaticResource TextBlockAltDetailStyle}"
+                                                                            Text="&#xe734;&#xe734;&#xe734;&#xe734;&#xe734;"
                                                                             FontFamily="{DynamicResource FontAltIcoFont}"
-                                                                            TextAlignment="Left"
+                                                                            TextAlignment="left"
                                                                             FontSize="20"
                                                                             TextWrapping="Wrap"
-                                                                            Height="100">
+                                                                            Height="100"
+                                                                        >
+                                                                        </TextBlock>
+                                                                        <Grid VerticalAlignment="Bottom"
+                                                                            Height="{Binding CommunityScore, FallbackValue=0}">
+                                                                            <TextBlock
+                                                                                HorizontalAlignment="Left"
+                                                                                VerticalAlignment="Bottom"
+                                                                                Width="30"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                Text="&#xe735;&#xe735;&#xe735;&#xe735;&#xe735;"
+                                                                                FontFamily="{DynamicResource FontAltIcoFont}"
+                                                                                TextAlignment="Left"
+                                                                                FontSize="20"
+                                                                                TextWrapping="Wrap"
+                                                                                Height="100">
+                                                                            </TextBlock>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    <Grid VerticalAlignment="Bottom"
+                                                                        HorizontalAlignment="Left"
+                                                                        Margin="-8,0,0,-50">
+                                                                        <TextBlock
+                                                                            VerticalAlignment="Center"
+                                                                            HorizontalAlignment="Center"
+                                                                            Style="{StaticResource GameTitleHeaderText}"
+                                                                            Text="{Binding ReleaseYear, Converter={StaticResource ListToStringConverter}}"
+                                                                        >
+                                                                            <TextBlock.RenderTransform>
+                                                                                <RotateTransform
+                                                                                    Angle="-90" />
+                                                                            </TextBlock.RenderTransform>
                                                                         </TextBlock>
                                                                     </Grid>
+                                                                    <!-- Community Score Stars End -->
                                                                 </Grid>
-                                                                <Grid VerticalAlignment="Bottom"
-                                                                    HorizontalAlignment="Left"
-                                                                    Margin="-8,0,0,-50">
-                                                                    <TextBlock
-                                                                        VerticalAlignment="Center"
-                                                                        HorizontalAlignment="Center"
-                                                                        Style="{StaticResource GameTitleHeaderText}"
-                                                                        Text="{Binding ReleaseYear, Converter={StaticResource ListToStringConverter}}"
-                                                                    >
-                                                                        <TextBlock.RenderTransform>
-                                                                            <RotateTransform
-                                                                                Angle="-90" />
-                                                                        </TextBlock.RenderTransform>
-                                                                    </TextBlock>
-                                                                </Grid>
-                                                                <!-- Community Score Stars End -->
-                                                            </Grid>
-                                                            <StackPanel Orientation="Vertical"
-                                                                HorizontalAlignment="Stretch"
-                                                                DockPanel.Dock="Top"
-                                                                Margin="10,10,10,0">
-                                                                <TextBlock
-                                                                    Text="{Binding DisplayName}"
-                                                                    Margin="0,2,0,0"
-                                                                    HorizontalAlignment="Center"
-                                                                    TextAlignment="Center"
-                                                                    Style="{StaticResource GameTitleHeaderText}"
-                                                                    TextTrimming="CharacterEllipsis"
-                                                                    TextWrapping="Wrap"
-                                                                />
-                                                                <Rectangle
-                                                                    Fill="{DynamicResource TextAltBrush}"
-                                                                    Height="2"
-                                                                    HorizontalAlignment="Stretch"
-                                                                    Margin="-10,5,-10,0"
-                                                                    Opacity="0.4" />
-                                                            </StackPanel>
-                                                            <DockPanel DockPanel.Dock="Bottom">
-                                                                <TextBlock
-                                                                    Style="{StaticResource GameTitleHeaderText}"
-                                                                    Text="{Binding Developers[0], Converter={StaticResource ListToStringConverter}}"
-                                                                    DockPanel.Dock="Left"
-                                                                    Margin="0,10,0,0">
-                                                                </TextBlock>
-                                                                <TextBlock
-                                                                    Style="{StaticResource GameTitleHeaderText}"
-                                                                    DockPanel.Dock="Right"
-                                                                    TextAlignment="Right"
-                                                                    Text="{Binding Genres[0], Converter={StaticResource ListToStringConverter}}"
-                                                                    VerticalAlignment="Center"
-                                                                    Margin="0,10,0,0">
-                                                                </TextBlock>
-                                                            </DockPanel>
-
-                                                            <ScrollViewerEx
-                                                                x:Name="PART_ScrollHtmlDescription"
-                                                                FocusVisualStyle="{x:Null}"
-                                                                Margin="20,20,20,20"
-                                                                pbeh:FocusBahaviors.FocusBinding="{Binding ElementName=LIST_GameDetails, Path=IsFocused }"
-                                                                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                                            >
                                                                 <StackPanel Orientation="Vertical"
-                                                                    HorizontalAlignment="Stretch">
-                                                                    <HtmlTextView
-                                                                        x:Name="PART_HtmlDescription"
-                                                                        HtmlFontSize="{DynamicResource FontSizeMedium}"
-                                                                        HtmlFontFamily="{DynamicResource FontThemeMain}"
-                                                                        HtmlForeground="{DynamicResource Description}"
-                                                                        LinkForeground="{DynamicResource GlyphColor}"
-                                                                        FocusVisualStyle="{x:Null}" />
-
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCLibrary}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding Source}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            TextWrapping="Wrap"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCGamePlatformTitle}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding Platforms, Converter={StaticResource ListToStringConverter}}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCCriticScore}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding CriticScore}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCCommunityScore}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding CommunityScore}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCTimePlayed}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCAgeRatingsLabel}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding AgeRatings, Converter={StaticResource ListToStringConverter}}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCSize}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding InstallSize, Converter={StaticResource NullableUlongBytesSizeToStringConverter},
-                                                            ConverterParameter=' / '}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCGenresLabel}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' / '}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            TextWrapping="Wrap"
-                                                                            MaxHeight="200"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
-                                                                    <StackPanel
-                                                                        Orientation="Horizontal"
-                                                                        HorizontalAlignment="Left"
-                                                                        Margin="0,10,0,0">
-                                                                        <TextBlock
-                                                                            Text="{DynamicResource LOCFeaturesLabel}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextAlignment="Left"
-                                                                            Margin="10,2,10,0" />
-                                                                        <TextBlock
-                                                                            Text="{Binding Features, Converter={StaticResource ListToStringConverter}}"
-                                                                            Margin="0,2,0,0"
-                                                                            Style="{StaticResource TextBlockDetailStyle}"
-                                                                            TextWrapping="Wrap"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            MaxHeight="200"
-                                                                            MaxWidth="550" />
-                                                                    </StackPanel>
+                                                                    HorizontalAlignment="Stretch"
+                                                                    DockPanel.Dock="Top"
+                                                                    Margin="10,10,10,0">
+                                                                    <TextBlock
+                                                                        Text="{Binding DisplayName}"
+                                                                        Margin="0,2,0,0"
+                                                                        HorizontalAlignment="Center"
+                                                                        TextAlignment="Center"
+                                                                        Style="{StaticResource GameTitleHeaderText}"
+                                                                        TextTrimming="CharacterEllipsis"
+                                                                        TextWrapping="Wrap"
+                                                                    />
+                                                                    <Rectangle
+                                                                        Fill="{DynamicResource TextAltBrush}"
+                                                                        Height="2"
+                                                                        HorizontalAlignment="Stretch"
+                                                                        Margin="-10,5,-10,0"
+                                                                        Opacity="0.4" />
                                                                 </StackPanel>
-                                                            </ScrollViewerEx>
-                                                        </DockPanel>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
+                                                                <DockPanel DockPanel.Dock="Bottom">
+                                                                    <TextBlock
+                                                                        Style="{StaticResource GameTitleHeaderText}"
+                                                                        Text="{Binding Developers[0], Converter={StaticResource ListToStringConverter}}"
+                                                                        DockPanel.Dock="Left"
+                                                                        Margin="0,10,0,0">
+                                                                    </TextBlock>
+                                                                    <TextBlock
+                                                                        Style="{StaticResource GameTitleHeaderText}"
+                                                                        DockPanel.Dock="Right"
+                                                                        TextAlignment="Right"
+                                                                        Text="{Binding Genres[0], Converter={StaticResource ListToStringConverter}}"
+                                                                        VerticalAlignment="Center"
+                                                                        Margin="0,10,0,0">
+                                                                    </TextBlock>
+                                                                </DockPanel>
 
-                                    </GameDetails.Style>
-                                </GameDetails>
+                                                                <ScrollViewerEx
+                                                                    x:Name="PART_ScrollHtmlDescription"
+                                                                    FocusVisualStyle="{x:Null}"
+                                                                    Margin="20,20,20,20"
+                                                                    pbeh:FocusBahaviors.FocusBinding="{Binding ElementName=LIST_GameDetails, Path=IsFocused }"
+                                                                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                                >
+                                                                    <StackPanel Orientation="Vertical"
+                                                                        HorizontalAlignment="Stretch">
+                                                                        <HtmlTextView
+                                                                            x:Name="PART_HtmlDescription"
+                                                                            HtmlFontSize="{DynamicResource FontSizeMedium}"
+                                                                            HtmlFontFamily="{DynamicResource FontThemeMain}"
+                                                                            HtmlForeground="{DynamicResource Description}"
+                                                                            LinkForeground="{DynamicResource GlyphColor}"
+                                                                            FocusVisualStyle="{x:Null}" />
 
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCLibrary}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding Source}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                TextWrapping="Wrap"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCGamePlatformTitle}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding Platforms, Converter={StaticResource ListToStringConverter}}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCCriticScore}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding CriticScore}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCCommunityScore}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding CommunityScore}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCTimePlayed}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCAgeRatingsLabel}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding AgeRatings, Converter={StaticResource ListToStringConverter}}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCSize}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding InstallSize, Converter={StaticResource NullableUlongBytesSizeToStringConverter},
+                                                                ConverterParameter=' / '}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCGenresLabel}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter=' / '}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                TextWrapping="Wrap"
+                                                                                MaxHeight="200"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="0,10,0,0">
+                                                                            <TextBlock
+                                                                                Text="{DynamicResource LOCFeaturesLabel}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}" />
+                                                                            <TextBlock Text=":"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextAlignment="Left"
+                                                                                Margin="10,2,10,0" />
+                                                                            <TextBlock
+                                                                                Text="{Binding Features, Converter={StaticResource ListToStringConverter}}"
+                                                                                Margin="0,2,0,0"
+                                                                                Style="{StaticResource TextBlockDetailStyle}"
+                                                                                TextWrapping="Wrap"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxHeight="200"
+                                                                                MaxWidth="550" />
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+                                                                </ScrollViewerEx>
+                                                            </DockPanel>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+
+                                        </GameDetails.Style>
+                                    </GameDetails>
+                                </Grid>
 
                                 <!--CoverListHorizontal-->
                                 <Grid x:Name="GameListContainer">
@@ -2557,22 +2582,7 @@
                                                  Menu => equal swapable Gamepad Run (X)
                                                  Details => equal swapable Gamepad Details (A)
                                             -->
-                                            <KeyBinding
-                                                Key="{Binding ElementName=GAMEPAD_Run, Path=Content}"
-                                                Command="{Binding OpenGameMenuCommand}" />
-                                            <KeyBinding
-                                                Key="{Binding ElementName=GAMEPAD_Details, Path=Content}"
-                                                Command="{Binding ToggleGameDetailsCommand}" />
-                                            <KeyBinding Key="Enter"
-                                                Command="{Binding ActivateSelectedCommand}" />
-                                            <pin:GameControllerInputBinding Button="Start"
-                                                Command="{Binding OpenGameMenuCommand}" />
-                                            <pin:GameControllerInputBinding
-                                                Button="{Binding ElementName=GAMEPAD_Run, Path=Content}"
-                                                Command="{Binding ActivateSelectedCommand}" />
-                                            <pin:GameControllerInputBinding
-                                                Button="{Binding ElementName=GAMEPAD_Details, Path=Content}"
-                                                Command="{Binding ToggleGameDetailsCommand}" />
+
                                         </ListBoxEx.InputBindings>
                                     </ListBoxEx>
 
@@ -2591,7 +2601,9 @@
 
                                 </Grid>
 
-                                <TextBlock Grid.RowSpan="5" Grid.ColumnSpan="3"
+                                <TextBlock
+                                    x:Name="NoGameText"
+                                    Grid.RowSpan="5" Grid.ColumnSpan="3"
                                     FontSize="{DynamicResource FontSizeLarge}"
                                     Text="{DynamicResource LOCNoGamesFound}"
                                     TextAlignment="Center" HorizontalAlignment="Center"
@@ -2833,7 +2845,7 @@
                                 </Grid>
                                 <Grid x:Name="BottomButtonPanel" Panel.ZIndex="1000" Grid.Row="4" Grid.ColumnSpan="3"
 
-                                    Height="60" Width="1920">
+                                    Height="60">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
@@ -2844,7 +2856,15 @@
                                     <Grid.Style>
                                         <Style TargetType="Grid">
                                             <Setter Property="Background" Value="{DynamicResource TopBarBackgroundBrush}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}"
+                                                    Value="Visible">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
                                         </Style>
+
                                     </Grid.Style>
 
                                     <ButtonEx x:Name="HELP_ButtonMenu"
@@ -2940,15 +2960,6 @@
                                         Text="{Binding CurrentTime.Time, Mode=OneWay}"
                                         Grid.Column="4">
                                     </TextBlock>
-
-                                    <!-- <TextBlock x:Name="PART_TextClock"
-                                        Style="{DynamicResource ThemeTextBlockBaseStyle}"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Right"
-                                        Margin="0,0,30,0"
-                                        Grid.Column="4">
-                                    </TextBlock> -->
-
                                 </Grid>
                             </Grid>  <!--
                             Control grid-->
@@ -3321,10 +3332,12 @@
                                     Value="1" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="GameListContainer" />
-                            <!-- <Setter Property="Visibility" Value="Collapsed" TargetName="LIST_GameDetails" /> -->
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="DetailsPanel" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="NoGameText" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="BackgroundImageGrid" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="AgeRatingsContainer" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="LogoContainer" />
+                            <Setter Property="IsEnabled" Value="True" TargetName="FILTER_GRID" />
 
                         </MultiDataTrigger>
 
@@ -3397,7 +3410,6 @@
                         <DataTrigger Binding="{Binding ChildOpened}" Value="True">
                             <Setter TargetName="BottomButtonPanel" Property="Background" Value="#DD000000"/>
                         </DataTrigger>
-
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
