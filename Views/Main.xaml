@@ -1185,7 +1185,7 @@
                                         <Image x:Name="FILTER_BackgroundImage"
                                             RenderOptions.BitmapScalingMode="Fant"
                                             RenderTransformOrigin="0.5,0.5"
-                                            Stretch="Uniform"
+                                            Stretch="UniformToFill"
                                             Source="{ThemeFileBinding Data.Tag, Source={StaticResource FILTER_ActualImagePath}, PathFormat='Icons/FilterBackground/{0}.jpg'}"
                                             HorizontalAlignment="Center" VerticalAlignment="Center">
                                             <Image.Style>
@@ -1260,83 +1260,100 @@
                                             <Grid.Style>
                                                 <Style TargetType="Grid">
                                                     <Setter Property="Margin" Value="0" />
-                                                    <Setter Property="Width" Value="1920" />
-                                                    <Setter Property="Height" Value="1080" />
+                                                    <!-- <Setter Property="Width" Value="1920" />
+                                                    <Setter Property="Height" Value="1080" /> -->
                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                 </Style>
                                             </Grid.Style>
                                         <Image
                                             RenderOptions.BitmapScalingMode="Fant"
                                             RenderTransformOrigin="0.5,0.5"
-                                            Stretch="Uniform"
+                                            Stretch="Fill"
                                             Source="{ThemeFile 'Images/backfade.png'}"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                                         </Image>
-                                        <StackPanel x:Name="FILTER_GameCount" VerticalAlignment="Bottom" Margin="0,0,0,60" Orientation="Vertical">
-                                        <StackPanel x:Name="ReflectedText" Orientation="Horizontal" HorizontalAlignment="Center"
-                                            >
-                                            <StackPanel.Style>
-                                                <Style TargetType="StackPanel">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=FILTER_GRID, Path=Opacity}" Value="1">
-                                                            <Setter Property="Tag" Value="Visible" />
-                                                            <Setter Property="Effect">
-                                                                <Setter.Value>
-                                                                    <DropShadowEffect ShadowDepth="1" Color="Black"
-                                                                        RenderingBias="Quality" BlurRadius="10"
-                                                                        Opacity="1" />
-                                                                </Setter.Value>
-                                                            </Setter>
+                                        <StackPanel x:Name="FILTER_GameCount"
+                                                VerticalAlignment="Bottom"
+                                                Margin="0,0,0,60"
+                                                Orientation="Vertical">
+                                            <StackPanel x:Name="ReflectedText"
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                                <StackPanel.Style>
+                                                    <Style TargetType="StackPanel">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=FILTER_GRID, Path=Opacity}"
+                                                                    Value="1">
+                                                                <Setter Property="Tag"
+                                                                        Value="Visible"/>
+                                                                <Setter Property="Effect">
+                                                                    <Setter.Value>
+                                                                        <DropShadowEffect ShadowDepth="1"
+                                                                                Color="Black"
+                                                                                            RenderingBias="Quality"
+                                                                                BlurRadius="10"
+                                                                                            Opacity="1"/>
+                                                                    </Setter.Value>
+                                                                </Setter>
 
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </StackPanel.Style>
-                                            <TextBlock
-                                                Text="{Binding Items.Count, ElementName=PART_ListGameItems}"
-                                                Style="{DynamicResource BottomBarStyle}"
-                                                FontSize="50"
-                                                FontWeight="Bold"
-                                                VerticalAlignment="Bottom"
-                                                Margin="0,0,15,0" />
-                                            <TextBlock
-                                                Text="GAMES"
-                                                Style="{DynamicResource BottomBarStyle}"
-                                                Foreground="GhostWhite"
-                                                VerticalAlignment="Bottom"
-                                                FontWeight="Bold"
-                                                FontSize="50" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </StackPanel.Style>
+                                                <TextBlock
+                                                    Text="{Binding Items.Count, ElementName=PART_ListGameItems}"
+                                                    Style="{DynamicResource BottomBarStyle}"
+                                                    FontSize="50"
+                                                    FontWeight="Bold"
+                                                    VerticalAlignment="Bottom"
+                                                    Margin="0,0,15,0"/>
+                                                <TextBlock
+                                                    Text="GAMES"
+                                                    Style="{DynamicResource BottomBarStyle}"
+                                                    Foreground="GhostWhite"
+                                                    VerticalAlignment="Bottom"
+                                                    FontWeight="Bold"
+                                                    FontSize="50"/>
                                             </StackPanel>
                                             <!-- The object to contain the reflection. -->
                                             <Rectangle
                                                 Visibility="{Binding ElementName=ReflectedText, Path=Tag, TargetNullValue=Collapsed}"
-                                                DataContext="{Binding ElementName=ReflectedText}" Height="{Binding Path=ActualHeight}" Width="{Binding Path=ActualWidth}">
+                                                DataContext="{Binding ElementName=ReflectedText}"
+                                                    Height="{Binding Path=ActualHeight}"
+                                                    Width="{Binding Path=ActualWidth}">
                                                 <Rectangle.Fill>
                                                     <!-- Creates the reflection. -->
-                                                    <VisualBrush Opacity="0.75" Stretch="None" Visual="{Binding}">
+                                                    <VisualBrush Opacity="0.75"
+                                                            Stretch="None"
+                                                            Visual="{Binding}">
                                                         <VisualBrush.RelativeTransform>
                                                             <!-- Flip the reflection. -->
                                                             <TransformGroup>
-                                                                <ScaleTransform ScaleX="1" ScaleY="-1" />
-                                                                <TranslateTransform Y="1" />
+                                                                <ScaleTransform ScaleX="1"
+                                                                        ScaleY="-1"/>
+                                                                <TranslateTransform Y="1"/>
                                                             </TransformGroup>
                                                         </VisualBrush.RelativeTransform>
                                                     </VisualBrush>
                                                 </Rectangle.Fill>
                                                 <Rectangle.OpacityMask>
-                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                                        <GradientStop Color="#AA000000" Offset="0.0" />
-                                                        <GradientStop Color="#33000000" Offset="0.5" />
-                                                        <GradientStop Color="#00000000" Offset="0.75" />
+                                                    <LinearGradientBrush StartPoint="0.5,0"
+                                                            EndPoint="0.5,1">
+                                                        <GradientStop Color="#AA000000"
+                                                                Offset="0.0"/>
+                                                        <GradientStop Color="#33000000"
+                                                                Offset="0.5"/>
+                                                        <GradientStop Color="#00000000"
+                                                                Offset="0.75"/>
                                                     </LinearGradientBrush>
                                                 </Rectangle.OpacityMask>
                                                 <Rectangle.Effect>
-                                                    <BlurEffect Radius="3.5" />
+                                                    <BlurEffect Radius="3.5"/>
                                                 </Rectangle.Effect>
                                             </Rectangle>
                                         </StackPanel>
-                                    </Grid>
+                                        </Grid>
 
                                     </Grid>
                                 </Grid>
@@ -2001,45 +2018,36 @@
                                                                         <MultiDataTrigger>
                                                                             <MultiDataTrigger.Conditions>
                                                                                 <Condition Binding="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName}" Value=""/>
-                                                                                <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}" Value="False" />
-                                                                            </MultiDataTrigger.Conditions>
-                                                                            <Setter Property="Tag" Value="False" />
-                                                                        </MultiDataTrigger>
-                                                                        <MultiDataTrigger>
-                                                                            <MultiDataTrigger.Conditions>
-                                                                                <Condition Binding="{Binding ElementName=Sounds_MusicControl, Path=Content.CurrentMusicName}" Value=""/>
-                                                                                <Condition Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Opacity}" Value="1"/>
-                                                                                <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}" Value="True" />
+                                                                                <!-- <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=StartNoSound}" Value="False" /> -->
                                                                             </MultiDataTrigger.Conditions>
                                                                             <Setter Property="Tag" Value="False" />
                                                                         </MultiDataTrigger>
                                                                         </Style.Triggers>
                                                                     </Style>
                                                                     </Grid.Style>
-
-                                                                        <ContentControl
-                                                                            Tag="{Binding Tag, ElementName=TrailerTrigger, NotifyOnTargetUpdated=True}"
-                                                                            x:Name="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound">
-                                                                            <Behaviors:Interaction.Triggers>
-                                                                                <Behaviors:EventTrigger EventName="TargetUpdated">
-                                                                                    <Behaviors:Interaction.Behaviors>
-                                                                                        <BehaviorsCore:ConditionBehavior>
-                                                                                            <BehaviorsCore:ConditionBehavior.Condition>
-                                                                                                <BehaviorsCore:ConditionalExpression>
-                                                                                                    <BehaviorsCore:ConditionalExpression.Conditions>
-                                                                                                        <BehaviorsCore:ComparisonCondition
-                                                                                                            LeftOperand="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted}"
-                                                                                                            RightOperand="{Binding Tag, ElementName=TrailerTrigger}"
-                                                                                                            Operator="NotEqual" />
-                                                                                                        </BehaviorsCore:ConditionalExpression.Conditions>
-                                                                                                    </BehaviorsCore:ConditionalExpression>
-                                                                                                </BehaviorsCore:ConditionBehavior.Condition>
-                                                                                            </BehaviorsCore:ConditionBehavior>
-                                                                                    </Behaviors:Interaction.Behaviors>
-                                                                                    <Behaviors:InvokeCommandAction
-                                                                                        Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
-                                                                                </Behaviors:EventTrigger>
-                                                                            </Behaviors:Interaction.Triggers>
+                                                                    <ContentControl
+                                                                        Tag="{Binding Tag, ElementName=TrailerTrigger, NotifyOnTargetUpdated=True}"
+                                                                        x:Name="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound">
+                                                                        <Behaviors:Interaction.Triggers>
+                                                                            <Behaviors:EventTrigger EventName="TargetUpdated">
+                                                                                <Behaviors:Interaction.Behaviors>
+                                                                                    <BehaviorsCore:ConditionBehavior>
+                                                                                        <BehaviorsCore:ConditionBehavior.Condition>
+                                                                                            <BehaviorsCore:ConditionalExpression>
+                                                                                                <BehaviorsCore:ConditionalExpression.Conditions>
+                                                                                                    <BehaviorsCore:ComparisonCondition
+                                                                                                        LeftOperand="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted}"
+                                                                                                        RightOperand="{Binding Tag, ElementName=TrailerTrigger}"
+                                                                                                        Operator="NotEqual" />
+                                                                                                    </BehaviorsCore:ConditionalExpression.Conditions>
+                                                                                                </BehaviorsCore:ConditionalExpression>
+                                                                                            </BehaviorsCore:ConditionBehavior.Condition>
+                                                                                        </BehaviorsCore:ConditionBehavior>
+                                                                                </Behaviors:Interaction.Behaviors>
+                                                                                <Behaviors:InvokeCommandAction
+                                                                                    Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
+                                                                            </Behaviors:EventTrigger>
+                                                                        </Behaviors:Interaction.Triggers>
 
                                                                         <ContentControl.Style>
                                                                             <Style TargetType="ContentControl">
