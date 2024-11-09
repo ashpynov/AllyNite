@@ -31,13 +31,24 @@
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
+                                <Setter Property="Opacity" Value="0" />
                                 <!-- Déclencheurs de style -->
                                 <Style.Triggers>
-                                    <!-- Déclencheurs vides -->
+                                    <EventTrigger RoutedEvent="Window.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                    BeginTime="0:0:1"
+                                                    Duration="0:0:1"
+                                                    From="0" To="1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Grid.Style>
 
+                        <!--
                         <Grid Name="IntroVideoBackground" Panel.ZIndex="99" Background="Black"
                             IsHitTestVisible="False">
                             <Grid.Style>
@@ -74,7 +85,7 @@
                                 </Style>
                             </Grid.Style>
                         </Grid>
-
+                        -->
                         <ContentControl x:Name="GAMEPAD_Confirm" Visibility="Collapsed">
                             <ContentControl.Style>
                                 <Style TargetType="ContentControl">
@@ -155,47 +166,35 @@
 
 
                         <!-- Grille pour la vidéo d'introduction -->
-                        <!-- Grille pour la vidéo d'introduction -->
-                        <Grid Name="IntroVideo" Panel.ZIndex="100">
-                            <!-- Élément multimédia pour la vidéo -->
+                        <!-- <Grid Name="IntroVideo" Panel.ZIndex="100">
                             <MediaElement x:Name="IntroVideoElement"
                                 Source="{ThemeFile 'Startup Video/IntroVideo.mp4'}"
                                 Stretch="UniformToFill"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 SnapsToDevicePixels="True">
-                                <!-- Style de l'élément multimédia -->
                                 <MediaElement.Style>
                                     <Style TargetType="MediaElement">
                                         <Setter Property="Opacity" Value="1" />
-                                        <!-- Déclencheurs de style pour l'élément multimédia -->
                                         <Style.Triggers>
-                                            <!-- Déclencheur déclenché à la fin de la vidéo -->
                                             <EventTrigger RoutedEvent="MediaElement.MediaEnded">
-                                                <!-- Début de l'animation -->
                                                 <BeginStoryboard>
-                                                    <!-- Storyboard pour l'animation de disparition -->
                                                     <Storyboard>
-                                                        <!-- Animation de l'opacité -->
                                                         <DoubleAnimation
                                                             Storyboard.TargetProperty="Opacity"
                                                             From="1" To="0"
                                                             Duration="0:0:1.5"
                                                             FillBehavior="HoldEnd" />
-                                                        <!-- Animation de la visibilité -->
                                                         <ObjectAnimationUsingKeyFrames
                                                             BeginTime="00:00:00"
                                                             Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                            <!-- Image visible -->
                                                             <DiscreteObjectKeyFrame
                                                                 KeyTime="00:00:00"
                                                                 Value="{x:Static Visibility.Visible}" />
-                                                            <!-- Image cachée -->
                                                             <DiscreteObjectKeyFrame
                                                                 KeyTime="00:00:0.5"
                                                                 Value="{x:Static Visibility.Collapsed}" />
                                                         </ObjectAnimationUsingKeyFrames>
-
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>
@@ -204,7 +203,7 @@
                                 </MediaElement.Style>
                             </MediaElement>
                         </Grid>
-
+ -->
                         <!-- Grille pour l'hôte de la vue -->
 
                         <Grid x:Name="PART_ViewHost">
