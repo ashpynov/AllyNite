@@ -595,12 +595,19 @@
     <pcon:InvertedObjectEqualityToBoolConverter x:Key="InvertedObjectEqualityToBoolConverter" />
 
 
-    <DataTemplate x:Key="ButtonPromptDPad">
+    <DataTemplate x:Key="ButtonPromptDPadLeftRight">
         <Viewbox>
-            <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
-                        Height="8"
-                        Foreground="{DynamicResource TextBrush}"
-                        Text="d" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
+                            Height="11"
+                            Foreground="{DynamicResource TextBrush}"
+                            Text="f" />
+                <TextBlock FontFamily="{DynamicResource FontXboxOneController}"
+                            Height="11"
+                            Margin="2,0,0,0"
+                            Foreground="{DynamicResource TextBrush}"
+                            Text="z" />
+            </StackPanel>
         </Viewbox>
     </DataTemplate>
 

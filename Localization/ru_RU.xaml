@@ -6,5 +6,6 @@
     <sys:String x:Key="LOCAllyNite_HideTrailer">Скрыть Видео</sys:String>
     <sys:String x:Key="LOCAllyNite_MuteTrailer">Выключить звук</sys:String>
     <sys:String x:Key="LOCAllyNite_UnmuteTrailer">Включить звук</sys:String>
+    <sys:String x:Key="LOCAllyNite_ChooseFilter">Сменить</sys:String>
 
 </ResourceDictionary>

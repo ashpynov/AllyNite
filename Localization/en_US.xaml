@@ -6,5 +6,6 @@
     <sys:String x:Key="LOCAllyNite_HideTrailer">Hide Trailer</sys:String>
     <sys:String x:Key="LOCAllyNite_MuteTrailer">Mute Trailer</sys:String>
     <sys:String x:Key="LOCAllyNite_UnmuteTrailer">Unmute Trailer</sys:String>
+    <sys:String x:Key="LOCAllyNite_ChooseFilter">Choose</sys:String>
 
 </ResourceDictionary>

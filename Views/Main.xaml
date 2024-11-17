@@ -846,7 +846,7 @@
                                     </Grid>
                                 </Grid>
 
-                                <ContentControl x:Name="ThemeOptions_AutoFilter" />
+                                <ContentControl x:Name="ThemeOptions_AutoFilter" Visibility="Collapsed" />
 
                                 <TextBlock Foreground="White" FontSize="28" Text="{Binding ElementName=ThemeOptions_AutoFilter, Path=Content.ActiveFilter.Name}" />
 
@@ -1072,8 +1072,21 @@
                                         <ContentControl
                                             x:Name="FILTER_CurrentName"
                                             Visibility="Collapsed"
-                                            Tag="{Binding ActiveFilterPreset.Name, FallbackValue='None', TargetNullValue='None'}"
-                                        />
+                                        >
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="Tag" Value="{Binding ActiveFilterPreset.Name, FallbackValue='None', TargetNullValue='None'}" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsExtraFilterActive}" Value="True">
+                                                            <Setter Property="Tag" Value="Custom" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsSearchActive}" Value="True" >
+                                                            <Setter Property="Tag" Value="{Binding AppSettings.Fullscreen.FilterSettings.Name}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
 
                                         <ContentControl
                                             x:Name="FILTER_Show"
@@ -1205,35 +1218,57 @@
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
                                             </Image>
+                                            
+                                                <!-- <DataTrigger Binding="{Binding IsSearchActive}" Value="True" >
+                                                    <Setter Property="Tag" Value="{Binding AppSettings.Fullscreen.FilterSettings.Name}" />
+                                                </DataTrigger> -->
                                             <Viewbox VerticalAlignment="Center">
-                                                <TextBlock
-                                                    Text="{Binding Data.Tag, Source={StaticResource FILTER_ActualImagePath}}"
-                                                    TextWrapping="WrapWithOverflow"
-                                                    TextTrimming="CharacterEllipsis"
-                                                    FontSize="150"
-                                                    FontWeight="Bold"
-                                                    MaxWidth="1500"
-                                                    LineStackingStrategy="BlockLineHeight"
-                                                    LineHeight="150"
-                                                    VerticalAlignment="Center"
-                                                    TextAlignment="Center"
-                                                    Foreground="White">
-                                                    <TextBlock.Style>
-                                                        <Style TargetType="TextBlock">
-                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                            <Style.Triggers>
-                                                                <!-- Déclencheurs de visibilité -->
-                                                                <MultiDataTrigger>
-                                                                    <MultiDataTrigger.Conditions>
-                                                                        <Condition Binding="{Binding ElementName=FilterImage, Path=Source}" Value="{x:Null}"/>
-                                                                    </MultiDataTrigger.Conditions>
-                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                </MultiDataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </TextBlock.Style>
-                                                </TextBlock>
+                                                <StackPanel 
+                                                    Orientation="Horizontal" 
+                                                    VerticalAlignment="Center" 
+                                                    HorizontalAlignment="Center"
+                                                    MaxHeight="150" >
+                                                    <TextBlock Text="&#xed12;" 
+                                                        FontFamily="{StaticResource FontIcoFont}"
+                                                        FontSize="120"
+                                                        TextAlignment="Center"
+                                                        VerticalAlignment="Center" 
+                                                        Foreground="White"
+                                                        Margin="0,0,20,0"
+                                                        Visibility="{Binding IsSearchActive, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                    />
+                                                    <Viewbox VerticalAlignment="Center">
+                                                        <TextBlock
+                                                            Text="{Binding Data.Tag, Source={StaticResource FILTER_ActualImagePath}}"
+                                                            TextWrapping="WrapWithOverflow"
+                                                            TextTrimming="CharacterEllipsis"
+                                                            FontSize="140"
+                                                            FontWeight="Bold"
+                                                            MaxWidth="1500"
+                                                            LineStackingStrategy="BlockLineHeight"
+                                                            LineHeight="150"
+                                                            VerticalAlignment="Center"
+                                                            TextAlignment="Center"
+                                                            Foreground="White">
+                                                            <TextBlock.Style>
+                                                                <Style TargetType="TextBlock">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    <Style.Triggers>
+                                                                        <!-- Déclencheurs de visibilité -->
+                                                                        <MultiDataTrigger>
+                                                                            <MultiDataTrigger.Conditions>
+                                                                                <Condition Binding="{Binding ElementName=FilterImage, Path=Source}" Value="{x:Null}"/>
+                                                                            </MultiDataTrigger.Conditions>
+                                                                            <Setter Property="Visibility" Value="Visible" />
+                                                                        </MultiDataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </TextBlock.Style>
+                                                        </TextBlock>
+                                                    </Viewbox>
+                                                </StackPanel>
                                             </Viewbox>
+                                            
 
                                             <Grid.Style>
                                                 <Style TargetType="Grid">
@@ -2909,6 +2944,11 @@
                                             </ButtonEx.Style>
                                         </ButtonEx>
 
+                                        <ButtonEx x:Name="HELP_ButtonSelectFilter"
+                                            Style="{DynamicResource ButtonBottomMenu}"
+                                            InputHint="{DynamicResource ButtonPromptDPadLeftRight}"
+                                            Content="{DynamicResource LOCAllyNite_ChooseFilter}" />
+
                                         <ButtonEx x:Name="HELP_ButtonHideFilter"
                                             Style="{DynamicResource ButtonBottomMenu}"
                                             InputHint="{Binding ElementName=GAMEPAD_Confirm, Path=Tag}"
@@ -2946,7 +2986,7 @@
                                                 InputHint="{Binding ElementName=GAMEPAD_Filter, Path=Tag}"
                                                 Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
                                                 CommandParameter="{Binding ElementName=FILTER_Show}"
-                                                Content="{DynamicResource LOCBackLabel}" />
+                                                Content="{DynamicResource LOCFilters}" />
 
                                             <!--Options-->
                                             <ButtonEx x:Name="PART_ButtonGameOptions"
@@ -3351,6 +3391,7 @@
                         <DataTrigger Binding="{Binding ElementName=FILTER_Visible, Path=Visibility}" Value="Visible">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_GameButtons" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_ButtonShowFilter" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="HELP_ButtonSelectFilter" />
                             <Setter Property="Visibility" Value="Visible" TargetName="HELP_ButtonHideFilter" />
                             <Setter Property="Focusable" Value="False" TargetName="PART_ButtonMainMenu" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ItemsFilterPresets" />
@@ -3404,12 +3445,14 @@
                         <DataTrigger Binding="{Binding ElementName=FILTER_Visible, Path=Visibility}" Value="Collapsed">
                             <Setter Property="Visibility" Value="Visible" TargetName="HELP_GameButtons" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_ButtonHideFilter" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_ButtonSelectFilter" />
                         </DataTrigger>
 
                         <DataTrigger Binding="{Binding ElementName=PART_ViewHost, Path=IsKeyboardFocusWithin }" Value="False">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_GameButtons" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_ButtonMenu" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_ButtonHideFilter" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="HELP_ButtonSelectFilter" />
                             <Setter Property="Visibility" Value="Visible" TargetName="HELP_ButtonConfirm" />
                             <Setter Property="Visibility" Value="Visible" TargetName="HELP_ButtonCancel" />
                         </DataTrigger>
