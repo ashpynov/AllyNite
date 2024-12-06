@@ -301,7 +301,8 @@
                                 </Grid.ColumnDefinitions>
 
 
-                                <ContentControl x:Name="ThemeOptions_Command" />
+                                <ContentControl x:Name="ThemeOptions_Command" Visibility="Collapsed" />
+                                <ContentControl x:Name="ThemeOptions_AutoFilter" Visibility="Collapsed" />
 
                                 <Border RenderOptions.BitmapScalingMode="Fant">
                                     <Border.Style>
@@ -846,10 +847,6 @@
                                     </Grid>
                                 </Grid>
 
-                                <ContentControl x:Name="ThemeOptions_AutoFilter" Visibility="Collapsed" />
-
-                                <TextBlock Foreground="White" FontSize="28" Text="{Binding ElementName=ThemeOptions_AutoFilter, Path=Content.ActiveFilter.Name}" />
-
                                 <Grid x:Name="FILTER_GRID" FocusVisualStyle="{x:Null}"
                                     Grid.Column="0"
                                     Grid.Row="0"
@@ -882,14 +879,19 @@
                                                 Storyboard.TargetProperty="Tag">
                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0"
                                                     Value="{Binding Tag, ElementName=FILTER_PreviousName}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.25"
+                                                    Value="{Binding Tag, ElementName=FILTER_Actual}" />
                                             </ObjectAnimationUsingKeyFrames>
 
                                             <ObjectAnimationUsingKeyFrames
                                                 Storyboard.TargetName="FILTER_CurrentName"
-                                                Storyboard.TargetProperty="Tag">
+                                                Storyboard.TargetProperty="Content">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0"
+                                                    Value="{Binding Content, ElementName=FILTER_PreviousName}" />
                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.25"
-                                                    Value="{Binding Tag, ElementName=FILTER_Actual}" />
+                                                    Value="{Binding Content, ElementName=FILTER_Actual}" />
                                             </ObjectAnimationUsingKeyFrames>
+
                                             <ThicknessAnimation
                                                 Storyboard.TargetProperty="Margin"
                                                 Storyboard.TargetName="FILTER_NameImageGrid"
@@ -921,7 +923,6 @@
                                                 AccelerationRatio="0.5"
                                                 From="0" To="1"
                                             />
-
                                         </Storyboard>
                                         <Storyboard x:Key="FILTER_SwipeRight"
                                             TargetName="FILTER_GRID">
@@ -944,14 +945,19 @@
                                                 Storyboard.TargetProperty="Tag">
                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0"
                                                     Value="{Binding Tag, ElementName=FILTER_PreviousName}" />
+                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.25"
+                                                    Value="{Binding Tag, ElementName=FILTER_Actual}" />
                                             </ObjectAnimationUsingKeyFrames>
 
                                             <ObjectAnimationUsingKeyFrames
                                                 Storyboard.TargetName="FILTER_CurrentName"
-                                                Storyboard.TargetProperty="Tag">
+                                                Storyboard.TargetProperty="Content">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0"
+                                                    Value="{Binding Content, ElementName=FILTER_PreviousName}" />
                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.25"
-                                                    Value="{Binding Tag, ElementName=FILTER_Actual}" />
+                                                    Value="{Binding Content, ElementName=FILTER_Actual}" />
                                             </ObjectAnimationUsingKeyFrames>
+
                                             <ThicknessAnimation
                                                 Storyboard.TargetProperty="Margin"
                                                 Storyboard.TargetName="FILTER_NameImageGrid"
@@ -985,6 +991,23 @@
                                             />
 
                                         </Storyboard>
+
+                                        <Storyboard x:Key="FILTER_NoSwipe"
+                                            TargetName="FILTER_GRID">
+                                            <ObjectAnimationUsingKeyFrames
+                                                Storyboard.TargetName="FILTER_CurrentName"
+                                                Storyboard.TargetProperty="Tag">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.25"
+                                                    Value="{Binding Tag, ElementName=FILTER_Actual}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames
+                                                Storyboard.TargetName="FILTER_CurrentName"
+                                                Storyboard.TargetProperty="Content">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.25"
+                                                    Value="{Binding Content, ElementName=FILTER_Actual}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+
                                         <p:BindingProxy x:Key="FILTER_ActualImagePath"
                                             Data="{Binding ElementName=FILTER_CurrentName}" />
                                         <p:BindingProxy x:Key="FILTER_PreviousImagePath"
@@ -1072,16 +1095,38 @@
                                         <ContentControl
                                             x:Name="FILTER_CurrentName"
                                             Visibility="Collapsed"
+                                            Tag="{Binding Tag, ElementName=FILTER_CalcFiterName}"
+                                            Content="{Binding Content, ElementName=FILTER_CalcFiterName}"
+                                        />
+
+                                        <ContentControl x:Name="FILTER_ActivePreset" Visibility="Collapsed">
+                                            <ContentControl.Tag>
+                                                <PriorityBinding>
+                                                    <!-- <Binding ElementName="ThemeOptions_AutoFilter" Path="Content.ActiveFilterPreset" /> -->
+                                                    <Binding Path="ActiveFilterPreset" />
+                                                </PriorityBinding>
+                                            </ContentControl.Tag>
+                                        </ContentControl>
+                                        <ContentControl
+                                            x:Name="FILTER_CalcFiterName"
+                                            Visibility="Collapsed"
                                         >
                                             <ContentControl.Style>
                                                 <Style TargetType="ContentControl">
-                                                    <Setter Property="Tag" Value="{Binding ActiveFilterPreset.Name, FallbackValue='None', TargetNullValue='None'}" />
+                                                    <Setter Property="Tag" Value="{Binding Tag.Name, ElementName=FILTER_ActivePreset, FallbackValue='None', TargetNullValue='None'}" />
+                                                    <Setter Property="Content" Value="{Binding Tag.Name, ElementName=FILTER_ActivePreset, FallbackValue='None', TargetNullValue='None'}" />
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsExtraFilterActive}" Value="True">
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Tag.Name, ElementName=FILTER_ActivePreset, FallbackValue='None'}" Value="None" />
+                                                                <Condition Binding="{Binding IsExtraFilterActive}" Value="True" />
+                                                            </MultiDataTrigger.Conditions>
                                                             <Setter Property="Tag" Value="Custom" />
-                                                        </DataTrigger>
+                                                            <Setter Property="Content" Value="Custom" />
+                                                        </MultiDataTrigger>
                                                         <DataTrigger Binding="{Binding IsSearchActive}" Value="True" >
-                                                            <Setter Property="Tag" Value="{Binding AppSettings.Fullscreen.FilterSettings.Name}" />
+                                                            <Setter Property="Tag" Value="Search" />
+                                                            <Setter Property="Content" Value="{Binding AppSettings.Fullscreen.FilterSettings.Name}" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
@@ -1129,12 +1174,23 @@
                                                         Value="{Binding Tag, ElementName=FILTER_CurrentName}"
                                                     />
                                                     <BehaviorsCore:ChangePropertyAction
+                                                        TargetObject="{Binding ElementName=FILTER_PreviousName}"
+                                                        PropertyName="Content"
+                                                        Value="{Binding Content, ElementName=FILTER_CurrentName}"
+                                                    />
+                                                    <BehaviorsCore:ChangePropertyAction
                                                         TargetObject="{Binding ElementName=FILTER_Direction}"
                                                         PropertyName="Content"
                                                         Value="{DynamicResource FILTER_SwipeLeft}"
                                                     />
-                                                    <Behaviors:InvokeCommandAction
-                                                        Command="{Binding PrevFilterViewCommand}" />
+                                                    <Behaviors:InvokeCommandAction>
+                                                        <Behaviors:InvokeCommandAction.Command>
+                                                            <PriorityBinding>
+                                                                <!-- <Binding ElementName="ThemeOptions_AutoFilter" Path="Content.PrevFilterViewCommand" /> -->
+                                                                <Binding Path="PrevFilterViewCommand" />
+                                                            </PriorityBinding>
+                                                        </Behaviors:InvokeCommandAction.Command>
+                                                    </Behaviors:InvokeCommandAction>
                                                 </Behaviors:EventTrigger>
                                             </Behaviors:Interaction.Triggers>
                                         </ContentControl>
@@ -1151,36 +1207,31 @@
                                                         Value="{Binding Tag, ElementName=FILTER_CurrentName}"
                                                     />
                                                     <BehaviorsCore:ChangePropertyAction
+                                                        TargetObject="{Binding ElementName=FILTER_PreviousName}"
+                                                        PropertyName="Content"
+                                                        Value="{Binding Content, ElementName=FILTER_CurrentName}"
+                                                    />
+                                                    <BehaviorsCore:ChangePropertyAction
                                                         TargetObject="{Binding ElementName=FILTER_Direction}"
                                                         PropertyName="Content"
                                                         Value="{DynamicResource FILTER_SwipeRight}"
                                                     />
-                                                    <Behaviors:InvokeCommandAction
-                                                        Command="{Binding NextFilterViewCommand}" />
+                                                    <Behaviors:InvokeCommandAction>
+                                                        <Behaviors:InvokeCommandAction.Command>
+                                                            <PriorityBinding>
+                                                                <!-- <Binding ElementName="ThemeOptions_Command" Path="Content.NextFilterViewCommand" /> -->
+                                                                <Binding Path="NextFilterViewCommand" />
+                                                            </PriorityBinding>
+                                                        </Behaviors:InvokeCommandAction.Command>
+                                                    </Behaviors:InvokeCommandAction>
                                                 </Behaviors:EventTrigger>
                                             </Behaviors:Interaction.Triggers>
                                         </ContentControl>
 
-                                        <!-- <ContentControl x:Name="FILTER_Search">
-                                            <ContentControl.Style>
-                                                <Style TargetType="ContentControl">
-                                                    <Setter Property="Tag" Value="{Binding ActiveFilterPreset.Name}" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsSearchActive}" Value="True">
-                                                            <Setter Property="Tag" Value="{Binding AppSettings.Fullscreen.FilterSettings.Name}"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding ActiveFilterPreset.Name}" Value="{x:Null}">
-                                                            <Setter Property="Tag" Value="No Filter"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ContentControl.Style>
-                                        </ContentControl> -->
-
-
                                         <ContentControl x:Name="FILTER_Actual"
                                             Visibility="Collapsed"
-                                            Tag="{Binding ActiveFilterPreset.Name, NotifyOnTargetUpdated=true}"
+                                            Tag="{Binding Tag, ElementName=FILTER_CalcFiterName, NotifyOnTargetUpdated=true}"
+                                            Content="{Binding Content, ElementName=FILTER_CalcFiterName, NotifyOnTargetUpdated=true}"
                                         >
                                             <Behaviors:Interaction.Triggers>
                                                 <Behaviors:EventTrigger EventName="TargetUpdated">
@@ -1188,26 +1239,33 @@
                                                         Storyboard="{Binding ElementName=FILTER_Direction, Path=Content}"
                                                         ControlStoryboardOption="Play"
                                                     />
+                                                    <BehaviorsCore:ChangePropertyAction
+                                                        TargetObject="{Binding ElementName=FILTER_Direction}"
+                                                        PropertyName="Content"
+                                                        Value="{DynamicResource FILTER_NoSwipe}"
+                                                    />
                                                 </Behaviors:EventTrigger>
                                             </Behaviors:Interaction.Triggers>
                                         </ContentControl>
-
                                     </StackPanel>
                                     <Grid>
-                                        <Image x:Name="FILTER_BackgroundImage"
-                                            RenderOptions.BitmapScalingMode="Fant"
-                                            RenderTransformOrigin="0.5,0.5"
-                                            Stretch="UniformToFill"
-                                            Source="{ThemeFileBinding Data.Tag, Source={StaticResource FILTER_ActualImagePath}, PathFormat='Icons/FilterBackground/{0}.jpg'}"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <Image.Style>
-                                                <Style TargetType="Image">
+                                        <Grid
+                                            x:Name="FILTER_BackgroundImage"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                            <Grid.Style>
+                                                <Style TargetType="Grid">
                                                     <Setter Property="Margin" Value="-25" />
                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                 </Style>
-                                            </Image.Style>
-                                        </Image>
+                                            </Grid.Style>
 
+                                            <Image
+                                                RenderOptions.BitmapScalingMode="Fant"
+                                                RenderTransformOrigin="0.5,0.5"
+                                                Stretch="UniformToFill"
+                                                Source="{ThemeFileBinding Data.Tag, Source={StaticResource FILTER_ActualImagePath}, PathFormat='Icons/FilterBackground/{0}.jpg'}">
+                                            </Image>
+                                        </Grid>
                                         <Grid x:Name="FILTER_NameImageGrid">
                                             <Image x:Name="FilterImage"
                                                 RenderOptions.BitmapScalingMode="Fant"
@@ -1218,28 +1276,25 @@
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
                                             </Image>
-                                            
-                                                <!-- <DataTrigger Binding="{Binding IsSearchActive}" Value="True" >
-                                                    <Setter Property="Tag" Value="{Binding AppSettings.Fullscreen.FilterSettings.Name}" />
-                                                </DataTrigger> -->
+
                                             <Viewbox VerticalAlignment="Center">
-                                                <StackPanel 
-                                                    Orientation="Horizontal" 
-                                                    VerticalAlignment="Center" 
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    VerticalAlignment="Center"
                                                     HorizontalAlignment="Center"
                                                     MaxHeight="150" >
-                                                    <TextBlock Text="&#xed12;" 
+                                                    <TextBlock Text="&#xed12;"
                                                         FontFamily="{StaticResource FontIcoFont}"
                                                         FontSize="120"
                                                         TextAlignment="Center"
-                                                        VerticalAlignment="Center" 
+                                                        VerticalAlignment="Center"
                                                         Foreground="White"
                                                         Margin="0,0,20,0"
                                                         Visibility="{Binding IsSearchActive, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                     />
                                                     <Viewbox VerticalAlignment="Center">
                                                         <TextBlock
-                                                            Text="{Binding Data.Tag, Source={StaticResource FILTER_ActualImagePath}}"
+                                                            Text="{Binding Content, ElementName=FILTER_CurrentName}"
                                                             TextWrapping="WrapWithOverflow"
                                                             TextTrimming="CharacterEllipsis"
                                                             FontSize="140"
@@ -1268,7 +1323,7 @@
                                                     </Viewbox>
                                                 </StackPanel>
                                             </Viewbox>
-                                            
+
 
                                             <Grid.Style>
                                                 <Style TargetType="Grid">
