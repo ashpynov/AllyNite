@@ -24,7 +24,7 @@
             "command": "Robocopy.exe",
             "type": "shell",
             "args": [
-                ".", ".pack", "/S", "/XD", ".*","/Purge", "||", "echo", "Done"
+                ".", ".pack", "/S", "/XD", ".*", "/Purge"
             ],
             "problemMatcher": [],
         },
