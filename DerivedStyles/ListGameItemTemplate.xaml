@@ -100,7 +100,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="10"
                                     Background="Transparent">
                                     <!-- Contenu principal du modèle -->
-                                    <Grid x:Name="ImageCover" Width="75" MaxHeight="100" VerticalAlignment="Center">
+                                    <Grid x:Name="ImageCover" Width="105" MaxHeight="140" VerticalAlignment="Center">
                                         <!-- Masque pour l'opacité de l'image -->
                                         <Border x:Name="Mask" Background="#181A1E"
                                             BorderThickness="0" CornerRadius="0" />
@@ -111,8 +111,9 @@
                                             Source="{Binding CoverImageObject}"
                                             StretchDirection="Both"
                                             VerticalAlignment="Top"
-                                            MaxHeight="100"
-                                            HorizontalAlignment="Center"
+                                            MaxHeight="140"
+                                            Width="105"
+                                            HorizontalAlignment="Right"
                                             Stretch="UniformToFill" />
                                         <!-- Indicateur visuel de jeu en cours -->
                                         <Canvas x:Name="Playing" Visibility="Collapsed">
@@ -131,24 +132,20 @@
                                         </Grid.OpacityMask>
                                     </Grid>
                                     <StackPanel MinWidth="300" Orientation="Vertical"
-                                        Margin="10,0,0,0" VerticalAlignment="Center">
+                                        Margin="20,0,0,0" VerticalAlignment="Center">
                                         <TextBlock Text="{Binding DisplayName}"
                                             TextTrimming="CharacterEllipsis"
                                             Style="{DynamicResource ThemeTextBlockBaseStyle}"
-                                            FontSize="{DynamicResource FontSizeSmall}"
+                                            FontSize="{DynamicResource FontSizeExtraLarge}"
                                             HorizontalAlignment="Left" VerticalAlignment="Top"
                                             TextAlignment="Left"
                                             Padding="0,0,0,5"
                                             Background="Transparent" />
-                                        <Canvas x:Name="GameIsRunningLine" Visibility="Collapsed" Margin="0, 0, 0, 14">
-                                            <Polygon Points="3,0 33,0 30,3 0,3" Fill="{DynamicResource StatusBadgeBrush}"
-                                                Opacity="1" />
-                                            <Polygon Points="35,0 43,0 40,3 32,3" Fill="{DynamicResource StatusBadgeBrush}"
-                                                Opacity="1" />
-                                            <Polygon Points="45,0 50,0 47,3 42,3" Fill="{DynamicResource StatusBadgeBrush}"
-                                                Opacity="1" />
-                                            <Polygon Points="52,0 55,0 52,3 49,3" Fill="{DynamicResource StatusBadgeBrush}"
-                                                Opacity="1" />
+                                        <Canvas x:Name="GameIsRunningLine" Visibility="Collapsed" Margin="0, 0, 0, 14"> 
+                                            <Polygon Points="9,0 99,0 90,9 0,9" Fill="{DynamicResource StatusBadgeBrush}" Opacity="1" /> 
+                                            <Polygon Points="105,0 129,0 120,9 96,9" Fill="{DynamicResource StatusBadgeBrush}" Opacity="1" /> 
+                                            <Polygon Points="135,0 150,0 141,9 126,9" Fill="{DynamicResource StatusBadgeBrush}" Opacity="1" /> 
+                                            <Polygon Points="156,0 165,0 156,9 147,9" Fill="{DynamicResource StatusBadgeBrush}" Opacity="1" /> 
                                         </Canvas>
                                         <StackPanel x:Name="GameInfoPanel" HorizontalAlignment="Left"
                                             Orientation="Horizontal" VerticalAlignment="Center">
@@ -162,7 +159,7 @@
                                                 TextAlignment="Center"
                                                 MinWidth="220"
                                                 Padding="5,0,5,4"
-                                                FontSize="{DynamicResource FontSizeSmall}"
+                                                FontSize="{DynamicResource FontSizeMedium}"
                                                 Style="{DynamicResource ButtonTextBlockBoldStyle}">
                                                 <TextBlock.Style>
                                                     <Style TargetType="TextBlock">
@@ -179,13 +176,13 @@
                                                 Margin="10,0,5,0"
                                                 VerticalAlignment="Center"
                                                 FontFamily="{StaticResource FontIcoFont}"
-                                                FontSize="{DynamicResource FontSizeSmall}"
+                                                FontSize="{DynamicResource FontSizeMedium}"
                                                 Style="{StaticResource HltbAltStyle}" />
                                             <TextBlock
                                                 Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"
                                                 Margin="0,0,0,4"
                                                 VerticalAlignment="Center"
-                                                FontSize="{DynamicResource FontSizeSmall}"
+                                                FontSize="{DynamicResource FontSizeMedium}"
                                                 Style="{StaticResource HltbAltStyle}" />
                                         </StackPanel>
                                     </StackPanel>
@@ -235,7 +232,7 @@
                             <Setter TargetName="MainBorder" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Content" Property="Margin" Value="38,0,0,0"/>
+                            <Setter TargetName="Content" Property="Margin" Value="52,0,0,0"/>
                             <Setter TargetName="Content" Property="Opacity" Value="0.8"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

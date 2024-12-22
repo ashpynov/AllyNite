@@ -97,6 +97,7 @@
     <sys:Double x:Key="FontSize">32</sys:Double>
     <sys:Double x:Key="FontSizeLarge">40</sys:Double>
     <sys:Double x:Key="FontSizeMedium">32</sys:Double>
+    <sys:Double x:Key="FontSizeExtraLarge">46</sys:Double>
 
     <FontFamily x:Key="FontAltIcoFont">Segoe MDL2 Assets</FontFamily>
     <FontFamily x:Key="FontThemeMain">Segoe UI Light</FontFamily>

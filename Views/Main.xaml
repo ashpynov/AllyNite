@@ -1970,6 +1970,8 @@
 
                                     </StackPanel>
                                 </Grid>
+
+                                                        <!-- Chemin du logo -->
                                 <!--Wallpaper Vertical List-->
                                 <Grid x:Name="DetailsPanel"
                                     Grid.Row="1"
@@ -1989,7 +1991,7 @@
                                                         <ControlTemplate
                                                             TargetType="{x:Type GameDetails}">
                                                             <DockPanel x:Name="ListDetailsPannel"
-                                                                Width="860"
+                                                                Width="800"
                                                                 Margin="20,5,0,0"
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Stretch"
@@ -2193,6 +2195,35 @@
                                                                             </Style>
                                                                         </ContentControl.Style>
                                                                     </ContentControl>
+                                                                    <TextBlock Name="BezelPath" Tag="{Api Paths.ConfigurationPath}"
+                                                                        Visibility="Collapsed">
+                                                                        <TextBlock.Style>
+                                                                            <Style TargetType="TextBlock">
+                                                                                <Setter Property="Text">
+                                                                                    <Setter.Value>
+                                                                                        <MultiBinding StringFormat="{}{0}{1}{2}{3}">
+                                                                                            <Binding RelativeSource="{RelativeSource Self}"
+                                                                                                Path="Tag" />
+                                                                                            <Binding Source="\ExtraMetadata\games\" />
+                                                                                            <Binding Path="Id" />
+                                                                                            <Binding Source="\bezel.png" />
+                                                                                        </MultiBinding>
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                            </Style>
+                                                                        </TextBlock.Style>
+                                                                    </TextBlock>
+                                                                    <Image Name="BezelImage" Stretch="Uniform"
+                                                                        RenderOptions.BitmapScalingMode="Fant"
+                                                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                        Tag="{Api Paths.ConfigurationPath}">
+                                                                        <Image.Style>
+                                                                            <Style TargetType="Image">
+                                                                                <Setter Property="Source"
+                                                                                    Value="{Binding ElementName=BezelPath, Path=Text, Converter={StaticResource ImageStringToImageConverter}}" />
+                                                                                </Style>
+                                                                        </Image.Style>
+                                                                    </Image>
                                                                     </Grid>
 
 
@@ -2618,7 +2649,7 @@
                                                     <!-- <Setter Property="Grid.RowSpan" Value="2" /> -->
                                                     <Setter Property="Grid.ColumnSpan" Value="2" />
                                                     <Setter Property="Height" Value="920" />
-                                                    <Setter Property="Width" Value="900" />
+                                                    <Setter Property="Width" Value="1000" />
                                                     <Setter Property="VerticalAlignment" Value="Top" />
                                                     <Setter Property="Opacity" Value="0" />
                                                     <Setter Property="Margin"
@@ -2629,8 +2660,8 @@
                                                             <Storyboard FillBehavior="HoldEnd">
                                                                 <ThicknessAnimation
                                                                     Storyboard.TargetProperty="Margin"
-                                                                    From="850,0,-670,-550"
-                                                                    To="850,0,-100,-570"
+                                                                    From="750,0,-670,-550"
+                                                                    To="750,0,-100,-570"
                                                                     Duration="0:0:1"
                                                                     DecelerationRatio="0.5" />
                                                                 <DoubleAnimation
