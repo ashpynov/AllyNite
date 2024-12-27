@@ -7,5 +7,7 @@
     <sys:String x:Key="LOCAllyNite_MuteTrailer">Mute Trailer</sys:String>
     <sys:String x:Key="LOCAllyNite_UnmuteTrailer">Unmute Trailer</sys:String>
     <sys:String x:Key="LOCAllyNite_ChooseFilter">Choose</sys:String>
+    <sys:String x:Key="LOCAllyNite_SearchOrView">Search &#8226; View</sys:String>
+    <sys:String x:Key="LOCAllyNite_Menu">Main menu</sys:String>
 
 </ResourceDictionary>

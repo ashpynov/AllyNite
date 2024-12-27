@@ -216,6 +216,10 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Grid.Style>
+                                <Grid.Resources>
+                                    <p:BindingProxy x:Key="MAIN_Commands" Data="{Binding}" />
+                                    <p:BindingProxy x:Key="THEMEOPTIONS_Commands" Data="{Binding Content, ElementName=ThemeOptions_Command}" />
+                                </Grid.Resources>
                                 <Grid.InputBindings>
                                     <KeyBinding
                                         Key="{Binding ElementName=GAMEPAD_Run, Path=Content}"
@@ -261,6 +265,25 @@
                                         Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
                                         CommandParameter="{Binding ElementName=FILTER_Right}"
                                     />
+                                    <KeyBinding
+                                        Key="V"
+                                        Command="{Binding Content.Toggle, ElementName=ThemeOptions_Command}"
+                                        CommandParameter="{Binding ElementName=ToggleViewButton}"
+                                    />
+                                    <pin:GameControllerInputBinding
+                                        Button="Y"
+                                        Command="{Binding Content.GameControllerHoldCommand, ElementName=ThemeOptions_Command}">
+                                        <pin:GameControllerInputBinding.CommandParameter>
+                                            <x:Array Type="{x:Type Button}">
+                                                <Button
+                                                    Command="{Binding Data.OpenSearchCommand, Source={StaticResource MAIN_Commands}}"
+                                                />
+                                                <Button
+                                                    Command="{Binding Data.Toggle, Source={StaticResource THEMEOPTIONS_Commands}}"
+                                                    CommandParameter="ToggleViewButton"/>
+                                            </x:Array>
+                                        </pin:GameControllerInputBinding.CommandParameter>
+                                    </pin:GameControllerInputBinding>
                                 </Grid.InputBindings>
 
 
@@ -421,6 +444,14 @@
 
                                         </ButtonEx.Content>
                                     </ButtonEx>
+
+                                    <CheckBoxEx x:Name="ToggleViewButton" Margin="0,0,0,0"
+                                        Height="{DynamicResource ThemeBaseSizex2}"
+                                        Width="{DynamicResource ThemeBaseSizex2}"
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Left"
+                                        Visibility="Collapsed"
+                                    />
 
                                     <CheckBoxEx x:Name="ChangeViewButton" Margin="30,0,0,0"
                                         Height="{DynamicResource ThemeBaseSizex2}"
@@ -2999,7 +3030,7 @@
                                         Style="{DynamicResource ButtonBottomMenu}"
                                         InputHint="{DynamicResource ButtonPromptBack}"
                                         Command="{Binding OpenMainMenuCommand}"
-                                        Content="{DynamicResource LOCApplicationMenu}"
+                                        Content="{DynamicResource LOCAllyNite_Menu}"
                                         Grid.Column="0"/>
 
                                     <StackPanel Grid.Column="2" Orientation="Horizontal"
@@ -3081,7 +3112,7 @@
                                             <!--Search-->
                                             <ButtonEx x:Name="PART_ButtonSearch"
                                                 Style="{DynamicResource ButtonBottomMenu}"
-                                                Content="{DynamicResource LOCSearchLabel}" />
+                                                Content="{DynamicResource LOCAllyNite_SearchOrView}" />
                                         </StackPanel>
 
                                     </StackPanel>
@@ -3285,6 +3316,16 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Settings Fullscreen.ShowGameTitles}"
+                                    Value="False" >
+                            <Setter TargetName="ToggleViewButton" Property="Style" Value="{DynamicResource ChangeViewButton}" />
+                            <Setter TargetName="ToggleViewButton" Property="IsChecked" Value="{Binding ElementName=ChangeViewButton, Path=IsChecked, Mode=TwoWay}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Settings Fullscreen.HorizontalLayout}"
+                                    Value="True">
+                            <Setter TargetName="ToggleViewButton" Property="Style" Value="{DynamicResource ChangeViewButton}" />
+                            <Setter TargetName="ToggleViewButton" Property="IsChecked" Value="{Binding ElementName=ChangeViewButton, Path=IsChecked, Mode=TwoWay}" />
+                        </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Settings Fullscreen.ShowGameTitles}"
@@ -3302,6 +3343,9 @@
                                 Value="Visible" />
                             <Setter TargetName="LIST_GameDetails" Property="Visibility"
                                 Value="Visible" />
+
+                            <Setter TargetName="ToggleViewButton" Property="Style" Value="{DynamicResource ChangeDetailsButton}" />
+                            <Setter TargetName="ToggleViewButton" Property="IsChecked" Value="{Binding ElementName=ChangeDetailsButton, Path=IsChecked, Mode=TwoWay}" />
 
                             <!-- need to perevent flasing on list Mode-->
                             <MultiDataTrigger.EnterActions>

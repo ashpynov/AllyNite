@@ -7,5 +7,7 @@
     <sys:String x:Key="LOCAllyNite_MuteTrailer">Выключить звук</sys:String>
     <sys:String x:Key="LOCAllyNite_UnmuteTrailer">Включить звук</sys:String>
     <sys:String x:Key="LOCAllyNite_ChooseFilter">Сменить</sys:String>
+    <sys:String x:Key="LOCAllyNite_SearchOrView">Поиск &#8226; Вид</sys:String>
+    <sys:String x:Key="LOCAllyNite_Menu">Главное меню</sys:String>
 
 </ResourceDictionary>
