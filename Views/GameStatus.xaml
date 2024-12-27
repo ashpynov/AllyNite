@@ -84,6 +84,30 @@
                                             Binding="{Binding RelativeSource={RelativeSource Self}, Path=Source}"
                                             Value="{x:Null}">
                                             <Setter Property="Visibility" Value="Collapsed" />
+                                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=PART_ElemGameStatus, Path=Visibility}" Value="Visible">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard x:Name="ZoomIn">
+                                                    <Storyboard FillBehavior="HoldEnd">
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0" Duration="0:0:0.5"/>
+                                                        <DoubleAnimation
+                                                                Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                                From="1" To="1.2" Duration="0:0:30" />
+                                                        <DoubleAnimation
+                                                                Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                                From="1" To="1.2" Duration="0:0:30" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <RemoveStoryboard BeginStoryboardName="ZoomIn"/>
+                                            </DataTrigger.ExitActions>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -150,34 +174,68 @@
                         </Image>
 
                         <!-- Texte de statut -->
-                        <TextBlock Name="PART_TextStatus" TextWrapping="Wrap" FontSize="42"
+                        <TextBlock Name="PART_TextStatus" TextWrapping="Wrap" FontSize="52"
                             Style="{StaticResource TextBlockBoldBaseStyle}" TextAlignment="Center"
                             HorizontalAlignment="Center" Margin="0,690,0,20">
                             <TextBlock.Effect>
-                                <DropShadowEffect ShadowDepth="1" Color="Black"
-                                    RenderingBias="Quality" BlurRadius="0" Opacity="0.8" />
+                                <DropShadowEffect ShadowDepth="0" Color="Black"
+                                    RenderingBias="Quality" BlurRadius="10" Opacity="1" />
                             </TextBlock.Effect>
                         </TextBlock>
 
                         <!-- Boutons d'action -->
-                        <StackPanel Name="PART_PanelActionButtons" Orientation="Horizontal"
+                        <StackPanel x:Name="PART_PanelActionButtons" Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
+                            Visibility="Collapsed"
                             Margin="0,800,0,0" >
                             <ButtonEx
                                 x:Name="BackToGameButton"
                                 Margin="0,0,40,0"
-                                Visibility="Collapsed"
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource ButtonGameStatusAction}"
                                 Content="{DynamicResource LOCBackToGame}"
                                 Command="{PluginSettings Plugin=BackToGame, Path=ActivateGame}" />
+                            <ContentControl x:Name="VisibilityTrigger" Visibility="Collapsed" Tag="False" />
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{PluginSettings Plugin=BackToGame, Path=IsRunning}" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="BackToGameButton"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_PanelActionButtons"/>
+
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=IsActive}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="EnableActiveWindowTracking">
+                                    <Storyboard FillBehavior="HoldEnd">
+                                        <ObjectAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="Tag">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="True" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=IsActive}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="ShowButtons">
+                                    <Storyboard FillBehavior="HoldEnd">
+                                        <ObjectAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_PanelActionButtons"
+                                            Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:5"
+                                                Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                        </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
