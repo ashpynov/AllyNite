@@ -1,0 +1,25 @@
+Variables:
+    MenuItemsHeader:
+        Title: "Show items on main menu:"
+        LocKey: LOCSettingsShowItemsMainMenuHeader
+        Type: Header
+        TitleStyle: SettingsSectionText
+
+    ShowHelpMenu:
+        Title: Help
+        LocKey: LOCMenuHelpTitle
+        Type: Visibility
+        Default: Visible
+        Style: SettingsSectionOffsetDockPanelStyle
+    ShowParteonMenu:
+        Title: Support on Patreon
+        LocKey: LOCMenuPatreonSupport
+        Type: Visibility
+        Default: Visible
+        Style: SettingsSectionOffsetDockPanelStyle
+    ShowKoFiMenu:
+        Title: Support on Ko-fi
+        LocKey: LOCMenuKofiSupport
+        Type: Visibility
+        Default: Visible
+        Style: SettingsSectionOffsetDockPanelStyle

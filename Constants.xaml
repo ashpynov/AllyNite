@@ -612,6 +612,8 @@
         </Viewbox>
     </DataTemplate>
 
-
-
+    <Style x:Key="SettingsSectionOffsetDockPanelStyle" TargetType="DockPanel">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="30,0,0,0" />
+    </Style>
 </ResourceDictionary>

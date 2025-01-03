@@ -48,44 +48,6 @@
                             </Style>
                         </Grid.Style>
 
-                        <!--
-                        <Grid Name="IntroVideoBackground" Panel.ZIndex="99" Background="Black"
-                            IsHitTestVisible="False">
-                            <Grid.Style>
-                                <Style TargetType="Grid">
-                                    <Setter Property="Visibility" Value="Visible" />
-
-                                    <Style.Triggers>
-                                        <DataTrigger
-                                            Binding="{Binding Opacity, ElementName=IntroVideo}"
-                                            Value="1">
-                                            <DataTrigger.EnterActions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetProperty="Opacity"
-                                                            From="1.0" To="0.0" BeginTime="0:0:2"
-                                                            Duration="0:0:2" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </DataTrigger.EnterActions>
-                                            <DataTrigger.ExitActions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ObjectAnimationUsingKeyFrames
-                                                            Storyboard.TargetProperty="Visibility">
-                                                            <DiscreteObjectKeyFrame KeyTime="0:0:2"
-                                                                Value="{x:Static Visibility.Collapsed}" />
-                                                        </ObjectAnimationUsingKeyFrames>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </DataTrigger.ExitActions>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Grid.Style>
-                        </Grid>
-                        -->
                         <ContentControl x:Name="GAMEPAD_Confirm" Visibility="Collapsed">
                             <ContentControl.Style>
                                 <Style TargetType="ContentControl">
@@ -452,6 +414,23 @@
                                         HorizontalAlignment="Left"
                                         Visibility="Collapsed"
                                     />
+
+                                    <CheckBoxEx x:Name="AltChangeViewButton" Margin="00,0,0,0"
+                                        Height="{DynamicResource ThemeBaseSizex2}"
+                                        Width="{DynamicResource ThemeBaseSizex2}"
+                                        IsChecked="{PluginSettings Plugin=ThemeOptions, Path=Options[TestButton], TargetNullValue=True, Mode=TwoWay}"
+                                        Visibility="Visible"
+                                        Style="{DynamicResource ChangeViewButton}"
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Left" />
+                                    <CheckBoxEx x:Name="AltChangeViewButton2" Margin="100,0,0,0"
+                                        Height="{DynamicResource ThemeBaseSizex2}"
+                                        Width="{DynamicResource ThemeBaseSizex2}"
+                                        IsChecked="{PluginSettings Plugin=ThemeOptions, Path=Options[TestButton], TargetNullValue=True, Mode=TwoWay}"
+                                        Visibility="Visible"
+                                        Style="{DynamicResource ChangeViewButton}"
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Left" />
 
                                     <CheckBoxEx x:Name="ChangeViewButton" Margin="30,0,0,0"
                                         Height="{DynamicResource ThemeBaseSizex2}"
