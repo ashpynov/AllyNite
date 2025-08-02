@@ -1185,14 +1185,14 @@
                                             Visibility="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
                                         >
 
-                                            <Behaviors:Interaction.Triggers>
+                                            <!-- <Behaviors:Interaction.Triggers>
                                                 <Behaviors:EventTrigger EventName="TargetUpdated">
                                                     <Behaviors:InvokeCommandAction
                                                         Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" />
                                                     <Behaviors:InvokeCommandAction
                                                         Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}" />
                                                 </Behaviors:EventTrigger>
-                                            </Behaviors:Interaction.Triggers>
+                                            </Behaviors:Interaction.Triggers> -->
                                         </ButtonEx>
 
                                         <ButtonEx x:Name="HELP_ButtonPlay"
