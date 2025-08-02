@@ -187,7 +187,7 @@
                         <StackPanel x:Name="PART_PanelActionButtons" Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
-                            Visibility="Collapsed"
+                            Visibility="Visible"
                             Margin="0,800,0,0" >
                             <ButtonEx
                                 x:Name="BackToGameButton"
@@ -196,14 +196,25 @@
                                 Style="{StaticResource ButtonGameStatusAction}"
                                 Content="{DynamicResource LOCBackToGame}"
                                 Command="{PluginSettings Plugin=BackToGame, Path=ActivateGame}" />
-                            <ContentControl x:Name="VisibilityTrigger" Visibility="Collapsed" Tag="False" />
                         </StackPanel>
                     </Grid>
+                    <!--
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{PluginSettings Plugin=BackToGame, Path=IsRunning}" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="BackToGameButton"/>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="PART_PanelActionButtons"/>
-
+                        </DataTrigger>
+                        <DataTrigger Binding="{PluginSettings Plugin=BackToGame, Path=IsRunning}" Value="False">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="Disable">
+                                    <Storyboard FillBehavior="HoldEnd">
+                                        <ObjectAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="Tag">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="False" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=IsActive}" Value="True">
                             <DataTrigger.EnterActions>
@@ -229,7 +240,7 @@
                                         <ObjectAnimationUsingKeyFrames
                                             Storyboard.TargetName="PART_PanelActionButtons"
                                             Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:5"
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:20"
                                                 Value="{x:Static Visibility.Visible}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -237,6 +248,7 @@
                             </MultiDataTrigger.EnterActions>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
+                    -->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

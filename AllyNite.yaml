@@ -1,5 +1,12 @@
 AddonId: 'AllyNite_e1f711b2-2e8e-41a7-a843-c931045cfaa6'
 Packages:
+  - Version: 1.2
+    RequiredApiVersion: 2.8.0
+    ReleaseDate: 2025-08-02
+    PackageUrl: https://github.com/ashpynov/AllyNite/releases/download/v1.2/AllyNite_e1f711b2-2e8e-41a7-a843-c931045cfaa6_1_2.pthm
+    Changelog:
+      - Support for new Playnite menus
+      - Adopted size of settings of menu list to handle more items
   - Version: 1.1
     RequiredApiVersion: 2.6.0
     ReleaseDate: 2024-12-18
