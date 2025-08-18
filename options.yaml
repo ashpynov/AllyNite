@@ -23,7 +23,4 @@ Variables:
         Type: Visibility
         Default: Visible
         Style: SettingsSectionOffsetDockPanelStyle
-    FullscreenFilterVisible:
-        Type: Boolean
-        Default: False
 
