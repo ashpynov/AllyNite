@@ -1783,7 +1783,7 @@
                                                         </Grid.ColumnDefinitions>
                                                         <Border x:Name="RatingIcon"
                                                             Background="Transparent"
-                                                            CornerRadius="0"
+
                                                             Height="160"
                                                             Width="auto"
                                                             Margin="0" Visibility="Visible">
@@ -2834,7 +2834,7 @@
                                     </Border.Style>
                                 </Border>
 
-                                <Border Background="{DynamicResource OverlayMenu}" CornerRadius="0"
+                                <Border Background="{DynamicResource OverlayMenu}"
                                     Height="70" VerticalAlignment="Top" HorizontalAlignment="Right"
                                     Panel.ZIndex="10">
                                     <Border.Style>
@@ -2872,7 +2872,7 @@
                                     </StackPanel>
                                 </Border>
                                 <!--NombredeJeuxfiltrer-->
-                                <Border Background="Transparent" CornerRadius="0"
+                                <Border Background="Transparent"
                                     Height="60" VerticalAlignment="Bottom"
                                     HorizontalAlignment="Right"
                                     Panel.ZIndex="10">
@@ -3175,7 +3175,7 @@
 
                         <Grid x:Name="FilterGrid" HorizontalAlignment="Left" Margin="50,10,0,10"
                             Background="Transparent">
-                            <Border Background="{DynamicResource OverlayMenu}" CornerRadius="0">
+                            <Border Background="{DynamicResource OverlayMenu}">
                                 <Border.Effect>
                                     <DropShadowEffect ShadowDepth="1" Color="White"
                                         RenderingBias="Quality" BlurRadius="5" />

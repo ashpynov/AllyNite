@@ -21,7 +21,7 @@
                 <ControlTemplate TargetType="Thumb">
                     <Ellipse  Width="{TemplateBinding Width}" Height="15"
                                 Fill="{TemplateBinding Foreground}" />
-          
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -39,7 +39,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Slider">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border Height="6" Margin="10,0" CornerRadius="0" Background="Gray" />
+                        <Border Height="6" Margin="10,0" Background="Gray" />
                         <Track Grid.Row="1" x:Name="PART_Track" Margin="0,3,0,3" >
                             <Track.Thumb>
                                 <Thumb Width="15" Foreground="{TemplateBinding Foreground}"
@@ -54,12 +54,12 @@
                                               Command="Slider.IncreaseLarge" />
                             </Track.IncreaseRepeatButton>
                         </Track>
-						<Border x:Name="MainBorder" Margin="0" BorderThickness="3" Opacity="1" CornerRadius="0" 
-							Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
+						<Border x:Name="MainBorder" Margin="0" BorderThickness="3" Opacity="1"
+							Style="{DynamicResource SolidBorderLightStyle}" Tag="False" Visibility="Collapsed" >
 							</Border>
-						<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" 
+						<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}"
 							Tag="False" Visibility="Collapsed">
-							</Border>	
+							</Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">

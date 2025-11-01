@@ -26,11 +26,11 @@
 							</Style>
 						</Grid.Style>
 						<!-- Bordure principale -->
-						<Border x:Name="MainBorder" Margin="0" BorderThickness="3" CornerRadius="0"
-                                Style="{DynamicResource SolidBorderLightBrush}" Tag="False"  Visibility="Collapsed" >
+						<Border x:Name="MainBorder" Margin="0" BorderThickness="3"
+                                Style="{DynamicResource SolidBorderLightStyle}" Tag="False"  Visibility="Collapsed" >
 						</Border>
 						<!-- Bordure clignotante pour le menu -->
-						<Border x:Name="FlashMenuBorder" Margin="5" CornerRadius="0" Background="{DynamicResource ControlBackgroundBrush}" Opacity="0.4"
+						<Border x:Name="FlashMenuBorder" Margin="5" Background="{DynamicResource ControlBackgroundBrush}" Opacity="0.4"
                                 Visibility="Collapsed">
 						</Border>
 						<!-- Icône de filtre -->

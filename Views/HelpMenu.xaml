@@ -23,8 +23,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border x:Name="MainBorder" Margin="0,0,0,-5" BorderThickness="3" Opacity="1" CornerRadius="0"
-                                Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
+                        <Border x:Name="MainBorder" Margin="0,0,0,-5" BorderThickness="3" Opacity="1"
+                                Style="{DynamicResource SolidBorderLightStyle}" Tag="False" Visibility="Collapsed" >
                         </Border>
                         <Border x:Name="FlashMenuBorder" Margin="15,5,5,0" Style="{DynamicResource AnimatedFlashMenu}"
                                 Tag="False" Visibility="Collapsed">

@@ -11,12 +11,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
+                        <Border Opacity="0.4" Background="Transparent"
                                 x:Name="MainBackground"/>
                         <Border x:Name="MainBorder" Margin="-3"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                                BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                                Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                                BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                                    Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -71,7 +71,7 @@
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundLightBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
         <Style.Triggers>
             <EventTrigger RoutedEvent="Window.Loaded">
                 <BeginStoryboard>
@@ -86,7 +86,7 @@
     <Style x:Key="ItemSelectionFooterBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
         <Setter Property="BorderThickness" Value="0,1,0,0" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundLightBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
         <Setter Property="Padding" Value="0,10,0,10" />
     </Style>
 

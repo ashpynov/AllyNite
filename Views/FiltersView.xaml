@@ -13,10 +13,10 @@
                     <Grid Background="{TemplateBinding Background}">
                         <Border x:Name="MainBorder"
                             Margin="0"
-                            CornerRadius="0"
+
                             BorderThickness="3"
                             Opacity="1"
-                            Style="{DynamicResource SolidBorderLightBrush}"
+                            Style="{DynamicResource SolidBorderLightStyle}"
                             Tag="False"
                             Visibility="Collapsed" />
                         <Border x:Name="FlashMenuBorder"
@@ -232,7 +232,7 @@
                 <!-- Modèle de contrôle pour les filtres -->
                 <ControlTemplate TargetType="{x:Type Filters}">
                     <Border Background="Transparent"
-                        CornerRadius="0"
+
                         Width="{DynamicResource FilterPanelWidth}"
                         Height="{StaticResource DesignHeight}">
                         <ItemsControlEx

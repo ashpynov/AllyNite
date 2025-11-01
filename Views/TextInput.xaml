@@ -16,11 +16,11 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
                         <Border x:Name="MainBorder"
-                                CornerRadius="0"
+
                                 Margin="-3"
                                 BorderThickness="3"
                                 Opacity="1"
-                                Style="{DynamicResource SolidBorderLightBrush}"
+                                Style="{DynamicResource SolidBorderLightStyle}"
                                 Visibility="Collapsed" />
                         <TextBlock Style="{DynamicResource ThemeTextBlockBaseStyle}"
                                    Margin="15,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

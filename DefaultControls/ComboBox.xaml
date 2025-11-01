@@ -40,7 +40,7 @@
 
                         <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}"
                             Placement="Bottom" Focusable="False" AllowsTransparency="True">
-                            <Border CornerRadius="0" Padding="0"
+                            <Border Padding="0"
                                 BorderBrush="Transparent"
                                 BorderThickness="0"
                                 Background="{DynamicResource OverlayMenu}">
@@ -86,7 +86,7 @@
                             <Grid Background="{TemplateBinding Background}">
                                 <Border x:Name="MainBorder" Margin="0" BorderThickness="3"
                                     Opacity="1"
-                                    CornerRadius="0" Style="{DynamicResource SolidBorderLightBrush}"
+                                    Style="{DynamicResource SolidBorderLightStyle}"
                                     Tag="False" Visibility="Collapsed">
                                 </Border>
                                 <Border x:Name="FlashMenuBorder" Margin="5"
@@ -137,7 +137,7 @@
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Grid Background="{TemplateBinding Background}">
                         <Border x:Name="MainBorder" Margin="0" BorderThickness="3" Opacity="1"
-                            CornerRadius="0" Style="{DynamicResource SolidBorderLightBrush}"
+                            Style="{DynamicResource SolidBorderLightStyle}"
                             Tag="False" Visibility="Collapsed">
                         </Border>
                         <Border x:Name="FlashMenuBorder" Margin="5"

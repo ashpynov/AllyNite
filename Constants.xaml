@@ -22,8 +22,8 @@
     <Color x:Key="GlyphColor">#26b7ff</Color>
     <Color x:Key="GlyphLightColor">#F6F6F6</Color>
     <Color x:Key="BadgeColor">#0095B2</Color>
-    <Color x:Key="BorderDark">#0095B2</Color>
-    <Color x:Key="BorderLight">#00D5FF</Color>
+
+
     <Color x:Key="BorderBright">#e5e4e2</Color>
     <Color x:Key="Background">#171717</Color>
     <Color x:Key="SubBackground">#16171b</Color>
@@ -31,7 +31,13 @@
     <Color x:Key="SelectionLightColor">#e5e4e2</Color>
     <Color x:Key="OverlayColor">#BB000000</Color>
     <Color x:Key="ControlBackgroundColor">#181A1E</Color>
-    <Color x:Key="ControlBackgroundColorLight">#494949</Color>
+
+    <Color x:Key="BorderDark">#26b7ff</Color>
+    <Color x:Key="ControlBorderColor">#292929</Color>                   <!-- Bit Gray Border -->
+
+    <Color x:Key="BorderLight">#8CD0E7</Color>                          <!-- Primary Blue frame-->
+    <Color x:Key="ControlBackgroundLightColor">#138AC4</Color>          <!-- Darker  Blue Background-->
+
     <Color x:Key="ControlBackgroundColorDark">#0c0c0c</Color>
     <Color x:Key="AlternativeButtonColor">#00000000</Color>
     <Color x:Key="TextColor">#F6F6F6</Color>
@@ -57,8 +63,12 @@
     <SolidColorBrush x:Key="StatusBadgeBrush" Color="{DynamicResource BadgeColor}" />
     <SolidColorBrush x:Key="GlyphLightBrush" Color="{DynamicResource GlyphLightColor}" />
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource ControlBackgroundColor}" />
+    <SolidColorBrush x:Key="ControlBorderBrush"
+        Color="{DynamicResource ControlBorderColor}" />
+
     <SolidColorBrush x:Key="ControlBackgroundLightBrush"
-        Color="{DynamicResource ControlBackgroundColorLight}" />
+        Color="{DynamicResource ControlBackgroundLightColor}" />
+
     <SolidColorBrush x:Key="FilterBackgroundBrush" Color="{DynamicResource ControlBackgroundColor}"
         Opacity="0.4" />
     <SolidColorBrush x:Key="SwitchViewBackgroundBrush"
@@ -363,7 +373,7 @@
     </Style>
 
 
-    <Style x:Key="AnimatedBorderBrush" TargetType="Border">
+    <Style x:Key="AnimatedBorderStyle" TargetType="Border">
         <Setter Property="BorderBrush">
             <Setter.Value>
                 <LinearGradientBrush>
@@ -511,12 +521,11 @@
 
     <SolidColorBrush x:Key="WarningBrush" Color="#ff6b6b" />
 
-    <Style x:Key="SolidBorderLightBrush" TargetType="Border">
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource BorderLight}" />
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="SolidBorderLightStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource StaticBorderBrush}" />
+        <Setter Property="Margin" Value="-5"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="BorderThickness" Value="3"/>
     </Style>
 
 
@@ -529,31 +538,22 @@
                     <Grid>
                         <Border x:Name="Back" Background ="Black" Opacity="0.4" />
                         <Grid x:Name="NormalFrame">
-                            <Border CornerRadius="0"
+                            <Border CornerRadius="3"
                                 BorderThickness="1"
-                                BorderBrush="{DynamicResource ControlBackgroundLightBrush}"
+                                BorderBrush="{DynamicResource ControlBorderBrush}"
                             />
-                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_lt.png'}" Stretch="None"
-                            HorizontalAlignment="Left" VerticalAlignment="Top" />
-                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_rt.png'}" Stretch="None"
-                            HorizontalAlignment="Right" VerticalAlignment="Top" />
-                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_lb.png'}" Stretch="None"
-                            HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-                            <Image Source="{ThemeFile 'Images/ASUS/asus_cac_common_btn_edge_rb.png'}" Stretch="None"
-                            HorizontalAlignment="Right" VerticalAlignment="Bottom" />
                         </Grid>
                         <Grid x:Name="FocusFrame" Visibility="Collapsed" >
-                            <Border
-                                CornerRadius="0"
+                            <Border CornerRadius="8" Opacity="0.5"
                                 BorderThickness="1"
-                                BorderBrush="{DynamicResource ControlBackgroundLightBrush}"
+                                Margin = "-1"
+                                BorderBrush="{DynamicResource ControlBorderBrush}"
+                                Background="{DynamicResource ControlBackgroundLightBrush}"
                             />
                             <Border
-                                Margin="-5"
-                                Style="{DynamicResource SolidBorderLightBrush}"
+                                Style="{DynamicResource SolidBorderLightStyle}"
                                 Tag="False"
                                 BorderThickness="3"
-                                CornerRadius="0"
                             />
                         </Grid>
                     </Grid>

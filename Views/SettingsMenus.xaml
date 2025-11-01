@@ -73,12 +73,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
+                        <Border Opacity="0.4" Background="Transparent"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Margin="-5"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -171,8 +171,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border x:Name="MainBorder" Margin="0" CornerRadius="0" BorderThickness="3"
-                            Opacity="1" Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
+                        <Border x:Name="MainBorder" Margin="0" BorderThickness="3"
+                            Opacity="1" Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
                             Visibility="Collapsed">
                         </Border>
                         <Border x:Name="FlashMenuBorder" Margin="5"

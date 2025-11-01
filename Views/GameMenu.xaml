@@ -11,12 +11,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
+                        <Border Opacity="0.4" Background="Transparent"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Margin="-3"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -62,7 +62,7 @@
         <Setter Property="Padding" Value="10,10,10,10" />
         <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundLightBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
         <Style.Triggers>
             <EventTrigger RoutedEvent="Window.Loaded">
                 <BeginStoryboard>
@@ -78,7 +78,7 @@
     <!-- Modèle de données pour l'en-tête du menu de jeu -->
     <DataTemplate x:Key="GameMenuHeaderTemplate">
         <Border BorderThickness="0,0,0,1"
-                BorderBrush="{DynamicResource ControlBackgroundLightBrush}">
+                BorderBrush="{DynamicResource ControlBorderBrush}">
             <TextBlock Text="{Binding Name}"
                  Style="{DynamicResource GameTitleHeaderText}"
                  VerticalAlignment="Bottom"

@@ -32,20 +32,20 @@
                         <ContentPresenter />
 
                         <!-- Éléments visuels supplémentaires -->
-                        <Border x:Name="FlashFocus" Opacity="0" CornerRadius="0"
+                        <Border x:Name="FlashFocus" Opacity="0"
                             Style="{DynamicResource AnimatedFlashFocus}" Tag="False"
                             Visibility="Collapsed" />
                         <Border x:Name="FlashCover" Opacity="0"
-                            Style="{DynamicResource AnimatedFlashCover}" CornerRadius="0"
+                            Style="{DynamicResource AnimatedFlashCover}"
                             Tag="False" Visibility="Collapsed" />
-                        <Border x:Name="GameTitleBackground" CornerRadius="0" Margin="0"
+                        <Border x:Name="GameTitleBackground" Margin="0"
                             BorderThickness="0" Background="{DynamicResource GameTitleBrush}"
                             Height="150" Opacity="0.6"
                             VerticalAlignment="Bottom" Visibility="Collapsed" />
-                        <Border x:Name="NonFocus" Opacity="0" CornerRadius="0" Margin="0"
+                        <Border x:Name="NonFocus" Opacity="0" Margin="0"
                             BorderThickness="0" Background="#7000" />
                         <Border x:Name="MainBorder" Opacity="1" BorderThickness="5" Margin="-2"
-                            CornerRadius="0" Style="{DynamicResource SolidBorderLightBrush}"
+                            Style="{DynamicResource SolidBorderLightStyle}"
                             Tag="False"
                             Visibility="Collapsed">
                         </Border>

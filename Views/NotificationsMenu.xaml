@@ -8,7 +8,7 @@
         <Setter Property="Width" Value="400" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundLightBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
     </Style>
 
     <!-- Style pour le bouton d'élément de menu de notifications -->
@@ -22,11 +22,11 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}" Margin="-10" >
                         <Border x:Name="MainBackground"
-                            CornerRadius="0" Opacity="0.4" Background="Transparent" />
+                            Opacity="0.4" Background="Transparent" />
                         <Border x:Name="MainBorder" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource TextBlockDetailStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

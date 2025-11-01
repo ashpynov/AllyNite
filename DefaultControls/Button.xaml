@@ -80,13 +80,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.9"
+                        <Border Opacity="0.9"
                             Background="{DynamicResource ControlBackgroundButtonDetails}"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Opacity="1" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <StackPanel x:Name="Info" VerticalAlignment="Center"
                             HorizontalAlignment="Center" Margin="0,0,0,0" Opacity="1">
                             <StackPanel Orientation="Horizontal" Margin="3,0,0,0">
@@ -215,13 +215,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.8"
+                        <Border Opacity="0.8"
                             Background="{DynamicResource ControlBackgroundButtonDetails}"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Opacity="1" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
 
@@ -279,13 +279,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.9"
+                        <Border Opacity="0.9"
                             Background="{DynamicResource ControlBackgroundButtonDetails}"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Opacity="1" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
 
@@ -346,13 +346,13 @@
                 <ControlTemplate TargetType="Button">
 
                     <Grid x:Name="Test" Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.4"
+                        <Border Opacity="0.4"
                             Background="{DynamicResource ControlBackgroundBrush}"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -403,12 +403,12 @@
                 <ControlTemplate TargetType="Button">
 
                     <Grid x:Name="Test" Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
+                        <Border Opacity="0.4" Background="Transparent"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -454,13 +454,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.4"
+                        <Border Opacity="0.4"
                             Background="{DynamicResource ControlBackgroundBrush}"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Opacity="1" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -508,12 +508,12 @@
                 <ControlTemplate TargetType="Button">
 
                     <Grid x:Name="Test" Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.4" Background="Transparent"
+                        <Border Opacity="0.4" Background="Transparent"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Margin="-6" Opacity="1"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -564,13 +564,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}">
-                        <Border CornerRadius="0" Opacity="0.9"
+                        <Border Opacity="0.9"
                             Background="{DynamicResource PlayButtonBackgroundBrush}"
                             x:Name="MainBackground" />
                         <Border x:Name="MainBorder" Opacity="1" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Style="{DynamicResource SolidBorderLightBrush}" Tag="False"
-                            BorderThickness="3" CornerRadius="0" Visibility="Collapsed" />
+                            Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
+                            BorderThickness="3" Visibility="Collapsed" />
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
 

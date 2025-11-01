@@ -18,7 +18,7 @@
 				<ControlTemplate TargetType="Button">
 					<Grid Background="{TemplateBinding Background}">
 						<!-- Bordure principale pour les animations -->
-						<Border x:Name="MainBorder" Margin="0,0,0,0" BorderThickness="3" CornerRadius="0" Opacity="1" Style="{DynamicResource SolidBorderLightBrush}" Tag="False" Visibility="Collapsed" >
+						<Border x:Name="MainBorder" Margin="0,0,0,0" BorderThickness="3" Opacity="1" Style="{DynamicResource SolidBorderLightStyle}" Tag="False" Visibility="Collapsed" >
 						</Border>
 						<!-- Bordure de clignotement pour les animations -->
 						<Border x:Name="FlashMenuBorder" Margin="5" Style="{DynamicResource AnimatedFlashMenu}" Tag="False" Visibility="Collapsed">
