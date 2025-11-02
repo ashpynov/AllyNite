@@ -10,29 +10,18 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property=" Margin" Value="0,0,0,0" />
+        <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
 
-        <Setter Property="Background">
-            <Setter.Value>
-                <ImageBrush ImageSource="{ThemeFile 'Images/Interface.png'}"
-                    Stretch="UniformToFill" />
-            </Setter.Value>
-        </Setter>
-
-
-        <!-- Déclencheurs pour les animations lors du chargement de la fenêtre -->
         <Style.Triggers>
             <EventTrigger RoutedEvent="Window.Loaded">
                 <BeginStoryboard>
                     <Storyboard>
                         <!-- Force to use left column to be nonstandart screen height friendly -->
                         <Int32Animation Storyboard.TargetProperty="(Grid.Column)" Duration="0:0:0" To ="0"/>
-                        <!-- Animation d'opacité -->
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2"
                             From="0" To="1" />
-                        <!-- Animation de marge pour déplacer le cadre du menu depuis l'extérieur de
-                        la fenêtre -->
                         <ThicknessAnimation Storyboard.TargetProperty=" Margin" Duration="0:0:0.2"
                             From="-400,0,0,0" To="0,0,0,0" AccelerationRatio="0.5"
                             DecelerationRatio="0.5" />
@@ -42,7 +31,6 @@
         </Style.Triggers>
     </Style>
 
-    <!-- Style pour les boutons du menu principal -->
     <Style x:Key="MainMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
         <Setter Property=" Margin" Value="26,20,26,20" />
         <!-- <Setter Property="Height" Value="60" /> -->
@@ -55,7 +43,9 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="{TemplateBinding Background}" Margin="-10" >
                         <Border x:Name="MainBackground"
-                            Opacity="0.4" Background="Transparent" />
+                            CornerRadius="6"
+                            Opacity="0" Background="{DynamicResource ControlBackgroundLightBrush}" 
+                        />
                         <Border x:Name="MainBorder" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
@@ -96,18 +86,13 @@
                         </Trigger>
 
                         <Trigger Property="IsFocused" Value="True">
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
                             <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                             <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <!-- <Setter Property="Opacity" Value="1" TargetName="MainBackground" /> -->
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
+                            <Setter Property="Opacity" Value="0.5" TargetName="MainBackground" />
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
-                            <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
+                            <Setter Property="Opacity" Value="0.5" TargetName="MainBackground" />
                             <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -128,7 +113,7 @@
     <!-- Modèle de bouton pour accéder aux paramètres -->
     <DataTemplate x:Key="MainMenuSettingsButtonTemplate">
         <StackPanel Orientation="Horizontal"  >
-            <TextBlock Text="&#xef3a;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe713;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"/>
@@ -138,7 +123,7 @@
     <!-- Modèle de bouton pour mettre à jour la bibliothèque -->
     <DataTemplate x:Key="MainMenuLibUpdateButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xefd1;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe777;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8"  />
             <TextBlock Text="{DynamicResource LOCMenuReloadLibrary}" VerticalAlignment="Center" />
@@ -148,7 +133,7 @@
     <!-- Modèle de bouton pour annuler la mise à jour de la bibliothèque -->
     <DataTemplate x:Key="MainMenuCancelLibUpdateButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xecb1;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe711;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuCancelLibraryUpdate}"
@@ -159,7 +144,7 @@
     <!-- Modèle de bouton pour quitter Playnite -->
     <DataTemplate x:Key="MainMenuExitPlayniteButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xef16;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe711;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCExitPlaynite}" VerticalAlignment="Center" />
@@ -169,7 +154,7 @@
     <!-- Modèle de bouton pour basculer vers le bureau -->
     <DataTemplate x:Key="MainMenuSwithDesktopButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xef1d;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xf3b1;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCBackToDesktopMode}" VerticalAlignment="Center" />
@@ -179,7 +164,7 @@
     <!-- Modèle de bouton pour sélectionner un jeu aléatoire -->
     <DataTemplate x:Key="MainMenuRandomGameButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xefcf;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe8b1;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuSelectRandomGame}" VerticalAlignment="Center" />
@@ -189,7 +174,7 @@
     <!-- Modèle de bouton pour arrêter le système -->
     <DataTemplate x:Key="MainMenuShutdowButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xefc4;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe7e8;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuShutdownSystem}" VerticalAlignment="Center" />
@@ -199,7 +184,7 @@
     <!-- Modèle de bouton pour suspendre le système -->
     <DataTemplate x:Key="MainMenuSuspendButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xef9e;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe708;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuSuspendSystem}" VerticalAlignment="Center" />
@@ -209,7 +194,7 @@
     <!-- Modèle de bouton pour hiberner le système -->
     <DataTemplate x:Key="MainMenuHibernateButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xef9e;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe121;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuHibernateSystem}" VerticalAlignment="Center" />
@@ -219,7 +204,7 @@
     <!-- Modèle de bouton pour redémarrer le système -->
     <DataTemplate x:Key="MainMenuRestartButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xef80;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe72c;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuRestartSystem}" VerticalAlignment="Center" />
@@ -228,7 +213,7 @@
 
     <DataTemplate x:Key="MainMenuMinimizeButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#128471;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe7c4;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMinimize}" VerticalAlignment="Center" />
@@ -238,7 +223,7 @@
     <!-- Modèle de bouton pour accéder à l'aide -->
     <DataTemplate x:Key="MainMenuHelpButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xefca;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe897;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuHelpTitle}" VerticalAlignment="Center" />
@@ -266,7 +251,7 @@
 
     <DataTemplate x:Key="MainMenuLockSystemButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xef7a;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe72e;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuLockSystem}" VerticalAlignment="Center" />
@@ -275,7 +260,7 @@
 
     <DataTemplate x:Key="MainMenuLogoutUserButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xefe9;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe748;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuLogoutUser}" VerticalAlignment="Center" />
@@ -284,7 +269,7 @@
 
     <DataTemplate x:Key="MainMenuClientsButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xec84;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xe7fc;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuOpenClient}" VerticalAlignment="Center" />
@@ -293,7 +278,7 @@
 
     <DataTemplate x:Key="MainMenuToolsButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xf013;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xec7a;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCMenuTools}" VerticalAlignment="Center" />
@@ -302,7 +287,7 @@
 
     <DataTemplate x:Key="MainMenuExtensionsButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="&#xefc7;" FontFamily="{DynamicResource FontIcoFont}"
+            <TextBlock Text="&#xea86;" FontFamily="Segoe Fluent Icons"
                 Width="{DynamicResource FontSizeLarge}"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,-8" />
             <TextBlock Text="{DynamicResource LOCExtensions}" VerticalAlignment="Center" />

@@ -256,7 +256,7 @@
                                     <!-- Deuxième ligne -->
                                     <RowDefinition Height="*" />
                                     <!-- Troisième ligne Cover -->
-                                    <RowDefinition Height="360" />
+                                    <RowDefinition Height="450" />
                                     <!-- Quatrième ligne -->
                                     <RowDefinition Height="60" />
                                 </Grid.RowDefinitions>
@@ -2531,7 +2531,7 @@
                                             <!-- <Setter Property="Grid.RowSpan" Value="2" /> -->
                                             <Setter Property="Grid.ColumnSpan" Value="3" />
                                             <!-- <Setter Property="Background" Value="White" /> -->
-                                            <Setter Property="Height" Value="380" />
+                                            <!-- <Setter Property="Height" Value="180" /> -->
                                             <Setter Property="Width" Value="1920" />
                                             <Setter Property="Tag" Value="" />
                                             <Setter Property="Effect">
@@ -2571,11 +2571,10 @@
                                                     <Setter Property="Margin" Value="0,2000,0,-2000" />
                                                     <Setter Property="Opacity" Value="0" />
                                                     <Setter Property="Grid.Row" Value="2" />
-                                                    <!-- <Setter Property="Grid.RowSpan" Value="2"
-                                                    /> -->
                                                     <Setter Property="Grid.ColumnSpan" Value="3" />
                                                     <Setter Property="Width" Value="1920" />
-                                                    <Setter Property="Height" Value="380" />
+                                                    <Setter Property="VerticalAlignment" Value = "Bottom"/>
+                                                    <!-- <Setter Property="Height" Value="680" /> -->
                                                     <!-- <Setter Property="Background" Value="Red"
                                                     /> -->
                                                     <Trigger.EnterActions>
@@ -2585,7 +2584,7 @@
                                                                 <ThicknessAnimation
                                                                     Storyboard.TargetProperty="Margin"
                                                                     From="0,0,0,-400"
-                                                                    To="0,0,0,0"
+                                                                    To="0,0,0,-50"
                                                                     Duration="0:0:1"
                                                                     DecelerationRatio="0.5" />
                                                                 <DoubleAnimation
@@ -2709,14 +2708,26 @@
 
 
                                     <Grid x:Name="T_ListGameItemsContainer">
-                                        <ListBoxEx x:Name="PART_ListGameItems"
-                                            Background="Transparent" BorderThickness="0"
-                                            BorderBrush="Transparent"
-                                            FocusVisualStyle="{x:Null}"
+                                        <ListBoxEx
+                                            x:Name="PART_ListGameItems"
+                                            BorderBrush="{DynamicResource DefaultBorderBrush}"
+                                            DockPanel.Dock="Right"
                                             KeyboardNavigation.DirectionalNavigation="Once"
-                                            VirtualizingStackPanel.IsVirtualizing="True"
+                                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            VirtualizingStackPanel.IsVirtualizing="True">
+                                            <ListBoxEx.Style>
+                                                <Style TargetType="ListBoxEx">
+                                                    <Setter Property="Background" Value="Transparent" />
+                                                    <Setter Property="BorderThickness" Value="0" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Settings Fullscreen.HorizontalLayout}" Value="False">
+                                                            <Setter Property="Margin" Value="-1,0" />
+                                                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ListBoxEx.Style>
                                         </ListBoxEx>
                                     </Grid>
 

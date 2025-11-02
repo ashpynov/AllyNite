@@ -14,23 +14,21 @@
     <FontFamily x:Key="FontTitilliumWebBold">Titillium Web</FontFamily>
     <FontFamily x:Key="FontIcoFont">icofont</FontFamily> -->
 
-    <!-- Here Change your Name -->
-    <sys:String x:Key="UserName">AllyNite</sys:String>
-
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#F6F6F6</Color>
+    
     <Color x:Key="GlyphColor">#26b7ff</Color>
     <Color x:Key="GlyphLightColor">#F6F6F6</Color>
     <Color x:Key="BadgeColor">#0095B2</Color>
 
 
     <Color x:Key="BorderBright">#e5e4e2</Color>
-    <Color x:Key="Background">#171717</Color>
+    <Color x:Key="Background">#1a1a1a</Color>
     <Color x:Key="SubBackground">#16171b</Color>
     <Color x:Key="SwitchViewBackground">#0b0418</Color>
     <Color x:Key="SelectionLightColor">#e5e4e2</Color>
     <Color x:Key="OverlayColor">#BB000000</Color>
-    <Color x:Key="ControlBackgroundColor">#181A1E</Color>
+    <Color x:Key="ControlBackgroundColor">#161616</Color>
 
     <Color x:Key="BorderDark">#26b7ff</Color>
     <Color x:Key="ControlBorderColor">#292929</Color>                   <!-- Bit Gray Border -->
@@ -84,7 +82,6 @@
     <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource Background}" />
     <SolidColorBrush x:Key="TopBarBackgroundBrush" Color="{DynamicResource Background}" Opacity="0.7" />
     <SolidColorBrush x:Key="ContainerBackgroundBrush" Color="#000000" Opacity="0.1" />
-    <SolidColorBrush x:Key="ThemeDark" Color="{DynamicResource ButtonBack}" />
     <SolidColorBrush x:Key="ThemeMain" Color="{DynamicResource ThemeColorMain}" />
     <SolidColorBrush x:Key="TextDetailBrush" Color="{DynamicResource TextDetail}" />
     <SolidColorBrush x:Key="TextDetailAltBrush" Color="{DynamicResource TextAltDetail}" />
@@ -110,8 +107,8 @@
     <sys:Double x:Key="FontSizeExtraLarge">46</sys:Double>
 
     <FontFamily x:Key="FontAltIcoFont">Segoe MDL2 Assets</FontFamily>
-    <FontFamily x:Key="FontThemeMain">Segoe UI Light</FontFamily>
-    <FontFamily x:Key="FontThemeBold">Segoe UI</FontFamily>
+    <FontFamily x:Key="FontThemeMain">Segoe UI</FontFamily>
+    <FontFamily x:Key="FontThemeBold">Segoe UI SemiBold</FontFamily>
 
     <sys:Double x:Key="FilterPanelWidth">500</sys:Double>
     <Thickness x:Key="GamepadButtonAdjust">0,-5,0,-10</Thickness>
