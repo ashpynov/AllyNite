@@ -57,7 +57,6 @@
     <!-- Style de la zone de texte de texte -->
     <Style x:Key="TextInputTextbox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
         <Setter Property="Margin" Value="0,0,0,20" />
-        <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Height" Value="60" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>

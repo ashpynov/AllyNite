@@ -18,7 +18,7 @@
                                 Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
                                 BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                                   Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                                   Foreground="{TemplateBinding Foreground}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                    Margin="25,0">
@@ -120,7 +120,7 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontThemeBold}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontTheme}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Padding" Value="15,15,15,15" />

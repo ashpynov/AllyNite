@@ -18,7 +18,7 @@
                             Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
                             BorderThickness="3" Visibility="Collapsed" />
                         <TextBlock x:Name="Text" Style="{DynamicResource ButtonTextBlockBaseStyle}"
-                            Foreground="{TemplateBinding Foreground}" FontWeight="SemiBold"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Margin="10,0,25,0">

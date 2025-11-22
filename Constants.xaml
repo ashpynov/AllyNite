@@ -97,8 +97,8 @@
     </LinearGradientBrush>
 
     <sys:Double x:Key="ThemeBaseSize">40</sys:Double>
-    <sys:Double x:Key="ThemeBaseSizex2">80</sys:Double>
-    <sys:Double x:Key="ThemeBaseSizex4">160</sys:Double>
+    <sys:Double x:Key="ThemeBaseSizex2">60</sys:Double>
+    <sys:Double x:Key="ThemeBaseSizex4">120</sys:Double>
 
     <sys:Double x:Key="FontSizeSmall">28</sys:Double>
     <sys:Double x:Key="FontSize">32</sys:Double>
@@ -164,7 +164,7 @@
 
     <Style x:Key="TextBlockBoldBaseStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
-        <Setter Property="FontFamily" Value="Segoe UI Bold" />
+        <Setter Property="FontFamily" Value="Segoe UI SemiBold" />
         <Setter Property="Foreground" Value="{DynamicResource TextWhiteBrush}" />
     </Style>
 
