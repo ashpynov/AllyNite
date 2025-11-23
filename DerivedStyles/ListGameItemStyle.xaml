@@ -67,10 +67,6 @@
                         <Border x:Name="FlashCover" Opacity="0"
                             Style="{DynamicResource AnimatedFlashCover}"
                             Tag="False" Visibility="Collapsed" Grid.Row="0" CornerRadius="16" />
-                        <Border x:Name="GameTitleBackground" Margin="0"
-                            BorderThickness="0" Background="{DynamicResource GameTitleBrush}"
-                            Height="150" Opacity="0.6"
-                            VerticalAlignment="Bottom" Visibility="Collapsed" Grid.Row="0" CornerRadius="16" />
                         <Border x:Name="NonFocus" Opacity="0" Margin="0"
                             BorderThickness="0" Background="#7000" Grid.Row="0" CornerRadius="16"  />
                         <Border x:Name="MainBorder" Opacity="1" BorderThickness="4" Margin="-8"
@@ -134,41 +130,8 @@
                             <Setter Property="Visibility" Value="Collapsed" TargetName="MainBorder" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="FlashFocus" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="FlashCover" />
-                            <Setter Property="Opacity" Value="0.3" TargetName="GameTitleBackground" />
-                            <Setter Property="Visibility" Value="Visible"
-                                TargetName="GameTitleBackground" />
                             <Setter Property="Opacity" Value="0.9" TargetName="InstallFont" />
                         </Trigger>
-                        <!-- Sélection -->
-                        <Trigger Property="IsSelected" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FocusedOn}" />
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
-                            </Trigger.ExitActions>
-                            <Setter Property="Visibility" Value="Collapsed"
-                                TargetName="GameTitleBackground" />
-                        </Trigger>
-                        <!-- Survole de la souris -->
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FocusedOn}" />
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
-                            </Trigger.ExitActions>
-                            <Setter Property="Visibility" Value="Collapsed"
-                                TargetName="GameTitleBackground" />
-                        </Trigger>
-                        <!-- Affichage du titre du jeu -->
-                        <!-- <DataTrigger Binding="{Settings Fullscreen.ShowGameTitles}" Value="True">
-                            <Setter Property="Opacity" Value="0.9" TargetName="GameTitleBackground" />
-                            <Setter Property="Visibility" Value="Visible"
-                                TargetName="GameTitleBackground" />
-                            <Setter Property="Visibility" Value="Visible" TargetName="GameTitle" />
-                        </DataTrigger> -->
-
                         <!-- Affichage de l'icône d'installation -->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>

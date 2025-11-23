@@ -100,13 +100,14 @@
     <sys:Double x:Key="ThemeBaseSizex2">60</sys:Double>
     <sys:Double x:Key="ThemeBaseSizex4">120</sys:Double>
 
+
     <sys:Double x:Key="FontSizeSmall">28</sys:Double>
     <sys:Double x:Key="FontSize">32</sys:Double>
     <sys:Double x:Key="FontSizeLarge">40</sys:Double>
     <sys:Double x:Key="FontSizeMedium">32</sys:Double>
     <sys:Double x:Key="FontSizeExtraLarge">46</sys:Double>
 
-    <FontFamily x:Key="FontAltIcoFont">Segoe MDL2 Assets</FontFamily>
+    <FontFamily x:Key="FontAltIcoFont">Segoe Fluent Icons</FontFamily>
     <FontFamily x:Key="FontThemeMain">Segoe UI</FontFamily>
     <FontFamily x:Key="FontThemeBold">Segoe UI SemiBold</FontFamily>
 
@@ -504,10 +505,7 @@
         </Style.Triggers>
     </Style>
 
-    <LinearGradientBrush x:Key="GameTitleBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-        <GradientStop Color="#00000000" Offset="0" />
-        <GradientStop Color="#D9000000" Offset="1" />
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="GameTitleBrush" Color="{DynamicResource Background}" />
 
     <ImageBrush x:Key="ScrollFadeBrush" ImageSource="{ThemeFile 'Images/FadeBottom.png'}"
         RenderOptions.BitmapScalingMode="Fant" Stretch="Fill" />
@@ -612,5 +610,8 @@
     <Style x:Key="SettingsSectionOffsetDockPanelStyle" TargetType="DockPanel">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="30,0,0,0" />
+    </Style>
+    <Style x:Key="SettingsSectionInternalOption" TargetType="DockPanel">
+        <Setter Property="Visibility" Value="Collapsed" />
     </Style>
 </ResourceDictionary>

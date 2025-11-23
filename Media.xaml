@@ -7,12 +7,15 @@
 	<BitmapImage x:Key="DefaultGameCover" UriSource="{ThemeFile 'Images/custom_cover_background.png'}" popt:Freeze="True" />
 
 	<!-- Définition des icônes de statut de batterie -->
-	<TextBlock x:Key="BatteryStatusCritical" Text="&#xeeb1;" FontFamily="{StaticResource FontIcoFont}" />
-	<TextBlock x:Key="BatteryStatusLow" Text="&#xeeb4;" FontFamily="{StaticResource FontIcoFont}" />
-	<TextBlock x:Key="BatteryStatusMedium" Text="&#xeeb3;" FontFamily="{StaticResource FontIcoFont}" />
-	<TextBlock x:Key="BatteryStatusHigh" Text="&#xeeb2;" FontFamily="{StaticResource FontIcoFont}" />
-	<TextBlock x:Key="BatteryStatusCharging" Text="&#xeed4;" FontFamily="{StaticResource FontIcoFont}" />
-
+	<TextBlock x:Key="BatteryStatusCritical" Text="&#xeba0;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="BatteryStatusLow" Text="&#xeba3;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="BatteryStatusMedium" Text="&#xeba7;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="BatteryStatusHigh" Text="&#xebaa;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="BatteryStatusCriticalCharging" Text="&#xebab;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="BatteryStatusLowCharging" Text="&#xebae;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="BatteryStatusMediumCharging" Text="&#xebb2;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="BatteryStatusHighCharging" Text="&#xebb5;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	
 	<!-- Définition du style pour l'indicateur de progression -->
 	<Style x:Key="ProgressIndicator" TargetType="ContentControl">
 		<Setter Property="Template">

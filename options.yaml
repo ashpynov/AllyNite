@@ -4,7 +4,11 @@ Variables:
         LocKey: LOCSettingsShowItemsMainMenuHeader
         Type: Header
         TitleStyle: SettingsSectionText
-
+    GameDetails:
+        Title: Game Details List
+        Type: Boolean
+        Default: true
+        Style: SettingsSectionInternalOption
     ShowHelpMenu:
         Title: Help
         LocKey: LOCMenuHelpTitle
@@ -23,4 +27,5 @@ Variables:
         Type: Visibility
         Default: Visible
         Style: SettingsSectionOffsetDockPanelStyle
+
 

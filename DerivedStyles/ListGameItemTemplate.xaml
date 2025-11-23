@@ -31,13 +31,20 @@
                         <Border Background="#181A1E" x:Name="BorderDarken"
                             CornerRadius="16"
                             Visibility="Collapsed" Opacity="0.7" />
-                        <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
-                            Visibility="Collapsed"
-                            Style="{DynamicResource ThemeTextBlockBaseStyle}"
-                            FontSize="{DynamicResource FontSizeSmall}"
-                            HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            TextAlignment="Center" Padding="5"
-                            Background="{DynamicResource ControlBackgroundDarkBrush}" />
+
+                        <Grid 
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Bottom">
+                            <Border  Background="{DynamicResource GameTitleBrush}"  Opacity="0.8" />
+                            <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"                               
+                                Style="{DynamicResource TextBlockBaseStyle}"
+                                FontSize="{DynamicResource FontSizeSmall}"
+                                TextWrapping="NoWrap"
+                                TextAlignment="Center" Padding="5" 
+                                Visibility="{Settings Fullscreen.ShowGameTitles}"
+                                Background="Transparent"/>
+                        </Grid>
+                        
 
                         <ContentControl x:Name="BackToGame_Control" />
                         <TextBlock x:Name="GameIsRunningBadge"
