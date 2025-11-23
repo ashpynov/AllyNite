@@ -15,7 +15,15 @@
 	<TextBlock x:Key="BatteryStatusLowCharging" Text="&#xebae;" FontFamily="{DynamicResource FontAltIcoFont}" />
 	<TextBlock x:Key="BatteryStatusMediumCharging" Text="&#xebb2;" FontFamily="{DynamicResource FontAltIcoFont}" />
 	<TextBlock x:Key="BatteryStatusHighCharging" Text="&#xebb5;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	
+
+	<TextBlock x:Key="SettingsMenuIconGeneral" Text="&#xe713;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="SettingsMenuIconVisuals" Text="&#xe7f4;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="SettingsMenuIconAudio" Text="&#xe767;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="SettingsMenuIconLayout" Text="&#xf246;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="SettingsMenuIconMenus" Text="&#xe8fd;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="SettingsMenuIconInput" Text="&#xe7fc;" FontFamily="{DynamicResource FontAltIcoFont}" />
+	<TextBlock x:Key="SettingsMenuIconThemeOptions" Text="&#xe91b;" FontFamily="{DynamicResource FontAltIcoFont}" />
+
 	<!-- Définition du style pour l'indicateur de progression -->
 	<Style x:Key="ProgressIndicator" TargetType="ContentControl">
 		<Setter Property="Template">

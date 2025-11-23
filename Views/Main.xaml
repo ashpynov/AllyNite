@@ -974,7 +974,7 @@
                                     <StackPanel>
                                         <ContentControl
                                             x:Name="FILTER_Visible"
-                                            Visibility="Collapsed"
+                                            Visibility="Visible"
                                             Opacity="0"
                                         />
                                         <ContentControl
@@ -3208,10 +3208,10 @@
                                 <Condition Binding="{Settings Fullscreen.HorizontalLayout}"
                                     Value="False" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="ChangeViewButton" Property="Visibility"
+                            <!-- <Setter TargetName="ChangeViewButton" Property="Visibility"
                                 Value="Collapsed" />
                             <Setter TargetName="ChangeDetailsButton" Property="Visibility"
-                                Value="Visible" />
+                                Value="Collapsed" /> -->
                             <Setter TargetName="T_ListGameItemsContainer" Property="Visibility"
                                 Value="Collapsed" />
                             <Setter TargetName="PART_ListGameItemsAlt" Property="Visibility"
@@ -3400,6 +3400,7 @@
                             <Setter Property="Visibility" Value="Visible" TargetName="HELP_ButtonHideFilter" />
                             <Setter Property="Focusable" Value="False" TargetName="PART_ButtonMainMenu" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ItemsFilterPresets" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ToggleViewButton" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeViewButton" />
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ChangeDetailsButton" />
                             <Setter Property="Focusable" Value="False" TargetName="PART_ButtonNotifications" />

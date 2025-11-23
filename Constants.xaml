@@ -58,7 +58,7 @@
     <SolidColorBrush x:Key="TextWhiteBrush" Color="{DynamicResource TextWhiteColor}" />
     <SolidColorBrush x:Key="TextAltBrush" Color="{DynamicResource TextSecondaryColor}" />
     <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource GlyphColor}" />
-    <SolidColorBrush x:Key="StatusBadgeBrush" Color="{DynamicResource BadgeColor}" />
+    <SolidColorBrush x:Key="StatusBadgeBrush" Color="{DynamicResource BadgeColor}" Opacity ="0.9" />
     <SolidColorBrush x:Key="GlyphLightBrush" Color="{DynamicResource GlyphLightColor}" />
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource ControlBackgroundColor}" />
     <SolidColorBrush x:Key="ControlBorderBrush"
@@ -79,7 +79,7 @@
         Color="{DynamicResource ControlBackgroundColorDark}" />
     <SolidColorBrush x:Key="AlternativeButtonBrush" Color="{DynamicResource AlternativeButtonColor}" />
     <SolidColorBrush x:Key="BottomBarBackgroundBrush" Color="{DynamicResource Background}" />
-    <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{DynamicResource ControlBackgroundColor}" Opacity="0.8" />
     <SolidColorBrush x:Key="TopBarBackgroundBrush" Color="{DynamicResource Background}" Opacity="0.7" />
     <SolidColorBrush x:Key="ContainerBackgroundBrush" Color="#000000" Opacity="0.1" />
     <SolidColorBrush x:Key="ThemeMain" Color="{DynamicResource ThemeColorMain}" />

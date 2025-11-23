@@ -5,27 +5,23 @@
     <!-- Style pour le contour du menu de réglages -->
     <Style x:Key="SettingsMenuBorder" TargetType="Border">
         <!-- Propriétés de base -->
-        <!-- <Setter Property="Height" Value="Auto" />-->
+        <!-- <Setter Property="Height" Value="1020" /> -->
         <Setter Property="Width" Value="Auto" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="Tag" Value="SettingsMenuName" />
         <Setter Property="Grid.ColumnSpan" Value="4" />
-        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Margin" Value="0,0,0,63" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <!-- Utilisation d'un Grid pour superposer l'image en tant qu'arrière-plan -->
-        <Setter Property="Background">
-            <Setter.Value>
-                <ImageBrush ImageSource="{ThemeFile 'Images/SettingsBackground.png'}"
-                    Stretch="UniformToFill"
-                    AlignmentX="Right" AlignmentY="Bottom" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Background" Value="Transparent" />
         <Style.Resources>
             <Style TargetType="StackPanel"> <!-- No key, so it is implicit and will apply to any child element of type Image -->
                 <Setter Property="HorizontalAlignment" Value="Left" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
-                <Setter Property="Width" Value="800" />
-                <Setter Property="Margin" Value="20,0,0,0" />
+                <Setter Property="Width" Value="770" />
+                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}" />
+
                 <Setter Property="LayoutTransform">
                     <Setter.Value>
                         <ScaleTransform ScaleY="0.67" ScaleX="0.67"/>
@@ -40,6 +36,9 @@
                     <Storyboard>
                         <Int32Animation Storyboard.TargetProperty="(Grid.Column)" Duration="0:0:0" To ="0"/>
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" From="0" To="1" />
+                        <ThicknessAnimation Storyboard.TargetProperty=" Margin" Duration="0:0:0.2"
+                            From="-400,0,0,63" AccelerationRatio="0.5"
+                            DecelerationRatio="0.5" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -49,18 +48,18 @@
 
     <!-- Style pour la section settings -->
     <Style x:Key="SettingsSectionBorder" TargetType="Border">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}" />
         <Setter Property="CornerRadius" Value="0" />
-        <Setter Property="Margin" Value="100, -50,0,0" />
+        <Setter Property="Margin" Value="100, -160,0,61" />
         <Setter Property="Opacity" Value="1" />
         <Setter Property="Grid.RowSpan" Value="2" />
         <Setter Property="Grid.ColumnSpan" Value="2" />
     </Style>
 
     <!-- Style pour les boutons du menu de Gauche -->
-    <Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+    <Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx" >
         <!-- Propriétés de base -->
-        <Setter Property="Margin" Value="-5,0,0,50" />
+        <Setter Property="Margin" Value="50,30,50,50" />
         <Setter Property="Width" Value="450"/>
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -72,10 +71,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid Background="{TemplateBinding Background}">
-                        <Border Opacity="0.4" Background="Transparent"
-                            x:Name="MainBackground" />
-                        <Border x:Name="MainBorder" Margin="-5"
+                    <Grid Background="{TemplateBinding Background}" Margin="-10">
+                        <Border x:Name="MainBackground"
+                            CornerRadius="6"
+                            Opacity="0" Background="{DynamicResource ControlBackgroundLightBrush}" 
+                        />
+                        <Border x:Name="MainBorder" Margin="-6"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             Style="{DynamicResource SolidBorderLightStyle}" Tag="False"
                             BorderThickness="3" Visibility="Collapsed" />
@@ -83,7 +84,7 @@
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="10,0">
+                            Margin="10,0" Padding="0,0,0,8">
                             <ContentPresenter />
                         </TextBlock>
                     </Grid>
@@ -93,27 +94,20 @@
                         </Trigger>
 
                         <Trigger Property="IsFocused" Value="True">
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
                             <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                             <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
+                            <Setter Property="Opacity" Value="0.5" TargetName="MainBackground" />
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
-                            <!-- <Setter Property="Background" Value="White" TargetName="MainBackground" /> -->
-                            <!-- <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" /> -->
-                            <Setter Property="Opacity" Value="1" TargetName="MainBackground" />
+                            <Setter Property="Opacity" Value="0.5" TargetName="MainBackground" />
                             <Setter Property="Tag" Value="True" TargetName="MainBorder" />
                         </Trigger>
-                        <!-- <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="Transparent" />
-                        </Trigger> -->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
     </Style>
 
 
@@ -139,9 +133,9 @@
                 </TextBlock>
                 <!-- Ligne de séparation -->
                 <!-- Logo Settings -->
-                <Image Source="{ThemeFile 'Images/ASUS/rog-eye.png'}" Height="80"
+                <!-- <Image Source="{ThemeFile 'Images/ASUS/rog-eye.png'}" Height="80"
                     RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center"
-                    Margin="600,10,-550,30" />
+                    Margin="600,10,-550,30" /> -->
             </StackPanel>
         </Grid>
     </DataTemplate>
@@ -258,58 +252,74 @@
     </Style>
 
     <!-- Modèles de données pour les boutons du menu de réglages -->
+    <Style x:Key="SettingsMenuIconStyle" TargetType="ContentControl" >
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,0,20,-8" />
+        <Setter Property="Width" Value="{DynamicResource FontSizeLarge}" />
+    </Style>
+
     <DataTemplate x:Key="SettingsMenuGeneralButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <!-- Texte du bouton "Général" -->
-            <TextBlock Text="{DynamicResource LOCSettingsFSSectionGeneral}"
-                VerticalAlignment="Center" Margin="5,0,0,0" />
+            <ContentControl 
+                Style="{DynamicResource SettingsMenuIconStyle}"
+                Content="{DynamicResource SettingsMenuIconGeneral}"/> 
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionGeneral}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="SettingsMenuVisualsButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <!-- Texte du bouton "Visuals" -->
-            <TextBlock Text="{DynamicResource LOCSettingsFSSectionVisuals}"
-                VerticalAlignment="Center" Margin="5,0,0,0" />
+            <ContentControl 
+                Style="{DynamicResource SettingsMenuIconStyle}"
+                Content="{DynamicResource SettingsMenuIconVisuals}"/> 
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionVisuals}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="SettingsMenuAudioButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <!-- Texte du bouton "Audio" -->
-            <TextBlock Text="{DynamicResource LOCSettingsFSSectionAudio}" VerticalAlignment="Center"
-                Margin="5,0,0,0" />
+            <ContentControl 
+                Style="{DynamicResource SettingsMenuIconStyle}"
+                Content="{DynamicResource SettingsMenuIconAudio}"/> 
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionAudio}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="SettingsMenuLayoutButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <!-- Texte du bouton "Layout" -->
-            <TextBlock Text="{DynamicResource LOCSettingsFSSectionLayout}"
-                VerticalAlignment="Center" Margin="5,0,0,0" />
+            <ContentControl 
+                Style="{DynamicResource SettingsMenuIconStyle}"
+                Content="{DynamicResource SettingsMenuIconLayout}"/> 
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionLayout}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="SettingsMenuMenusButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <!-- Texte du bouton "Menus" -->
-            <TextBlock Text="{DynamicResource LOCSettingsFSSectionMenus}" VerticalAlignment="Center"
-                Margin="5,0,0,0" />
+            <ContentControl 
+                Style="{DynamicResource SettingsMenuIconStyle}"
+                Content="{DynamicResource SettingsMenuIconMenus}"/> 
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionMenus}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="SettingsMenuInputButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <!-- Texte du bouton "Input" -->
-            <TextBlock Text="{DynamicResource LOCSettingsFSSection}" VerticalAlignment="Center"
-                Margin="5,0,0,0" />
+            <ContentControl 
+                Style="{DynamicResource SettingsMenuIconStyle}"
+                Content="{DynamicResource SettingsMenuIconInput}"/> 
+            <TextBlock Text="{DynamicResource LOCSettingsFSSection}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="SettingsMenuThemeOptionsButtonTemplate">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{DynamicResource LOCThemeOptionsSettingsMenu}"
-                VerticalAlignment="Center" Margin="5,0,0,0" />
+            <ContentControl 
+                Style="{DynamicResource SettingsMenuIconStyle}"
+                Content="{DynamicResource SettingsMenuIconThemeOptions}" /> 
+            <TextBlock Text="{DynamicResource LOCThemeOptionsSettingsMenu}" />
         </StackPanel>
     </DataTemplate>
 

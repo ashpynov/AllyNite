@@ -54,7 +54,8 @@
                             Text="{DynamicResource LOCGameRunning}"
                             VerticalAlignment="Bottom"
                             TextAlignment="Center"
-                            Margin="0,0,0,15"
+                            Margin="0,0,0,35"
+                            HorizontalAlignment="Stretch" 
                             Padding="0,0,0,5"
                             FontSize="{DynamicResource FontSizeSmall}"
                             Style="{DynamicResource ButtonTextBlockBoldStyle}" />
