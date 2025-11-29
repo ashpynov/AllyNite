@@ -2,86 +2,91 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:popt="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
-	<!-- Définition des ressources d'images par défaut -->
-	<BitmapImage x:Key="DefaultGameIcon" UriSource="{ThemeFile 'Images/applogo_clean.png'}" popt:Freeze="True" />
-	<BitmapImage x:Key="DefaultGameCover" UriSource="{ThemeFile 'Images/custom_cover_background.png'}" popt:Freeze="True" />
+    <BitmapImage x:Key="DefaultGameIcon" UriSource="{ThemeFile 'Images/applogo_clean.png'}" popt:Freeze="True" />
+    <BitmapImage x:Key="DefaultGameCover" UriSource="{ThemeFile 'Images/custom_cover_background.png'}" popt:Freeze="True" />
 
-	<!-- Définition des icônes de statut de batterie -->
-	<TextBlock x:Key="BatteryStatusCritical" Text="&#xeba0;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="BatteryStatusLow" Text="&#xeba3;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="BatteryStatusMedium" Text="&#xeba7;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="BatteryStatusHigh" Text="&#xebaa;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="BatteryStatusCriticalCharging" Text="&#xebab;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="BatteryStatusLowCharging" Text="&#xebae;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="BatteryStatusMediumCharging" Text="&#xebb2;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="BatteryStatusHighCharging" Text="&#xebb5;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusCritical" Text="&#xeba0;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusLow" Text="&#xeba3;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusMedium" Text="&#xeba7;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusHigh" Text="&#xebaa;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusCriticalCharging" Text="&#xebab;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusLowCharging" Text="&#xebae;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusMediumCharging" Text="&#xebb2;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="BatteryStatusHighCharging" Text="&#xebb5;" FontFamily="{DynamicResource FontAltIcoFont}" />
 
-	<TextBlock x:Key="SettingsMenuIconGeneral" Text="&#xe713;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="SettingsMenuIconVisuals" Text="&#xe7f4;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="SettingsMenuIconAudio" Text="&#xe767;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="SettingsMenuIconLayout" Text="&#xf246;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="SettingsMenuIconMenus" Text="&#xe8fd;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="SettingsMenuIconInput" Text="&#xe7fc;" FontFamily="{DynamicResource FontAltIcoFont}" />
-	<TextBlock x:Key="SettingsMenuIconThemeOptions" Text="&#xe91b;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="SettingsMenuIconGeneral" Text="&#xe713;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="SettingsMenuIconVisuals" Text="&#xe7f4;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="SettingsMenuIconAudio" Text="&#xe767;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="SettingsMenuIconLayout" Text="&#xf246;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="SettingsMenuIconMenus" Text="&#xe8fd;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="SettingsMenuIconInput" Text="&#xe7fc;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="SettingsMenuIconThemeOptions" Text="&#xe91b;" FontFamily="{DynamicResource FontAltIcoFont}" />
 
-	<!-- Définition du style pour l'indicateur de progression -->
-	<Style x:Key="ProgressIndicator" TargetType="ContentControl">
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ContentControl">
-					<Grid>
-						<!-- Cercle extérieur -->
-						<Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    <TextBlock x:Key="GameMenuIconPlay" Text="&#xe768;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconBackToGame" Text="&#xe7fc;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconInstall" Text="&#xe118;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconFavories" Text="&#xe734;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconHdr" Text="&#xe91b;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconVisibility" Text="&#xed1a;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconSetFields" Text="&#xe929;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconRemove" Text="&#xe711;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconUninstall" Text="&#xe74d;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconCustomAction" Text="&#xe794;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconExtensions" Text="&#xe74c;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconCompletionStatus" Text="&#xe10b;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    
+    <Style x:Key="ProgressIndicator" TargetType="ContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid>
+                        <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                  Fill="Transparent"
                                  StrokeThickness="4"
                                  Stroke="{DynamicResource ControlBackgroundBrush}"/>
 
-						<!-- Cercle intérieur animé -->
-						<Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                  Fill="Transparent" RenderTransformOrigin="0.5,0.5"
                                  StrokeThickness="4"
                                  Stroke="{DynamicResource GlyphBrush}">
-							<Ellipse.Resources>
-								<!-- Définition des animations -->
-								<Storyboard x:Key="VisibleOn">
-									<DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)"
+                            <Ellipse.Resources>
+                                <Storyboard x:Key="VisibleOn">
+                                    <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)"
                                                      To="360" Duration="0:0:05" RepeatBehavior="Forever" />
-								</Storyboard>
-								<Storyboard x:Key="VisibleOff">
-									<DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)"
+                                </Storyboard>
+                                <Storyboard x:Key="VisibleOff">
+                                    <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)"
                                                      To="0" Duration="0:0:0"/>
-								</Storyboard>
-							</Ellipse.Resources>
-							<Ellipse.RenderTransform>
-								<RotateTransform />
-							</Ellipse.RenderTransform>
-							<!-- Définition des déclencheurs de l'animation -->
-							<Ellipse.Style>
-								<Style TargetType="Ellipse">
-									<Style.Triggers>
-										<MultiTrigger>
-											<MultiTrigger.Conditions>
-												<Condition Property="IsVisible" Value="True"/>
-											</MultiTrigger.Conditions>
-											<MultiTrigger.EnterActions>
-												<BeginStoryboard Storyboard="{StaticResource VisibleOn}"/>
-											</MultiTrigger.EnterActions>
-											<MultiTrigger.ExitActions>
-												<BeginStoryboard Storyboard="{StaticResource VisibleOff}"/>
-											</MultiTrigger.ExitActions>
-										</MultiTrigger>
-									</Style.Triggers>
-								</Style>
-							</Ellipse.Style>
-							<!-- Masquage du cercle intérieur -->
-							<Ellipse.Clip>
-								<RectangleGeometry Rect="0,0,10,20"/>
-							</Ellipse.Clip>
-						</Ellipse>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+                                </Storyboard>
+                            </Ellipse.Resources>
+                            <Ellipse.RenderTransform>
+                                <RotateTransform />
+                            </Ellipse.RenderTransform>
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Style.Triggers>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsVisible" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource VisibleOn}"/>
+                                            </MultiTrigger.EnterActions>
+                                            <MultiTrigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource VisibleOff}"/>
+                                            </MultiTrigger.ExitActions>
+                                        </MultiTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                            <Ellipse.Clip>
+                                <RectangleGeometry Rect="0,0,10,20"/>
+                            </Ellipse.Clip>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

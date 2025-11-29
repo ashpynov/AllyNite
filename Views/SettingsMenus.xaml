@@ -2,9 +2,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <!-- Style pour le contour du menu de réglages -->
     <Style x:Key="SettingsMenuBorder" TargetType="Border">
-        <!-- Propriétés de base -->
         <!-- <Setter Property="Height" Value="1020" /> -->
         <Setter Property="Width" Value="Auto" />
         <Setter Property="CornerRadius" Value="0" />
@@ -29,7 +27,6 @@
                 </Setter>
             </Style>
         </Style.Resources>
-        <!-- Déclencheur pour l'animation de l'opacité lors du chargement -->
         <Style.Triggers>
             <EventTrigger RoutedEvent="Window.Loaded">
                 <BeginStoryboard>
@@ -45,8 +42,6 @@
         </Style.Triggers>
     </Style>
 
-
-    <!-- Style pour la section settings -->
     <Style x:Key="SettingsSectionBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}" />
         <Setter Property="CornerRadius" Value="0" />
@@ -56,9 +51,7 @@
         <Setter Property="Grid.ColumnSpan" Value="2" />
     </Style>
 
-    <!-- Style pour les boutons du menu de Gauche -->
     <Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx" >
-        <!-- Propriétés de base -->
         <Setter Property="Margin" Value="50,30,50,50" />
         <Setter Property="Width" Value="450"/>
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -111,14 +104,11 @@
     </Style>
 
 
-    <!-- Modèle de données pour l'en-tête du menu de réglages -->
     <DataTemplate x:Key="SettingsMenuHeaderTemplate">
-        <!-- Conteneur parent avec une largeur automatique -->
         <Grid HorizontalAlignment="Stretch">
             <Grid.RenderTransform>
                 <ScaleTransform ScaleY="1.5" ScaleX="1.5"/>
             </Grid.RenderTransform>
-            <!-- Contenu de l'en-tête -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
                 VerticalAlignment="Top" Margin="0,0,0,40" Background="Transparent" Height="110">
                 <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Top"
@@ -131,33 +121,23 @@
                         <ScaleTransform ScaleY="1.025"  ScaleX="1.5"/>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-                <!-- Ligne de séparation -->
-                <!-- Logo Settings -->
-                <!-- <Image Source="{ThemeFile 'Images/ASUS/rog-eye.png'}" Height="80"
-                    RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center"
-                    Margin="600,10,-550,30" /> -->
             </StackPanel>
         </Grid>
     </DataTemplate>
 
-    <!-- Épaisseur pour l'espacement des éléments de section -->
     <Thickness x:Key="SettingsSectionItemSpacing">0,12,10,10</Thickness>
 
-    <!-- Style pour le curseur de section -->
     <Style x:Key="SettingsSectionSlider" TargetType="SliderEx"
         BasedOn="{StaticResource {x:Type SliderEx}}">
         <Setter Property="Width" Value="300" />
         <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
     </Style>
 
-    <!-- Style pour la case à cocher de section -->
     <Style x:Key="SettingsSectionCheckbox" TargetType="CheckBoxEx">
-        <!-- Styles et modèles -->
         <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <!-- <Setter Property="Height" Value="50" /> -->
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Right" />
@@ -243,7 +223,6 @@
         </Style.Resources>
     </Style>
 
-    <!-- Style pour le texte de section -->
     <Style x:Key="SettingsSectionText" TargetType="TextBlock"
         BasedOn="{StaticResource TextBlockBaseStyle}">
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -251,7 +230,6 @@
         <Setter Property="Margin" Value="0,0,0,10" />
     </Style>
 
-    <!-- Modèles de données pour les boutons du menu de réglages -->
     <Style x:Key="SettingsMenuIconStyle" TargetType="ContentControl" >
         <Setter Property="Focusable" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Center" />
