@@ -252,7 +252,7 @@
                                 <!-- Définition des lignes -->
                                 <Grid.RowDefinitions>
                                     <!-- Première ligne -->
-                                    <RowDefinition Height="100" />
+                                    <RowDefinition Height="120" />
                                     <!-- Deuxième ligne -->
                                     <RowDefinition Height="*" />
                                     <!-- Troisième ligne Cover -->
@@ -706,7 +706,8 @@
                                     </Grid.Style>
 
                                     <Grid VerticalAlignment="Top" HorizontalAlignment="Center"
-                                        Height="70">
+                                        Height="70"
+                                        Margin = "0,50,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
@@ -958,6 +959,15 @@
                                             Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
                                             CommandParameter="{Binding ElementName=FILTER_Hide}"
                                         />
+                                        <KeyBinding
+                                            Key="Left"
+                                            Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
+                                            CommandParameter="{Binding ElementName=FILTER_Left}" />
+                                        <KeyBinding
+                                            Key="Right"
+                                            Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
+                                            CommandParameter="{Binding ElementName=FILTER_Right}"
+                                        />
 
                                     </Grid.InputBindings>
                                     <Grid.Style>
@@ -965,7 +975,7 @@
                                             <!-- <Setter Property="Focusable" Value="True" /> -->
                                             <Setter Property="IsEnabled" Value="False" />
                                             <Setter Property="Visibility" Value="Visible" />
-                                            <Setter Property="Margin" Value="0,10,0,1000"/>
+                                            <Setter Property="Margin" Value="0,5,0,960"/>
                                             <Style.Triggers>
                                             </Style.Triggers>
                                         </Style>
@@ -1157,6 +1167,8 @@
                                                 RenderOptions.BitmapScalingMode="Fant"
                                                 RenderTransformOrigin="0.5,0.5"
                                                 Stretch="UniformToFill"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center"
                                                 Source="{ThemeFileBinding Data.Tag, Source={StaticResource FILTER_ActualImagePath}, PathFormat='Icons/FilterBackground/{0}.jpg'}">
                                             </Image>
                                         </Grid>
@@ -1165,8 +1177,8 @@
                                                 RenderOptions.BitmapScalingMode="Fant"
                                                 RenderTransformOrigin="0.5,0.5"
                                                 Stretch="Uniform"
-                                                MaxHeight="300"
-                                                Source="{ThemeFileBinding Data.Tag, Source={StaticResource FILTER_ActualImagePath}, PathFormat='Icons/Filter/{0}.png'}"
+                                                MaxWidth="1200"
+                                                Source="{ThemeFileBinding Data.Tag, Source={StaticResource FILTER_ActualImagePath}, PathFormat='Icons/FilterLarge/{0}.png'}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
                                             </Image>
@@ -1289,6 +1301,7 @@
                                                     Style="{DynamicResource BottomBarStyle}"
                                                     FontSize="50"
                                                     FontWeight="Bold"
+                                                    FontFamily="Segoe UI Bold"
                                                     VerticalAlignment="Bottom"
                                                     Margin="0,0,15,0"/>
                                                 <TextBlock
@@ -1296,6 +1309,7 @@
                                                     Style="{DynamicResource BottomBarStyle}"
                                                     Foreground="GhostWhite"
                                                     VerticalAlignment="Bottom"
+                                                    FontFamily="Segoe UI Bold"
                                                     FontWeight="Bold"
                                                     FontSize="50"/>
                                             </StackPanel>
@@ -2978,7 +2992,7 @@
                                                 InputHint="{Binding ElementName=GAMEPAD_Filter, Path=Tag}"
                                                 Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
                                                 CommandParameter="{Binding ElementName=FILTER_Show}"
-                                                Content="{DynamicResource LOCFilters}" />
+                                                Content="{DynamicResource LOCBackLabel}" />
 
                                             <!--Options-->
                                             <ButtonEx x:Name="PART_ButtonGameOptions"
@@ -3308,7 +3322,7 @@
                                         <ObjectAnimationUsingKeyFrames
                                             Storyboard.TargetName="FILTER_FadeImage"
                                             Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0"
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.3"
                                                 Value="{x:Static Visibility.Visible}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ThicknessAnimation
@@ -3322,13 +3336,18 @@
                                             Storyboard.TargetProperty="Opacity"
                                             From="0.1" To="1"
                                             BeginTime="0:0:0"
-                                            Duration="0:0:0.3" />
+                                            Duration="0:0:0.1" />
                                         <DoubleAnimation
                                             Storyboard.TargetProperty="Opacity"
                                             From="0.99" To="1"
                                             BeginTime="0:0:0"
                                             Duration="0:0:0.3" />
-
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="FilterImage"
+                                            Storyboard.TargetProperty="MaxWidth"
+                                            To="1200"
+                                            BeginTime="0:0:0"
+                                            Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
@@ -3349,15 +3368,15 @@
                                             Storyboard.TargetName="FILTER_BackgroundImage"
                                             Storyboard.TargetProperty="Opacity"
                                             From="1" To="0.1"
-                                            BeginTime="0:0:0"
-                                            Duration="0:0:0.3" />
+                                            BeginTime="0:0:2"
+                                            Duration="0:0:0.1" />
+                                        
                                         <ThicknessAnimation
                                             Storyboard.TargetProperty="Margin"
                                             Duration="0:0:0.4"
-                                            To="0,10,0,1000"
+                                            To="0,5,0,960"
                                             DecelerationRatio="0.3"
                                             AccelerationRatio="0.7" />
-
                                         <ObjectAnimationUsingKeyFrames
                                             Storyboard.TargetName="FILTER_BackgroundImage"
                                             Storyboard.TargetProperty="Visibility">
@@ -3370,6 +3389,12 @@
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0.4"
                                                 Value="{x:Static Visibility.Collapsed}" />
                                         </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="FilterImage"
+                                            Storyboard.TargetProperty="MaxWidth"
+                                            To="480"
+                                            BeginTime="0:0:0"
+                                            Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
