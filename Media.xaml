@@ -32,7 +32,7 @@
     <TextBlock x:Key="GameMenuIconRemove" Text="&#xe711;" FontFamily="{DynamicResource FontAltIcoFont}" />
     <TextBlock x:Key="GameMenuIconUninstall" Text="&#xe74d;" FontFamily="{DynamicResource FontAltIcoFont}" />
     <TextBlock x:Key="GameMenuIconCustomAction" Text="&#xe794;" FontFamily="{DynamicResource FontAltIcoFont}" />
-    <TextBlock x:Key="GameMenuIconExtensions" Text="&#xe74c;" FontFamily="{DynamicResource FontAltIcoFont}" />
+    <TextBlock x:Key="GameMenuIconExtensions" Text="&#xea86;" FontFamily="{DynamicResource FontAltIcoFont}" />
     <TextBlock x:Key="GameMenuIconCompletionStatus" Text="&#xe10b;" FontFamily="{DynamicResource FontAltIcoFont}" />
     
     <Style x:Key="ProgressIndicator" TargetType="ContentControl">

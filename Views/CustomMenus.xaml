@@ -2,62 +2,60 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <Style x:Key="GameClientMenuButton" BasedOn="{StaticResource GameMenuButton}" TargetType="ButtonEx">
-        <Setter Property="Margin" Value="5" />
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <ContentControl Content="{Binding Icon}" 
-                                        Width="{DynamicResource FontSizeLarge}" Focusable="False"
-                                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
-                    </StackPanel>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="CustomMenuIconStyle" TargetType="Image" >
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,10,30,10" />
+        <Setter Property="Width" Value="{DynamicResource FontSizeLarge}" />
     </Style>
 
-    <Style x:Key="GameClientsBorder" TargetType="Border" BasedOn="{StaticResource GameMenuBorder}" >
-    </Style>
-
-    <Style x:Key="SoftwareToolMenuButton" BasedOn="{StaticResource GameMenuButton}" TargetType="ButtonEx">
-        <Setter Property="Margin" Value="5" />
+    <Style x:Key="CustomMenuButtonStyle" BasedOn="{StaticResource GameMenuButton}" TargetType="ButtonEx" >
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding Icon, Converter={StaticResource ImageStringToImageConverter}}" 
-                                Width="{DynamicResource FontSizeLarge}" Focusable="False"
-                                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+                               Style="{DynamicResource CustomMenuIconStyle}" />
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="GameClientMenuButton" BasedOn="{StaticResource CustomMenuButtonStyle}" TargetType="ButtonEx">
+    </Style>
+
+    <Style x:Key="GameClientsBorder" TargetType="Border" BasedOn="{StaticResource GameMenuBorder}" >
+    </Style>
+
+    <Style x:Key="SoftwareToolMenuButton" BasedOn="{StaticResource CustomMenuButtonStyle}" TargetType="ButtonEx">
     </Style>
 
     <Style x:Key="SoftwareToolsBorder" TargetType="Border" BasedOn="{StaticResource GameMenuBorder}">
     </Style>
 
     <Style x:Key="ExtensionMenuButton" BasedOn="{StaticResource GameMenuButton}" TargetType="ButtonEx">
-        <Setter Property="Margin" Value="5" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <DockPanel>
-                        <ContentControl Content="{Binding Icon}" 
-                                        Width="{DynamicResource FontSizeLarge}" Focusable="False"
-                                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"
-                                        DockPanel.Dock="Left"/>
+                    <DockPanel LastChildFill="True" >
                         <TextBlock Text=">" Margin="15,0,0,0" DockPanel.Dock="Right" VerticalAlignment="Center"
                                    Visibility="{Binding Children, Converter={StaticResource NullToVisibilityConverter}}"/>
+                        <ContentControl Content="{Binding Icon}" 
+                                        Width="{DynamicResource FontSizeLarge}" 
+                                        Focusable="False"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center" 
+                                        Margin="10,10,30,10"
+                                        DockPanel.Dock="Left"/>
                         <TextBlock Text="{Binding Header}" VerticalAlignment="Center"
                                    DockPanel.Dock="Left"/>
                     </DockPanel>
                 </DataTemplate>
             </Setter.Value>
-        </Setter>
+        </Setter> 
     </Style>
     
     <Style x:Key="ExtensionsBorder" TargetType="Border" BasedOn="{StaticResource GameMenuBorder}">  

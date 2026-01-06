@@ -4,8 +4,8 @@
     <!-- Style pour la bordure du menu de notifications -->
     <Style x:Key="NotificationsMenuBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource OverlayMenu}" />
-        <Setter Property="Margin" Value="0,0,-100,0" />
-        <Setter Property="Width" Value="400" />
+        <Setter Property="Margin" Value="-100,0,-100,0" />
+        <Setter Property="Width" Value="600" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
@@ -13,7 +13,7 @@
 
     <!-- Style pour le bouton d'élément de menu de notifications -->
     <Style x:Key="NotificationsMenuItemButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
-        <Setter Property=" Margin" Value="26,20,26,20" />
+        <Setter Property="Margin" Value="26,20,26,20" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -31,6 +31,7 @@
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            FontSize="{DynamicResource FontSizeMedium}"
                             Margin="10,0" Padding="0,0,0,8" >
                             <ContentPresenter />
                         </TextBlock>
@@ -75,6 +76,6 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Margin" Value="20,0,20,0" />
+        <Setter Property="Margin" Value="-320,0,20,0" />
     </Style>
 </ResourceDictionary>

@@ -522,14 +522,12 @@
                                         Margin="0,0,0,0"
                                         Height="{DynamicResource ThemeBaseSizex2}"
                                         Width="{DynamicResource ThemeBaseSizex2}"
-                                        Style="{DynamicResource ButtonMenu}"
                                         Grid.Column="3">
                                         <ButtonEx.Content>
                                             <TextBlock Text="&#xef08;"
                                                 FontFamily="{StaticResource FontIcoFont}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Foreground="#ff6b6b"
                                                 FontSize="{DynamicResource FontSizeLarge}" />
                                         </ButtonEx.Content>
                                     </ButtonEx>
@@ -928,6 +926,26 @@
                                         />
                                         <pin:GameControllerInputBinding
                                             Button="{Binding ElementName=GAMEPAD_Confirm, Path=Content}"
+                                            Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
+                                            CommandParameter="{Binding ElementName=FILTER_Hide}"
+                                        />
+                                        <pin:GameControllerInputBinding
+                                            Button="A"
+                                            Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
+                                            CommandParameter="{Binding ElementName=FILTER_Hide}"
+                                        />
+                                        <pin:GameControllerInputBinding
+                                            Button="B"
+                                            Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
+                                            CommandParameter="{Binding ElementName=FILTER_Hide}"
+                                        />
+                                        <pin:GameControllerInputBinding
+                                            Button="X"
+                                            Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
+                                            CommandParameter="{Binding ElementName=FILTER_Hide}"
+                                        />
+                                        <pin:GameControllerInputBinding
+                                            Button="Y"
                                             Command="{Binding Content.TouchTag, ElementName=ThemeOptions_Command}"
                                             CommandParameter="{Binding ElementName=FILTER_Hide}"
                                         />
